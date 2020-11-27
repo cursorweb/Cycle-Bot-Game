@@ -1,0 +1,8 @@
+[user: id (string)] => {
+  name: tag (string) # user tag, will be updated each time a command is used
+  cycles: string # will be used from big
+  cpp: string # cycles per post
+  cpm: string # cycles per minute
+  langs: string[] # languages the user knows (boost)
+  level: string # level boost
+}
