@@ -1,0 +1,1 @@
+run="npm run prod ; npm run server"

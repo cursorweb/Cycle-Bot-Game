@@ -1,0 +1,29 @@
+{
+  "name": "replit-bot",
+  "version": "0.0.0",
+  "description": "Fun repl.it bot",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsc -w",
+    "prod": "tsc",
+    "replit": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cursorweb/Replit-Sim.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "idle"
+  ],
+  "author": "Coder100",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cursorweb/Replit-Sim/issues"
+  },
+  "homepage": "https://github.com/cursorweb/Replit-Sim#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
