@@ -5,8 +5,10 @@ class C extends g.Command {
   names = ["eval"];
   help = "";
 
+  isAdmin = true;
+
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    
+    msg.channel.send("ok master :)")
   }
 }
 

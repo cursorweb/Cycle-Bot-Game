@@ -1,12 +1,14 @@
-- Finalize `template.txt`
+- Finalize `template.txt` (done)
 - Consider Trimming excessive whitespace
-- Add Test Command
-- Add Version Command
-- Add Invite Command
-- Add Help Command
-  - Add Help Categories
+- Add Test Command (done)
+- Add Version Command (done)
+- Add Invite Command (done)
+- Add ADMIN-ONLY Command (done)
+- Add Help Command (done)
+  - Add Help Categories (done)
   - Add Guide
-- Add ADMIN-ONLY Command
+  - Improve Help
+- Polish commands
 - Non-Saving Example
   - Add Basic Gameplay
   - Add Basic Shop

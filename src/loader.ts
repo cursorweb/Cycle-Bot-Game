@@ -4,27 +4,7 @@ import * as fs from "fs";
 import * as Discord from "discord.js";
 import * as g from "./global";
 
-async function load(): Promise<g.Command[]> {
-  let output: g.Command[] = [];
-
-  async function loadDir(dir: string) {
-    for (const file of fs.readdirSync(dir)) {
-      let stat = fs.lstatSync(dir + "/" + file);
-      if (stat.isFile() && file.includes(".ts")) {
-        const C: g.Command = await import(dir + "/" + file);
-        output.push(C);
-      } else if (stat.isDirectory()) {
-        await loadDir(dir + "/" + file);
-      }
-    }
-  }
-
-  loadDir(path.join(__dirname, "cmd"));
-
-  return output;
-}
-
-async function help(msg: Discord.Message, args: string[]) {
+async function load(): Promise<{ [i: string]: g.Command[] }> {
   let output: { [i: string]: g.Command[] } = {};
 
   async function loadDir(dir: string, dirn?: string) {
@@ -43,6 +23,10 @@ async function help(msg: Discord.Message, args: string[]) {
 
   await loadDir(path.join(__dirname, "cmd"));
 
+  return output;
+}
+
+async function help(msg: Discord.Message, args: string[], output: { [i: string]: g.Command[] }) {
   if (args.length != 1) {
     msg.channel.send("Help categories (will be prettified):\n" + Object.keys(output).join(","));
   } else {

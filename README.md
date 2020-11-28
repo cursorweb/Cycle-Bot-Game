@@ -1,5 +1,5 @@
-# Repl.it Bot
-Welcome to the repl.it bot! You are playing as a coder who makes programs in order to get cycles. You can extend your reach to youtube and twitch to become the most cycled!
+# Cycle Bot
+This is the code repository for cycle bot! You are playing as a coder who makes programs in order to get cycles. You can extend your reach to youtube, twitch, and dev.to to become the most cycled!
 
 You can invite the bot [here](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot). Enjoy!
 
@@ -8,7 +8,7 @@ You can invite the bot [here](https://discord.com/api/oauth2/authorize?client_id
 The prefix is `&`. Use `&help` to see all commands.
 
 ## Building
-The program will try to read the `.env` file use `dotenv`. Your `.env` file should look something like:
+The program will try to read the `.env` file using `dotenv`. Your `.env` file should look something like:
 ```sh
 TOKEN=insert_token_here
 ```
@@ -21,7 +21,10 @@ npm run dev
 
 Then do `node .` to run your bot.
 
-If you are hosting this on `repl.it`, a `.replit` file already has been made with everything you need!
+If you are hosting this on [`repl.it`](https://repl.it/), a `.replit` file already has been made with everything you need! All you need to add is your `.env` file and make sure to install everything by doing
+```
+npm i
+```
 
 ## Contributions
 Suggestions are very much welcome!

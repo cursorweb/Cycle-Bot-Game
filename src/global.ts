@@ -12,6 +12,7 @@ export interface UserInput {
 export class Command {
   names: string[] = [];
   help: string = "*no help provided*";
+  examples: string[] = [];
 
   isAdmin: boolean = false;
 

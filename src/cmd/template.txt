@@ -4,6 +4,7 @@ import * as g from "../../global";
 class C extends g.Command {
   names = [""];
   help = "";
+  examples: string[] = [];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     
