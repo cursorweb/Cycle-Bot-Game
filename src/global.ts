@@ -18,7 +18,7 @@ export class Command {
   cooldownUsers: { [index:string]: number } = {};
   cooldown: number = 0; // ms
 
-  exec(msg: Discord.Message, args: string[]) { }
+  exec(msg: Discord.Message, args: string[], client: Discord.Client) { }
 
   getCooldown(user: Discord.User): number | false {
     return this.cooldownUsers[user.id] ? this.cooldownUsers[user.id] : false;

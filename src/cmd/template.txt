@@ -1,11 +1,13 @@
 import * as Discord from "discord.js";
 import * as g from "../../global";
 
-class C extends Method {
+class C extends g.Command {
   names = [""];
   help = "";
 
-  exec(client: Discord.Client, args: string[]) {
+  exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     
   }
 }
+
+export default new C();

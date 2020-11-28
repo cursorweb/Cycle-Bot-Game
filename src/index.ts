@@ -21,15 +21,15 @@ client.on("message", (msg: Discord.Message) => {
   // DEBUGGING
   if (msg.guild!.id != "663057930144186391") return;
 
+  if (cmd.command == "help") {
+    help(msg, cmd.args);
+  }
+
   msg.channel.send(`pardone, but your message was parsed as
 **Command**: ${cmd.command}
 **Args**: ${cmd.args.map(o => "'" + o + "'").join(", ")}`);
 });
 
-(async () => {
-  console.log(await help())
-})();
-
 
 client.login(process.env.TOKEN);
-// process.on("unhandledRejection", () => {});
+process.on("unhandledRejection", () => {});

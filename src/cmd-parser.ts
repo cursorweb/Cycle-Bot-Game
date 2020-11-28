@@ -14,7 +14,7 @@ function parse(prefix: string, command: string): UserInput | false {
 
   output = output.filter(o => o != "");
 
-  return { command: output[0], args: output.slice(1) };
+  return { command: output[0].toLowerCase(), args: output.slice(1) };
 }
 
 export { parse };

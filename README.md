@@ -21,5 +21,7 @@ npm run dev
 
 Then do `node .` to run your bot.
 
+If you are hosting this on `repl.it`, a `.replit` file already has been made with everything you need!
+
 ## Contributions
 Suggestions are very much welcome!

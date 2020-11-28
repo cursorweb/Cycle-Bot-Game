@@ -24,14 +24,14 @@ async function load(): Promise<g.Command[]> {
   return output;
 }
 
-async function help(/* msg: Discord.Message */) {
+async function help(msg: Discord.Message, args: string[]) {
   let output: { [i: string]: g.Command[] } = {};
 
   async function loadDir(dir: string, dirn?: string) {
     for (const file of fs.readdirSync(dir)) {
       let stat = fs.lstatSync(dir + "/" + file);
       if (stat.isFile() && file.includes(".js")) {
-        const C: g.Command = await import(dir + "/" + file);
+        const C: g.Command = (await import(dir + "/" + file)).default;
         
         if (!output[dirn!]) output[dirn!] = [];
         output[dirn!].push(C);
@@ -43,7 +43,15 @@ async function help(/* msg: Discord.Message */) {
 
   await loadDir(path.join(__dirname, "cmd"));
 
-  return output;
+  if (args.length != 1) {
+    msg.channel.send("Help categories (will be prettified):\n" + Object.keys(output).join(","));
+  } else {
+    if (!output[args[0]]) {
+      msg.channel.send("(will be prettified) Help category not found.")
+    } else {
+      msg.channel.send("Commands (and desc) (will be prettified):\n" + output[args[0]].map(o => o.names.join(", ")).join("\n"));
+    }
+  }
 }
 
 export { load, help };
