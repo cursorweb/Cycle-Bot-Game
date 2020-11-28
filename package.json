@@ -1,6 +1,6 @@
 {
   "name": "replit-bot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Fun repl.it bot",
   "main": "dist/index.js",
   "scripts": {
