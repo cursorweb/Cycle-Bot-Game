@@ -1,0 +1,11 @@
+import * as Discord from "discord.js";
+import * as g from "../../global";
+
+class C extends Method {
+  names = [""];
+  help = "";
+
+  exec(client: Discord.Client, args: string[]) {
+    
+  }
+}

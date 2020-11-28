@@ -21,14 +21,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const Discord = __importStar(require("discord.js"));
+const cmd_parser_1 = require("./cmd-parser");
+const loader_1 = require("./loader");
 const client = new Discord.Client();
-client.on('ready', () => {
+client.on("ready", () => {
+    client.user.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
     console.log(`Logged in as ${client.user.tag}!`);
 });
 client.on("message", (msg) => {
-    if (msg.author.id == client.user.id || msg.author.bot)
+    let cmd = cmd_parser_1.parse("&", msg.content);
+    if (msg.author.id == client.user.id || msg.author.bot || !cmd)
         return;
-    msg.channel.send("IM AN EW BOT");
+    if (msg.guild.id != "663057930144186391")
+        return;
+    msg.channel.send(`pardone, but your message was parsed as
+**Command**: ${cmd.command}
+**Args**: ${cmd.args.map(o => "'" + o + "'").join(", ")}`);
 });
+(async () => {
+    console.log(await loader_1.help());
+})();
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => { });

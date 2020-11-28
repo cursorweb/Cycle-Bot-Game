@@ -4,6 +4,7 @@
   "description": "Fun repl.it bot",
   "main": "dist/index.js",
   "scripts": {
+    "start": "node .",
     "dev": "tsc -w",
     "prod": "tsc",
     "replit": "node server"

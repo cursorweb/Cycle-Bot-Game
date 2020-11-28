@@ -1,5 +1,5 @@
-import { Method } from "../../global";
+import { Command } from "../../global";
 
-class Eval extends Method {
+class C extends Command {
 
 }

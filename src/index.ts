@@ -4,21 +4,32 @@ Invite link: https://discord.com/api/oauth2/authorize?client_id=7819393174503424
 
 require("dotenv").config();
 
-import * as Discord from 'discord.js';
+import * as Discord from "discord.js";
 import { parse } from "./cmd-parser";
+import { help, load } from "./loader";
 
 const client = new Discord.Client();
 
-client.on('ready', () => {
+client.on("ready", () => {
+  client.user!.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" })
   console.log(`Logged in as ${client.user!.tag}!`);
 });
 
 client.on("message", (msg: Discord.Message) => {
-  if (msg.author.id == client.user!.id || msg.author.bot) return;
+  let cmd = parse("&", msg.content);
+  if (msg.author.id == client.user!.id || msg.author.bot || !cmd) return;
+  // DEBUGGING
+  if (msg.guild!.id != "663057930144186391") return;
 
-  msg.channel.send("IM AN EW BOT");
+  msg.channel.send(`pardone, but your message was parsed as
+**Command**: ${cmd.command}
+**Args**: ${cmd.args.map(o => "'" + o + "'").join(", ")}`);
 });
+
+(async () => {
+  console.log(await help())
+})();
 
 
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => {});
+// process.on("unhandledRejection", () => {});

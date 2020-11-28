@@ -1,0 +1,20 @@
+- Finalize `template.txt`
+- Consider Trimming excessive whitespace
+- Add Test Command
+- Add Version Command
+- Add Invite Command
+- Add Help Command
+  - Add Help Categories
+  - Add Guide
+- Add ADMIN-ONLY Command
+- Non-Saving Example
+  - Add Basic Gameplay
+  - Add Basic Shop
+- Prototype JSON Database
+- Choose repl.it DB or firebase
+- Add Random Drops and Boosts
+  - Add Inventory
+- Add Boost shop
+- Code Cleanup
+  - Add semis
+  - Refactor bad code
