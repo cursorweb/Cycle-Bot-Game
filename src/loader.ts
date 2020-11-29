@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 import * as Discord from "discord.js";
-import { Command, brackets, codestr, noun } from "./global";
+import { Command, brackets, codestr, noun, Colors } from "./global";
 
 async function load(): Promise<{ [i: string]: Command[] }> {
   let output: { [i: string]: Command[] } = {};
@@ -28,17 +28,24 @@ async function load(): Promise<{ [i: string]: Command[] }> {
 
 async function help(msg: Discord.Message, args: string[], output: { [i: string]: Command[] }) {
   if (args.length != 1) { // &help
-    let fields: string[] = Object.keys(output).map(brackets);
+    let fields: string[] = Object.keys(output).map(k => `${brackets(k)} (**${output[k].length}** commands)`);
 
     msg.channel.send({
       embed: {
+        color: Colors.PRIMARY,
         title: "Help Categories",
         description: `View the help categories!${codestr("<&help category>")}${fields.join("\n")}`
       }
     });
   } else {
     if (!output[args[0]]) { // &help invalid
-      msg.channel.send("(will be prettified) Help category not found.");
+      msg.channel.send({
+        embed: {
+          color: Colors.ERROR,
+          title: "Error",
+          description: `Error, help category for ${brackets(args[0])} was not found!`
+        }
+      });
     } else { // &help meta
       let fields: Discord.EmbedField[] = output[args[0]].map((cmd): Discord.EmbedField => ({
         name: noun(cmd.names[0]),
@@ -54,6 +61,7 @@ ${cmd.isAdmin ? brackets("ADMIN-ONLY") : ""}`,
   
       msg.channel.send({
         embed: {
+          color: Colors.PRIMARY,
           title: `Help ${brackets(args[0])}`,
           description: `View the help for ${brackets(args[0])}!`,
           fields

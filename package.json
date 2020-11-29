@@ -1,7 +1,7 @@
 {
-  "name": "replit-bot",
+  "name": "cycle-bot",
   "version": "0.0.15",
-  "description": "Fun repl.it bot",
+  "description": "Fun Discord idle bot game",
   "main": "dist/index.js",
   "scripts": {
     "start": "node .",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cursorweb/Replit-Sim.git"
+    "url": "git+https://github.com/cursorweb/Cycle-Bot-Game.git"
   },
   "keywords": [
     "bot",
@@ -21,9 +21,9 @@
   "author": "Coder100",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cursorweb/Replit-Sim/issues"
+    "url": "https://github.com/cursorweb/Cycle-Bot-Game/issues"
   },
-  "homepage": "https://github.com/cursorweb/Replit-Sim#readme",
+  "homepage": "https://github.com/cursorweb/Cycle-Bot-Game#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0"

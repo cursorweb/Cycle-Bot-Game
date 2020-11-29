@@ -1,5 +1,8 @@
 enum Colors {
-  PRIMARY, ERROR, SUCCESS, WARNING
+  PRIMARY = "#1a8ff0",
+  ERROR = "#f0351a",
+  SUCCESS = "#3bf11b",
+  WARNING = "#faa12f"
 };
 
 // [ **smth** ]
@@ -21,4 +24,4 @@ function codestr(str: string, lang = "html") {
   return "```" + lang + '\n' + str + "```";
 }
 
-export { brackets, noun, hidden, codestr };
+export { Colors, brackets, noun, hidden, codestr };

@@ -52,4 +52,12 @@ function plural(amount: number, singular = "", plural = "s") {
   return amount == 1 ? singular : plural;
 }
 
-export { randomChoice, random, padstr, commanum, expandnum, plural };
+function msBetween(start: Date, end: Date) {
+  return end.getTime() - start.getTime();
+}
+
+function addMs(start: Date, ms: number) {
+  return new Date(start.getTime() + ms);
+}
+
+export { randomChoice, random, padstr, commanum, expandnum, plural, msBetween, addMs };

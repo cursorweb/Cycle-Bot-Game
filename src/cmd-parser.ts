@@ -7,10 +7,11 @@ function parse(prefix: string, command: string): UserInput | false {
 
   let output: string[] = [];
 
-  let r: RegExp = /(\s+)|"([^"]+)"|'([^']+)'|([^\s]+)/g;
+  // whitespace | "str" | 'str' | ident
+  let r: RegExp = /(\s+)|"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([^\s]+)/g;
   let m: RegExpExecArray | null;
 
-  while ((m = r.exec(input)) != null) output.push((m[3] || m[2] || m[0]).trim());
+  while ((m = r.exec(input)) != null) output.push((m[3] || m[2] || m[0]).replace(/\\('|"|\\)/g, "$1").trim());
 
   output = output.filter(o => o != "");
 

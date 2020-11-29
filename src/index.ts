@@ -23,7 +23,7 @@ client.on("ready", async () => {
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr]), []);
 
   console.log(`Loaded ${gcmdarr.length} commands.`)
-});
+}); 
 
 client.on("message", (msg: Discord.Message) => {
   let cmd = parse("&", msg.content);
@@ -36,26 +36,26 @@ client.on("message", (msg: Discord.Message) => {
 
     for (const cmdclss of gcmdarr) {
       if (cmdclss.names.includes(cmd.command)) {
+        if (cmdclss.cooldown && cmdclss.getCooldown(msg.author) != null) {
+          cmdclss.cooldownError(msg, cmdclss.getCooldown(msg.author)!);
+        } else
+
         if (cmdclss.isAdmin) {
-          if (admins.includes(msg.author.id)) cmdclss.exec(msg, cmd.args, client);
+          if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
           else {
-            msg.channel.send("haha you don't have the perms!")
+            msg.channel.send("haha you don't have the perms!");
           }
-        } else cmdclss.exec(msg, cmd.args, client);
+        } else cmdclss.wrap(msg, cmd.args, client);
 
         found = true;
         break;
       }
     }
 
-    if (!found) msg.channel.send("is not valid command!")
+    if (!found) msg.channel.send("is not valid command!");
   }
-
-  /* msg.channel.send(`pardone, but your message was parsed as
-**Command**: ${cmd.command}
-**Args**: ${cmd.args.map(o => "'" + o + "'").join(", ")}`); */
 });
 
 
 client.login(process.env.TOKEN);
-// process.on("unhandledRejection", () => {});
+process.on("unhandledRejection", () => {});

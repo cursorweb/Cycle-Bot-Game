@@ -1,16 +1,32 @@
 import * as Discord from "discord.js";
-import { Command } from "../../global";
+import { Command, Colors, codestr } from "../../global";
 
 class C extends Command {
   names = ["eval"];
   help = "Evaluates code.";
-  examples = ["eval 1+1"];
+  examples = ["eval 'return 1+1'"];
 
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], client: Discord.Client) {
-    let output = new Function("client", "process", args.join(" "))(client, process);
-    msg.channel.send("output was `"+output+"`");
+    try {
+      let output = new Function("client", "process", args.join(" "))(client, process);
+      msg.channel.send({
+        embed: {
+          color: Colors.SUCCESS,
+          title: "Beep Boop Bop Boop!",
+          description: "Output was\n" + codestr(output, "yaml")
+        }
+      });
+    } catch (e) {
+      msg.channel.send({
+        embed: {
+          color: Colors.ERROR,
+          title: "Error!!",
+          description: "Error was\n" + codestr(e, "js")
+        }
+      });
+    }
   }
 }
 

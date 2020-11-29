@@ -1,8 +1,10 @@
 import * as Discord from "discord.js";
+import { addMs, msBetween } from "./util/util";
 
 export * from "./util/format";
 export * from "./util/util";
 
+export * as Database from "./util/database/database";
 
 export interface UserInput {
   command: string;
@@ -11,38 +13,38 @@ export interface UserInput {
 
 export class Command {
   names: string[] = [];
-  help: string = "*no help provided*";
+  help = "*no help provided*";
   examples: string[] = [];
 
-  isAdmin: boolean = false;
+  isAdmin = false;
 
-  cooldownUsers: { [index:string]: number } = {};
-  cooldown: number = 0; // ms
+  private cooldownUsers: { [index:string]: Date } = {};
+  get cooldown() { return 0; } // ms
+
+  wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
+    if (this.cooldown) this.setCooldown(msg.author);
+    this.exec(msg, args, client);
+  }
 
   exec(_: Discord.Message, _1: string[], _2: Discord.Client) {}
 
-  getCooldown(user: Discord.User): number | false {
-    return this.cooldownUsers[user.id] ? this.cooldownUsers[user.id] : false;
+  getCooldown(user: Discord.User) {
+    if (!this.cooldownUsers[user.id]) return null;
+
+    if (msBetween(new Date(), this.cooldownUsers[user.id]) <= 0) {
+      delete this.cooldownUsers[user.id];
+      return null;
+    }
+
+    return msBetween(new Date(), this.cooldownUsers[user.id]);
   }
 
   setCooldown(user: Discord.User) {
     if (this.getCooldown(user)) return;
-    this.cooldownUsers[user.id] = this.cooldown;
+    this.cooldownUsers[user.id] = addMs(new Date(), this.cooldown);
   }
 
-  initCooldown() {
-    setInterval(() => {
-      for (const id in this.cooldownUsers) {
-        this.cooldownUsers[id]--;
+  cooldownError(msg: Discord.Message, ms: number) {}
 
-        if (this.cooldownUsers[id] < 0) {
-          delete this.cooldownUsers[id];
-        }
-      }
-    }, 1);
-  }
-
-  constructor() {
-    if (this.cooldown > 0) this.initCooldown();
-  }
+  constructor() {}
 }
