@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
-import * as format from "./util/format";
-import * as util from "./util/util";
 
-export { format, util };
+export * from "./util/format";
+export * from "./util/util";
+
 
 export interface UserInput {
   command: string;
@@ -19,7 +19,7 @@ export class Command {
   cooldownUsers: { [index:string]: number } = {};
   cooldown: number = 0; // ms
 
-  exec(msg: Discord.Message, args: string[], client: Discord.Client) { }
+  exec(_: Discord.Message, _1: string[], _2: Discord.Client) {}
 
   getCooldown(user: Discord.User): number | false {
     return this.cooldownUsers[user.id] ? this.cooldownUsers[user.id] : false;

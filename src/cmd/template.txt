@@ -1,14 +1,14 @@
 import * as Discord from "discord.js";
-import * as g from "../../global";
+import { Command } from "../../global";
 
-class C extends g.Command {
+class C extends Command {
   names = [""];
   help = "";
-  examples: string[] = [];
+  examples = [""];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     
   }
 }
 
-export default new C();
+export const c = new C();

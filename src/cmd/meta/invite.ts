@@ -1,13 +1,13 @@
 import * as Discord from "discord.js";
-import * as g from "../../global";
+import { Command } from "../../global";
 
-class C extends g.Command {
+class C extends Command {
   names = ["invite"];
-  help = "";
+  help = "Invite the bot to your server!";
 
-  exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    msg.channel.send("please use &version.")
+  exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
+    msg.channel.send("(todo:format) please use &version.");
   }
 }
 
-export default new C();
+export const c = new C();

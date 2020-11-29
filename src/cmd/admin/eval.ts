@@ -1,15 +1,17 @@
 import * as Discord from "discord.js";
-import * as g from "../../global";
+import { Command } from "../../global";
 
-class C extends g.Command {
+class C extends Command {
   names = ["eval"];
-  help = "";
+  help = "Evaluates code.";
+  examples = ["eval 1+1"];
 
   isAdmin = true;
 
-  exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    msg.channel.send("ok master :)")
+  exec(msg: Discord.Message, args: string[], client: Discord.Client) {
+    let output = new Function("client", "process", args.join(" "))(client, process);
+    msg.channel.send("output was `"+output+"`");
   }
 }
 
-export default new C();
+export const c = new C();

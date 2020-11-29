@@ -1,17 +1,19 @@
-- Finalize `template.txt` (done)
+- ~~Finalize `template.txt`~~
 - Consider Trimming excessive whitespace
-- Add Test Command (done)
-- Add Version Command (done)
-- Add Invite Command (done)
-- Add ADMIN-ONLY Command (done)
-- Add Help Command (done)
-  - Add Help Categories (done)
+- ~~Add Test Command~~
+- ~~Add Version Command~~
+- ~~Add Invite Command~~
+- ~~Add ADMIN-ONLY Command~~
+- ~~Add Help Command~~
+  - ~~Add Help Categories~~
   - Add Guide
-  - Improve Help
+  - ~~Improve Help~~
 - Polish commands
 - Non-Saving Example
   - Add Basic Gameplay
   - Add Basic Shop
+  - Think of Gameplay
+    - Create online version
 - Prototype JSON Database
 - Choose repl.it DB or firebase
 - Add Random Drops and Boosts

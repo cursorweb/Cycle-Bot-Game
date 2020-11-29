@@ -58,4 +58,4 @@ client.on("message", (msg: Discord.Message) => {
 
 
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => { });
+// process.on("unhandledRejection", () => {});
