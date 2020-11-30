@@ -3,22 +3,15 @@ import * as Discord from "discord.js"
 function genSchema(user: Discord.User): CycleUser {
   return {
     name: user.tag,
-
-    money: "0",
-    cycles: "0",
-    text: "0",
-    egocoins: "0",
-
-    tpc: "1",
-    cpp: "1",
-    cpm: "0",
-
-    langs: [],
-    level: "0",
-    socialMedia: [],
-
+    money: "0", cycles: "0", text: "0", egocoins: "0",
+    tpc: "1", cpp: "1", cpm: "0",
+    langs: [], level: "0", socialMedia: [],
+    
     inv: [],
-    bought: []
+    bought: {
+      idle: [],
+      upgrades: []
+    }
   }
 }
 
@@ -38,13 +31,18 @@ interface CycleUser {
   cpm: string, // cycles per minute
 
   // extra boosts
-  langs: string[], // languages the user knows (boost)
+  langs: number[], // languages the user knows (boost index)
   level: string, // level boost
-  socialMedia: string[], // social media boost
+  socialMedia: number[], // social media boost (index)
+  inv: number[], // what the user has in inventory (by index)
 
-  // todo section
-  inv: string[], // what the user has in inventory
-  bought: [], // what the user has bought
+  // what the user has bought
+  bought: {
+    idle: number[][], // the index, and then amount
+    // for example, for [0, 1], the user bought 1 of the 0th index
+    // this also means we can only expand up.
+    upgrades: number[][]
+  }
 }
 
 export { genSchema, CycleUser };

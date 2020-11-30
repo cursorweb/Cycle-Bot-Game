@@ -1,3 +1,5 @@
+import * as Discord from "discord.js";
+
 enum Colors {
   PRIMARY = "#1a8ff0",
   ERROR = "#f0351a",
@@ -24,4 +26,26 @@ function codestr(str: string, lang = "html") {
   return "```" + lang + '\n' + str + "```";
 }
 
-export { Colors, brackets, noun, hidden, codestr };
+namespace Bot {
+  export function argserror(msg: Discord.Message, got: number, expect: number[]) {
+    msg.channel.send({
+      embed: {
+        color: Colors.ERROR,
+        title: "Invalid Arguments!",
+        description: `Invalid arguments!\nExpected \`${expect.join(", ")}\` arguments but got \`${got}\` arguments.`
+      }
+    });
+  }
+
+  export function errormsg(msg: Discord.Message, error: string, title = "Error!!") {
+    msg.channel.send({
+      embed: {
+        color: Colors.ERROR,
+        title,
+        description: error
+      }
+    });
+  }
+}
+
+export { Colors, brackets, noun, hidden, codestr, Bot };

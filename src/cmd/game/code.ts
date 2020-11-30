@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors } from "../../global";
+import { Command, Colors, Bot, brackets } from "../../global";
 
 class C extends Command {
   names = ["code", "c"];
@@ -13,7 +13,8 @@ class C extends Command {
   }
 
   cooldownError(msg: Discord.Message, ms: number) {
-    msg.channel.send("You are still tired from typing! You have " + ms / 1000 + "seconds LEFT");
+    Bot.errormsg(msg, `Your fingers are still tired from typing!
+Please wait ${brackets((ms / 1000).toString())} seconds before you can code again.`, `Cooldown!`);
   }
 }
 

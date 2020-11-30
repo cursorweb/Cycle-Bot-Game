@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { Bot } from "./util/format";
 import { addMs, msBetween } from "./util/util";
 
 export * from "./util/format";
@@ -44,7 +45,7 @@ export class Command {
     this.cooldownUsers[user.id] = addMs(new Date(), this.cooldown);
   }
 
-  cooldownError(msg: Discord.Message, ms: number) {}
-
-  constructor() {}
+  cooldownError(msg: Discord.Message, ms: number) {
+    Bot.errormsg(msg, `You still have ${ms / 1000} seconds left!`, "Cooldown!")
+  }
 }

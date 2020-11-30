@@ -22,7 +22,7 @@ client.on("ready", async () => {
   commands = await load();
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr]), []);
 
-  console.log(`Loaded ${gcmdarr.length} commands.`)
+  console.log(`Loaded ${gcmdarr.length} commands.`);
 }); 
 
 client.on("message", (msg: Discord.Message) => {

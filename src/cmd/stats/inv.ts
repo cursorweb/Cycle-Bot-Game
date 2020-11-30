@@ -6,8 +6,10 @@ class C extends Command {
   help = "View your inventory.";
   examples = ["i 2"];
 
+  get cooldown() { return 5; }
+
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    msg.channel.send("You don't have any items, and btw, here's the data:\n" + args.join(","))
+    msg.channel.send("You don't have any items, and btw, here's the data:\n" + args.join(","));
   }
 }
 
