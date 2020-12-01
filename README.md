@@ -26,5 +26,13 @@ If you are hosting this on [`repl.it`](https://repl.it/), a `.replit` file alrea
 npm i
 ```
 
+### Firebase
+This project *does* require firebase, so make sure you hvae the admin SDK ready. First, it will check if the `.env` file contains the `FIREBASE` key, which is just the JSON file on one line.
+```
+FIREBASE={"...": "..."}
+```
+Otherwise, it just readds the `sdk-key.json` file in the root directory.
+> Make sure not to commit `sdk-key.json`!
+
 ## Contributions
 Suggestions are very much welcome!

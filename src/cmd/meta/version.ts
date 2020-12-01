@@ -9,8 +9,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.25",
-        description: "The bot is now mostly complete in terms of commands. Now it's time to begin implementing them!"
+        title: "Version 0.0.3",
+        description: "Firebase is set up, and the wiki is mostly finished. Now it is just the problem of making things *work*. See you tomorrow!"
       }
     });
   }

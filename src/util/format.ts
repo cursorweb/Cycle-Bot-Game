@@ -5,7 +5,7 @@ enum Colors {
   ERROR = "#f0351a",
   SUCCESS = "#3bf11b",
   WARNING = "#faa12f"
-};
+}
 
 // [ **smth** ]
 function brackets(input: string) {
@@ -24,6 +24,18 @@ function hidden(input: string) {
 
 function codestr(str: string, lang = "html") {
   return "```" + lang + '\n' + str + "```";
+}
+
+function formatDate(ms: number) {
+  const days = Math.floor(ms / (24 * 60 * 60 * 1000));
+  const hours = Math.floor((ms % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+  const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
+  const seconds = Math.floor((ms % (60 * 1000)) / (1000));
+
+  return (days > 0 ? brackets(days.toString().padStart(2, '0')) + " days : " : "")
+    + (hours > 0 ? brackets(hours.toString().padStart(2, '0')) + " hours : " : "")
+    + (minutes > 0 ? brackets(minutes.toString().padStart(2, '0')) + " minutes : " : "")
+    + brackets(seconds.toString().padStart(2, '0')) + " seconds";
 }
 
 namespace Bot {
@@ -48,4 +60,4 @@ namespace Bot {
   }
 }
 
-export { Colors, brackets, noun, hidden, codestr, Bot };
+export { Colors, brackets, noun, hidden, codestr, formatDate, Bot };

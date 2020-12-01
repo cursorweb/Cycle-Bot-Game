@@ -11,12 +11,6 @@ function random(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
-function padstr(text: string, length: number, pad = "0") {
-  let amount = length - text.length;
-  if (amount <= 0) return text;
-  return text.padStart(amount, pad);
-}
-
 /** Adds Commas */
 function commanum(inp: string) {
   let val = inp.replace(/,/g, "");
@@ -60,4 +54,4 @@ function addMs(start: Date, ms: number) {
   return new Date(start.getTime() + ms);
 }
 
-export { randomChoice, random, padstr, commanum, expandnum, plural, msBetween, addMs };
+export { randomChoice, random, commanum, expandnum, plural, msBetween, addMs };

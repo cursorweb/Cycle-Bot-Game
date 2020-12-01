@@ -3,6 +3,7 @@ import * as fs from "fs";
 
 import * as Discord from "discord.js";
 import { Command, brackets, codestr, noun, Colors } from "./global";
+import * as g from "./global";
 
 async function load(): Promise<{ [i: string]: Command[] }> {
   let output: { [i: string]: Command[] } = {};
@@ -71,4 +72,38 @@ ${cmd.isAdmin ? brackets("ADMIN-ONLY") : ""}`,
   }
 }
 
-export { load, help };
+function verifyHuman(msg: Discord.Message, args: string[], commandsUsed: { [i: string]: [number, string, number] }) {
+  // commands used, input, answer
+  let user = commandsUsed[msg.author.id];
+
+  if (!user) return false;
+
+  if (Number(args[0]) != user[2]) {
+    msg.channel.send({
+      embed: {
+        color: g.Colors.ERROR,
+        title: "Error!",
+        description: `You gave the wrong answer!
+If you forgot, your input was ${brackets(user[1])}\n
+For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
+        footer: {
+          text: "You cannot continue until you complete this challenge!"
+        }
+      }
+    });
+
+    return false;
+  } else {
+    msg.channel.send({
+      embed: {
+        color: g.Colors.SUCCESS,
+        title: "Challenge Complete!",
+        description: "You may now continue."
+      }
+    });
+
+    return true;
+  }
+}
+
+export { load, help, verifyHuman };

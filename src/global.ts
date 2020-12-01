@@ -46,6 +46,6 @@ export class Command {
   }
 
   cooldownError(msg: Discord.Message, ms: number) {
-    Bot.errormsg(msg, `You still have ${ms / 1000} seconds left!`, "Cooldown!")
+    Bot.errormsg(msg, `You still have ${ms / 1000} seconds left!`, "Cooldown!");
   }
 }

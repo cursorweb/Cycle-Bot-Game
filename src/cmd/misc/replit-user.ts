@@ -52,7 +52,7 @@ class C extends Command {
             inline: true
           }))
         }
-      })
+      });
     }
   }
 }
