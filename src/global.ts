@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
-import { Bot } from "./util/format";
+import { Bot, brackets } from "./util/format";
 import { addMs, msBetween } from "./util/util";
+import { genSchema, setUser, getUser } from "./util/database/database";
 
 export * from "./util/format";
 export * from "./util/util";
@@ -16,6 +17,7 @@ export class Command {
   names: string[] = [];
   help = "*no help provided*";
   examples: string[] = [];
+  isGame = true; // if we should initiate player or not
 
   isAdmin = false;
 
@@ -24,6 +26,7 @@ export class Command {
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
+    if (this.isGame && !getUser(msg.author.id)) setUser(msg.author.id, genSchema(msg.author));
     this.exec(msg, args, client);
   }
 
@@ -46,6 +49,6 @@ export class Command {
   }
 
   cooldownError(msg: Discord.Message, ms: number) {
-    Bot.errormsg(msg, `You still have ${ms / 1000} seconds left!`, "Cooldown!");
+    Bot.errormsg(msg, `You still have ${brackets((ms / 1000).toFixed(2))} seconds left!`, "Cooldown!");
   }
 }

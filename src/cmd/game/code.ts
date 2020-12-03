@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, brackets } from "../../global";
+import { BigNumber as Big } from "bignumber.js";
+import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global";
 
 class C extends Command {
   names = ["code", "c"];
@@ -8,8 +9,22 @@ class C extends Command {
   get cooldown() { return 5000; }
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
-    // todo: color success
-    msg.channel.send("This is what coding looks like.");
+    let user = Database.getUser(msg.author.id);
+    let tpc = new Big(user.tpc), text = new Big(user.text);
+
+    msg.channel.send({
+      embed: {
+        color: Colors.SUCCESS,
+        title: "Code Code Code!",
+        description: `You code your heart out!
+You make ${brackets(commanum(user.tpc))} line${plural(tpc.toNumber())} of code!`,
+        footer: {
+          text: "Use &post to get some cycles!"
+        }
+      }
+    });
+
+    user.text = text.plus(tpc).toString();
   }
 
   cooldownError(msg: Discord.Message, ms: number) {

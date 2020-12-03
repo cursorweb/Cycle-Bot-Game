@@ -7,6 +7,8 @@ class C extends Command {
   help = "Get the cycles, ID, and profile of a repl.it user.";
   examples = ["replit-user Coder100"];
 
+  get cooldown() { return 3e4; }
+
   async exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) Bot.argserror(msg, args.length, [1]);
     else {

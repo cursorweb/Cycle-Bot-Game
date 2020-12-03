@@ -3,16 +3,16 @@ import * as Discord from "discord.js"
 function genSchema(user: Discord.User): CycleUser {
   return {
     name: user.tag,
-    money: "0", cycles: "0", text: "0", egocoins: "0",
-    tpc: "1", cpp: "1", cpm: "0",
-    langs: [], level: "0", socialMedia: [],
+    cycles: "0", text: "0", xp: "0",
+    tpc: "1", cpp: "1", tpm: "0",
+    langs: null, level: "0", socialMedia: null,
     
     inv: [],
     bought: {
-      idle: [],
-      upgrades: []
+      idle: {},
+      upgrades: {}
     }
-  }
+  };
 }
 
 interface CycleUser {
@@ -20,28 +20,28 @@ interface CycleUser {
   name: string; // tag, used for identification
 
   // leaderboard
-  money: string;
   cycles: string; // used from big.js
   text: string; // your code
-  egocoins: string;
+  xp: string; // xp points
+  // refer to desmos.
+  // gain EXP by POSTING
 
   // boosts
   tpc: string; // text per code
   cpp: string; // cycles per post
-  cpm: string; // cycles per minute
+  tpm: string; // text per minute
 
   // extra boosts
-  langs: number[]; // languages the user knows (boost index)
+  langs: number | null; // language the user knows (boost index)
   level: string; // level boost
-  socialMedia: number[]; // social media boost (index)
-  inv: number[]; // what the user has in inventory (by index)
+  socialMedia: number | null; // social media platform (null | number)
+  inv: { [i: number]: number }; // [item-index]: amount
 
   // what the user has bought
   bought: {
-    idle: number[][]; // the index, and then amount
-    // for example, for [0, 1], the user bought 1 of the 0th index
-    // this also means we can only expand up.
-    upgrades: number[][];
+    idle: { [i: number]: number }; // [item-index]: amount
+    // this means we can only expand forwards
+    upgrades: { [i: number]: number };
   }
 }
 

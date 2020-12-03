@@ -9,7 +9,9 @@ class C extends Command {
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     // todo: make the failsafe too lol
     if (args.length > 1) Bot.argserror(msg, args.length, [0, 1]);
-    else msg.channel.send(`You want to sell ${args[0] || 1} line${plural(Number(args[0]) || 1)} of code. tsk tsk says the FSF`);
+    else msg.channel.send(`You want to sell ${args[0] || 1} line${plural(Number(args[0]) || 1)} of code. tsk tsk says the FSF
+jk you can't sell code, that was weird
+you can only sell... POG`);
   }
 }
 

@@ -24,6 +24,10 @@ client.on("ready", async () => {
   client.user!.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
   console.log(`Logged in as ${client.user!.tag}!`);
 
+  // todo: load db here
+  await g.Database.update();
+  console.log("Loaded database.");
+
   commands = await load();
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr]), []);
 
@@ -87,6 +91,12 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
 > Use \`&help\` if you don't know how to use this bot!`, "Unknown Command!");
   }
 });
+
+
+setInterval(async () => {
+  await g.Database.save();
+  g.Database.update();
+}, 6e5); // 10 min
 
 
 client.login(process.env.TOKEN);

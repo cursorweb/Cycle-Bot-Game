@@ -1,4 +1,3 @@
-import * as fs from "fs"; // import some firebase
 // for now the wrapper will actually be fs and not firebase (yet)
 
 import admin from "firebase-admin";

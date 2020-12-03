@@ -11,7 +11,7 @@ async function load(): Promise<{ [i: string]: Command[] }> {
   async function loadDir(dir: string, dirn?: string) {
     for (const file of fs.readdirSync(dir)) {
       let stat = fs.lstatSync(dir + "/" + file);
-      if (stat.isFile() && file.includes(".js")) {
+      if (stat.isFile() && /\.js$/.test(file)) {
         const C: Command = (await import(dir + "/" + file)).c;
         
         if (!output[dirn!]) output[dirn!] = [];

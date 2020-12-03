@@ -1,4 +1,8 @@
+# generated
 node_modules
 dist
+database.json
+
+# keys
 sdk-key.json
 .env
