@@ -1,6 +1,6 @@
 {
   "name": "cycle-bot",
-  "version": "0.0.3",
+  "version": "0.0.35",
   "description": "Fun Discord idle bot game",
   "main": "dist/index.js",
   "scripts": {
