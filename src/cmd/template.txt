@@ -1,10 +1,14 @@
 import * as Discord from "discord.js";
+import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors } from "../../global";
 
 class C extends Command {
   names = [""];
   help = "";
   examples = [""];
+  isGame = '' as '';
+
+  get cooldown() { return ; }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     

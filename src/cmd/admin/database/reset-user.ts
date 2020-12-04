@@ -5,6 +5,7 @@ class C extends Command {
   names = ["admin-user-reset"];
   help = "Test things out with *nothing*.";
   examples = ["admin-user-reset id"];
+  isGame = 'n' as 'n';
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);

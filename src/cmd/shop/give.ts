@@ -7,7 +7,7 @@ class C extends Command {
   examples = ["give @Coder100 apple"];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    
+    msg.channel.send("Coming... SOON!");
   }
 }
 

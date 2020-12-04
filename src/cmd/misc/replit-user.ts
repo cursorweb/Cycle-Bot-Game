@@ -6,6 +6,7 @@ class C extends Command {
   names = ["replit-user", "repl-user"];
   help = "Get the cycles, ID, and profile of a repl.it user.";
   examples = ["replit-user Coder100"];
+  isGame = 'n' as 'n';
 
   get cooldown() { return 3e4; }
 

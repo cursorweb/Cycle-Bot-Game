@@ -4,6 +4,7 @@ function parse(prefix: string, command: string): UserInput | false {
   if (command.slice(0, prefix.length) != prefix) return false;
 
   let input = command.slice(prefix.length).trim();
+  if (!/(\s+)|"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([^\s]+)/g.test(input)) return false;
 
   let output: string[] = [];
 

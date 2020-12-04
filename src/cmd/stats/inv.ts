@@ -9,7 +9,7 @@ class C extends Command {
   get cooldown() { return 5; }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    msg.channel.send("You don't have any items, and btw, here's the data:\n" + args.join(","));
+    msg.channel.send("You don't have any items (yet), and btw, here's the data:\n" + args.join(","));
   }
 }
 

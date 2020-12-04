@@ -5,6 +5,7 @@ class C extends Command {
   names = ["dice-roll", "roll-dice"];
   help = "Roll a dice!";
   examples = ["dice-roll min max", "dice-roll"];
+  isGame = 'n' as 'n';
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length == 0) {

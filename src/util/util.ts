@@ -1,3 +1,5 @@
+import { BigNumber as Big } from "bignumber.js";
+
 function randomChoice<T>(array: T[], amount = 1): T[] {
   let out = [];
   for (let i = 0; i < amount; i++) {
@@ -8,7 +10,11 @@ function randomChoice<T>(array: T[], amount = 1): T[] {
 }
 
 function random(min: number, max: number): number {
-  return Math.random() * (max - min) + min;
+  return (max - min) * Math.random() + min;
+}
+
+function randomb(min: Big, max: Big): Big {
+  return (max.minus(min)).times(Math.random()).plus(min);
 }
 
 /** Adds Commas */
@@ -46,6 +52,16 @@ function plural(amount: number, singular = "", plural = "s") {
   return amount == 1 ? singular : plural;
 }
 
+function pluralb(amount: Big, singular = "", plural = "s") {
+  return amount.eq(1) ? singular : plural;
+}
+
+function parseMention(input: string): { type: "name" | "id", value: string } {
+  if (/^<@!?(\d+)>$/.test(input)) return { type: "id", value: input.match(/^<@!?(\d+)>$/)![1] };
+  if (/^\d+$/.test(input)) return { type: "id", value: input };
+  return { type: "name", value: input };
+}
+
 function msBetween(start: Date, end: Date) {
   return end.getTime() - start.getTime();
 }
@@ -54,4 +70,4 @@ function addMs(start: Date, ms: number) {
   return new Date(start.getTime() + ms);
 }
 
-export { randomChoice, random, commanum, expandnum, plural, msBetween, addMs };
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs };

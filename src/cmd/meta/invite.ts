@@ -4,6 +4,7 @@ import { Command, Colors } from "../../global";
 class C extends Command {
   names = ["invite"];
   help = "Invite the bot to your server!";
+  isGame = 'n' as 'n';
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({

@@ -11,7 +11,13 @@ import { CycleUser } from "./genschema";
 export let pdb: { [i: string]: CycleUser } = {};
 
 export function setUser(key: string, val: CycleUser) {
+  if (!pdb[key]) pdb[key] = val;
   Object.assign(pdb[key], val);
+}
+
+// return keys of IDs
+export function findUser(filter: (u: CycleUser) => boolean): string[] {
+  return Object.keys(pdb).filter(k => filter(pdb[k]));
 }
 
 export function getUser(key: string): CycleUser {

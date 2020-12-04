@@ -5,6 +5,7 @@ class C extends Command {
   names = ["eval"];
   help = "Evaluates code.";
   examples = ["eval 'return 1+1'"];
+  isGame = 'n' as 'n';
 
   isAdmin = true;
 

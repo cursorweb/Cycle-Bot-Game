@@ -4,6 +4,7 @@ import { Command, Colors, brackets, plural, formatDate } from "../../global";
 class C extends Command {
   names = ["uptime", "bot-about", "bot-servers"];
   help = "View some general statistics about the bot.";
+  isGame = 'n' as 'n';
 
   exec(msg: Discord.Message, args: string[], client: Discord.Client) {
     msg.channel.send({

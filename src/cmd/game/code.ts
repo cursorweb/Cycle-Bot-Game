@@ -5,6 +5,7 @@ import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../.
 class C extends Command {
   names = ["code", "c"];
   help = "Work on your project!";
+  isGame = 'y' as 'y';
 
   get cooldown() { return 5000; }
 

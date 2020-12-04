@@ -5,6 +5,7 @@ class C extends Command {
   names = ["echo", "mimic", "repeat"];
   help = "Repeats what you say";
   examples = ["echo hi"];
+  isGame = 'n' as 'n';
 
   isAdmin = true;
 
