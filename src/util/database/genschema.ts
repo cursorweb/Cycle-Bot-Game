@@ -1,5 +1,21 @@
 import * as Discord from "discord.js"
 
+const defaultSchema: CycleUser = {
+  name: "",
+  cycles: "0", text: "0", xp: "0",
+  tpc: "1", cpp: "1", tpm: "0",
+  langs: null, level: "0", socialMedia: null,
+  
+  inv: [],
+  
+  daily: "",
+
+  bought: {
+    idle: {},
+    upgrades: {}
+  }
+};
+
 function genSchema(user: Discord.User): CycleUser {
   return {
     name: user.tag,
@@ -8,6 +24,9 @@ function genSchema(user: Discord.User): CycleUser {
     langs: null, level: "0", socialMedia: null,
     
     inv: [],
+ 
+    daily: "",
+
     bought: {
       idle: {},
       upgrades: {}
@@ -37,6 +56,8 @@ interface CycleUser {
   socialMedia: number | null; // social media platform (null | number)
   inv: { [i: number]: number }; // [item-index]: amount
 
+  daily: string
+
   // what the user has bought
   bought: {
     idle: { [i: number]: number }; // [item-index]: amount
@@ -45,4 +66,4 @@ interface CycleUser {
   }
 }
 
-export { genSchema, CycleUser };
+export { defaultSchema, genSchema, CycleUser };

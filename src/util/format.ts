@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { constrain } from "./util";
 
 enum Colors {
   PRIMARY = "#1a8ff0",
@@ -57,6 +58,45 @@ namespace Bot {
         description: error
       }
     });
+  }
+
+  /**
+   * 'carousel'
+   * @param msg msg (for user)
+   * @param data array of item data
+   * @param count how much should be in each page
+   * @param send the embed to be sent
+   * @param curr curr page (1)
+   */
+  export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (page: number, i: T[]) => Discord.MessageEmbedOptions, curr: number = 1) {
+    let page = curr;
+
+    function recurse() {
+      msg.channel.send({ embed: send(page, data.slice(constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length))) })
+        .then(async mesg => {
+          if (page > 1) await mesg.react('\u2B05'); // left
+          await mesg.react('\u27A1'); // right
+
+          function filter(reaction: Discord.MessageReaction, user: Discord.User) {
+            return ['\u2B05', '\u27A1'].includes(reaction.emoji.name) && user.id == msg.author.id;
+          }
+
+          mesg.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] }).then(col => {
+            const choice = col.first();
+
+            // left
+            if (choice!.emoji.name == '\u2B05') page--;
+            // right
+            else page++;
+
+            mesg.delete();
+
+            recurse();
+          });
+        });
+    }
+
+    recurse();
   }
 }
 

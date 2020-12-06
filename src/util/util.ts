@@ -70,4 +70,13 @@ function addMs(start: Date, ms: number) {
   return new Date(start.getTime() + ms);
 }
 
-export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs };
+function geosum(start: number, inflation: number, amount: number) {
+  let bstrt = new Big(start);
+  let binfl = new Big(inflation);
+  return new Big(bstrt.times(new Big(1).minus(binfl.pow(amount)))).div(new Big(1).minus(binfl)).toPrecision(0);
+}
+
+
+function constrain(n: number, min: number, max: number) { return n < min ? min : n > max ? max : n; }
+
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, geosum, constrain };

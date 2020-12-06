@@ -6,7 +6,7 @@ class C extends Command {
   help = "View some general statistics about the bot.";
   isGame = 'n' as 'n';
 
-  exec(msg: Discord.Message, args: string[], client: Discord.Client) {
+  exec(msg: Discord.Message, _: string[], client: Discord.Client) {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,

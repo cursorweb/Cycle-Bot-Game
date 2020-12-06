@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.4",
-        description: "It is here! You can now view other peoples' cycles, and make some cycles yourself! See you tommorrow for some *competition*!"
+        title: "Version 0.0.45",
+        description: "I had some homework, so I did a bit less today. Anyways, here's the leaderboard!"
       }
     });
   }
