@@ -3,6 +3,8 @@ The source code is divided into many sections. Hopefully this will help you (and
 ```
 cmd/
   # All the bot commands (each folder is a category)
+  template.txt # A template file
+  cmd.json # Info on all the files
 
 util/
   data/

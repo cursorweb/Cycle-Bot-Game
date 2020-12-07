@@ -13,7 +13,7 @@ import { help, load, verifyHuman } from "./loader";
 import admins from "./util/admin.json";
 
 const client = new Discord.Client();
-let commands: { [i: string]: g.Command[] }, gcmdarr: g.Command[];
+let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[];
 
 // the limit is x before we have people confirm they are not self-botting.
 // the array is: `commands used,bot input,bot answer`
@@ -29,7 +29,7 @@ client.on("ready", async () => {
   console.log("Loaded database.");
 
   commands = await load();
-  gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr]), []);
+  gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr].cmds), []);
 
   console.log(`Loaded ${gcmdarr.length} commands.`);
 }); 

@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.45",
-        description: "I had some homework, so I did a bit less today. Anyways, here's the leaderboard!"
+        title: "Version 0.0.5",
+        description: "The bot is now on repl.it discord, and its time for the *second* half to the road to v1!"
       }
     });
   }

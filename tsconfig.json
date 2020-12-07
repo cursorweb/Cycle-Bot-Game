@@ -15,6 +15,6 @@
     "removeComments": true
   },
 
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/**/*.md"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
