@@ -7,6 +7,8 @@ class C extends Command {
   examples = ["admin-user-set id"];
   isGame = 'n' as 'n';
 
+  isAdmin = true;
+
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
 

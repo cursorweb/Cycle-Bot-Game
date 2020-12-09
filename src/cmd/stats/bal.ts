@@ -13,7 +13,8 @@ class C extends Command {
         color: Colors.PRIMARY,
         title: "Personal Balance",
         description: `**Cycles**: ${brackets(commanum(user.cycles))}
-**Text**: ${brackets(commanum(user.text))}`
+**Text**: ${brackets(commanum(user.text))}
+**Level**: (todo)`
       }
     });
   }

@@ -11,7 +11,7 @@ export * as Database from "./util/database/database";
 export interface UserInput {
   command: string;
   args: string[];
-};
+}
 
 export class Command {
   names: string[] = [];

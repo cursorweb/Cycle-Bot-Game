@@ -1,6 +1,6 @@
 export interface BSocialMedia {
   name: string;
-  amt: number; // amount of boost in all categories, tpc, cpp, and cpm
+  amt: number; // amount of boost in all categories, tpc, cpp, and tpm
   price: number; // in cycles
 }
 

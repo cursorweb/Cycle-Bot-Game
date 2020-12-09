@@ -6,6 +6,8 @@ class C extends Command {
   help = "'git push' to firebase.";
   isGame = 'n' as 'n';
 
+  isAdmin = true;
+
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.save().then(() => Database.update().then(() => msg.channel.send({
       embed: {

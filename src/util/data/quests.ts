@@ -7,13 +7,13 @@ export interface CQuest {
   start?: { // this is the starting number, which will be manually assigned
     tpc?: string;
     cpp?: string;
-    cpm?: string;
+    tpm?: string;
   }
 
   end?: { // this is how much will be needed, like start + this_number when initiated
     tpc?: string;
     cpp?: string;
-    cpm?: string;
+    tpm?: string;
   }
 }
 

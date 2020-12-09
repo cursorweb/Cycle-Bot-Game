@@ -7,7 +7,7 @@ export interface BItem {
 
   tpc?: number;
   cpp?: number;
-  cpm?: number;
+  tpm?: number;
 }
 
 export const items: BItem[] = [];
