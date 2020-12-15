@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, Database, commanum, constrain, geosum, brackets, codestr } from "../../global";
+import { BigNumber as Big } from "bignumber.js";
+import { Command, Colors, Bot, Database, commanum, constrain, calcCost, calcPrice, brackets, codestr } from "../../global";
 import { items } from "../../util/data/shop";
 
 class C extends Command {
@@ -14,8 +15,8 @@ class C extends Command {
     const user = Database.getUser(msg.author.id);
 
     let page = constrain(Number(args[0] || 1), 1, Infinity);
-    let data = items.upgrade.map(n => `[ ${n.name} ][ ${n.cost} ]
-<+${n.tpc!}> <todo owned>
+    let data = items.upgrade.map((n, i) => `[ ${n.name} ][ ${calcPrice(n.cost, 1.07, user.bought.upgrades[i] || 0)} Cycles ]
+<+${n.tpc!} TPC> <${commanum((user.bought.upgrades[i] || 0).toString())} owned>
 > ${n.description}`);
 
     Bot.carousel(msg, data, 5, (page, i): Discord.MessageEmbedOptions => i.length > 0 ? ({

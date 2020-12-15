@@ -70,13 +70,22 @@ function addMs(start: Date, ms: number) {
   return new Date(start.getTime() + ms);
 }
 
-function geosum(start: number, inflation: number, amount: number) {
-  let bstrt = new Big(start);
-  let binfl = new Big(inflation);
-  return new Big(bstrt.times(new Big(1).minus(binfl.pow(amount)))).div(new Big(1).minus(binfl)).toPrecision(0);
+/**
+ * How much 'n' amoout costs.
+ */
+function calcCost(base: number, inflation: number, amount: number, owned: number) {
+  let bbase = new Big(base), binfl = new Big(inflation);
+  return bbase.times((binfl.pow(amount).minus(1)).times(binfl.pow(owned)).div(binfl.minus(1))).dp(0);
+}
+
+/**
+ * How much one thing costs
+ */
+function calcPrice(base: number, inflation: number, owned: number) {
+  return calcCost(base, inflation, 1, owned);
 }
 
 
 function constrain(n: number, min: number, max: number) { return n < min ? min : n > max ? max : n; }
 
-export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, geosum, constrain };
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, constrain };

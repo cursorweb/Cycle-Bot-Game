@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import { Bot, brackets } from "./util/format";
 import { addMs, msBetween } from "./util/util";
-import { genSchema, setUser, getUser } from "./util/database/database";
+import { genSchema, setUser, getUser, CycleUser } from "./util/database/database";
 
 export * from "./util/format";
 export * from "./util/util";
@@ -31,9 +31,12 @@ export class Command {
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
+
     if (this.isGame == 'y' && !getUser(msg.author.id)) setUser(msg.author.id, genSchema(msg.author));
     else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
     > Do \`&code\` to start playing!`, "Profile not found!");
+
+    if (getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
     this.exec(msg, args, client);
   }
 

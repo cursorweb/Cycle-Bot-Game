@@ -24,7 +24,7 @@ class C extends Command {
         let col1 = itm.slice(0, 5).map((n, i) => `${st + i}. ${n.name == msg.author.tag ? "**" : ""}${n.name}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles.toString()))}`);
         let col2 = itm.slice(5).map((n, i) => `${st + i + 5}. ${n.name == msg.author.tag ? "**" : ""}${n.name}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles.toString()))}`);
 
-        if (col1.length > 0) out.push({ name: st + "-" + (st + 5), value: col1.join('\n'), inline: true });
+        if (col1.length > 0) out.push({ name: st + "-" + (st + 4), value: col1.join('\n'), inline: true });
         if (col2.length > 0) out.push({ name: (st + 5) + "-" + (st + 9), value: col2.join('\n'), inline: true });
       }
 

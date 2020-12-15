@@ -42,7 +42,7 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
         color: Colors.PRIMARY,
         title: "Help Categories",
         description: `View the help categories! Page: ${brackets(page.toString())}${codestr("<&help category>")}`,
-        fields: i
+        fields: i.length == 0 ? [{ name: "End of Help!", value: "No more commands!" }] : i
       }
     });
   } else {
