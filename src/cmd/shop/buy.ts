@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database, Bot } from "../../global";
+import { Command, Colors, Database, brackets, Bot } from "../../global";
+import { items } from "../../util/data/shop";
 
 class C extends Command {
   names = ["buy", "b"];
@@ -13,9 +14,14 @@ class C extends Command {
     let itm = args[0];
     let amt = Number(args[1] || 1);
 
+    let itmIndex = items.upgrade.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
+    if (itmIndex == -1) {
+      return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!")
+    } else {
+      msg.channel.send(`u want to buy ${items.upgrade[itmIndex].name}, which is nice, and also ${amt} too.`)
+    }
 
-    Database.pdb[msg.author.id].bought.upgrades[0] = 10;
-    msg.channel.send("TODO: make sure to like parse the args.\nargs: " + args.join(","));
+    // msg.channel.send("TODO: make sure to like parse the args.\nargs: " + args.join(","));
   }
 }
 

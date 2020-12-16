@@ -32,7 +32,10 @@ export class Command {
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
 
-    if (this.isGame == 'y' && !getUser(msg.author.id)) setUser(msg.author.id, genSchema(msg.author));
+    if (this.isGame == 'y' && !getUser(msg.author.id)) {
+      msg.channel.send(`Welcome to the bot, ${brackets(msg.author.tag)}! Use \`&guide\` to get a simple tutorial!`);
+      setUser(msg.author.id, genSchema(msg.author));
+    }
     else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
     > Do \`&code\` to start playing!`, "Profile not found!");
 

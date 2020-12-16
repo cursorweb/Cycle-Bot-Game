@@ -71,7 +71,7 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
         if (cmdclss.isAdmin) {
           if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
           else {
-            msg.channel.send("haha you don't have the perms!");
+            g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
           }
         } else cmdclss.wrap(msg, cmd.args, client);
 

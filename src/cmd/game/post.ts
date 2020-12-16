@@ -22,7 +22,7 @@ class C extends Command {
 You need ${brackets(amt.minus(text).toString())} more code.`);
 
       // refer to desmos.
-      let upvotes = amt.div(10).times(Math.sin(amt.sqrt().plus(random(-5, 5)).mod(2 * Math.PI).toNumber())).plus(cpp).abs().dp(0);
+      let upvotes = amt.div(5).times(random(-5, 5)).abs().plus(cpp);
 
       cycles = cycles.plus(upvotes);
 
