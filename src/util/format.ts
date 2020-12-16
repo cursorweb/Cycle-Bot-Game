@@ -4,7 +4,7 @@ import { constrain } from "./util";
 enum Colors {
   PRIMARY = "#1a8ff0",
   ERROR = "#f0351a",
-  SUCCESS = "#3bf11b",
+  SUCCESS = "#06c012",
   WARNING = "#faa12f"
 }
 

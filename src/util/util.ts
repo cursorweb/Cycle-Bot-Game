@@ -71,7 +71,7 @@ function addMs(start: Date, ms: number) {
 }
 
 /**
- * How much 'n' amoout costs.
+ * How much 'n' amout costs.
  */
 function calcCost(base: number, inflation: number, amount: number, owned: number) {
   let bbase = new Big(base), binfl = new Big(inflation);

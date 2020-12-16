@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database, brackets, Bot } from "../../global";
+import { BigNumber as Big } from "bignumber.js";
+import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum } from "../../global";
 import { items } from "../../util/data/shop";
 
 class C extends Command {
@@ -12,16 +13,37 @@ class C extends Command {
     if (args.length != 1 && args.length != 2) Bot.argserror(msg, args.length, [1, 2]);
 
     let itm = args[0];
-    let amt = Number(args[1] || 1);
+    let amt = constrain(Number(args[1] || 1), 1, 50);
+
+    let user = Database.getUser(msg.author.id);
 
     let itmIndex = items.upgrade.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
+    let item = items.upgrade[itmIndex];
     if (itmIndex == -1) {
-      return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!")
+      return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
     } else {
-      msg.channel.send(`u want to buy ${items.upgrade[itmIndex].name}, which is nice, and also ${amt} too.`)
-    }
+      let cost = calcCost(item.cost, 1.07, amt, user.bought.upgrades[itmIndex] || 0);
+      let cycles = new Big(user.cycles), tpc = new Big(user.tpc);
 
-    // msg.channel.send("TODO: make sure to like parse the args.\nargs: " + args.join(","));
+      if (cycles.lt(cost)) return Bot.errormsg(msg, `You don't have enough cycles!
+**You have** ${brackets(commanum(cycles.toString()))}
+**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough Cycles!");
+
+      user.cycles = cycles.minus(cost).toString();
+      if (!user.bought.upgrades[itmIndex]) user.bought.upgrades[itmIndex] = 0;
+      user.bought.upgrades[itmIndex] += amt;
+      user.tpc = tpc.plus(amt * items.upgrade[itmIndex].tpc!).toString();
+
+      msg.channel.send({
+        embed: {
+          title: "Transaction Successful!",
+          color: Colors.SUCCESS,
+          description: `Successfully bought ${brackets(item.name)}
+You Spent: ${brackets(commanum(cost.toString()))}
+Your TPC: ${brackets(commanum(user.tpc))}`
+        }
+      });
+    }
   }
 }
 

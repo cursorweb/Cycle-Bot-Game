@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, commanum, constrain, calcCost, calcPrice, brackets, codestr } from "../../global";
+import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr } from "../../global";
 import { items } from "../../util/data/shop";
 
 class C extends Command {
@@ -15,7 +15,7 @@ class C extends Command {
     const user = Database.getUser(msg.author.id);
 
     let page = constrain(Number(args[0] || 1), 1, Infinity);
-    let data = items.upgrade.map((n, i) => `[ ${n.name} ][ ${calcPrice(n.cost, 1.07, user.bought.upgrades[i] || 0)} Cycles ]
+    let data = items.upgrade.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(n.cost, 1.07, user.bought.upgrades[i] || 0).toString())} Cycles ]
 <+${n.tpc!} TPC> <${commanum((user.bought.upgrades[i] || 0).toString())} owned>
 > ${n.description}`);
 
