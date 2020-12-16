@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.55",
-        description: "You can now get daily rewards for cycles! Come back daily for new updates and cycles!"
+        title: "Version 0.0.555",
+        description: "Unfortunately not enough was added, so I added a sub-sub version. Anyways, you can now give feedback and cycles are slightly buffed."
       }
     });
   }
