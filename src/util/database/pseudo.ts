@@ -31,6 +31,7 @@ export async function save() {
 }
 
 export async function update() {
+  
   // db.load();
   // ...
   pdb = JSON.parse(await fs.readFile(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"));

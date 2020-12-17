@@ -3,11 +3,11 @@ export interface SItem {
   name: string;
   description: string;
 
-  cost: number; // in cycles
+  cost: number | string; // in cycles
 
-  tpc?: number;
-  cpp?: number;
-  tpm?: number;
+  tpc?: number | string;
+  cpp?: number | string;
+  tpm?: number | string;
 }
 
 // upgrades are cpp, idles are tpm
@@ -35,8 +35,33 @@ export const items: { upgrade: SItem[], idle: SItem[] } = {
   }, {
     name: "Hastebin",
     description: "It's pastebin but with an H!",
-    cost: 75,
-    tpc: 25
+    cost: 135,
+    tpc: 45
+  }, {
+    name: "NotePad",
+    description: "Evolution, but backwards!",
+    cost: 223,
+    tpc: 50
+  }, {
+    name: "SourceB.in",
+    description: "Another bin?!?",
+    cost: 375,
+    tpc: 55
+  }, {
+    name: "Whitespace",
+    description: "[ ] [\t]",
+    cost: 1837,
+    tpc: 70
+  }, {
+    name: "Indentation Error",
+    description: "Did you use four spaces?!?",
+    cost: 5353,
+    tpc: 80
+  }, {
+    name: "Windows Powershell",
+    description: "At least `clear` works",
+    cost: 45697,
+    tpc: 100
   }],
   
   idle: [{

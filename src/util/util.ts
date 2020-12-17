@@ -73,15 +73,15 @@ function addMs(start: Date, ms: number) {
 /**
  * How much 'n' amout costs.
  */
-function calcCost(base: number, inflation: number, amount: number, owned: number) {
-  let bbase = new Big(base), binfl = new Big(inflation);
-  return bbase.times((binfl.pow(amount).minus(1)).times(binfl.pow(owned)).div(binfl.minus(1))).dp(0);
+function calcCost(base: Big, inflation: number, amount: number, owned: number) {
+  let binfl = new Big(inflation);
+  return base.times((binfl.pow(amount).minus(1)).times(binfl.pow(owned)).div(binfl.minus(1))).dp(0);
 }
 
 /**
  * How much one thing costs
  */
-function calcPrice(base: number, inflation: number, owned: number) {
+function calcPrice(base: Big, inflation: number, owned: number) {
   return calcCost(base, inflation, 1, owned);
 }
 

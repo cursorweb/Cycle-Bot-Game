@@ -22,7 +22,7 @@ class C extends Command {
     if (itmIndex == -1) {
       return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
     } else {
-      let cost = calcCost(item.cost, 1.07, amt, user.bought.upgrades[itmIndex] || 0);
+      let cost = calcCost(new Big(item.cost), 1.07, amt, user.bought.upgrades[itmIndex] || 0);
       let cycles = new Big(user.cycles), tpc = new Big(user.tpc);
 
       if (cycles.lt(cost)) return Bot.errormsg(msg, `You don't have enough cycles!
@@ -32,7 +32,7 @@ class C extends Command {
       user.cycles = cycles.minus(cost).toString();
       if (!user.bought.upgrades[itmIndex]) user.bought.upgrades[itmIndex] = 0;
       user.bought.upgrades[itmIndex] += amt;
-      user.tpc = tpc.plus(amt * items.upgrade[itmIndex].tpc!).toString();
+      user.tpc = tpc.plus(new Big(items.upgrade[itmIndex].tpc!).times(amt)).toString();
 
       msg.channel.send({
         embed: {

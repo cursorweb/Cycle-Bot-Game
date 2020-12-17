@@ -100,4 +100,4 @@ setInterval(async () => {
 
 
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => {});
+// process.on("unhandledRejection", () => {});
