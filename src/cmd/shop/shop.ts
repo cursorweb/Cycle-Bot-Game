@@ -17,7 +17,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     // if (args.length > 2 || args.length < 1) Bot.argserror(msg, args.length, [1, 2]);
-    if (args[1] && isNaN(parseInt(args[1]))) return Bot.errormsg(msg, "The page must be a number!");
+    if (args[0] && isNaN(Number(args[0]))) return Bot.errormsg(msg, "The page must be a number!");
 
     const user = Database.getUser(msg.author.id);
 

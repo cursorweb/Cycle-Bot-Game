@@ -7,7 +7,6 @@ class C extends Command {
   names = ["casino", "gamble"];
   help = "Gamble some money!";
   examples = ["casino <cycles>"];
-  isGame = 'p' as 'p';
 
   // get cooldown() { return 60e3; }
 

@@ -23,7 +23,7 @@ export const items: { upgrade: SItem[], idle: SItem[] } = {
     cost: 15,
     tpc: 5
   }, {
-    name: "NotePad++",
+    name: "NotePad",
     description: "A featureless editor",
     cost: 25,
     tpc: 10
@@ -38,8 +38,8 @@ export const items: { upgrade: SItem[], idle: SItem[] } = {
     cost: 135,
     tpc: 45
   }, {
-    name: "NotePad",
-    description: "Evolution, but backwards!",
+    name: "NotePad++",
+    description: "It's evolution! Still featureless...",
     cost: 223,
     tpc: 50
   }, {

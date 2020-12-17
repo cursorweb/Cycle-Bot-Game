@@ -25,14 +25,13 @@ export function getUser(key: string): CycleUser {
 }
 
 export async function save() {
-  // db.save(pdb);
-  // ...
-  await fs.writeFile(path.join(__dirname, "..", "..", "..", "database.json"), JSON.stringify(pdb));
+  db.collection("cycle-users").doc("users").set(pdb);
 }
 
 export async function update() {
-  
-  // db.load();
-  // ...
+  let col = db.collection("cycle-users").doc("users");
+  col.get().then(doc => {
+    pdb = doc.data() as { [i: string]: CycleUser };
+  });
   pdb = JSON.parse(await fs.readFile(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"));
 }

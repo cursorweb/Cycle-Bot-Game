@@ -10,15 +10,22 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     // todo: add the shop type
-    if (args.length != 1 && args.length != 2) Bot.argserror(msg, args.length, [1, 2]);
+    if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
+    if (args[1] && isNaN(parseInt(args[1]))) return Bot.errormsg(msg, "The amount must be a number!");
 
     let itm = args[0];
     let amt = constrain(Number(args[1] || 1), 1, 50);
 
     let user = Database.getUser(msg.author.id);
 
-    let itmIndex = items.upgrade.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
+    let itmIndex: number;
+
+    let potential = items.upgrade.findIndex(o => o.name.toLowerCase() == itm.toLowerCase());
+    if (potential == -1) itmIndex = items.upgrade.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
+    else itmIndex = potential;
+    
     let item = items.upgrade[itmIndex];
+
     if (itmIndex == -1) {
       return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
     } else {
