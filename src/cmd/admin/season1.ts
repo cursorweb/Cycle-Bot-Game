@@ -9,6 +9,7 @@ class C extends Command {
   names = ["admin-new-season"];
   help = "Starts a new season";
   isGame = 'n' as 'n';
+  isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.db.collection("cycle-users").doc("users").set(

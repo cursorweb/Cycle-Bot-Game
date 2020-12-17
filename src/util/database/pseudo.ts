@@ -1,8 +1,5 @@
 import { db } from "./database";
 
-import * as fs from "fs/promises"; // todo: remove
-import * as path from "path"; // todo: remove
-
 import { CycleUser } from "./genschema";
 // todo: literally add everything xd
 // Try to use `setUser` for everything
@@ -33,5 +30,4 @@ export async function update() {
   col.get().then(doc => {
     pdb = doc.data() as { [i: string]: CycleUser };
   });
-  pdb = JSON.parse(await fs.readFile(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"));
 }
