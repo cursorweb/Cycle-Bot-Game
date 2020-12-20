@@ -62,11 +62,27 @@ export const items: { upgrade: SItem[], idle: SItem[] } = {
     description: "At least `clear` works",
     cost: 45697,
     tpc: 100
+  }, {
+    name: "NullPointerException",
+    description: "Segmentation fault (core dumped)",
+    cost: 390634,
+    tpc: 120
+  }, {
+    name: "Stack Overflow",
+    description: "To understand recursion, you must first understand recursion.",
+    cost: 9766e3,
+    tpc: 150
+  }, {
+    name: "Stack Overflow II",
+    description: "That place where you ask questions",
+    cost: 2087e6,
+    tpc: 200
   }],
   
   idle: [{
     name: "First Idle",
     description: "Your very first idle machine!",
-    cost: 100
+    cost: 100,
+    tpm: 1
   }]
 };

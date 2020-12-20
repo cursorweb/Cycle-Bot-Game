@@ -26,6 +26,7 @@
   "homepage": "https://github.com/cursorweb/Cycle-Bot-Game#readme",
   "dependencies": {
     "bignumber.js": "^9.0.1",
+    "dblapi.js": "^2.4.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "firebase-admin": "^9.4.1"

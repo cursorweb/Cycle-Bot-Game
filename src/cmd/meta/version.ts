@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.65",
-        description: "I moved the database onto firebase, and also you can expect more stability!"
+        title: "Version 0.0.7",
+        description: "New items have been added and you can now expect more items to buy!"
       }
     });
   }

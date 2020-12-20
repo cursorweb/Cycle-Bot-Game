@@ -5,6 +5,7 @@ Invite link: https://discord.com/api/oauth2/authorize?client_id=7819393174503424
 require("dotenv").config();
 
 import * as Discord from "discord.js";
+import DBL from "dblapi.js";
 import * as g from "./global";
 
 import { parse } from "./cmd-parser";
@@ -13,6 +14,7 @@ import { help, load, verifyHuman } from "./loader";
 import admins from "./util/admin.json";
 
 const client = new Discord.Client();
+// todo: DBL
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[];
 
 // the limit is x before we have people confirm they are not self-botting.
@@ -95,7 +97,7 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
 
 setInterval(async () => {
   await g.Database.save();
-  g.Database.update();
+  await g.Database.update();
 }, 6e5); // 10 min
 
 

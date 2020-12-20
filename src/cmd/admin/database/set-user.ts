@@ -36,7 +36,7 @@ class C extends Command {
     Database.setUser(id!, Object.assign({ daily: "" }, {
       cycles: "999999999", text: "999999999", xp: "0",
       tpc: "999999999", cpp: "999999999", tpm: "999999999",
-      langs: null, level: "999999999", socialMedia: null,
+      langs: null, exp: "999999999", socialMedia: null,
       
       inv: [],
       bought: {

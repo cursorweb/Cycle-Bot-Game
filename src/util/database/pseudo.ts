@@ -22,12 +22,12 @@ export function getUser(key: string): CycleUser {
 }
 
 export async function save() {
-  db.collection("cycle-users").doc("users").set(pdb);
+  return await db.collection("cycle-users").doc("users").set(pdb);
 }
 
 export async function update() {
   let col = db.collection("cycle-users").doc("users");
-  col.get().then(doc => {
+  return await col.get().then(doc => {
     pdb = doc.data() as { [i: string]: CycleUser };
   });
 }

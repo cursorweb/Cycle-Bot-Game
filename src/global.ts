@@ -39,7 +39,7 @@ export class Command {
     else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
     > Do \`&code\` to start playing!`, "Profile not found!");
 
-    if (getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
+    if (this.isGame != 'n' && getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
     this.exec(msg, args, client);
   }
 

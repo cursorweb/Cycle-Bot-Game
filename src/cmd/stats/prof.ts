@@ -6,7 +6,7 @@ class C extends Command {
   names = ["profile", "prof"];
   help = "View yours or someone elses' profile.";
   examples = ["prof", "prof Coder100"];
-  isGame = 'n' as 'n';
+  isGame = 'p' as 'p';
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
@@ -38,7 +38,7 @@ ${user_arr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}*
         description: `View the profile of ${brackets(user!.name)}
 **Cycles**: ${commanum(user!.cycles)}
 **Text**: ${commanum(user!.text)}
-**Level**: ${commanum(user!.level)}`,
+**Level**: ${commanum(user!.exp)}`,
         fields: [{
           name: "TPC (Text Per Code)",
           value: commanum(user!.tpc)

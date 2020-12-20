@@ -7,6 +7,9 @@ class C extends Command {
   isGame = 'n' as 'n';
 
   exec(msg: Discord.Message, _: string[], client: Discord.Client) {
+    let guildCount = client.guilds.cache.size;
+    let userCount = client.guilds.cache.reduce((p, c) => p + c.memberCount, 0);
+
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
@@ -17,10 +20,10 @@ class C extends Command {
           value: formatDate(client.uptime!)
         }, {
           name: "Servers",
-          value: `In ${brackets(client.guilds.cache.size.toString())} server${plural(client.guilds.cache.size)}!`
+          value: `In ${brackets(guildCount.toString())} server${plural(guildCount)}!`
         }, {
           name: "Users",
-          value: `The bot is overseeing ${brackets(client.users.cache.size.toString())} user${plural(client.users.cache.size)}.`
+          value: `The bot is overseeing ${brackets(userCount.toString())} user${plural(userCount)}.`
         }, {
           name: "Creator",
           value: "[Junhao Zhang](https://github.com/cursorweb) ([@Coder100](https://repl.it/@Coder100)) with TypeScript."
