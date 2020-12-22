@@ -14,13 +14,14 @@ class C extends Command {
         color: Colors.PRIMARY,
         title: "Cycle Guide!",
         description: `Welcome to the Cycle Bot! This guide explains everything you will need to know!
+Join the [Discord server](https://discord.gg/4vTPWdpjFz) for more perks!
 **&code** Use this command to write some code!
 **&post** Once you make some code, you can post it for some *cycles*.
 **&shop** Use the shop to see the available upgrades you can buy.
 **&lb** View the leaderboard, and see who has the most cycles!
 **&help** View more help commands!
 
-[Discord Server](https://discord.gg/4vTPWdpjFz) | [Wiki](https://github.com/cursorweb/Cycle-Bot-Game/wiki) | [Bot Invite](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot)`,
+[**Discord Server**](https://discord.gg/4vTPWdpjFz) | [**Wiki**](https://github.com/cursorweb/Cycle-Bot-Game/wiki) | [**Bot Invite**](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot)`,
         fields: [{
           name: "Code",
           value: "This is the stuff you can use to get **cycles**"

@@ -24,6 +24,10 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
       // refer to desmos.
       let upvotes = amt.div(5).times(Math.abs(random(-7, 7)) + 1).abs().plus(cpp).dp(0);
 
+      let isServer = msg.guild!.id == "788421241005408268"; // refer to ./code.ts
+
+      if (isServer) upvotes = upvotes.times(1.05).dp(0);
+
       cycles = cycles.plus(upvotes);
 
       msg.channel.send({
@@ -33,7 +37,8 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
           description: `You posted ${brackets(commanum(amt.toString()))} line${pluralb(amt)} of code.
 People viewed your post and you made ${brackets(commanum(upvotes.toString()))} cycle${pluralb(new Big(upvotes))}!
 
-> You now have ${brackets(commanum(cycles.toString()))} cycles!`,
+> You now have ${brackets(commanum(cycles.toString()))} cycles!${isServer ? `
+**x5% cycles boost** for posting in the official discord server!` : ""}`,
           footer: {
             text: "Use &bal to view your balance!"
           }

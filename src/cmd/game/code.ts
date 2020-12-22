@@ -13,12 +13,19 @@ class C extends Command {
     let user = Database.getUser(msg.author.id);
     let tpc = new Big(user.tpc), text = new Big(user.text);
 
+    let isServer = msg.guild!.id == "788421241005408268"; // if user is in official server
+
+    if (isServer) tpc = tpc.times(1.1).dp(0);
+
+    console.log(tpc.toString());
+
     msg.channel.send({
       embed: {
         color: Colors.SUCCESS,
         title: "Code Code Code!",
         description: `You code your heart out!
-You make ${brackets(commanum(user.tpc))} line${plural(tpc.toNumber())} of code!`,
+You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of code!${isServer ? `
+**10% text boost** for coding in the official discord server!` : ""}`,
         footer: {
           text: "Use &post to get some cycles!"
         }

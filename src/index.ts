@@ -34,17 +34,15 @@ client.on("ready", async () => {
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr].cmds), []);
 
   console.log(`Loaded ${gcmdarr.length} commands.`);
-}); 
+});
 
 client.on("message", (msg: Discord.Message) => {
   let cmd = parse("&", msg.content);
-  if (msg.author.id == client.user!.id || msg.author.bot || !cmd) return;
+  if (msg.author.id == client.user!.id || msg.author.bot || !msg.guild || !cmd) return;
 
-  if (cmd.command == "help") {
-    help(msg, cmd.args, commands);
-  } else if (cmd.command == "verify") {
-    if (verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id];
-  } else {
+  if (cmd.command == "help") help(msg, cmd.args, commands);
+  else if (cmd.command == "verify") { if (verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id]; }
+  else {
     let found = false;
 
     for (const cmdclss of gcmdarr) {
@@ -70,12 +68,12 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
           cmdclss.cooldownError(msg, cmdclss.getCooldown(msg.author)!);
         } else
 
-        if (cmdclss.isAdmin) {
-          if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
-          else {
-            g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
-          }
-        } else cmdclss.wrap(msg, cmd.args, client);
+          if (cmdclss.isAdmin) {
+            if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
+            else {
+              g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
+            }
+          } else cmdclss.wrap(msg, cmd.args, client);
 
         found = true;
         if (!commandsUsed[msg.author.id]) {
@@ -102,4 +100,4 @@ setInterval(async () => {
 
 
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => {});
+// process.on("unhandledRejection", () => {});

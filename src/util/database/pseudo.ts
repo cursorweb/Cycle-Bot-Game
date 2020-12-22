@@ -1,3 +1,6 @@
+import { promises as fs } from "fs";
+import * as path from "path";
+
 import { db } from "./database";
 
 import { CycleUser } from "./genschema";
@@ -22,10 +25,12 @@ export function getUser(key: string): CycleUser {
 }
 
 export async function save() {
+  return await fs.writeFile(path.join(__dirname, "..", "..", "..", "database.json"), JSON.stringify(pdb));
   return await db.collection("cycle-users").doc("users").set(pdb);
 }
 
 export async function update() {
+  return pdb = JSON.parse(await fs.readFile(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"));
   let col = db.collection("cycle-users").doc("users");
   return await col.get().then(doc => {
     pdb = doc.data() as { [i: string]: CycleUser };
