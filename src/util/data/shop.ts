@@ -77,6 +77,11 @@ export const items: { upgrade: SItem[], idle: SItem[] } = {
     description: "That place where you ask questions",
     cost: 2087e6,
     tpc: 200
+  }, {
+    name: "Hoisting",
+    description: "Use it before you define it!",
+    cost: "446169698830",
+    tpc: 250
   }],
   
   idle: [{

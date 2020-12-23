@@ -10,8 +10,12 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.7",
-        description: "New items have been added and you can now expect more items to buy!"
+        title: "Version 0.0.75",
+        description: "Many more bugs have been fixed, and you can now get extra text boosts sometimes!",
+        fields: [{
+          name: "Discord Server",
+          value: "Talk to the developers, and get sneak peeks in the official [discord server](https://discord.gg/4vTPWdpjFz)!"
+        }]
       }
     });
   }

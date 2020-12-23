@@ -10,7 +10,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [1]);
-    if (args[0] && isNaN(parseInt(args[0]))) return Bot.errormsg(msg, "The page must be a number!");
+    if (args[0] && isNaN(Number(args[0]))) return Bot.errormsg(msg, "The page must be a number!");
     
     let page = constrain(Number(args[0] || 1), 1, Infinity);
     let data = Object.keys(Database.pdb).map(n => ({ name: Database.pdb[n].name, cycles: Database.pdb[n].cycles })).sort((a, b) => new Big(b.cycles).minus(new Big(a.cycles)).toNumber());

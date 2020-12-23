@@ -15,7 +15,7 @@ class C extends Command {
     else {
       let user = Database.getUser(msg.author.id);
       let text = new Big(user.text), cpp = new Big(user.cpp), cycles = new Big(user.cycles);
-      let amt = new Big(parseInt(args[0]) || user.text);
+      let amt = new Big(Number(args[0]) || user.text);
 
       if (amt.lte(0)) return Bot.errormsg(msg, `You cannot post less than ${brackets('0')} lines of code!`);
       if (text.lt(amt)) return Bot.errormsg(msg, `You don't have enough code!

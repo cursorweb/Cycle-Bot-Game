@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { Bot, brackets } from "./util/format";
+import { Bot, brackets, Colors } from "./util/format";
 import { addMs, msBetween } from "./util/util";
-import { genSchema, setUser, getUser, CycleUser, pdb } from "./util/database/database";
+import { genSchema, setUser, getUser, CycleUser } from "./util/database/database";
 
 export * from "./util/format";
 export * from "./util/util";
@@ -32,11 +32,12 @@ export class Command {
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
 
-    let isJoined = msg.author.client.guilds.cache.has("788421241005408268");
+    let isJoined = !!client.guilds.cache.get("663057930144186391"/*"788421241005408268"*/)?.member(msg.author.id);
 
     if (this.isGame == 'y' && !getUser(msg.author.id)) {
       msg.channel.send({
         embed: {
+          color: Colors.PRIMARY,
           title: "Welcome!",
           description: `Welcome to the bot, ${brackets(msg.author.tag)}! Use \`&guide\` to get a simple tutorial!${!isJoined ? `
 Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!` : ""}`
@@ -51,6 +52,7 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
 
     if (Math.random() * 100 < 3 && !isJoined) msg.channel.send({
       embed: {
+        color: Colors.PRIMARY,
         title: "Reminder",
         description: "Remember to join the [discord server](https://discord.gg/4vTPWdpjFz) for giveaways, perks, and more!"
       }

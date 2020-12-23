@@ -92,6 +92,8 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
   }
 });
 
+client.on("disconnect", async () => await g.Database.save());
+
 
 setInterval(async () => {
   await g.Database.save();
@@ -100,4 +102,6 @@ setInterval(async () => {
 
 
 client.login(process.env.TOKEN);
-// process.on("unhandledRejection", () => {});
+process.on("unhandledRejection", () => {});
+process.on("uncaughtException", () => {});
+process.on("beforeExit", async () => await g.Database.save());
