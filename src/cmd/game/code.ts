@@ -7,11 +7,11 @@ let drops: { chance: () => boolean, award: (_: Database.CycleUser) => Discord.Em
   award: user => {
     let text = new Big(user.text);
     let tpc = new Big(user.tpc);
-    let boost = Math.floor(Math.random() * 5 + 1);
+    let boost = Math.floor(Math.random() * 2 + 1e-5);
     let amount = tpc.times(boost).dp(0);
     text = text.plus(amount);
     user.cycles = text.toString();
-    return { name: "Code Burst!", value: `With a burst of energy, you made an extra ${brackets(commanum(amount.toString()))} cycle${pluralb(amount)}! (+${boost * 100}%)` }
+    return { name: "Code Burst!", value: `With a burst of energy, you made an extra ${brackets(commanum(amount.toString()))} cycle${pluralb(amount)}! (+${boost * 100}%)` };
   }
 }];
 
