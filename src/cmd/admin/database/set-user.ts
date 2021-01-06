@@ -55,7 +55,7 @@ class C extends Command {
       }
     });
 
-    Database.save();
+    process.env.NODE_ENV ? Database.saveBackup() : Database.save();
   }
 }
 

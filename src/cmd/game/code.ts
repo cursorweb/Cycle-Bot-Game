@@ -1,19 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, brackets, plural, pluralb, commanum, Database } from "../../global";
-
-let drops: { chance: () => boolean, award: (_: Database.CycleUser) => Discord.EmbedFieldData }[] = [{
-  chance: () => Math.random() < 0.1,
-  award: user => {
-    let text = new Big(user.text);
-    let tpc = new Big(user.tpc);
-    let boost = Math.floor(Math.random() * 2 + 1e-5);
-    let amount = tpc.times(boost).dp(0);
-    text = text.plus(amount);
-    user.cycles = text.toString();
-    return { name: "Code Burst!", value: `With a burst of energy, you made an extra ${brackets(commanum(amount.toString()))} cycle${pluralb(amount)}! (+${boost * 100}%)` };
-  }
-}];
+import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global";
+import { code as drops } from "../../util/data/drops";
 
 class C extends Command {
   names = ["code", "c"];
@@ -32,7 +20,10 @@ class C extends Command {
 
     let fields: Discord.EmbedFieldData[] = [];
     for (const drop of drops) {
-      if (drop.chance()) fields.push(drop.award(user));
+      if (drop.chance()) {
+        fields.push(drop.award(user));
+        tpc = new Big(user.tpc), text = new Big(user.text); // have to update it again
+      }
     }
 
     msg.channel.send({

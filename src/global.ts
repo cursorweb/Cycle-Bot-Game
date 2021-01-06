@@ -32,7 +32,7 @@ export class Command {
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
 
-    let isJoined = !!client.guilds.cache.get("663057930144186391"/*"788421241005408268"*/)?.member(msg.author.id);
+    let isJoined = !!client.guilds.cache.get("788421241005408268")?.member(msg.author.id);
 
     if (this.isGame == 'y' && !getUser(msg.author.id)) {
       msg.channel.send({

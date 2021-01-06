@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum } from "../../global";
+import { post as drops } from "../../util/data/drops";
 
 class C extends Command {
   names = ["post", "p"];
@@ -25,8 +26,15 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
       let upvotes = amt.div(5).times(Math.abs(random(-7, 7)) + 1).abs().plus(cpp).dp(0);
 
       let isServer = msg.guild!.id == "788421241005408268"; // refer to ./code.ts
-
       if (isServer) upvotes = upvotes.times(1.05).dp(0);
+
+      let fields: Discord.EmbedFieldData[] = [];
+      for (const drop of drops) {
+        if (drop.chance()) {
+          fields.push(drop.award(user));
+          cycles = new Big(user.cycles), text = new Big(user.text); // have to update it again
+        }
+      }
 
       cycles = cycles.plus(upvotes);
 

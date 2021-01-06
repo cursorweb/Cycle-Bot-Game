@@ -9,9 +9,10 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     for (const id in Database.pdb) {
-      Database.pdb[id].exp = Database.pdb[id].level!;
-      delete Database.pdb[id].level;
+      Database.pdb[id].level = "0";
     }
+
+    Database.save();
 
     msg.channel.send({
       embed: {

@@ -14,8 +14,8 @@ class C extends Command {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
     
     for (const id of admin) {
-      let user = await client.users.fetch(id);
-      user.send({
+      let user = client.users.cache.get(id);
+      user?.send({
         embed: {
           color: Colors.PRIMARY,
           title: "Incoming Feedback!",

@@ -9,7 +9,7 @@ class C extends Command {
   isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
-    Database.save().then(() => Database.update().then(() => msg.channel.send({
+    ((process.env.NODE_ENV ? Database.saveBackup() : Database.save()) as Promise<void>).then(() => Database.update().then(() => msg.channel.send({
       embed: {
         color: Colors.SUCCESS,
         title: "Success!",

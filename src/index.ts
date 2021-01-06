@@ -7,6 +7,7 @@ require("dotenv").config();
 import * as Discord from "discord.js";
 import DBL from "dblapi.js";
 import * as g from "./global";
+import admin from "./util/admin.json";
 
 import { parse } from "./cmd-parser";
 import { help, load, verifyHuman } from "./loader";
@@ -94,11 +95,48 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
 
 
 setInterval(async () => {
-  await g.Database.save();
-  await g.Database.update();
+  if (process.env.NODE_ENV) {
+    await g.Database.saveBackup();
+    await g.Database.updateBackup();
+  } else {
+    await g.Database.save();
+    await g.Database.update();
+  }
 }, 6e5); // 10 min
 
 
 client.login(process.env.TOKEN);
-process.on("unhandledRejection", () => {});
-process.on("uncaughtException", () => {});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+  for (const id of admin) {
+    let user = client.users.cache.get(id);
+    user?.send({
+      embed: {
+        color: g.Colors.PRIMARY,
+        title: "Error!",
+        description: `Error is type ${g.brackets("UNHANDLED REJECTION")}. Look in logs for more.`,
+      }
+    });
+  }
+});
+
+process.on("uncaughtException", (err: Error, origin: string) => {
+  for (const id of admin) {
+    let user = client.users.cache.get(id);
+    user?.send({
+      embed: {
+        color: g.Colors.PRIMARY,
+        title: "Error!",
+        description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
+        fields: [{
+          name: "Error",
+          value: g.codestr(`(${err.name}) ${err.message}\n${err.stack || ""}\n\n${origin}`, "js")
+        }]
+      }
+    });
+  }
+
+  // prevent undefined behavior
+  process.exit(1);
+});

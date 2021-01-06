@@ -39,3 +39,8 @@ As this bot is in beta, for now, the files are going to be manually written over
 
 ## Contributions
 Suggestions are very much welcome!
+You can also use a fallback JSON database so you don't have to mess around with the actual database. To do this, just add a `NODE_ENV` to your `.env` file:
+```
+NODE_ENV=1
+```
+Note the value can be whatever you want as we only check for existence.

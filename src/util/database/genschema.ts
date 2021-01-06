@@ -4,7 +4,7 @@ const defaultSchema: CycleUser = {
   name: "",
   cycles: "0", text: "0", xp: "0",
   tpc: "1", cpp: "1", tpm: "0",
-  langs: null, exp: "0", socialMedia: null,
+  langs: null, level: "0", socialMedia: null,
   
   inv: [],
   
@@ -21,7 +21,7 @@ function genSchema(user: Discord.User): CycleUser {
     name: user.tag,
     cycles: "0", text: "0", xp: "0",
     tpc: "1", cpp: "1", tpm: "0",
-    langs: null, exp: "0", socialMedia: null,
+    langs: null, level: "0", socialMedia: null,
     
     inv: [],
  
@@ -52,8 +52,7 @@ interface CycleUser {
 
   // extra boosts
   langs: number | null; // language the user knows (boost index)
-  level?: string;
-  exp: string; // level boost
+  level: string; // the level
   socialMedia: number | null; // social media platform (null | number)
   inv: { [i: number]: number }; // [item-index]: amount
 

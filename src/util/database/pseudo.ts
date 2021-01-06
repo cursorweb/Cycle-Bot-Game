@@ -4,7 +4,6 @@ import * as path from "path";
 import { db } from "./database";
 
 import { CycleUser } from "./genschema";
-// todo: literally add everything xd
 // Try to use `setUser` for everything
 
 // 'pseudo' db
