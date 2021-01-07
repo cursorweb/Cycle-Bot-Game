@@ -27,8 +27,7 @@ client.on("ready", async () => {
   client.user!.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
   console.log(`Logged in as ${client.user!.tag}!`);
 
-  // todo: load db here
-  await g.Database.update();
+  await (process.env.NODE_ENV ? g.Database.updateBackup() : g.Database.update());
   console.log("Loaded database.");
 
   commands = await load();
@@ -42,7 +41,7 @@ client.on("message", (msg: Discord.Message) => {
   if (msg.author.id == client.user!.id || msg.author.bot || !msg.guild || !cmd) return;
 
   if (cmd.command == "help") help(msg, cmd.args, commands);
-  else if (cmd.command == "verify") { if (verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id]; }
+  else if (cmd.command == "verify") { if (commandsUsed[msg.author.id] && verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id]; }
   else {
     let found = false;
 
@@ -108,30 +107,21 @@ setInterval(async () => {
 client.login(process.env.TOKEN);
 
 process.on("unhandledRejection", (reason, promise) => {
-  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
-  for (const id of admin) {
-    let user = client.users.cache.get(id);
-    user?.send({
-      embed: {
-        color: g.Colors.PRIMARY,
-        title: "Error!",
-        description: `Error is type ${g.brackets("UNHANDLED REJECTION")}. Look in logs for more.`,
-      }
-    });
-  }
+  console.log("[REJECTION ERROR]", reason);
 });
 
-process.on("uncaughtException", (err: Error, origin: string) => {
+process.on("uncaughtException", async (err: Error, origin: string) => {
+  console.log(`[EXCEPTION] (${err.name}) ${err.message}\n${err.stack || ""}\n\n${origin}`);
   for (const id of admin) {
     let user = client.users.cache.get(id);
-    user?.send({
+    await user?.send({
       embed: {
         color: g.Colors.PRIMARY,
         title: "Error!",
         description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
         fields: [{
           name: "Error",
-          value: g.codestr(`(${err.name}) ${err.message}\n${err.stack || ""}\n\n${origin}`, "js")
+          value: g.codestr(`${err.message}`, "js")
         }]
       }
     });

@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database, Bot, brackets, commanum } from "../../global";
 
 class C extends Command {
@@ -14,7 +15,7 @@ class C extends Command {
         title: "Personal Balance",
         description: `**Cycles**: ${brackets(commanum(user.cycles))}
 **Text**: ${brackets(commanum(user.text))}
-**Level**: (todo)`
+**Level**: ${brackets(commanum(user.level))} (${commanum(user.xp)} / ${commanum(new Big(user.level).pow(2).toString())} xp)`
       }
     });
   }

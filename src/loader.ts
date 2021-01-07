@@ -77,7 +77,7 @@ function verifyHuman(msg: Discord.Message, args: string[], commandsUsed: { [i: s
   // commands used, input, answer
   let user = commandsUsed[msg.author.id];
 
-  if (!user) return false;
+  if (!user || user[0] < 100) return false;
 
   if (Number(args[0]) != user[2]) {
     msg.channel.send({

@@ -6,7 +6,7 @@ class C extends Command {
   help = "Test things out with *nothing*.";
   examples = ["admin-user-reset id"];
   isGame = 'n' as 'n';
-
+  
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {

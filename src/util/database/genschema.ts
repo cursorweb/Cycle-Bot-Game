@@ -6,7 +6,7 @@ const defaultSchema: CycleUser = {
   tpc: "1", cpp: "1", tpm: "0",
   langs: null, level: "0", socialMedia: null,
   
-  inv: [],
+  inv: [], badges: [],
   
   daily: "",
 
@@ -23,7 +23,7 @@ function genSchema(user: Discord.User): CycleUser {
     tpc: "1", cpp: "1", tpm: "0",
     langs: null, level: "0", socialMedia: null,
     
-    inv: [],
+    inv: [], badges: [],
  
     daily: "",
 
@@ -55,6 +55,8 @@ interface CycleUser {
   level: string; // the level
   socialMedia: number | null; // social media platform (null | number)
   inv: { [i: number]: number }; // [item-index]: amount
+
+  badges: string[] // badges lol
 
   daily: string
 

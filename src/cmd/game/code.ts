@@ -12,7 +12,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     let user = Database.getUser(msg.author.id);
-    let tpc = new Big(user.tpc), text = new Big(user.text);
+    let tpc = new Big(user.tpc), text = new Big(user.text), xp = new Big(user.xp), level = new Big(user.level);
 
     let isServer = msg.guild!.id == "788421241005408268"; // if user is in official server
 
@@ -24,6 +24,28 @@ class C extends Command {
         fields.push(drop.award(user));
         tpc = new Big(user.tpc), text = new Big(user.text); // have to update it again
       }
+    }
+
+    xp = xp.plus(1);
+    if (xp.gte(level.pow(2))) {
+      // level up!
+      xp = new Big(0);
+      user.level = level.plus(1).toString();
+
+      let newCpp = new Big(user.cpp).times(1.01).dp(0);
+      let newTpc = tpc = tpc.times(1.02).dp(0);
+      let newCycles = new Big(user.cycles).times(1.1).dp(0);
+      let newText = text = new Big(user.text).times(1.15).dp(0);
+
+      user.cpp = newCpp.toString();
+      user.tpc = newTpc.toString();
+      user.cycles = newCycles.toString();
+      user.text = newText.toString();
+
+      fields.push({
+        name: "Level up!",
+        value: `You are now level ${brackets(commanum(user.level))}!`
+      });
     }
 
     msg.channel.send({
@@ -39,6 +61,7 @@ You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of 
     });
 
     user.text = text.plus(tpc).toString();
+    user.xp = xp.toString();
   }
 
   cooldownError(msg: Discord.Message, ms: number) {

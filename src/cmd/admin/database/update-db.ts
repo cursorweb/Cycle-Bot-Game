@@ -5,7 +5,7 @@ class C extends Command {
   names = ["admin-git-fetch", "admin-update-db"];
   help = "'git fetch' from firebase.";
   isGame = 'n' as 'n';
-
+  
   isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {

@@ -5,6 +5,7 @@ class C extends Command {
   names = ["admin-git-restore", "admin-load-backup"];
   help = "Loads up the backup DB.";
   isGame = 'n' as 'n';
+  
   isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {

@@ -38,7 +38,7 @@ ${user_arr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}*
         description: `View the profile of ${brackets(user!.name)}
 **Cycles**: ${commanum(user!.cycles)}
 **Text**: ${commanum(user!.text)}
-**Level**: ${commanum(user!.xp)}`,
+**Level**: ${commanum(user!.level)}`,
         fields: [{
           name: "TPC (Text Per Code)",
           value: commanum(user!.tpc)
