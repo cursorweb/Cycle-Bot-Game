@@ -12,7 +12,8 @@ const defaultSchema: CycleUser = {
 
   bought: {
     idle: {},
-    upgrades: {}
+    upgrades: {},
+    cpp: {}
   }
 };
 
@@ -29,7 +30,8 @@ function genSchema(user: Discord.User): CycleUser {
 
     bought: {
       idle: {},
-      upgrades: {}
+      upgrades: {},
+      cpp: {}
     }
   };
 }
@@ -56,15 +58,16 @@ interface CycleUser {
   socialMedia: number | null; // social media platform (null | number)
   inv: { [i: number]: number }; // [item-index]: amount
 
-  badges: string[] // badges lol
+  badges: string[]; // badges lol
 
-  daily: string
+  daily: string;
 
   // what the user has bought
   bought: {
     idle: { [i: number]: number }; // [item-index]: amount
     // this means we can only expand forwards
     upgrades: { [i: number]: number };
+    cpp: { [i: number]: number };
   }
 }
 

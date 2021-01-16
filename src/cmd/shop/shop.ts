@@ -5,9 +5,13 @@ import { items } from "../../util/data/shop";
 
 // [topic] [value]
 const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {
-  upgrades: user => items.upgrade.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.07, user.bought.upgrades[i] || 0).toString())} Cycles ]
-  <+${n.tpc!} TPC> <${commanum((user.bought.upgrades[i] || 0).toString())} owned>
-  > ${n.description}`)
+  text: user => items.upgrades.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.07, user.bought.upgrades[i] || 0).toString())} Cycles ]
+<+${n.tpc!} TPC> <${commanum((user.bought.upgrades[i] || 0).toString())} owned>
+> ${n.description}`),
+  post: user => items.cpp.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.14, user.bought.cpp[i] || 0).toString())} Cycles ]
+<+${n.cpp!} CPP> <${commanum((user.bought.cpp[i] || 0).toString())} owned>
+> ${n.description}`),
+  //idle: user => items.cpp.map((n, i) => `Soon`)
 };
 
 class C extends Command {
@@ -16,15 +20,15 @@ class C extends Command {
   examples = ["shop idle", "shop idle 3"];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    // if (args.length > 2 || args.length < 1) Bot.argserror(msg, args.length, [1, 2]);
-    if (args[0] && isNaN(Number(args[0]))) return Bot.errormsg(msg, "The page must be a number!");
+    if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
+    if (args[1] && isNaN(Number(args[1]))) return Bot.errormsg(msg, "The page must be a number!");
+    if (!Object.keys(handleShop).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
+${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
 
     const user = Database.getUser(msg.author.id);
 
-    let page = constrain(Number(args[0] || 1), 1, Infinity);
-    let data = items.upgrade.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.07, user.bought.upgrades[i] || 0).toString())} Cycles ]
-<+${n.tpc!} TPC> <${commanum((user.bought.upgrades[i] || 0).toString())} owned>
-> ${n.description}`);
+    let page = constrain(Number(args[1] || 1), 1, Infinity);
+    let data = handleShop[args[0]](user);
 
     Bot.carousel(msg, data, 5, (page, i): Discord.MessageEmbedOptions => ({
       color: Colors.PRIMARY,

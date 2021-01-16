@@ -33,17 +33,10 @@ class C extends Command {
     }
 
     let user = Database.getUser(id!);
-    Database.setUser(id!, Object.assign({ daily: "", level: "0" }, {
-      cycles: "999999999", text: "999999999", xp: "0",
-      tpc: "999999999", cpp: "999999999", tpm: "999999999",
-      langs: null, exp: "999999999", socialMedia: null,
-      
-      inv: [], badges: [],
-      bought: {
-        idle: {},
-        upgrades: {}
-      }
-    }, { name: user.name }));
+    Database.setUser(id!, Object.assign({
+      cycles: "999999999", text: "999999999",
+      tpc: "999999999", cpp: "999999999", tpm: "999999999"
+    }, { name: user.name }, Database.defaultSchema));
 
     msg.channel.send({
       embed: {

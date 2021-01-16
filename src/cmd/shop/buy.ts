@@ -1,7 +1,57 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum } from "../../global";
-import { items } from "../../util/data/shop";
+import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr } from "../../global";
+import { items, SItem } from "../../util/data/shop";
+
+const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex: number, amt: number) => string[] | string } = {
+  text(user, item, itmIndex, amt) {
+    let cost = calcCost(new Big(item.cost), 1.07, amt, user.bought.upgrades[itmIndex] || 0);
+    let cycles = new Big(user.cycles), tpc = new Big(user.tpc);
+
+    if (cycles.lt(cost)) return [`You don't have enough cycles!
+**You have** ${brackets(commanum(cycles.toString()))}
+**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough cycles!"];
+
+    user.cycles = cycles.minus(cost).toString();
+    if (!user.bought.upgrades[itmIndex]) user.bought.upgrades[itmIndex] = 0;
+    user.bought.upgrades[itmIndex] += amt;
+    user.tpc = tpc.plus(new Big(items.upgrades[itmIndex].tpc!).times(amt)).toString();
+
+    return `Successfully bought ${brackets(item.name)}
+    You Spent: ${brackets(commanum(cost.toString()))}
+    Your TPC: ${brackets(commanum(user.tpc))}`;
+  },
+
+  post(user, item, itmIndex, amt) {
+    let cost = calcCost(new Big(item.cost), 1.14, amt, user.bought.upgrades[itmIndex] || 0);
+    let cycles = new Big(user.cycles), cpp = new Big(user.cpp);
+
+    if (cycles.lt(cost)) return [`You don't have enough cycles!
+**You have** ${brackets(commanum(cycles.toString()))}
+**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough cycles!"];
+
+    user.cycles = cycles.minus(cost).toString();
+    if (!user.bought.cpp[itmIndex]) user.bought.cpp[itmIndex] = 0;
+    user.bought.cpp[itmIndex] += amt;
+    user.cpp = cpp.plus(new Big(items.cpp[itmIndex].cpp!).times(amt)).toString();
+
+    return `Successfully bought ${brackets(item.name)}
+    You Spent: ${brackets(commanum(cost.toString()))}
+    Your CPP: ${brackets(commanum(user.cpp))}`;
+  },
+
+  /* idle(user) {
+    return "Coming Soon!!";
+  } */
+};
+
+// because internal api is not the same as visual rip
+const map = {
+  text: "upgrades",
+  post: "cpp",
+  // idle: "idle"
+};
+
 
 class C extends Command {
   names = ["buy", "b"];
@@ -9,45 +59,36 @@ class C extends Command {
   examples = ['buy idle "cookie cutter"', 'buy idle "cookie cutter" 50'];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    // todo: add the shop type
-    if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
-    if (args[1] && isNaN(parseInt(args[1]))) return Bot.errormsg(msg, "The amount must be a number!");
+    if (args.length != 2 && args.length != 3) return Bot.argserror(msg, args.length, [2, 3]);
+    if (!Object.keys(handleBuy).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
+    ${codestr(Object.keys(handleBuy).join(", "), "yaml")}`, "Invalid Shop Name!");
+    if (args[2] && isNaN(parseInt(args[2]))) return Bot.errormsg(msg, "The amount must be a number!");
 
-    let itm = args[0];
-    let amt = constrain(Number(args[1] || 1), 1, 50);
+    let itm = args[1];
+    let amt = constrain(Number(args[2] || 1), 1, 50);
 
     let user = Database.getUser(msg.author.id);
 
     let itmIndex: number;
-
-    let potential = items.upgrade.findIndex(o => o.name.toLowerCase() == itm.toLowerCase());
-    if (potential == -1) itmIndex = items.upgrade.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
-    else itmIndex = potential;
     
-    let item = items.upgrade[itmIndex];
+    let catKey = map[args[0] as keyof typeof map] as keyof typeof items; // catalog key
+    let itemCat = items[catKey];
+    let potential = itemCat.findIndex(o => o.name.toLowerCase() == itm.toLowerCase());
+    if (potential == -1) itmIndex = itemCat.findIndex(o => o.name.toLowerCase().indexOf(itm.toLowerCase()) > -1);
+    else itmIndex = potential;
 
-    if (itmIndex == -1) {
-      return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
-    } else {
-      let cost = calcCost(new Big(item.cost), 1.07, amt, user.bought.upgrades[itmIndex] || 0);
-      let cycles = new Big(user.cycles), tpc = new Big(user.tpc);
+    let item = itemCat[itmIndex];
 
-      if (cycles.lt(cost)) return Bot.errormsg(msg, `You don't have enough cycles!
-**You have** ${brackets(commanum(cycles.toString()))}
-**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough Cycles!");
+    if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
+    else {
+      let result = handleBuy[args[0]](user, item, itmIndex, amt);
 
-      user.cycles = cycles.minus(cost).toString();
-      if (!user.bought.upgrades[itmIndex]) user.bought.upgrades[itmIndex] = 0;
-      user.bought.upgrades[itmIndex] += amt;
-      user.tpc = tpc.plus(new Big(items.upgrade[itmIndex].tpc!).times(amt)).toString();
-
-      msg.channel.send({
+      if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
+      else msg.channel.send({
         embed: {
           title: "Transaction Successful!",
           color: Colors.SUCCESS,
-          description: `Successfully bought ${brackets(item.name)}
-You Spent: ${brackets(commanum(cost.toString()))}
-Your TPC: ${brackets(commanum(user.tpc))}`
+          description: result
         }
       });
     }

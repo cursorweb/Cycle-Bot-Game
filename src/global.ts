@@ -26,7 +26,8 @@ export class Command {
 
   isAdmin = false;
 
-  private cooldownUsers: { [index: string]: Date } = {};
+  // Date, isSent
+  private cooldownUsers: { [index: string]: [Date, boolean] } = {};
   get cooldown() { return 0; } // ms
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
@@ -44,8 +45,7 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
         }
       });
       setUser(msg.author.id, genSchema(msg.author));
-    }
-    else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
+    } else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
     > Do \`&code\` to start playing!`, "Profile not found!");
 
     if (this.isGame != 'n' && getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
@@ -57,25 +57,36 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
         description: "Remember to join the [discord server](https://discord.gg/4vTPWdpjFz) for giveaways, perks, and more!"
       }
     });
+
     this.exec(msg, args, client);
   }
 
-  exec(_: Discord.Message, _1: string[], _2: Discord.Client) {}
+  exec(_: Discord.Message, _1: string[], _2: Discord.Client) { }
 
   getCooldown(user: Discord.User) {
     if (!this.cooldownUsers[user.id]) return null;
 
-    if (msBetween(new Date(), this.cooldownUsers[user.id]) <= 0) {
+    if (msBetween(new Date(), this.cooldownUsers[user.id][0]) <= 0) {
       delete this.cooldownUsers[user.id];
       return null;
     }
 
-    return msBetween(new Date(), this.cooldownUsers[user.id]);
+    return msBetween(new Date(), this.cooldownUsers[user.id][0]);
   }
 
   setCooldown(user: Discord.User) {
     if (this.getCooldown(user)) return;
-    this.cooldownUsers[user.id] = addMs(new Date(), this.cooldown);
+    this.cooldownUsers[user.id] = [addMs(new Date(), this.cooldown), false];
+  }
+
+  sentCooldown(user: Discord.User) {
+    if (!this.cooldownUsers[user.id]) return null;
+
+    return this.cooldownUsers[user.id][1];
+  }
+
+  setSent(user: Discord.User) {
+    if (this.cooldownUsers) this.cooldownUsers[user.id][1] = true;
   }
 
   cooldownError(msg: Discord.Message, ms: number) {

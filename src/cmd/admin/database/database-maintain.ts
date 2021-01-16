@@ -13,7 +13,7 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
-        Database.pdb[id].level = "1";
+        Database.pdb[id].bought.cpp = {};
         // CODE ENTRY POINT
       }
 
