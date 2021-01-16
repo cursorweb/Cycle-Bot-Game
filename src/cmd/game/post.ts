@@ -46,7 +46,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
 People viewed your post and you made ${brackets(commanum(upvotes.toString()))} cycle${pluralb(new Big(upvotes))}!
 
 > You now have ${brackets(commanum(cycles.toString()))} cycles!${isServer ? `
-**x5% cycles boost** for posting in the official discord server!` : ""}`,
+**5% cycle boost** for posting in the official discord server!` : ""}`,
           footer: {
             text: "Use &bal to view your balance!"
           }

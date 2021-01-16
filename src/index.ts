@@ -38,8 +38,9 @@ client.on("ready", async () => {
 
 client.on("message", async (msg: Discord.Message) => {
   try {
+    if (msg.author.bot) return;
     let cmd = parse("&", msg.content);
-    if (msg.author.id == client.user!.id || msg.author.bot || !msg.guild || !cmd) return;
+    if (!msg.guild || !cmd) return;
 
     if (cmd.command == "help") help(msg, cmd.args, commands);
     else if (cmd.command == "verify") { if (commandsUsed[msg.author.id] && verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id]; }
@@ -95,6 +96,7 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
 > Use \`&help\` if you don't know how to use this bot!`, "Unknown Command!");
     }
   } catch (err) {
+    console.log(err);
     for (const id of admin) {
       let user = client.users.cache.get(id);
       await user?.send({

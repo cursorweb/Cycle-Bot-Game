@@ -23,7 +23,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
   },
 
   post(user, item, itmIndex, amt) {
-    let cost = calcCost(new Big(item.cost), 1.14, amt, user.bought.upgrades[itmIndex] || 0);
+    let cost = calcCost(new Big(item.cost), 1.14, amt, user.bought.cpp[itmIndex] || 0);
     let cycles = new Big(user.cycles), cpp = new Big(user.cpp);
 
     if (cycles.lt(cost)) return [`You don't have enough cycles!
