@@ -24,7 +24,7 @@ const code: DropItem[] = [{
 You earned ${brackets('5')} cycles!` };
   }
 }, {
-  chance: () => Math.random() < 1,//0.1,
+  chance: () => Math.random() < 0.1,
   award: user => {
     let itemsGot = []; 
 
@@ -37,9 +37,13 @@ You earned ${brackets('5')} cycles!` };
 
     let itemText = itemsGot.map(i => hidden(items[i].name));
 
+    for (const index of itemsGot) {
+      user.inv[index] = user.inv[index] + 1 || 1;
+    }
+
     return { name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
 You open it up and find...
-${itemText.join("\n")}` };
+${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}` };
   }
 }];
 
