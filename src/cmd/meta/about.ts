@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command, Colors, brackets, plural, formatDate } from "../../global";
 
 class C extends Command {
-  names = ["uptime", "bot-about", "bot-servers"];
+  names = ["uptime", "about", "bot-about", "bot-servers"];
   help = "View some general statistics about the bot.";
   isGame = 'n' as 'n';
 

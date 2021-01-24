@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.0.85",
-        description: "You can now code for experience! You will need it to level up and get boosts in your CPP and TPC! See you in the next `&c`!",
+        title: "Version 0.0.9",
+        description: "You can now randomly get some items when you code! In the next update you will find out how to use them!",
         fields: [{
           name: "Discord Server",
           value: "Talk to the developers, and get sneak peeks in the official [discord server](https://discord.gg/4vTPWdpjFz)!"
