@@ -6,13 +6,15 @@ require("dotenv").config();
 
 import * as Discord from "discord.js";
 import DBL from "dblapi.js";
+
 import * as g from "./global";
-import admin from "./util/admin.json";
+import admins from "./util/admin.json";
 
 import { parse } from "./cmd-parser";
 import { help, load, verifyHuman } from "./loader";
 
-import admins from "./util/admin.json";
+import "./idle";
+
 
 const client = new Discord.Client();
 // todo: DBL
@@ -55,7 +57,7 @@ client.on("message", async (msg: Discord.Message) => {
                 color: g.Colors.WARNING,
                 title: "Anti-Bot Verification",
                 description: `Type the number for ${g.brackets(commandsUsed[msg.author.id][1])}\n
-For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
+For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
                 footer: {
                   text: "You cannot continue until you complete this challenge!"
                 }
@@ -97,7 +99,7 @@ For example, if you get **1**, type in ${g.codestr("&verify 1")}`,
     }
   } catch (err) {
     console.log(err);
-    for (const id of admin) {
+    for (const id of admins) {
       let user = client.users.cache.get(id);
       await user?.send({
         embed: {
