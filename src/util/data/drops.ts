@@ -4,16 +4,16 @@ import { brackets, pluralb, commanum, hidden, Database } from "../../global";
 import { items } from "./item";
 
 const code: DropItem[] = [{
-  chance: () => Math.random() < 0.05,
+  chance: () => Math.random() < 1,//0.05,
   award: user => {
     let text = new Big(user.text);
     let tpc = new Big(user.tpc);
-    let boost = Math.floor(Math.random() * 2);
+    let boost = Math.random() * 2;
     let amount = tpc.times(boost).dp(0);
     text = text.plus(amount);
     user.text = text.toString();
     return { name: "Code Burst!", value: `You get an extra burst of energy!
-+${brackets(commanum(amount.toString()))} line${pluralb(amount)} of code! (+${boost * 100}%)` };
++${brackets(commanum(amount.toString()))} line${pluralb(amount)} of code! (+${Math.floor(boost * 100)}%)` };
   }
 }, {
   chance: () => Math.random() < 0.01,
@@ -26,7 +26,7 @@ You earned ${brackets('5')} cycles!` };
 }, {
   chance: () => Math.random() < 0.1,
   award: user => {
-    let itemsGot = []; 
+    let itemsGot = [];
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
