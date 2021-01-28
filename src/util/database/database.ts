@@ -1,5 +1,3 @@
-// for now the wrapper will actually be fs and not firebase (yet)
-
 import admin from "firebase-admin";
 
 if (process.env.FIREBASE) {
@@ -15,6 +13,7 @@ if (process.env.FIREBASE) {
 }
 
 export const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 export * from "./genschema";
 export * from "./pseudo";

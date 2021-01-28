@@ -11,7 +11,7 @@ export interface SItem {
 }
 
 // upgrades are cpp, idles are tpm
-export const items: { upgrades: SItem[], cpp: SItem[] } = {
+export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   upgrades: [{
     name: "Inspiration",
     description: "The idea is the start of everything!",
@@ -99,5 +99,12 @@ export const items: { upgrades: SItem[], cpp: SItem[] } = {
     description: "bff",
     cost: 1100,
     cpp: 10
+  }],
+
+  idle: [{
+    name: "Idle Machine",
+    description: "Your first idle!",
+    cost: 20,
+    tpm: 1
   }]
 };

@@ -16,7 +16,7 @@ class C extends Command {
     let user = Database.getUser(msg.author.id);
     let page = constrain(Number(args[0] || 1), 1, Infinity);
     // todo: emoji
-    let data = Object.keys(user.inv).map(i => `**${user.inv[Number(i)]}** ${brackets(items[Number(i)].name)}`);
+    let data = Object.keys(user.inv).map(i => `x**${user.inv[Number(i)]}** ${brackets(items[Number(i)].name)}`);
 
     Bot.carousel(msg, data, 10, (_, itm) => {
       if (itm.length == 0) {
@@ -28,8 +28,9 @@ class C extends Command {
       } else {
         return {
           color: Colors.SUCCESS,
-          title: "Empty Page",
-          description: itm.join("\n")
+          title: "Inventory",
+          description: itm.join("\n"),
+          footer: { text: `Page ${page}` }
         };
       }
     }, page);

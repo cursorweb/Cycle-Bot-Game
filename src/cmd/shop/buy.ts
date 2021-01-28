@@ -40,16 +40,30 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
     Your CPP: ${brackets(commanum(user.cpp))}`;
   },
 
-  /* idle(user) {
-    return "Coming Soon!!";
-  } */
+  idle(user, item, itmIndex, amt) {
+    let cost = calcCost(new Big(item.cost), 1.21, amt, user.bought.cpp[itmIndex] || 0);
+    let coins = new Big(user.inv[0]), tpm = new Big(user.tpm);
+
+    if (coins.lt(cost)) return [`You don't have enough Ego-Coins!
+**You have** ${brackets(commanum(coins.toString()))}
+**You need** ${brackets(commanum(cost.minus(coins).toString()))}`, "Not enough Ego-Coins!"];
+
+    user.cycles = coins.minus(cost).toString();
+    if (!user.bought.cpp[itmIndex]) user.bought.cpp[itmIndex] = 0;
+    user.bought.cpp[itmIndex] += amt;
+    user.cpp = tpm.plus(new Big(items.cpp[itmIndex].cpp!).times(amt)).toString();
+
+    return `Successfully bought ${brackets(item.name)}
+    You Spent: ${brackets(commanum(cost.toString()))}
+    Your CPP: ${brackets(commanum(user.cpp))}`;
+  }
 };
 
 // because internal api is not the same as visual rip
 const map = {
   text: "upgrades",
   post: "cpp",
-  // idle: "idle"
+  idle: "idle"
 };
 
 
@@ -70,7 +84,7 @@ class C extends Command {
     let user = Database.getUser(msg.author.id);
 
     let itmIndex: number;
-    
+
     let catKey = map[args[0] as keyof typeof map] as keyof typeof items; // catalog key
     let itemCat = items[catKey];
     let potential = itemCat.findIndex(o => o.name.toLowerCase() == itm.toLowerCase());
