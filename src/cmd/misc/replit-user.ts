@@ -18,7 +18,8 @@ class C extends Command {
         headers: {
           "Content-Type": "application/json",
           "Origin": "https://repl.it",
-          "X-Requested-With": "Coder100"
+          "X-Requested-With": "XMLHttpRequest",
+          "User-Agent": "Mozilla/2.0"
         },
         body: JSON.stringify({
           query: "query user($name:String!){userByUsername(username:$name){username,url,id,karma,image,bio,languages(limit:3){displayName,tagline}}}",

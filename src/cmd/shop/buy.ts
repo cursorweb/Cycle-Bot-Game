@@ -73,6 +73,8 @@ class C extends Command {
   examples = ['buy idle "cookie cutter"', 'buy idle "cookie cutter" 50'];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
+    if (args.length == 0 || args.length == 1) return Bot.errormsg(msg, `The valid shop names are:
+    ${codestr(Object.keys(handleBuy).join(", "), "yaml")}`, "Shop names");
     if (args.length != 2 && args.length != 3) return Bot.argserror(msg, args.length, [2, 3]);
     if (!Object.keys(handleBuy).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
     ${codestr(Object.keys(handleBuy).join(", "), "yaml")}`, "Invalid Shop Name!");
@@ -83,6 +85,7 @@ class C extends Command {
 
     let user = Database.getUser(msg.author.id);
 
+    // todo: refactor
     let itmIndex: number;
 
     let catKey = map[args[0] as keyof typeof map] as keyof typeof items; // catalog key
@@ -94,18 +97,16 @@ class C extends Command {
     let item = itemCat[itmIndex];
 
     if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
-    else {
-      let result = handleBuy[args[0]](user, item, itmIndex, amt);
 
-      if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
-      else msg.channel.send({
-        embed: {
-          title: "Transaction Successful!",
-          color: Colors.SUCCESS,
-          description: result
-        }
-      });
-    }
+    let result = handleBuy[args[0]](user, item, itmIndex, amt);
+    if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
+    else msg.channel.send({
+      embed: {
+        title: "Transaction Successful!",
+        color: Colors.SUCCESS,
+        description: result
+      }
+    });
   }
 }
 

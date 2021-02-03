@@ -4,7 +4,7 @@ import { brackets, pluralb, commanum, hidden, Database } from "../../global";
 import { items } from "./item";
 
 const code: DropItem[] = [{
-  chance: () => Math.random() < 1,//0.05,
+  chance: () => Math.random() < 0.1,
   award: user => {
     let text = new Big(user.text);
     let tpc = new Big(user.tpc);
@@ -16,7 +16,7 @@ const code: DropItem[] = [{
 +${brackets(commanum(amount.toString()))} line${pluralb(amount)} of code! (+${Math.floor(boost * 100)}%)` };
   }
 }, {
-  chance: () => Math.random() < 0.01,
+  chance: () => Math.random() < 0.05,
   award: user => {
     let cycles = new Big(user.cycles);
     cycles = cycles.plus(5);
@@ -26,6 +26,7 @@ You earned ${brackets('5')} cycles!` };
 }, {
   chance: () => Math.random() < 0.15,
   award: user => {
+    // todo obj
     let itemsGot = [];
 
     for (let i = 0; i < items.length; i++) {
@@ -37,8 +38,10 @@ You earned ${brackets('5')} cycles!` };
 
     let itemText = itemsGot.map(i => hidden(items[i].name));
 
-    for (const index of itemsGot) {
-      user.inv[index] = user.inv[index] + 1 || 1;
+    for (let i = 0; i < 5; i++) {
+      for (const index of itemsGot) {
+        user.inv[index] = user.inv[index] + 1 || 1;
+      }
     }
 
     return { name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
