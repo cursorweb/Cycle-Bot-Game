@@ -19,4 +19,14 @@ export const items: BItem[] = [{
   emoji: "",
   description: "The camera doesn't even work!",
   dropChance: 8
-}];
+}, {
+  name: "Extra Finger",
+  emoji: "",
+  description: "Gross... but hey, more efficiency!",
+  dropChance: 15
+}, /*{
+  name: "Coffee",
+  emoji: "",
+  description: "Use this to code instantly again!",
+  dropChance: 10
+}*/];

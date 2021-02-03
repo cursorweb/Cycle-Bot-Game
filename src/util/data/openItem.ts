@@ -22,5 +22,39 @@ export const openItem: { [i: number]: (user: Database.CycleUser, amt: number) =>
 It's cheap, so it dies quickly!
 + ${brackets(num.toString())} cycles!`
     };
-  }
+  },
+  2: (user, amt) => {
+    let text = new Big(user.text);
+    let tpc = new Big(user.tpc);
+
+    let num = tpc.plus(Math.round(random(1, 5)));
+    let newText = text.plus(num);
+
+    user.text = newText.toString();
+    
+    return {
+      name: "Code code code!",
+      value: `You use your extra finger.
+It's not your finger, and breaks!
++ ${brackets(num.toString())} text!`
+    };
+  },
+  /*
+  3: (user, amt) => {
+    let text = new Big(user.text);
+    let tpc = new Big(user.tpc);
+
+    let num = tpc.plus(Math.round(random(1, 5)));
+    let newText = text.plus(num);
+
+    user.text = newText.toString();
+    
+    return {
+      name: "Code code code!",
+      value: `You use your extra finger.
+It's not your finger, and breaks!
++ ${brackets(num.toString())} text!`
+    };
+  },
+  */
 };

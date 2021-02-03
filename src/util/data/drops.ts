@@ -24,7 +24,7 @@ const code: DropItem[] = [{
 You earned ${brackets('5')} cycles!` };
   }
 }, {
-  chance: () => Math.random() < 0.15,
+  chance: () => Math.random() < 0.2,
   award: user => {
     // todo obj
     let itemsGot = [];
