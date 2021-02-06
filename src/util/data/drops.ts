@@ -27,22 +27,19 @@ You earned ${brackets('5')} cycles!` };
   chance: () => Math.random() < 0.2,
   award: user => {
     // todo obj
-    let itemsGot = [];
+    let itemsGot: { [i: number]: number } = {};
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      if (Math.random() * 100 < item.dropChance) {
-        itemsGot.push(i);
+    for (let j = 0; j < 5; j++) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (Math.random() * 100 < item.dropChance) {
+          itemsGot[i] = (itemsGot[i] || 0) + 1;
+          user.inv[i] = (user.inv[i] || 0) + 1;
+        }
       }
     }
 
-    let itemText = itemsGot.map(i => hidden(items[i].name));
-
-    for (let i = 0; i < 5; i++) {
-      for (const index of itemsGot) {
-        user.inv[index] = user.inv[index] + 1 || 1;
-      }
-    }
+    let itemText = Object.keys(itemsGot).map(i => hidden(`x${itemsGot[Number(i)]} ${items[Number(i)].name}`));
 
     return { name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
 You open it up and find...
