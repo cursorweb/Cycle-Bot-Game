@@ -104,7 +104,7 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   idle: [{
     name: "Idle Machine",
     description: "Your first idle!",
-    cost: 20,
+    cost: 5,
     tpm: 1
   }]
 };
