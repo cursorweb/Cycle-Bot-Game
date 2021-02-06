@@ -97,7 +97,8 @@ class C extends Command {
 
     let item = itemCat[itmIndex];
 
-    if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(itm)} not found. Check your spelling!`, "Item not found!");
+    if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(itm)} not found.
+Check your spelling!`, "Item not found!");
 
     let result = handleBuy[args[0]](user, item, itmIndex, amt);
     if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
