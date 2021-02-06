@@ -18,7 +18,7 @@ import "./idle";
 
 const client = new Discord.Client();
 // todo: DBL
-let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[];
+let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
 // the limit is x before we have people confirm they are not self-botting.
 // the array is: `commands used,bot input,bot answer`
@@ -36,10 +36,11 @@ client.on("ready", async () => {
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr].cmds), []);
 
   console.log(`Loaded ${gcmdarr.length} commands.`);
+  ready = true;
 });
 
 client.on("message", async (msg: Discord.Message) => {
-  try {
+  if (ready) try {
     if (msg.author.bot) return;
     let cmd = parse("&", msg.content);
     if (!msg.guild || !cmd) return;
