@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 import * as Discord from "discord.js";
-import { Command, brackets, codestr, noun, Colors, Bot } from "./global";
+import { Command, brackets, codestr, noun, Colors, Bot, parseNumber } from "./global";
 
 async function load() {
   let output: { [i: string]: { cmds: Command[], desc: string } } = {};
@@ -79,7 +79,7 @@ function verifyHuman(msg: Discord.Message, args: string[], commandsUsed: { [i: s
 
   if (!user || user[0] < 100) return false;
 
-  if (Number(args[0]) != user[2]) {
+  if (parseNumber(args[0]) != user[2]) {
     msg.channel.send({
       embed: {
         color: Colors.ERROR,

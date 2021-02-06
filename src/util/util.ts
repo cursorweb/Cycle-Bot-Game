@@ -85,7 +85,15 @@ function calcPrice(base: Big, inflation: number, owned: number) {
   return calcCost(base, inflation, 1, owned);
 }
 
+/**
+ * parses commas as well.
+ * @param num the number
+ */
+function parseNumber(num: string) {
+  let n = num.trim().replace(/[^\d.]/g, "")
+  return n == "" ? NaN : Number(n);
+}
 
 function constrain(n: number, min: number, max: number) { return n < min ? min : n > max ? max : n; }
 
-export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, constrain };
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, parseNumber, constrain };

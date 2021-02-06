@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr } from "../../global";
+import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr, parseNumber } from "../../global";
 import { items, SItem } from "../../util/data/shop";
 
 const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex: number, amt: number) => string[] | string } = {
@@ -78,10 +78,11 @@ class C extends Command {
     if (args.length != 2 && args.length != 3) return Bot.argserror(msg, args.length, [2, 3]);
     if (!Object.keys(handleBuy).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
     ${codestr(Object.keys(handleBuy).join(", "), "yaml")}`, "Invalid Shop Name!");
-    if (args[2] && isNaN(parseInt(args[2]))) return Bot.errormsg(msg, "The amount must be a number!");
+    let num = parseNumber(args[2]);
+    if (args[2] && isNaN(num)) return Bot.errormsg(msg, "The amount must be a number!");
 
     let itm = args[1];
-    let amt = constrain(Number(args[2] || 1), 1, 50);
+    let amt = constrain(num || 1, 1, 50);
 
     let user = Database.getUser(msg.author.id);
 

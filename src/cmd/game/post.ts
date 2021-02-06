@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum } from "../../global";
+import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum, parseNumber } from "../../global";
 import { post as drops } from "../../util/data/drops";
 
 class C extends Command {
@@ -16,7 +16,7 @@ class C extends Command {
     else {
       let user = Database.getUser(msg.author.id);
       let text = new Big(user.text), cpp = new Big(user.cpp), cycles = new Big(user.cycles);
-      let amt = new Big(Number(args[0]) || user.text);
+      let amt = new Big(parseNumber(args[0]) || user.text);
 
       if (amt.lte(0)) return Bot.errormsg(msg, `You cannot post less than ${brackets('0')} lines of code!`);
       if (text.lt(amt)) return Bot.errormsg(msg, `You don't have enough code!

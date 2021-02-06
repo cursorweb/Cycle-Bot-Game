@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum, constrain } from "../../global";
+import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber } from "../../global";
 
 class C extends Command {
   names = ["leaderboard", "scoreboard", "lb", "l"];
@@ -10,9 +10,10 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [1]);
-    if (args[0] && isNaN(Number(args[0]))) return Bot.errormsg(msg, "The page must be a number!");
+    let num = parseNumber(args[0]);
+    if (args[0] && isNaN(num)) return Bot.errormsg(msg, "The page must be a number!");
     
-    let page = constrain(Number(args[0] || 1), 1, Infinity);
+    let page = constrain(num || 1, 1, Infinity);
     let data = Object.keys(Database.pdb).map(n => ({ name: Database.pdb[n].name, cycles: Database.pdb[n].cycles })).sort((a, b) => new Big(b.cycles).minus(new Big(a.cycles)).toNumber());
 
     Bot.carousel(msg, data, 10, (pg, itm) => {

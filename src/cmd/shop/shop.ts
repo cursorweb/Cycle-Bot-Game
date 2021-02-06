@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr } from "../../global";
+import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../global";
 import { items } from "../../util/data/shop";
 
 // [topic] [value]
@@ -25,13 +25,14 @@ class C extends Command {
     if (args.length == 0) return Bot.errormsg(msg, `The valid shop names are:
     ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Shop names");
     if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
-    if (args[1] && isNaN(Number(args[1]))) return Bot.errormsg(msg, "The page must be a number!");
+    let num = parseNumber(args[1]);
+    if (args[1] && isNaN(num)) return Bot.errormsg(msg, "The page must be a number!");
     if (!Object.keys(handleShop).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
 ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
 
     const user = Database.getUser(msg.author.id);
 
-    let page = constrain(Number(args[1] || 1), 1, Infinity);
+    let page = constrain(num || 1, 1, Infinity);
     let data = handleShop[args[0]](user);
 
     Bot.carousel(msg, data, 5, (page, i): Discord.MessageEmbedOptions => ({

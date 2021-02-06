@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, constrain, random, brackets } from "../../global";
+import { Command, Colors, Bot, Database, constrain, random, brackets, parseNumber } from "../../global";
 import { commanum } from "../../util/util";
 
 class C extends Command {
@@ -8,12 +8,13 @@ class C extends Command {
   help = "Gamble some money!";
   examples = ["casino <cycles>"];
 
-  // get cooldown() { return 60e3; }
+  get cooldown() { return 60e3; }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
-
-    let amt = new Big(constrain(parseInt(args[0]), 1, Infinity));
+    let num = parseNumber(args[0]);
+    if (isNaN(num)) return Bot.errormsg(msg, "Amount must be a number!");
+    let amt = new Big(constrain(num, 1, Infinity));
 
     const user = Database.getUser(msg.author.id);
     let cycles = new Big(user.cycles);
