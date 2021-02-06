@@ -26,7 +26,6 @@ You earned ${brackets('5')} cycles!` };
 }, {
   chance: () => Math.random() < 0.2,
   award: user => {
-    // todo obj
     let itemsGot: { [i: number]: number } = {};
 
     for (let j = 0; j < 5; j++) {
@@ -39,7 +38,7 @@ You earned ${brackets('5')} cycles!` };
       }
     }
 
-    let itemText = Object.keys(itemsGot).map(i => hidden(`x${itemsGot[Number(i)]} ${items[Number(i)].name}`));
+    let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${Number(i) > 1 ? ` x**${i}** ` : ""}`);
 
     return { name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
 You open it up and find...

@@ -89,7 +89,7 @@ function calcPrice(base: Big, inflation: number, owned: number) {
  * parses commas as well.
  * @param num the number
  */
-function parseNumber(num: string) {
+function parseNumber(num = "") {
   let n = num.trim().replace(/[^\d.]/g, "")
   return n == "" ? NaN : Number(n);
 }

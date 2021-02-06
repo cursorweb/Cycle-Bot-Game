@@ -17,7 +17,7 @@ class C extends Command {
     let user = Database.getUser(msg.author.id);
     let page = constrain(num || 1, 1, Infinity);
     // todo: emoji
-    let data = Object.keys(user.inv).map(i => `x**${user.inv[Number(i)]}** ${brackets(items[Number(i)].name)}`);
+    let data = Object.keys(user.inv).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
 
     Bot.carousel(msg, data, 10, (_, itm) => {
       if (itm.length == 0) {

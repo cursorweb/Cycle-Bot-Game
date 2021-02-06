@@ -1,19 +1,22 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets } from "../../global";
+import { Command, Colors, Bot, Database, brackets, constrain, parseNumber } from "../../global";
 import { items } from "../../util/data/item";
 import { openItem } from "../../util/data/openItem";
+import { commanum } from "../../util/util";
 
 class C extends Command {
   names = ["use", "eat", "u"];
   help = "Use an item!";
-  examples = ["use apple"];
+  examples = ["use coffee"];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
-    if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
+    if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
+    let num = parseNumber(args[1]);
+    if (args[1] && isNaN(num)) return Bot.errormsg(msg, "The amount must be a number!");
 
     let name = args[0];
-    let amount = 1;
+    let amount = constrain(num || 1, 1, Infinity);
     let user = Database.getUser(msg.author.id);
 
     let itmIndex = items.findIndex(o => o.name.toLowerCase() == name.toLowerCase());
@@ -30,12 +33,12 @@ It might be used in a shop, however.`, "Item can't be used!");
     let result = open(user, amount);
     if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
     else {
-      user.inv[itmIndex]--;
+      user.inv[itmIndex] -= amount;
       msg.channel.send({
         embed: {
-          title: "You used a ",
+          title: "Using item!",
           color: Colors.SUCCESS,
-          description: `You use **x${amount}** ${brackets(item.name)} ...`,
+          description: `You use **x${commanum(amount.toString())}** ${brackets(item.name)} ...`,
           fields: [result]
         }
       });

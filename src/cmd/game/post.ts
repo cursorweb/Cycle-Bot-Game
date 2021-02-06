@@ -43,7 +43,8 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
           color: Colors.SUCCESS,
           title: "Post your Code!",
           description: `You posted ${brackets(commanum(amt.toString()))} line${pluralb(amt)} of code.
-People viewed your post and you made ${brackets(commanum(upvotes.toString()))} cycle${pluralb(new Big(upvotes))}!
+People view your post!
++ ${brackets(commanum(upvotes.toString()))} cycle${pluralb(new Big(upvotes))}!
 
 > You now have ${brackets(commanum(cycles.toString()))} cycles!${isServer ? `
 **5% cycle boost** for posting in the official discord server!` : ""}`,
