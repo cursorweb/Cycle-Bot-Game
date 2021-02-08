@@ -23,17 +23,18 @@ class C extends Command {
     if (itmIndex == -1) itmIndex = items.findIndex(i => i.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
 
     let item = items[itmIndex];
+    let userAmt = new Big(user.inv[itmIndex]);
     let open = openItem[itmIndex];
 
     if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(name)} not found. Check your spelling!`, "Item not found!");
-    if (!user.inv[itmIndex] || user.inv[itmIndex] < amount) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${amount - (user.inv[itmIndex])}`);
+    if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${commanum(userAmt.negated().plus(amount).toString())}`);
     if (!open) return Bot.errormsg(msg, `This kind of item can't be used!
 It might be used in a shop, however.`, "Item can't be used!");
     
     let result = open(user, amount);
     if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
     else {
-      user.inv[itmIndex] -= amount;
+      user.inv[itmIndex] = userAmt.minus(amount).toString();
       msg.channel.send({
         embed: {
           title: "Using item!",

@@ -13,7 +13,9 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
-        Database.pdb[id].inv = {};
+        for (const key in Database.pdb[id].inv) {
+          Database.pdb[id].inv[key] = Database.pdb[id].inv[key].toString();
+        }
         // CODE ENTRY POINT
       }
 

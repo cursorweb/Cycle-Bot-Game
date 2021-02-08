@@ -33,7 +33,7 @@ You earned ${brackets('5')} cycles!` };
         const item = items[i];
         if (Math.random() * 100 < item.dropChance) {
           itemsGot[i] = (itemsGot[i] || 0) + 1;
-          user.inv[i] = (user.inv[i] || 0) + 1;
+          user.inv[i] = new Big(user.inv[i] || 0).plus(1).toString();
         }
       }
     }

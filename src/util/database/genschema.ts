@@ -56,7 +56,7 @@ interface CycleUser {
   langs: number | null; // language the user knows (boost index)
   level: string; // the level
   socialMedia: number | null; // social media platform (null | number)
-  inv: { [i: number]: number }; // [item-index]: amount
+  inv: { [i: number]: string }; // [item-index]: amount
 
   badges: string[]; // badges lol
 

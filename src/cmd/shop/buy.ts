@@ -48,7 +48,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 **You have** ${brackets(commanum(coins.toString()))}
 **You need** ${brackets(commanum(cost.minus(coins).toString()))}`, "Not enough Ego-Coins!"];
 
-    user.cycles = coins.minus(cost).toString();
+    user.inv[0] = coins.minus(cost).toString();
     if (!user.bought.idle[itmIndex]) user.bought.idle[itmIndex] = 0;
     user.bought.idle[itmIndex] += amt;
     user.tpm = tpm.plus(new Big(items.idle[itmIndex].tpm!).times(amt)).toString();
