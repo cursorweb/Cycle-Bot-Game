@@ -5,7 +5,6 @@ Invite link: https://discord.com/api/oauth2/authorize?client_id=7819393174503424
 require("dotenv").config();
 
 import * as Discord from "discord.js";
-import DBL from "dblapi.js";
 
 import * as g from "./global";
 import admins from "./util/admin.json";
@@ -14,7 +13,7 @@ import { parse } from "./cmd-parser";
 import { help, load, verifyHuman } from "./loader";
 
 import "./idle";
-
+import "./server";
 
 const client = new Discord.Client();
 // todo: DBL
