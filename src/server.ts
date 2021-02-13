@@ -16,6 +16,7 @@ export function initiate(client: Discord.Client) {
     if (!req.vote) return res.end();
     const id = req.vote.user;
     const user = Database.getUser(id);
+    if (!user) return;
 
     const cycles = new Big(user.cycles);
     const cpp = new Big(user.cpp).times(5);

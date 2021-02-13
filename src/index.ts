@@ -13,10 +13,9 @@ import { parse } from "./cmd-parser";
 import { help, load, verifyHuman } from "./loader";
 
 import "./idle";
-import "./server";
+import { initiate } from "./server";
 
 const client = new Discord.Client();
-// todo: DBL
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
 // the limit is x before we have people confirm they are not self-botting.
@@ -36,6 +35,9 @@ client.on("ready", async () => {
 
   console.log(`Loaded ${gcmdarr.length} commands.`);
   ready = true;
+
+  initiate(client);
+  console.log(`Initiated server.`);
 });
 
 client.on("message", async (msg: Discord.Message) => {

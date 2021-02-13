@@ -20,5 +20,6 @@ util/
 cmd-parser.ts # This parses commands
 global.ts # This exports things from 'util' to be easily importable
 loader.ts # This loads commands from 'cmd'
+server.ts # This creates a server for top.gg
 index.ts # Entry point
 ```

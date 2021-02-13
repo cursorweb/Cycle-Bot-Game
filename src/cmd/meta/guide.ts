@@ -8,7 +8,7 @@ class C extends Command {
 
   get cooldown() { return 10e3; }
 
-  exec(msg: Discord.Message, args: string[], _: Discord.Client) {
+  exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
@@ -19,6 +19,8 @@ Join the [Discord server](https://discord.gg/4vTPWdpjFz) for more perks!
 **&post** Once you make some code, you can post it for some *cycles*.
 **&shop** Use the shop to see the available upgrades you can buy.
 **&lb** View the leaderboard, and see who has the most cycles!
+**&vote** Vote for the bot on top.gg :)
+**&daily** Get your daily reward!
 **&help** View more help commands!
 
 [**Discord Server**](https://discord.gg/4vTPWdpjFz) | [**Wiki**](https://github.com/cursorweb/Cycle-Bot-Game/wiki) | [**Bot Invite**](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot)`,
@@ -30,7 +32,7 @@ Join the [Discord server](https://discord.gg/4vTPWdpjFz) for more perks!
           value: "This determines your position on the leaderboard and you can use it to buy upgrades!"
         }, {
           name: "Ego coins",
-          value: "[coming soon...]"
+          value: "Earn them by coding a lot. You can use this to buy TPM -- Text Per Minute!"
         }],
         footer: { text: "Join the Discord Server! https://discord.gg/4vTPWdpjFz" }
       }
