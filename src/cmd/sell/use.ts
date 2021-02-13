@@ -30,20 +30,17 @@ class C extends Command {
     if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${commanum(userAmt.negated().plus(amount).toString())}`);
     if (!open) return Bot.errormsg(msg, `This kind of item can't be used!
 It might be used in a shop, however.`, "Item can't be used!");
-    
+
+    user.inv[itmIndex] = userAmt.minus(amount).toString();
     let result = open(user, amount);
-    if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
-    else {
-      user.inv[itmIndex] = userAmt.minus(amount).toString();
-      msg.channel.send({
-        embed: {
-          title: "Using item!",
-          color: Colors.SUCCESS,
-          description: `You use **x${commanum(amount.toString())}** ${brackets(item.name)} ...`,
-          fields: [result]
-        }
-      });
-    }
+    msg.channel.send({
+      embed: {
+        title: "Using item!",
+        color: Colors.SUCCESS,
+        description: `You use **x${commanum(amount.toString())}** ${brackets(item.name)} ...`,
+        fields: [result]
+      }
+    });
   }
 }
 

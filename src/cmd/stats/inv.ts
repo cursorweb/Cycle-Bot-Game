@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber } from "../../global";
 import { items } from "../../util/data/item";
 
@@ -17,7 +18,7 @@ class C extends Command {
     let user = Database.getUser(msg.author.id);
     let page = constrain(num || 1, 1, Infinity);
     // todo: emoji
-    let data = Object.keys(user.inv).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
+    let data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)]).gt(0)).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
 
     Bot.carousel(msg, data, 10, (_, itm) => {
       if (itm.length == 0) {
