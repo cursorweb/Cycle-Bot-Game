@@ -19,15 +19,15 @@ export function initiate(client: Discord.Client) {
     if (!user) return;
 
     const cycles = new Big(user.cycles);
-    const cpp = new Big(user.cpp).times(5);
+    const tpc = new Big(user.tpc).times(5);
 
-    user.cycles = cycles.plus(cpp).toString();
+    user.cycles = cycles.plus(tpc).toString();
 
     client.users.cache.get(id)?.send({
       embed: {
         color: Colors.PRIMARY,
         title: "Thank you for voting!",
-        description: `For voting, you get ${brackets(commanum(cpp.toString()))} text!`
+        description: `For voting, you get ${brackets(commanum(tpc.toString()))} cycles!`
       }
     });
 

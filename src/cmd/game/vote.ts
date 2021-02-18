@@ -13,7 +13,7 @@ class C extends Command {
       embed: {
         color: Colors.PRIMARY,
         title: "Vote Link!",
-        description: `**Vote rewards**: Lots of text.
+        description: `**Vote rewards**: Cycles!!
 **Vote Link: ** [here](https://top.gg/bot/781939317450342470/vote)`,
         footer: {
           text: "You will be DMed once your vote is processed!"

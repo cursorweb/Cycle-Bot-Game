@@ -106,5 +106,25 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "Your first idle!",
     cost: 5,
     tpm: 1
+  }, {
+    name: "Code Robot",
+    description: "Please click all the bugs to continue.",
+    cost: 21,
+    tpm: 5
+  }, {
+    name: "StackOverflow Commitee",
+    description: "Free code review!",
+    cost: 41,
+    tpm: 10
+  }, {
+    name: "Intern",
+    description: "Free code!",
+    cost: 61,
+    tpm: 15
+  }, {
+    name: "Code AI",
+    description: "One day it'll write binary",
+    cost: 81,
+    tpm: 20
   }]
 };
