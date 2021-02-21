@@ -34,42 +34,50 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
   if (args.length != 1) { // &help
     let fields: Discord.EmbedFieldData[] = Object.keys(output).map((k): Discord.EmbedFieldData => ({
       name: k,
-      value: `> ${output[k].desc}\n${brackets(output[k].cmds.length.toString())} **commands**`
+      value: `> ${output[k].desc}\n${output[k].cmds.map(n => `&**${n.names[0]}**`).join("\n")}`,
     }));
 
     Bot.carousel(msg, fields, 2, (page, i) => {
       return {
         color: Colors.PRIMARY,
         title: "Help Categories",
-        description: `View the help categories! Page: ${brackets(page.toString())}${codestr("<&help category>")}`,
+        description: `View the help categories! Page: ${brackets(page.toString())}${codestr("&help <command>")}`,
         fields: i.length == 0 ? [{ name: "End of Help!", value: "No more commands!" }] : i
       }
     });
   } else {
     // &help invalid
-    if (!output[args[0]]) Bot.errormsg(msg, `Help category for ${brackets(args[0])} was not found!`, "Error");
-    else { // &help meta
-      let fields: Discord.EmbedField[] = output[args[0]].cmds.map((cmd): Discord.EmbedField => ({
-        name: noun(cmd.names[0]),
-        value: `${cmd.help}\
-${cmd.examples.length == 0
-            ? cmd.names.map(o => codestr(`<&${o}>`)).join("")
-            : cmd.examples.map(o => codestr(`<&${o}>`)).join("")}\
-${cmd.names.length > 1
-            ? `**Aliases**: ${cmd.names.slice(1).join(",")}` : ""}
-${cmd.isAdmin ? brackets("ADMIN-ONLY") : ""}`,
-        inline: true
-      }));
+    // todo
+    let cmd: Command;
 
-      msg.channel.send({
-        embed: {
-          color: Colors.PRIMARY,
-          title: `Help ${brackets(args[0])}`,
-          description: `View the help for ${brackets(args[0])}!`,
-          fields
-        }
-      });
+    for (const k in output) {
+      let result = output[k].cmds.find(n => n.names.includes(args[0]));
+      if (result) cmd = result;
     }
+
+    if (!cmd!) return Bot.errormsg(msg, `Help category for ${brackets(args[0])} was not found!`, "Error");
+    // &help meta
+    let fields: Discord.EmbedFieldData = {
+      name: noun(cmd.names[0]),
+      value: `${cmd.help}\
+${cmd.examples.length == 0
+          ? cmd.names.map(o => codestr(`&${o}`)).join("")
+          : cmd.examples.map(o => codestr(`&${o}`)).join("")}\
+${cmd.names.length > 1
+          ? `**Aliases**: ${cmd.names.slice(1).join(",")}` : ""}
+${cmd.isAdmin ? brackets("ADMIN-ONLY") : ""}`,
+      inline: true
+    };
+
+    msg.channel.send({
+      embed: {
+        color: Colors.PRIMARY,
+        title: `Help ${brackets(args[0])}`,
+        description: `View the help for ${brackets(args[0])}!`,
+        fields: [fields]
+      }
+    });
+
   }
 }
 

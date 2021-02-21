@@ -13,7 +13,7 @@ export const items: BItem[] = [{
   name: "Ego-Coin",
   emoji: "", // todo
   description: "Made from only those with the biggest egoes!",
-  dropChance: 20
+  dropChance: 25
 }, {
   name: "Cheap iPhone",
   emoji: "",

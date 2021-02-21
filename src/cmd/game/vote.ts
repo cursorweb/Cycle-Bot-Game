@@ -6,8 +6,6 @@ class C extends Command {
   help = "Vote for the bot <3";
   isGame = 'p' as 'p';
 
-  isAdmin = true;
-
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
       embed: {
