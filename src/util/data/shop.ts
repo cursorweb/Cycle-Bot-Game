@@ -99,7 +99,12 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "bff",
     cost: 1100,
     cpp: 10
-  }],
+  }, {
+    name: "Subscribers",
+    description: "A real subscriber!",
+    cost: 5500,
+    cpp: 15
+  }],  
 
   idle: [{
     name: "Idle Machine",
