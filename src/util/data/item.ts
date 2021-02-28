@@ -30,8 +30,13 @@ export const items: BItem[] = [{
   description: "Use this to code with a boost!",
   dropChance: 10
 }, {
-  name: "Chest chest",
+  name: "Chest Chest",
   emoji: "",
   description: "Chests may contain chests.",
   dropChance: 8
+}, {
+  name: "Daily Chest",
+  emoji: "",
+  description: "Get this item through `&d`!",
+  dropChance: 0
 }];

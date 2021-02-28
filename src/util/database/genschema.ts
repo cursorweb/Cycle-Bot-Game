@@ -6,7 +6,7 @@ const defaultSchema: CycleUser = {
   tpc: "1", cpp: "1", tpm: "0",
   langs: null, level: "1", socialMedia: null,
   
-  inv: [], badges: [],
+  inv: {}, badges: [],
   
   daily: "",
 
@@ -24,7 +24,7 @@ function genSchema(user: Discord.User): CycleUser {
     tpc: "1", cpp: "1", tpm: "0",
     langs: null, level: "1", socialMedia: null,
     
-    inv: [], badges: [],
+    inv: {}, badges: [],
  
     daily: "",
 

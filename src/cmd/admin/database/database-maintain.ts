@@ -13,9 +13,12 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
+        let temp: { [i: number]: string } = {};
         for (const key in Database.pdb[id].inv) {
-          Database.pdb[id].inv[key] = Database.pdb[id].inv[key].toString();
+          temp[key] = Database.pdb[id].inv[key];
         }
+
+        Database.pdb[id].inv = temp;
         // CODE ENTRY POINT
       }
 
