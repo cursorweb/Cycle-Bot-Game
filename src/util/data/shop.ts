@@ -142,5 +142,5 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     cost: 250,
     tpm: 30
 
-  }]
-};
+}];
+
