@@ -136,5 +136,11 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "One day it'll write binary",
     cost: 81,
     tpm: 20
+  }, {
+    name: "Hacking Machine",
+    description: "There is nothing you can't hack anymore.",
+    cost: 250,
+    tpm: 30
+
   }]
 };
