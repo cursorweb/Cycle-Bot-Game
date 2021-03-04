@@ -85,8 +85,8 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   }, {
     name: "Personal Care Robot",
     description: "You now don't have to spend time combing your hair all day!",
-    cost: 54321968949,
-    tpm: 300
+    cost: "9537000000000",
+    tpc: 300
   }],
   
   cpp: [{
@@ -142,19 +142,29 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     cost: 81,
     tpm: 20
   }, {
+    name: "Debugger",
+    description: "Isn't that just spamming prints?",
+    cost: 101,
+    tpm: 25
+  }, {
     name: "Hacking Machine",
     description: "There is nothing you can't hack anymore.",
-    cost: 250,
+    cost: 121,
     tpm: 30
+  }, {
+    name: "Macros",
+    description: "Let the code do it's job!",
+    cost: 141,
+    tpm: 35
   }, {
     name: "Debugger",
     description: "Now you debug all your code!",
-    cost: 450,
+    cost: 161,
     tpm: 40
   }, {
     name: "Fiverr worker",
     description: "I mean you payed for it...",
-    cost: 500,
+    cost: 181,
     tpm: 45
   }]
 };
