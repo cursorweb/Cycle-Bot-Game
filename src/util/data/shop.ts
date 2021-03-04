@@ -73,6 +73,11 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     cost: 9766e3,
     tpc: 150
   }, {
+    name: "Windows Powershell+",
+    description: "The better version of Windows Powershell.",
+    cost: 500000,
+    tpc: 175
+  }, {
     name: "Stack Overflow II",
     description: "That place where you ask questions",
     cost: 2087e6,
@@ -87,6 +92,11 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "You now don't have to spend time combing your hair all day!",
     cost: "9537000000000",
     tpc: 300
+  }, {
+    name: "Gamer Mouse",
+    description: "The ultiminte mouse.",
+    cost: "435300000000000",
+    tpc: 400
   }],
   
   cpp: [{
