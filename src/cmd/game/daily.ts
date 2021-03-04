@@ -20,9 +20,21 @@ let rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
     user.cycles = cycles.plus(amt).toString();
 
     return {
-      name: "Daily reward!",
+      name: "Daily post!",
       value: `You got ${brackets(commanum(amt.toString()))} cycles!
 You now have ${brackets(commanum(cycles.toString()))} cycles!`
+    }
+  },
+  user => {
+    let text = new Big(user.text);
+    let amt = new Big(user.tpc).times(22);
+
+    user.text = text.plus(amt).toString();
+
+    return {
+      name: "Instant code!",
+      value: `You got ${brackets(commanum(amt.toString()))} text!
+You now have ${brackets(commanum(text.toString()))} text!`
     }
   }
 ];
@@ -50,7 +62,7 @@ class C extends Command {
       }
     });
 
-    // user.daily = addMs(new Date(), 60e3 * 60 * 10).toString();
+    user.daily = addMs(new Date(), 60e3 * 60 * 10).toString();
   }
 }
 
