@@ -82,6 +82,11 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "Use it before you define it!",
     cost: "446169698830",
     tpc: 250
+  }, {
+    name: "Personal Care Robot",
+    description: "You now don't have to spend time combing your hair all day!",
+    cost: 54321968949,
+    tpm: 300
   }],
   
   cpp: [{
@@ -147,7 +152,7 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     cost: 450,
     tpm: 40
   }, {
-    name: "Fiverr wroker",
+    name: "Fiverr worker",
     description: "I mean you payed for it...",
     cost: 500,
     tpm: 45
