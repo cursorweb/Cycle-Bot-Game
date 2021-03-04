@@ -141,5 +141,9 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "There is nothing you can't hack anymore.",
     cost: 250,
     tpm: 30
-  }]
-};
+  }, {
+    name: "Debugger",
+    description: "Now you debug all your code!",
+    cost: 450,
+    tpm: 40
+}];
