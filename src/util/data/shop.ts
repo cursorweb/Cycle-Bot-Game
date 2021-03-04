@@ -146,4 +146,5 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "Now you debug all your code!",
     cost: 450,
     tpm: 40
-}];
+  }]
+};
