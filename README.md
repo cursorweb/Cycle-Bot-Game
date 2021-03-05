@@ -31,7 +31,7 @@ This project *does* require firebase, so make sure you hvae the admin SDK ready.
 ```
 FIREBASE={"...": "..."}
 ```
-Otherwise, it just readds the `sdk-key.json` file in the root directory.
+Otherwise, it just reads the `sdk-key.json` file in the root directory.
 > Make sure not to commit `sdk-key.json`!
 
 ### Fake-DB
@@ -44,3 +44,5 @@ You can also use a fallback JSON database so you don't have to mess around with 
 NODE_ENV=1
 ```
 Note the value can be whatever you want as we only check for existence.
+
+Also read [CONTRIBUTING.md](CONTRIBUTING.md).
