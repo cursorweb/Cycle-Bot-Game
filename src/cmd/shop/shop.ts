@@ -42,7 +42,7 @@ ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
 **Cycles**: ${brackets(commanum(user.cycles))}
 **Text**: ${brackets(commanum(user.text))}\n${i.length > 0 ? codestr(i.join("\n\n"), "md") : codestr(`[ NO ][ MORE ][ ITEMS ]
 > You've gone far enough!`, "md")}`,
-      footer: { text: "Tip: Use &buy upgrade to buy an item!" }
+      footer: { text: `Tip: Use &buy ${args[0]} to buy an item!` }
     }), page);
   }
 }
