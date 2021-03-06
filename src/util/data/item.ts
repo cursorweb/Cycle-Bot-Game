@@ -39,4 +39,9 @@ export const items: BItem[] = [{
   emoji: "",
   description: "Get this item through `&d`!",
   dropChance: 0
+}, {
+  name: "Apple iPhone",
+  emoji: "",
+  description: "An iPhone... with an ego!",
+  dropChance: 5
 }];

@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, Database } from "../../global";
+import { CraftItem } from "../../util/data/craft";
 
 class C extends Command {
   names = ["craft", "create"];
