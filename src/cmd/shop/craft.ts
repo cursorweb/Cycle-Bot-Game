@@ -11,7 +11,12 @@ class C extends Command {
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[]) {
-    msg.channel.send("soon! Working on adding craft data.");
+    if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
+    if (args.length == 0) {
+      
+    } else {
+
+    }
   }
 }
 

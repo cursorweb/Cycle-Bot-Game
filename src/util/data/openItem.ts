@@ -2,12 +2,12 @@
 import * as Discord from "discord.js";
 import { Database, random, brackets, commanum, hidden } from "../../global";
 import { BigNumber as Big } from "bignumber.js";
-import { items } from "./item";
+import { items, ItemEnum } from "./item";
 
 // this way, we can utilize the inefficiency of an array search.
 // we will check if this object has an implementation, and if not, there won't be one!
 export const openItem: { [i: number]: (user: Database.CycleUser, amt: number) => Discord.EmbedFieldData } = {
-  1: (user, amt) => {
+  [ItemEnum.CheapPhone]: (user, amt) => {
     let cycles = new Big(user.cycles);
     let cpp = new Big(user.cpp);
 
@@ -23,7 +23,7 @@ It's cheap, so it dies quickly!
 + ${brackets(commanum(num.toString()))} cycles!`
     };
   },
-  2: (user, amt) => {
+  [ItemEnum.ExtraFinger]: (user, amt) => {
     let text = new Big(user.text);
     let tpc = new Big(user.tpc);
 
@@ -39,7 +39,7 @@ It's not your finger, and breaks!
 + ${brackets(commanum(num.toString()))} text!`
     };
   },
-  3: (user, amt) => {
+  [ItemEnum.Coffee]: (user, amt) => {
     let text = new Big(user.text);
     let tpc = new Big(user.tpc);
 
@@ -55,7 +55,7 @@ You feel a surge of energy!
 + ${brackets(commanum(num.toString()))} text!`
     };
   },
-  4: (user, amt) => {
+  [ItemEnum.ChestChest]: (user, amt) => {
     let itemsGot: { [i: string]: number } = {};
 
     for (let j = 0; j < 5 * amt; j++) {
@@ -75,7 +75,7 @@ You got...
 ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
     };
   },
-  5: (user, amt) => {
+  [ItemEnum.DailyChest]: (user, amt) => {
     let itemsGot: { [i: string]: number } = {};
     let cycles = new Big(user.cycles);
     let cpp = new Big(user.cpp);

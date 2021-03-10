@@ -1,3 +1,5 @@
+import { ItemEnum } from "./item";
+
 export interface CraftItem {
   /**
    * The message when crafted
@@ -8,7 +10,7 @@ export interface CraftItem {
 };
 
 export let items: CraftItem[] = [{
-  message: "You smash all the ego-coins together!",
-  creates: 6,
-  requires: [{ amt: 2, type: 1 }, { amt: 5, type: 0 }]
+  message: "You smash all the ego-coins together with the cheap iPhone!",
+  creates: ItemEnum.ApplePhone,
+  requires: [{ amt: 2, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.EgoCoin }]
 }];

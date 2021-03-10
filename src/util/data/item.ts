@@ -9,6 +9,11 @@ export interface BItem {
   // non-openable things (like ego-coins) can't be opened, and will lack implementation.
 }
 
+// Name the items!
+export enum ItemEnum {
+  EgoCoin, CheapPhone, ExtraFinger, Coffee, ChestChest, DailyChest, ApplePhone, ChestChestChest
+}
+
 export const items: BItem[] = [{
   name: "Ego-Coin",
   emoji: "", // todo
