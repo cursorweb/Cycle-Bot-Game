@@ -11,7 +11,15 @@ export interface BItem {
 
 // Name the items!
 export enum ItemEnum {
-  EgoCoin, CheapPhone, ExtraFinger, Coffee, ChestChest, DailyChest, ApplePhone, ChestChestChest
+  EgoCoin,
+  CheapPhone,
+  ExtraFinger,
+  Coffee,
+  ChestChest,
+  DailyChest,
+  ApplePhone,
+  ChestChestChest,
+  Glue
 }
 
 export const items: BItem[] = [{
@@ -52,6 +60,11 @@ export const items: BItem[] = [{
 }, {
   name: "Chest Chest Chest",
   emoji: "",
-  description: "A better chest!",
+  description: "Chests contain better loot!",
   dropChance: 2
+}, {
+  name: "Glue",
+  emoji: "",
+  description: "Glue can be used as an adhesive.",
+  dropChance: 5
 }];

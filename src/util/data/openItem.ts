@@ -102,5 +102,26 @@ You got...
 ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}
 You also got ${brackets(commanum(cyclesGot.toString()))} cycles!`
     };
+  },
+  [ItemEnum.ChestChestChest]: (user, amt) => {
+    let itemsGot: { [i: string]: number } = {};
+
+    for (let j = 0; j < 20 * amt; j++) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (Math.random() * 150 < item.dropChance) {
+          itemsGot[i] = (itemsGot[i] || 0) + 1;
+          user.inv[i] = new Big(user.inv[i] || 0).plus(1).toString();
+        }
+      }
+    }
+
+    let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
+
+    return {
+      name: "Mystery Chest Chest!", value: `You open up the chest chest.
+You got...
+${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
+    };
   }
 };
