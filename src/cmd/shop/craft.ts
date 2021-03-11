@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets } from "../../global";
+import { Command, Colors, Bot, Database, brackets, parseNumber } from "../../global";
 import { items } from "../../util/data/item";
 import { craftItems } from "../../util/data/craft";
 
@@ -13,7 +13,8 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[]) {
     if (args.length > 3) return Bot.argserror(msg, args.length, [0, 1, 2]);
-    if (args.length == 0) {
+    let num = parseNumber(args[0] || "0");
+    if (args.length == 0 || num) {
       let fields = craftItems.map(p => {
         let uses = p.requires.map(n => `${items[n.type].name} x${brackets(n.amt.toString())}`);
         return {
@@ -40,9 +41,10 @@ class C extends Command {
           }],
           footer: { text: "Tip: Use &craft <item> to craft <item>!" }
         }
-      });
+      }, num || 1);
     } else {
-
+      let amt = parseNumber(args[1] || "1");
+      msg.channel.send(`You want to craft ${args[0]} x${amt}`);
     }
   }
 }
