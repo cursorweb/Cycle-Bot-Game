@@ -17,4 +17,12 @@ export let craftItems: CraftItem[] = [{
   message: "You glue 5 chest chests together...",
   creates: ItemEnum.ChestChestChest,
   requires: [{ amt: 5, type: ItemEnum.ChestChest }, { amt: 5, type: ItemEnum.Glue }]
+}, {
+  message: "You glue glue together... what?",
+  creates: ItemEnum.SuperGlue,
+  requires: [{ amt: 4, type: ItemEnum.Glue }]
+}, {
+  message: "You glue the crafting materials together...",
+  creates: ItemEnum.CraftingMat,
+  requires: [{ amt: 6, type: ItemEnum.CraftingMat }, { amt: 4, type: ItemEnum.SuperGlue }]
 }];

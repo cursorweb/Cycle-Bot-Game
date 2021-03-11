@@ -38,7 +38,7 @@ class C extends Command {
             value: i.map(n => n.uses).join("\n\n"),
             inline: true
           }],
-          footer: { text: "Tip: type in the item name to craft it!" }
+          footer: { text: "Tip: Use &craft <item> to craft <item>!" }
         }
       });
     } else {

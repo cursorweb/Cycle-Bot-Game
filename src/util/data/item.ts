@@ -19,7 +19,9 @@ export enum ItemEnum {
   DailyChest,
   ApplePhone,
   ChestChestChest,
-  Glue
+  Glue,
+  SuperGlue,
+  CraftingMat
 }
 
 export const items: BItem[] = [{
@@ -66,5 +68,15 @@ export const items: BItem[] = [{
   name: "Glue",
   emoji: "",
   description: "Glue can be used as an adhesive.",
-  dropChance: 5
+  dropChance: 10
+}, {
+  name: "Super Glue",
+  emoji: "",
+  description: "Glue... glued together!",
+  dropChance: 1
+}, {
+  name: "Crafting Materials",
+  emoji: "",
+  description: "One of the key things to make items.",
+  dropChance: 15
 }];

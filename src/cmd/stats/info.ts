@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, brackets } from "../../global";
 import { items } from "../../util/data/item";
-import { openItem } from "../../util/data/openItem";
+import { openItem } from "../../util/data/open-item";
 
 class C extends Command {
   names = ["info", "item"];
