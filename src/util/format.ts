@@ -45,7 +45,15 @@ namespace Bot {
       embed: {
         color: Colors.ERROR,
         title: "Invalid Arguments!",
-        description: `Invalid arguments!\nExpected \`${expect.join(", ")}\` arguments but got \`${got}\` arguments.`
+        description: `Invalid arguments!\nExpected \`${expect.join(", ")}\` arguments but got \`${got}\` arguments.`,
+        fields: [{
+          name: "Tip",
+          value: `If you have an argument with spaces, use quotes!
+${codestr("&use 'cheap iphone'", "js")}`
+        }, {
+          name: "Tip",
+          value: "Use `&help <command>` if you don't know how to use the command!"
+        }]
       }
     });
   }
@@ -55,7 +63,15 @@ namespace Bot {
       embed: {
         color: Colors.ERROR,
         title,
-        description: error
+        description: error,
+        fields: [{
+          name: "Tip",
+          value: `If you have an argument with spaces, use quotes!
+${codestr("&use 'cheap iphone'", "js")}`
+        }, {
+          name: "Tip",
+          value: "Use `&help <command>` if you don't know how to use the command!"
+        }]
       }
     });
   }
