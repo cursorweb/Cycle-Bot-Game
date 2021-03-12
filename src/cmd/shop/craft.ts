@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, parseNumber } from "../../global";
+import { Command, Colors, Bot, Database, brackets, parseNumber, commanum } from "../../global";
 import { items } from "../../util/data/item";
 import { craftItems } from "../../util/data/craft";
 
@@ -46,26 +46,41 @@ class C extends Command {
       let itmInput = args[0];
       let amt = parseNumber(args[1] || "1");
       if (isNaN(amt)) return Bot.usererr(msg, "The amount must be a number!");
-      
+
       // find item
-      let item = craftItems.find(o => items[o.creates].name == itmInput);
+      let item = craftItems.find(o => items[o.creates].name.toLowerCase() == itmInput.toLowerCase());
       if (!item) item = craftItems.find(o => items[o.creates].name.toLowerCase().indexOf(itmInput.toLowerCase()) > -1);
       if (!item) return Bot.usererr(msg, `Item ${brackets(itmInput)} not found.
       Check your spelling!`, "Item not found!");
 
       // alias
       let itemMeta = items[item.creates];
-      let mesg = item.message;
 
       // check availability
       const user = Database.getUser(msg.author.id);
       for (const itm of item.requires) {
-        let num = new Big(itm.amt);
-        let userAmt = new Big(user.inv[itm.type]);
-        if (userAmt.lt(num)) return Bot.errormsg(msg, "You don't have enough!");
+        let num = new Big(itm.amt).times(amt);
+        let userAmt = new Big(user.inv[itm.type] || 0);
+        if (userAmt.lt(num)) return Bot.errormsg(msg, `You don't have enough of ${brackets(items[itm.type].name)}!
+**You still need** ${brackets(commanum(num.minus(userAmt).toString()))} **more!**`);
+        user.inv[itm.type] = userAmt.minus(num).toString();
       }
 
-      // msg.channel.send(`You want to craft ${itemMeta.name} x${amt}`);
+      let outAmt = new Big(user.inv[item.creates] || 0);
+      outAmt = outAmt.plus(amt);
+      user.inv[item.creates] = outAmt.toString();
+
+      msg.channel.send({
+        embed: {
+          color: Colors.SUCCESS,
+          title: "Success!",
+          description: item.message,
+          fields: [{
+            name: "Result",
+            value: `+ ${brackets(commanum(amt.toString()))} ${itemMeta.name}!`
+          }]
+        }
+      });
     }
   }
 }
