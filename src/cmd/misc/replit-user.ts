@@ -35,7 +35,7 @@ class C extends Command {
         languages: { displayName: string, tagline: string }[]
       } = data.data.userByUsername;
 
-      if (user == null) Bot.errormsg(msg, `The user ${brackets(args[0])} could not be found.\nCheck your spelling!`, "User not found!")
+      if (user == null) Bot.usererr(msg, `The user ${brackets(args[0])} could not be found.\nCheck your spelling!`, "User not found!")
       else msg.channel.send({
         embed: {
           color: Colors.SUCCESS,

@@ -16,11 +16,11 @@ class C extends Command {
     let id: string;
 
     if (parsed.type == "id") {
-      if (!Database.getUser(parsed.value)) return Bot.errormsg(msg, `User ${brackets("<@" + parsed.value + ">")} not found! Check your spelling.`, "Not found!!");
+      if (!Database.getUser(parsed.value)) return Bot.usererr(msg, `User ${brackets("<@" + parsed.value + ">")} not found! Check your spelling.`, "Not found!!");
       id = parsed.value;
     } else if (parsed.type == "name") {
       let ids = Database.findUser(u => u.name.toLowerCase().includes(parsed.value.toLowerCase()));
-      if (ids.length == 0) return Bot.errormsg(msg, `User ${brackets(parsed.value)} not found! Check your spelling.`, "Not found!!");
+      if (ids.length == 0) return Bot.usererr(msg, `User ${brackets(parsed.value)} not found! Check your spelling.`, "Not found!!");
       if (ids.length > 1) msg.channel.send({
         embed: {
           color: Colors.WARNING,

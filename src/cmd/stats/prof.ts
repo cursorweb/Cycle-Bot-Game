@@ -20,10 +20,10 @@ class C extends Command {
 
       if (userArg.type == "id") {
         user = Database.getUser(userArg.value);
-        if (!user) return Bot.errormsg(msg, `User ${brackets("<@" + userArg.value + ">")} not found.`, "User not found!");
+        if (!user) return Bot.usererr(msg, `User ${brackets("<@" + userArg.value + ">")} not found.`, "User not found!");
       } else {
         let user_arr = Database.findUser(u => u.name.toLowerCase().indexOf(userArg.value.toLowerCase()) > -1);
-        if (user_arr.length == 0) return Bot.errormsg(msg, `User ${brackets(userArg.value)} not found. Check your spelling!`, "User not found!");
+        if (user_arr.length == 0) return Bot.usererr(msg, `User ${brackets(userArg.value)} not found. Check your spelling!`, "User not found!");
         else if (user_arr.length > 1) return Bot.errormsg(msg, `Found ${brackets(user_arr.length.toString())} users.
 ${user_arr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**`).join("\n")}`, "Multiple users found!");
         else user = Database.getUser(user_arr[0]);

@@ -13,7 +13,7 @@ class C extends Command {
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [1]);
     let num = parseNumber(args[0]);
-    if (args[0] && isNaN(num)) return Bot.errormsg(msg, "The page must be a number!");
+    if (args[0] && isNaN(num)) return Bot.usererr(msg, "The page must be a number!");
 
     let user = Database.getUser(msg.author.id);
     let page = constrain(num || 1, 1, Infinity);

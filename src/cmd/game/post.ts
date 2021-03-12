@@ -18,8 +18,8 @@ class C extends Command {
       let text = new Big(user.text), cpp = new Big(user.cpp), cycles = new Big(user.cycles);
       let amt = new Big(parseNumber(args[0]) || user.text);
 
-      if (amt.lte(0)) return Bot.errormsg(msg, `You cannot post less than ${brackets('0')} lines of code!`);
-      if (text.lt(amt)) return Bot.errormsg(msg, `You don't have enough code!
+      if (amt.lte(0)) return Bot.usererr(msg, `You cannot post less than ${brackets('0')} lines of code!`);
+      if (text.lt(amt)) return Bot.usererr(msg, `You don't have enough code!
 You need ${brackets(amt.minus(text).toString())} more code.`);
 
       // refer to desmos.

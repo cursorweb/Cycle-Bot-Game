@@ -45,17 +45,27 @@ class C extends Command {
     } else {
       let itmInput = args[0];
       let amt = parseNumber(args[1] || "1");
-      if (isNaN(amt)) return Bot.errormsg(msg, "The amount must be a number!");
+      if (isNaN(amt)) return Bot.usererr(msg, "The amount must be a number!");
+      
+      // find item
       let item = craftItems.find(o => items[o.creates].name == itmInput);
       if (!item) item = craftItems.find(o => items[o.creates].name.toLowerCase().indexOf(itmInput.toLowerCase()) > -1);
-      if (!item) return Bot.errormsg(msg, `Item ${brackets(itmInput)} not found.
+      if (!item) return Bot.usererr(msg, `Item ${brackets(itmInput)} not found.
       Check your spelling!`, "Item not found!");
 
+      // alias
       let itemMeta = items[item.creates];
       let mesg = item.message;
 
+      // check availability
       const user = Database.getUser(msg.author.id);
-      msg.channel.send(`You want to craft ${itemMeta.name} x${amt}`);
+      for (const itm of item.requires) {
+        let num = new Big(itm.amt);
+        let userAmt = new Big(user.inv[itm.type]);
+        if (userAmt.lt(num)) return Bot.errormsg(msg, "You don't have enough!");
+      }
+
+      // msg.channel.send(`You want to craft ${itemMeta.name} x${amt}`);
     }
   }
 }

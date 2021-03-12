@@ -64,6 +64,16 @@ ${codestr("&use 'cheap iphone'", "js")}`
         color: Colors.ERROR,
         title,
         description: error,
+      }
+    });
+  }
+
+  export function usererr(msg: Discord.Message, error: string, title = "Error!!") {
+    msg.channel.send({
+      embed: {
+        color: Colors.ERROR,
+        title,
+        description: error,
         fields: [{
           name: "Tip",
           value: `If you have an argument with spaces, use quotes!

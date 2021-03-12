@@ -55,7 +55,7 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
       if (result) cmd = result;
     }
 
-    if (!cmd!) return Bot.errormsg(msg, `Help category for ${brackets(args[0])} was not found!`, "Error");
+    if (!cmd!) return Bot.usererr(msg, `Help category for ${brackets(args[0])} was not found!`, "Error");
     // &help meta
     let fields: Discord.EmbedFieldData = {
       name: noun(cmd.names[0]),

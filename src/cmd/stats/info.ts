@@ -16,7 +16,7 @@ class C extends Command {
     let name = args[0];
     let itemIndex = items.findIndex(n => n.name.toLowerCase() == name.toLowerCase());
     if (itemIndex == -1) itemIndex = items.findIndex(n => n.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
-    if (itemIndex == -1) return Bot.errormsg(msg, `The item ${brackets(name)} was not found!
+    if (itemIndex == -1) return Bot.usererr(msg, `The item ${brackets(name)} was not found!
 Check your spelling!`, "Item not found!");
 
     let item = items[itemIndex];

@@ -20,8 +20,8 @@ ${hidden(Math.floor(Math.random() * 6 + 1).toString())}`
     } else if (args.length == 2) {
       let min = parseNumber(args[0]);
       let max = parseNumber(args[1]);
-      if (isNaN(min) || isNaN(max)) Bot.errormsg(msg, "Please pass in a number for both arguments!");
-      else if (min >= max) Bot.errormsg(msg, "The maximum number has to be greater than (and not equal to) the minimum number!");
+      if (isNaN(min) || isNaN(max)) Bot.usererr(msg, "Please pass in a number for both arguments!");
+      else if (min >= max) Bot.usererr(msg, "The maximum number has to be greater than (and not equal to) the minimum number!");
       else msg.channel.send({
         embed: {
           color: Colors.SUCCESS,

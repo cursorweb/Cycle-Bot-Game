@@ -13,13 +13,13 @@ class C extends Command {
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
     let num = parseNumber(args[0]);
-    if (isNaN(num)) return Bot.errormsg(msg, "Amount must be a number!");
+    if (isNaN(num)) return Bot.usererr(msg, "Amount must be a number!");
     let amt = new Big(constrain(num, 1, Infinity));
 
     const user = Database.getUser(msg.author.id);
     let cycles = new Big(user.cycles);
 
-    if (amt.gt(cycles)) return Bot.errormsg(msg, "You can't bet more than your worth!");
+    if (amt.gt(cycles)) return Bot.usererr(msg, "You can't bet more than your worth!");
 
     msg.channel.send({
       embed: {

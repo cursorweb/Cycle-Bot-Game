@@ -95,9 +95,6 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
           break;
         }
       }
-
-      if (!found) g.Bot.errormsg(msg, `Command ${g.brackets(cmd.command)} not found!\n
-> Use \`&help\` if you don't know how to use this bot!`, "Unknown Command!");
     }
   } catch (err) {
     console.log(err);

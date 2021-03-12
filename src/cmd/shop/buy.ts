@@ -79,7 +79,7 @@ class C extends Command {
     if (!Object.keys(handleBuy).includes(args[0])) return Bot.errormsg(msg, `The valid shop names are:
     ${codestr(Object.keys(handleBuy).join(", "), "yaml")}`, "Invalid Shop Name!");
     let num = parseNumber(args[2]);
-    if (args[2] && isNaN(num)) return Bot.errormsg(msg, "The amount must be a number!");
+    if (args[2] && isNaN(num)) return Bot.usererr(msg, "The amount must be a number!");
 
     let itm = args[1];
     let amt = constrain(num || 1, 1, 50);
@@ -97,7 +97,7 @@ class C extends Command {
 
     let item = itemCat[itmIndex];
 
-    if (itmIndex == -1) return Bot.errormsg(msg, `Item ${brackets(itm)} not found.
+    if (itmIndex == -1) return Bot.usererr(msg, `Item ${brackets(itm)} not found.
 Check your spelling!`, "Item not found!");
 
     let result = handleBuy[args[0]](user, item, itmIndex, amt);
