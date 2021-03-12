@@ -9,8 +9,6 @@ class C extends Command {
   help = "Create an item... from other items!";
   examples = ["create 'chest chest chest' 5"];
 
-  isAdmin = true;
-
   exec(msg: Discord.Message, args: string[]) {
     if (args.length > 3) return Bot.argserror(msg, args.length, [0, 1, 2]);
     let num = parseNumber(args[0] || "0");
