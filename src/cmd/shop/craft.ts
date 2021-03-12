@@ -43,8 +43,19 @@ class C extends Command {
         }
       }, num || 1);
     } else {
+      let itmInput = args[0];
       let amt = parseNumber(args[1] || "1");
-      msg.channel.send(`You want to craft ${args[0]} x${amt}`);
+      if (isNaN(amt)) return Bot.errormsg(msg, "The amount must be a number!");
+      let item = craftItems.find(o => items[o.creates].name == itmInput);
+      if (!item) item = craftItems.find(o => items[o.creates].name.toLowerCase().indexOf(itmInput.toLowerCase()) > -1);
+      if (!item) return Bot.errormsg(msg, `Item ${brackets(itmInput)} not found.
+      Check your spelling!`, "Item not found!");
+
+      let itemMeta = items[item.creates];
+      let mesg = item.message;
+
+      const user = Database.getUser(msg.author.id);
+      msg.channel.send(`You want to craft ${itemMeta.name} x${amt}`);
     }
   }
 }
