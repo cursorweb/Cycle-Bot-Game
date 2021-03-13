@@ -5,7 +5,7 @@ import { Command, Colors, Database, Bot, formatDate, msBetween, brackets, comman
 let rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
   user => {
     let amt = new Big(user.inv[5] || 0);
-    amt = amt.plus(1);
+    amt = amt.plus(2);
     user.inv[5] = amt.toString();
 
     return {
