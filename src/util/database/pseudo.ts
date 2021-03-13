@@ -24,6 +24,7 @@ export function getUser(key: string): CycleUser {
 }
 
 export async function save() {
+  if (Object.keys(pdb).length == 0) return; // prevent corruption
   return await db.collection("cycle-users").doc("users").set(pdb);
 }
 

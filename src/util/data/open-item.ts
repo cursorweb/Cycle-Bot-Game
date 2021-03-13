@@ -1,6 +1,6 @@
 // refer to ./item.ts for metadata.
 import * as Discord from "discord.js";
-import { Database, random, brackets, commanum, hidden } from "../../global";
+import { Database, random, brackets, commanum, hidden, plural } from "../../global";
 import { BigNumber as Big } from "bignumber.js";
 import { items, ItemEnum } from "./item";
 
@@ -79,7 +79,7 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
     let itemsGot: { [i: string]: number } = {};
     let cycles = new Big(user.cycles);
     let cpp = new Big(user.cpp);
-    let cyclesGot = cpp.times(2);
+    let cyclesGot = cpp.times(2).times(amt);
     cycles = cycles.plus(cyclesGot);
 
     user.cycles = cycles.toString();
@@ -116,12 +116,15 @@ You also got ${brackets(commanum(cyclesGot.toString()))} cycles!`
       }
     }
 
+    user.inv[ItemEnum.ChestChest] = new Big(user.inv[ItemEnum.ChestChest] || 0).plus(amt).toString();
+
     let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
 
     return {
       name: "Mystery Chest Chest!", value: `You open up the chest chest.
 You got...
-${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
+${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}
+Also you got ${brackets(commanum(amt.toString()))} **chest chest${plural(amt)}**!`
     };
   }
 };

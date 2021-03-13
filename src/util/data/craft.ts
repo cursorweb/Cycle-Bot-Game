@@ -14,7 +14,7 @@ export let craftItems: CraftItem[] = [{
   creates: ItemEnum.ApplePhone,
   requires: [{ amt: 2, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.EgoCoin }]
 }, {
-  message: "You glue 5 chest chests together...",
+  message: "You glue the chest chests together...",
   creates: ItemEnum.ChestChestChest,
   requires: [{ amt: 5, type: ItemEnum.ChestChest }, { amt: 5, type: ItemEnum.Glue }]
 }, {

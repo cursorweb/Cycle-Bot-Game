@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command, Colors } from "../../global";
 
 class C extends Command {
-  names = ["version", "announcements", "info"];
+  names = ["version", "announcements"];
   help = "Get release notes of the current version!";
   isGame = 'n' as 'n';
 

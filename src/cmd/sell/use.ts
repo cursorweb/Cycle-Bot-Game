@@ -23,12 +23,12 @@ class C extends Command {
     if (itmIndex == -1) itmIndex = items.findIndex(i => i.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
 
     let item = items[itmIndex];
-    let userAmt = new Big(user.inv[itmIndex]);
+    let userAmt = new Big(user.inv[itmIndex] || 0);
     let open = openItem[itmIndex];
 
     if (itmIndex == -1) return Bot.usererr(msg, `Item ${brackets(name)} not found. Check your spelling!`, "Item not found!");
-    if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.usererr(msg, `You don't have enough of this item! You still need ${commanum(userAmt.negated().plus(amount).toString())}`);
-    if (!open) return Bot.usererr(msg, `This kind of item can't be used!
+    if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${commanum(userAmt.negated().plus(amount).toString())}`);
+    if (!open) return Bot.errormsg(msg, `This kind of item can't be used!
 It might be used in a shop, however.`, "Item can't be used!");
 
     user.inv[itmIndex] = userAmt.minus(amount).toString();

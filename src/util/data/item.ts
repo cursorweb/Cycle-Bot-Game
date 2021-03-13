@@ -63,7 +63,7 @@ export const items: BItem[] = [{
   name: "Chest Chest Chest",
   emoji: "",
   description: "Chests contain better loot!",
-  dropChance: 2
+  dropChance: 0.01
 }, {
   name: "Glue",
   emoji: "",
@@ -73,7 +73,7 @@ export const items: BItem[] = [{
   name: "Super Glue",
   emoji: "",
   description: "Glue... glued together!",
-  dropChance: 1
+  dropChance: 2
 }, {
   name: "Crafting Materials",
   emoji: "",
