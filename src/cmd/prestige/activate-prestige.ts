@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, Database } from "../../global";
+import { items, SItem } from "../../util/data/shop";
 
 class C extends Command {
   names = ["prestige", "use-prestige", "prestige-reset"];
