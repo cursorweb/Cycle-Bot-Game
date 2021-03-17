@@ -7,8 +7,6 @@ class C extends Command {
   names = ["prestige", "use-prestige", "prestige-reset"];
   help = "Reset all your data and get a boost!";
 
-  isAdmin = true;
-
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     msg.channel.send("soon");
   }
