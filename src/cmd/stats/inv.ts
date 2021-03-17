@@ -17,7 +17,7 @@ class C extends Command {
     let user: Database.CycleUser;
     if (parsedId.type == "id") {
       user = Database.getUser(parsedId.value);
-      return Bot.errormsg(msg, `User ${brackets(parsedId.value)} not found. Check your spelling!`, "User not found!");
+      if (!user) return Bot.errormsg(msg, `User ${brackets("<@" + parsedId.value + ">")} not found. Check your spelling!`, "User not found!");
     } else {
       let user_arr = Database.findUser(u => u.name.toLowerCase().indexOf(parsedId.value.toLowerCase()) > -1);
       if (user_arr.length == 0) return Bot.usererr(msg, `User ${brackets(parsedId.value)} not found. Check your spelling!`, "User not found!");
