@@ -103,6 +103,28 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}
 You also got ${brackets(commanum(cyclesGot.toString()))} cycles!`
     };
   },
+  [ItemEnum.ApplePhone]: (user, amt) => {
+    let cycles = new Big(user.cycles);
+    let text = new Big(user.text);
+    let cpp = new Big(user.cpp);
+    let tpc = new Big(user.tpc);
+
+    let num = cpp.plus(Math.round(random(1, 5))).times(amt);
+    let num2 = tpc.plus(Math.round(random(1, 5))).times(amt);
+    let newCycles = cycles.plus(num);
+    let newText = text.plus(num2);
+
+    user.cycles = newCycles.toString();
+    user.text = newText.toString();
+
+    return {
+      name: "Text text text!",
+      value: `You use your *expensive* phone.
+It's apple, so it dies quickly!
++ ${brackets(commanum(num.toString()))} cycles!
++ ${brackets(commanum(num2.toString()))} text!`
+    };
+  },
   [ItemEnum.ChestChestChest]: (user, amt) => {
     let itemsGot: { [i: string]: number } = {};
 
