@@ -12,7 +12,7 @@ export interface CraftItem {
 export const craftItems: CraftItem[] = [{
   message: "You smash all the ego-coins together with the cheap iPhone!",
   creates: ItemEnum.ApplePhone,
-  requires: [{ amt: 2, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.EgoCoin }]
+  requires: [{ amt: 1, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.EgoCoin }]
 }, {
   message: "You glue the chest chests together...",
   creates: ItemEnum.ChestChestChest,
@@ -20,9 +20,13 @@ export const craftItems: CraftItem[] = [{
 }, {
   message: "You glue glue together... what?",
   creates: ItemEnum.SuperGlue,
-  requires: [{ amt: 4, type: ItemEnum.Glue }]
+  requires: [{ amt: 2, type: ItemEnum.Glue }]
 }, {
   message: "You glue the crafting materials together...",
   creates: ItemEnum.ChestChest,
-  requires: [{ amt: 6, type: ItemEnum.CraftingMat }, { amt: 4, type: ItemEnum.SuperGlue }]
+  requires: [{ amt: 3, type: ItemEnum.CraftingMat }, { amt: 1, type: ItemEnum.SuperGlue }]
+}, {
+  message: "You ruin a chest chest :(",
+  creates: ItemEnum.CraftingMat,
+  requires: [{ amt: 1, type: ItemEnum.Glue }, { amt: 1, type: ItemEnum.ChestChest }]
 }];
