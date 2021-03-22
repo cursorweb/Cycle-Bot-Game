@@ -87,6 +87,16 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "You now don't have to spend time combing your hair all day!",
     cost: 54321968949,
     tpm: 300
+  }, {
+    name: "Github account",
+    description: "Don't lose any of your code!",
+    cost: "placeholder pls fill in",
+    tpm: 350
+  }, {
+    name: "Learn a new language",
+    description: "Now you can share even more code!",
+    cost: "placeholder pls fill in",
+    tpm: 400
   }],
   
   cpp: [{
