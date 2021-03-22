@@ -16,3 +16,6 @@ jobs:
 
       - name: Build the project
         run: npm run prod
+      
+      - name: Eslint check
+        run: npm run eslint

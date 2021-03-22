@@ -7,7 +7,8 @@
     "start": "node .",
     "dev": "tsc -w",
     "prod": "tsc",
-    "fix": "eslint . --fix"
+    "eslint": "eslint .",
+    "eslint-fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
