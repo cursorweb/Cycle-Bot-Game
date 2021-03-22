@@ -49,7 +49,6 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
     });
   } else {
     // &help invalid
-    // todo
     let cmd: Command | null = null;
 
     for (const k in output) {
@@ -57,7 +56,7 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
       if (result) cmd = result;
     }
 
-    if (!cmd) return Bot.usererr(msg, `Help category for ${brackets(args[0])} was not found!`, "Error");
+    if (!cmd) return Bot.usererr(msg, `Help for ${brackets(args[0])} was not found!`, "Command not found!");
     // &help meta
     const fields: Discord.EmbedFieldData = {
       name: noun(cmd.names[0]),
@@ -66,9 +65,9 @@ ${cmd.examples.length == 0
     ? cmd.names.map(o => codestr(`&${o}`)).join("")
     : cmd.examples.map(o => codestr(`&${o}`)).join("")}\
 ${cmd.names.length > 1
-    ? `**Aliases**: ${cmd.names.slice(1).join(",")}` : ""}
-${cmd.isAdmin ? brackets("ADMIN-ONLY") : ""}`,
-      inline: true
+    ? `**Aliases**: ${cmd.names.slice(1).join(",")}\n` : ""}\
+${cmd.isAdmin ? `${brackets("ADMIN-ONLY")}\n` : ""}\
+${cmd.cooldown ? `**Cooldown**: **${cmd.cooldown}**ms` : ""}`
     };
 
     msg.channel.send({
