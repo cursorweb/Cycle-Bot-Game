@@ -20,72 +20,72 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   }, {
     name: "Typing.com",
     description: "Time to learn to type!",
-    cost: 15,
+    cost: 12,
     tpc: 5
   }, {
     name: "NotePad",
     description: "A featureless editor",
-    cost: 25,
+    cost: 16,
     tpc: 10
   }, {
     name: "Pastebin",
     description: "Nowhere else to host",
-    cost: 40,
+    cost: 21,
     tpc: 15
   }, {
     name: "Hastebin",
     description: "It's pastebin but with an H!",
-    cost: 135,
+    cost: 90,
     tpc: 45
   }, {
     name: "NotePad++",
     description: "It's evolution! Still featureless...",
-    cost: 223,
+    cost: 115,
     tpc: 50
   }, {
     name: "SourceB.in",
     description: "Another bin?!?",
-    cost: 375,
+    cost: 146,
     tpc: 55
   }, {
     name: "Whitespace",
     description: "[ ] [\t]",
-    cost: 1837,
+    cost: 304,
     tpc: 70
   }, {
     name: "Indentation Error",
     description: "Did you use four spaces?!?",
-    cost: 5353,
+    cost: 495,
     tpc: 80
   }, {
     name: "Windows Powershell",
     description: "At least `clear` works",
-    cost: 45697,
+    cost: 1315,
     tpc: 100
   }, {
     name: "NullPointerException",
     description: "Segmentation fault (core dumped)",
-    cost: 390634,
+    cost: 3489,
     tpc: 120
   }, {
     name: "Stack Overflow",
     description: "To understand recursion, you must first understand recursion.",
-    cost: 9766e3,
+    cost: 15079,
     tpc: 150
   }, {
     name: "Windows Powershell+",
     description: "The better version of Windows Powershell.",
-    cost: 500000,
+    cost: 51065,
     tpc: 175
   }, {
     name: "Stack Overflow II",
     description: "That place where you ask questions",
-    cost: 2087e6,
+    cost: 172925,
     tpc: 200
   }, {
     name: "Hoisting",
     description: "Use it before you define it!",
-    cost: "446169698830",
+    cost: "1983009",
     tpc: 250
   }, {
     name: "Personal Care Robot",
@@ -94,9 +94,19 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     tpc: 300
   }, {
     name: "Gamer Mouse",
-    description: "The ultiminte mouse.",
-    cost: "435300000000000",
+    description: "The ultimate mouse.",
+    cost: "2.274e7",
     tpc: 400
+  }, {
+    name: "Github account",
+    description: "Don't lose any of your code!",
+    cost: "3.429e10",
+    tpc: 450
+  }, {
+    name: "Learn a new language",
+    description: "Now you can share even more code!",
+    cost: "3.9323e11",
+    tpc: 500
   }],
 
   cpp: [{
@@ -107,23 +117,33 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   }, {
     name: "Meme",
     description: "Haha funnies",
-    cost: 40,
+    cost: 14,
     cpp: 5
   }, {
     name: "Friends",
     description: "bff",
-    cost: 1100,
+    cost: 19,
     cpp: 10
   }, {
     name: "Subscribers",
     description: "A real subscriber!",
-    cost: 35769,
+    cost: 27,
     cpp: 15
   }, {
     name: "Paparazzi",
     description: "Get in those shots!",
-    cost: 71943,
-    cpp: 16
+    cost: 38,
+    cpp: 20
+  }, {
+    name: "Internet Stranger",
+    description: "The best kind of fan!",
+    cost: 76,
+    cpp: 30
+  }, {
+    name: "Diehard Fan",
+    description: "Uhh... that's too much?!",
+    cost: 149,
+    cpp: 40
   }],
 
   idle: [{
