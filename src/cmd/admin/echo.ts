@@ -1,11 +1,11 @@
 import * as Discord from "discord.js";
-import { Command, Colors } from "../../global";
+import { Command } from "../../global";
 
 class C extends Command {
   names = ["echo", "mimic", "repeat"];
   help = "Repeats what you say";
   examples = ["echo hi"];
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
   isAdmin = true;
 

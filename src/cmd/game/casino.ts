@@ -8,16 +8,18 @@ class C extends Command {
   help = "Gamble some money!";
   examples = ["casino <cycles>"];
 
-  get cooldown() { return 60e3; }
+  get cooldown() {
+    return 60e3;
+  }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
-    let num = parseNumber(args[0]);
+    const num = parseNumber(args[0]);
     if (isNaN(num)) return Bot.usererr(msg, "Amount must be a number!");
-    let amt = new Big(constrain(num, 1, Infinity));
+    const amt = new Big(constrain(num, 1, Infinity));
 
     const user = Database.getUser(msg.author.id);
-    let cycles = new Big(user.cycles);
+    const cycles = new Big(user.cycles);
 
     if (amt.gt(cycles)) return Bot.usererr(msg, "You can't bet more than your worth!");
 
@@ -32,9 +34,11 @@ class C extends Command {
       await mesg.react("🟩"); // green
       await mesg.react("🟥"); // red
 
-      function filter(reaction: Discord.MessageReaction, user: Discord.User) { return ["🟦", "🟩", "🟥"].includes(reaction.emoji.name) && user.id == msg.author.id }
+      function filter(reaction: Discord.MessageReaction, user: Discord.User) {
+        return ["🟦", "🟩", "🟥"].includes(reaction.emoji.name) && user.id == msg.author.id;
+      }
 
-      mesg.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] }).then(() => {
+      mesg.awaitReactions(filter, { max: 1, time: 60000, errors: ["time"] }).then(() => {
         if (random(0, 3) < 1) {
           mesg.edit({
             embed: {
@@ -57,7 +61,7 @@ class C extends Command {
           user.cycles = cycles.minus(amt).toString();
         }
       });
-    })
+    });
   }
 }
 

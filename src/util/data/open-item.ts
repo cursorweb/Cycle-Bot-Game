@@ -8,11 +8,11 @@ import { items, ItemEnum } from "./item";
 // we will check if this object has an implementation, and if not, there won't be one!
 export const openItem: { [i: number]: (user: Database.CycleUser, amt: number) => Discord.EmbedFieldData } = {
   [ItemEnum.CheapPhone]: (user, amt) => {
-    let cycles = new Big(user.cycles);
-    let cpp = new Big(user.cpp);
+    const cycles = new Big(user.cycles);
+    const cpp = new Big(user.cpp);
 
-    let num = cpp.plus(Math.round(random(1, 5))).times(amt);
-    let newCycles = cycles.plus(num);
+    const num = cpp.plus(Math.round(random(1, 5))).times(amt);
+    const newCycles = cycles.plus(num);
 
     user.cycles = newCycles.toString();
 
@@ -24,11 +24,11 @@ It's cheap, so it dies quickly!
     };
   },
   [ItemEnum.ExtraFinger]: (user, amt) => {
-    let text = new Big(user.text);
-    let tpc = new Big(user.tpc);
+    const text = new Big(user.text);
+    const tpc = new Big(user.tpc);
 
-    let num = tpc.plus(Math.round(random(1, 5))).times(amt);
-    let newText = text.plus(num);
+    const num = tpc.plus(Math.round(random(1, 5))).times(amt);
+    const newText = text.plus(num);
 
     user.text = newText.toString();
 
@@ -40,11 +40,11 @@ It's not your finger, and breaks!
     };
   },
   [ItemEnum.Coffee]: (user, amt) => {
-    let text = new Big(user.text);
-    let tpc = new Big(user.tpc);
+    const text = new Big(user.text);
+    const tpc = new Big(user.tpc);
 
-    let num = tpc.times((10 + amt) / 10).dp(0);
-    let newText = text.plus(num);
+    const num = tpc.times((10 + amt) / 10).dp(0);
+    const newText = text.plus(num);
 
     user.text = newText.toString();
 
@@ -56,7 +56,7 @@ You feel a surge of energy!
     };
   },
   [ItemEnum.ChestChest]: (user, amt) => {
-    let itemsGot: { [i: string]: number } = {};
+    const itemsGot: { [i: string]: number } = {};
 
     for (let j = 0; j < 5 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
@@ -67,7 +67,7 @@ You feel a surge of energy!
         }
       }
     }
-    let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
+    const itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
 
     return {
       name: "Mystery Chest!", value: `You open up the chest.
@@ -76,10 +76,10 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
     };
   },
   [ItemEnum.DailyChest]: (user, amt) => {
-    let itemsGot: { [i: string]: number } = {};
+    const itemsGot: { [i: string]: number } = {};
     let cycles = new Big(user.cycles);
-    let cpp = new Big(user.cpp);
-    let cyclesGot = cpp.times(2).times(amt);
+    const cpp = new Big(user.cpp);
+    const cyclesGot = cpp.times(2).times(amt);
     cycles = cycles.plus(cyclesGot);
 
     user.cycles = cycles.toString();
@@ -94,7 +94,7 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
       }
     }
 
-    let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
+    const itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
 
     return {
       name: "Mystery Chest!", value: `You open up the chest.
@@ -104,15 +104,15 @@ You also got ${brackets(commanum(cyclesGot.toString()))} cycles!`
     };
   },
   [ItemEnum.ApplePhone]: (user, amt) => {
-    let cycles = new Big(user.cycles);
-    let text = new Big(user.text);
-    let cpp = new Big(user.cpp);
-    let tpc = new Big(user.tpc);
+    const cycles = new Big(user.cycles);
+    const text = new Big(user.text);
+    const cpp = new Big(user.cpp);
+    const tpc = new Big(user.tpc);
 
-    let num = cpp.plus(Math.round(random(1, 5))).times(amt);
-    let num2 = tpc.plus(Math.round(random(1, 5))).times(amt);
-    let newCycles = cycles.plus(num);
-    let newText = text.plus(num2);
+    const num = cpp.plus(Math.round(random(1, 5))).times(amt);
+    const num2 = tpc.plus(Math.round(random(1, 5))).times(amt);
+    const newCycles = cycles.plus(num);
+    const newText = text.plus(num2);
 
     user.cycles = newCycles.toString();
     user.text = newText.toString();
@@ -126,7 +126,7 @@ It's apple, so it dies quickly!
     };
   },
   [ItemEnum.ChestChestChest]: (user, amt) => {
-    let itemsGot: { [i: string]: number } = {};
+    const itemsGot: { [i: string]: number } = {};
 
     for (let j = 0; j < 20 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
@@ -140,7 +140,7 @@ It's apple, so it dies quickly!
 
     user.inv[ItemEnum.ChestChest] = new Big(user.inv[ItemEnum.ChestChest] || 0).plus(amt).toString();
 
-    let itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
+    const itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
 
     return {
       name: "Mystery Chest Chest!", value: `You open up the chest chest.

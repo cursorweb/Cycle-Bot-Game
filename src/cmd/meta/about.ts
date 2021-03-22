@@ -4,11 +4,11 @@ import { Command, Colors, brackets, plural, formatDate } from "../../global";
 class C extends Command {
   names = ["uptime", "about", "bot-about", "bot-servers", "bot-info"];
   help = "View some general statistics about the bot.";
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
   exec(msg: Discord.Message, _: string[], client: Discord.Client) {
-    let guildCount = client.guilds.cache.size;
-    let userCount = client.guilds.cache.reduce((p, c) => p + c.memberCount, 0);
+    const guildCount = client.guilds.cache.size;
+    const userCount = client.guilds.cache.reduce((p, c) => p + c.memberCount, 0);
 
     msg.channel.send({
       embed: {
@@ -17,7 +17,7 @@ class C extends Command {
         description: "View bot statistics!",
         fields: [{
           name: "Uptime",
-          value: formatDate(client.uptime!)
+          value: formatDate(client.uptime ?? 0)
         }, {
           name: "Servers",
           value: `In ${brackets(guildCount.toString())} server${plural(guildCount)}!`

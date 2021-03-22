@@ -29,7 +29,7 @@ export async function save() {
 }
 
 export async function update() {
-  let col = db.collection("cycle-users").doc("users");
+  const col = db.collection("cycle-users").doc("users");
   return await col.get().then(doc => {
     pdb = doc.data() as { [i: string]: CycleUser };
   });

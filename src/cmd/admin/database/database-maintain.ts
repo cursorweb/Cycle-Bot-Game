@@ -1,11 +1,11 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
+// import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database } from "../../../global";
 
 class C extends Command {
   names = ["admin-git-prune", "admin-maintain-db"];
   help = "Updates the database.";
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
   isAdmin = true;
 
@@ -13,7 +13,7 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
-        let temp: { [i: number]: string } = {};
+        const temp: { [i: number]: string } = {};
         for (const key in Database.pdb[id].inv) {
           temp[key] = Database.pdb[id].inv[key];
         }

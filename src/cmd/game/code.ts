@@ -6,19 +6,22 @@ import { code as drops } from "../../util/data/drops";
 class C extends Command {
   names = ["code", "c"];
   help = "Work on your project!";
-  isGame = 'y' as 'y';
+  isGame = "y" as const;
 
-  get cooldown() { return 5000; }
+  get cooldown() {
+    return 5000;
+  }
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
-    let user = Database.getUser(msg.author.id);
-    let tpc = new Big(user.tpc), text = new Big(user.text), xp = new Big(user.xp), level = new Big(user.level);
+    const user = Database.getUser(msg.author.id);
+    let tpc = new Big(user.tpc), text = new Big(user.text), xp = new Big(user.xp);
+    const level = new Big(user.level);
 
-    let isServer = msg.guild!.id == "788421241005408268"; // if user is in official server
+    const isServer = msg.guild?.id == "788421241005408268"; // if user is in official server
 
     if (isServer) tpc = tpc.times(1.1).dp(0);
 
-    let fields: Discord.EmbedFieldData[] = [];
+    const fields: Discord.EmbedFieldData[] = [];
     for (const drop of drops) {
       if (drop.chance()) {
         fields.push(drop.award(user));
@@ -32,10 +35,10 @@ class C extends Command {
       xp = new Big(0);
       user.level = level.plus(1).toString();
 
-      let newCpp = new Big(user.cpp).times(1.01).dp(0);
-      let newTpc = tpc = tpc.times(1.02).dp(0);
-      let newCycles = new Big(user.cycles).times(1.1).dp(0);
-      let newText = text = new Big(user.text).times(1.15).dp(0);
+      const newCpp = new Big(user.cpp).times(1.01).dp(0);
+      const newTpc = tpc = tpc.times(1.02).dp(0);
+      const newCycles = new Big(user.cycles).times(1.1).dp(0);
+      const newText = text = new Big(user.text).times(1.15).dp(0);
 
       user.cpp = newCpp.toString();
       user.tpc = newTpc.toString();
@@ -66,7 +69,7 @@ You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of 
 
   cooldownError(msg: Discord.Message, ms: number) {
     Bot.errormsg(msg, `Your fingers are still tired from typing!
-Please wait ${brackets((ms / 1000).toString())} seconds before you can code again.`, `Cooldown!`);
+Please wait ${brackets((ms / 1000).toString())} seconds before you can code again.`, "Cooldown!");
   }
 }
 

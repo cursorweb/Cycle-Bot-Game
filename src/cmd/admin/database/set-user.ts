@@ -5,35 +5,37 @@ class C extends Command {
   names = ["admin-user-set"];
   help = "Test things out with *everything*.";
   examples = ["admin-user-set id"];
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
 
-    let parsed = parseMention(args[0]);
+    const parsed = parseMention(args[0]);
     let id: string;
 
     if (parsed.type == "id") {
-      if (!Database.getUser(parsed.value)) return Bot.usererr(msg, `User ${brackets("<@" + parsed.value + ">")} not found! Check your spelling.`, "Not found!!");
+      if (!Database.getUser(parsed.value)) return Bot.usererr(msg, `User ${brackets(`<@${ parsed.value }>`)} not found! Check your spelling.`, "Not found!!");
       id = parsed.value;
-    } else if (parsed.type == "name") {
-      let ids = Database.findUser(u => u.name.toLowerCase().includes(parsed.value.toLowerCase()));
+    } else {
+      const ids = Database.findUser(u => u.name.toLowerCase().includes(parsed.value.toLowerCase()));
       if (ids.length == 0) return Bot.usererr(msg, `User ${brackets(parsed.value)} not found! Check your spelling.`, "Not found!!");
-      if (ids.length > 1) msg.channel.send({
-        embed: {
-          color: Colors.WARNING,
-          title: "Warning",
-          description: `Found ${brackets(ids.length.toString())} users. Using the first one.`
-        }
-      });
+      if (ids.length > 1) {
+        msg.channel.send({
+          embed: {
+            color: Colors.WARNING,
+            title: "Warning",
+            description: `Found ${brackets(ids.length.toString())} users. Using the first one.`
+          }
+        });
+      }
 
       id = ids[0];
     }
 
-    let user = Database.getUser(id!);
-    Database.setUser(id!, Object.assign({
+    const user = Database.getUser(id);
+    Database.setUser(id, Object.assign({
       cycles: "999999999", text: "999999999",
       tpc: "999999999", cpp: "999999999", tpm: "999999999"
     }, { name: user.name }, Database.defaultSchema));

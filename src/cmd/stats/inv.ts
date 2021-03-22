@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseMention } from "../../global";
+import { Command, Colors, Bot, Database, brackets, commanum, parseMention } from "../../global";
 import { items } from "../../util/data/item";
 
 class C extends Command {
@@ -8,27 +8,31 @@ class C extends Command {
   help = "View your inventory.";
   examples = ["i 2"];
 
-  get cooldown() { return 5; }
+  get cooldown() {
+    return 5;
+  }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
-    let parsedId = parseMention(args[0] || msg.author.id);
+    const parsedId = parseMention(args[0] || msg.author.id);
 
     let user: Database.CycleUser;
     if (parsedId.type == "id") {
       user = Database.getUser(parsedId.value);
-      if (!user) return Bot.errormsg(msg, `User ${brackets("<@" + parsedId.value + ">")} not found. Check your spelling!`, "User not found!");
+      if (!user) return Bot.errormsg(msg, `User ${brackets(`<@${ parsedId.value }>`)} not found. Check your spelling!`, "User not found!");
     } else {
-      let user_arr = Database.findUser(u => u.name.toLowerCase().indexOf(parsedId.value.toLowerCase()) > -1);
-      if (user_arr.length == 0) return Bot.usererr(msg, `User ${brackets(parsedId.value)} not found. Check your spelling!`, "User not found!");
-      else if (user_arr.length > 1) return Bot.errormsg(msg, `Found ${brackets(user_arr.length.toString())} users.
-${user_arr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**`).join("\n")}`, "Multiple users found!");
-      else user = Database.getUser(user_arr[0]);
+      const userArr = Database.findUser(u => u.name.toLowerCase().indexOf(parsedId.value.toLowerCase()) > -1);
+      if (userArr.length == 0) return Bot.usererr(msg, `User ${brackets(parsedId.value)} not found. Check your spelling!`, "User not found!");
+      else if (userArr.length > 1) {
+        return Bot.errormsg(msg, `Found ${brackets(userArr.length.toString())} users.
+${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**`).join("\n")}`, "Multiple users found!");
+      }
+      user = Database.getUser(userArr[0]);
     }
 
-    let page = 1;
+    const page = 1;
     // todo: emoji
-    let data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)]).gt(0)).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
+    const data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)]).gt(0)).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
 
     Bot.carousel(msg, data, 10, (_, itm) => {
       if (itm.length == 0) {
@@ -37,14 +41,14 @@ ${user_arr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}*
           title: "Empty Page",
           description: "No items here!"
         };
-      } else {
-        return {
-          color: Colors.SUCCESS,
-          title: "Inventory",
-          description: itm.join("\n"),
-          footer: { text: `Page ${page}` }
-        };
       }
+      return {
+        color: Colors.SUCCESS,
+        title: "Inventory",
+        description: itm.join("\n"),
+        footer: { text: `Page ${page}` }
+      };
+
     }, page);
   }
 }

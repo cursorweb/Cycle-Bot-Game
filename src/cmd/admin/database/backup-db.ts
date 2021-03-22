@@ -4,8 +4,8 @@ import { Command, Colors, Database } from "../../../global";
 class C extends Command {
   names = ["admin-git-stash", "admin-backup-db"];
   help = "Backs up the database";
-  isGame = 'n' as 'n';
-  
+  isGame = "n" as const;
+
   isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {

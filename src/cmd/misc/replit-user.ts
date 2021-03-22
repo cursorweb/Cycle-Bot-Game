@@ -6,9 +6,11 @@ class C extends Command {
   names = ["replit-user", "repl-user"];
   help = "Get the cycles, ID, and profile of a repl.it user.";
   examples = ["replit-user Coder100"];
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
-  get cooldown() { return 3e4; }
+  get cooldown() {
+    return 3e4;
+  }
 
   async exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) Bot.argserror(msg, args.length, [1]);
@@ -35,28 +37,30 @@ class C extends Command {
         languages: { displayName: string, tagline: string }[]
       } = data.data.userByUsername;
 
-      if (user == null) Bot.usererr(msg, `The user ${brackets(args[0])} could not be found.\nCheck your spelling!`, "User not found!")
-      else msg.channel.send({
-        embed: {
-          color: Colors.SUCCESS,
-          title: `User card for ${brackets(user.username)}`,
-          author: {
-            url: "https://repl.it" + user.url,
-            icon_url: user.image,
-            name: user.username
-          },
-          description: `[@${user.username}](https://repl.it${user.url}) (${commanum(user.karma.toString())})
+      if (user == null) Bot.usererr(msg, `The user ${brackets(args[0])} could not be found.\nCheck your spelling!`, "User not found!");
+      else {
+        msg.channel.send({
+          embed: {
+            color: Colors.SUCCESS,
+            title: `User card for ${brackets(user.username)}`,
+            author: {
+              url: `https://repl.it${user.url}`,
+              ["icon_url"]: user.image,
+              name: user.username
+            },
+            description: `[@${user.username}](https://repl.it${user.url}) (${commanum(user.karma.toString())})
 **ID**: ${user.id}\n${codestr(user.bio, "txt")}`,
-          thumbnail: {
-            url: user.image
-          },
-          fields: user.languages.map(itm => ({
-            name: itm.displayName,
-            value: itm.tagline,
-            inline: true
-          }))
-        }
-      });
+            thumbnail: {
+              url: user.image
+            },
+            fields: user.languages.map(itm => ({
+              name: itm.displayName,
+              value: itm.tagline,
+              inline: true
+            }))
+          }
+        });
+      }
     }
   }
 }

@@ -2,7 +2,8 @@
 Invite link: https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot
 */
 
-require("dotenv").config();
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import * as Discord from "discord.js";
 
@@ -20,12 +21,12 @@ let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.C
 
 // the limit is x before we have people confirm they are not self-botting.
 // the array is: `commands used,bot input,bot answer`
-let commandsUsed: { [i: string]: [number, string, number] } = {};
+const commandsUsed: { [i: string]: [number, string, number] } = {};
 
 
-client.on("ready", async () => {
-  client.user!.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
-  console.log(`Logged in as ${client.user!.tag}!`);
+client.on("ready", async() => {
+  client.user?.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
+  console.log(`Logged in as ${client.user?.tag}!`);
 
   await (process.env.NODE_ENV ? g.Database.updateBackup() : g.Database.update());
   console.log("Loaded database.");
@@ -37,45 +38,43 @@ client.on("ready", async () => {
   ready = true;
 
   initiate(client);
-  console.log(`Initiated server.`);
+  console.log("Initiated server.");
 });
 
-client.on("message", async (msg: Discord.Message) => {
-  if (ready) try {
-    if (msg.author.bot) return;
-    let cmd = parse("&", msg.content);
-    if (!msg.guild || !cmd) return;
+client.on("message", async(msg: Discord.Message) => {
+  if (ready) {
+    try {
+      if (msg.author.bot) return;
+      const cmd = parse("&", msg.content);
+      if (!msg.guild || !cmd) return;
 
-    if (cmd.command == "help") help(msg, cmd.args, commands);
-    else if (cmd.command == "verify") { if (commandsUsed[msg.author.id] && verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id]; }
-    else {
-      let found = false;
-
-      for (const cmdclss of gcmdarr) {
-        if (cmdclss.names.includes(cmd.command)) {
-          if (commandsUsed[msg.author.id] && commandsUsed[msg.author.id][0] >= 100) {
-            msg.channel.send({
-              embed: {
-                color: g.Colors.WARNING,
-                title: "Anti-Bot Verification",
-                description: `Type the number for ${g.brackets(commandsUsed[msg.author.id][1])}\n
+      if (cmd.command == "help") help(msg, cmd.args, commands);
+      else if (cmd.command == "verify") {
+        if (commandsUsed[msg.author.id] && verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id];
+      } else {
+        for (const cmdclss of gcmdarr) {
+          if (cmdclss.names.includes(cmd.command)) {
+            if (commandsUsed[msg.author.id] && commandsUsed[msg.author.id][0] >= 100) {
+              msg.channel.send({
+                embed: {
+                  color: g.Colors.WARNING,
+                  title: "Anti-Bot Verification",
+                  description: `Type the number for ${g.brackets(commandsUsed[msg.author.id][1])}\n
 For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
-                footer: {
-                  text: "You cannot continue until you complete this challenge!"
+                  footer: {
+                    text: "You cannot continue until you complete this challenge!"
+                  }
                 }
-              }
-            });
-
-            found = true;
-            break;
-          }
-
-          if (cmdclss.cooldown && cmdclss.getCooldown(msg.author) != null) {
-            if (!cmdclss.sentCooldown(msg.author)) {
-              cmdclss.cooldownError(msg, cmdclss.getCooldown(msg.author)!);
-              cmdclss.setSent(msg.author);
+              });
+              break;
             }
-          } else
+
+            if (cmdclss.cooldown && cmdclss.getCooldown(msg.author) != null) {
+              if (!cmdclss.sentCooldown(msg.author)) {
+                cmdclss.cooldownError(msg, cmdclss.getCooldown(msg.author) ?? 0);
+                cmdclss.setSent(msg.author);
+              }
+            } else
 
             if (cmdclss.isAdmin) {
               if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
@@ -84,39 +83,38 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
               }
             } else cmdclss.wrap(msg, cmd.args, client);
 
-          found = true;
-          if (!commandsUsed[msg.author.id]) {
-            let numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-            let choice = g.randomChoice(numbers)[0];
-            let answer = numbers.indexOf(choice);
-            commandsUsed[msg.author.id] = [1, choice, answer];
+            if (!commandsUsed[msg.author.id]) {
+              const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+              const choice = g.randomChoice(numbers)[0];
+              const answer = numbers.indexOf(choice);
+              commandsUsed[msg.author.id] = [1, choice, answer];
+            } else commandsUsed[msg.author.id][0]++;
+            break;
           }
-          else commandsUsed[msg.author.id][0]++;
-          break;
         }
       }
-    }
-  } catch (err) {
-    console.log(err);
-    for (const id of admins) {
-      let user = client.users.cache.get(id);
-      await user?.send({
-        embed: {
-          color: g.Colors.PRIMARY,
-          title: "Error!",
-          description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
-          fields: [{
-            name: "Error",
-            value: g.codestr(`${err.message}`, "js")
-          }]
-        }
-      });
+    } catch (err) {
+      console.log(err);
+      for (const id of admins) {
+        const user = client.users.cache.get(id);
+        await user?.send({
+          embed: {
+            color: g.Colors.PRIMARY,
+            title: "Error!",
+            description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
+            fields: [{
+              name: "Error",
+              value: g.codestr(`${err.message}`, "js")
+            }]
+          }
+        });
+      }
     }
   }
 });
 
 
-setInterval(async () => {
+setInterval(async() => {
   if (process.env.NODE_ENV) {
     await g.Database.saveBackup();
     await g.Database.updateBackup();

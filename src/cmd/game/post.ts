@@ -7,28 +7,33 @@ class C extends Command {
   names = ["post", "p"];
   help = "Post lines of code for some cycles!";
   examples = ["post 10"];
-  isGame = 'y' as 'y';
+  isGame = "y" as const;
 
-  get cooldown() { return 10000; }
+  get cooldown() {
+    return 10000;
+  }
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) Bot.argserror(msg, args.length, [0, 1]);
     else {
-      let user = Database.getUser(msg.author.id);
-      let text = new Big(user.text), cpp = new Big(user.cpp), cycles = new Big(user.cycles);
-      let amt = new Big(parseNumber(args[0]) || user.text);
+      const user = Database.getUser(msg.author.id);
+      let text = new Big(user.text), cycles = new Big(user.cycles);
+      const cpp = new Big(user.cpp);
+      const amt = new Big(parseNumber(args[0]) || user.text);
 
-      if (amt.lte(0)) return Bot.usererr(msg, `You cannot post less than ${brackets('0')} lines of code!`);
-      if (text.lt(amt)) return Bot.usererr(msg, `You don't have enough code!
+      if (amt.lte(0)) return Bot.usererr(msg, `You cannot post less than ${brackets("0")} lines of code!`);
+      if (text.lt(amt)) {
+        return Bot.usererr(msg, `You don't have enough code!
 You need ${brackets(amt.minus(text).toString())} more code.`);
+      }
 
       // refer to desmos.
       let upvotes = amt.div(5).times(Math.abs(random(-7, 7)) + 1).abs().plus(cpp).dp(0);
 
-      let isServer = msg.guild!.id == "788421241005408268"; // refer to ./code.ts
+      const isServer = msg.guild?.id == "788421241005408268"; // refer to ./code.ts
       if (isServer) upvotes = upvotes.times(1.05).dp(0);
 
-      let fields: Discord.EmbedFieldData[] = [];
+      const fields: Discord.EmbedFieldData[] = [];
       for (const drop of drops) {
         if (drop.chance()) {
           fields.push(drop.award(user));

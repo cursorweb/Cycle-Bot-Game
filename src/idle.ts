@@ -3,9 +3,9 @@ import { Database } from "./global";
 
 setInterval(() => {
   for (const id in Database.pdb) {
-    let user = Database.getUser(id);
-    let tpm = new Big(user.tpm);
-    
+    const user = Database.getUser(id);
+    const tpm = new Big(user.tpm);
+
     if (tpm.gt(0)) {
       let text = new Big(user.text);
       text = text.plus(tpm);

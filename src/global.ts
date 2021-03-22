@@ -17,7 +17,7 @@ export class Command {
   names: string[] = [];
   help = "*no help provided*";
   examples: string[] = [];
-  isGame: 'y' | 'n' | 'p' = 'p'; // if we should initiate player or not
+  isGame: "y" | "n" | "p" = "p"; // if we should initiate player or not
   /* its either:
     'y' (yes, auto-initiate)
     'n' (don't initiate)
@@ -28,14 +28,16 @@ export class Command {
 
   // Date, isSent
   private cooldownUsers: { [index: string]: [Date, boolean] } = {};
-  get cooldown() { return 0; } // ms
+  get cooldown() {
+    return 0;
+  } // ms
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (this.cooldown) this.setCooldown(msg.author);
 
-    let isJoined = !!client.guilds.cache.get("788421241005408268")?.member(msg.author.id);
+    const isJoined = Boolean(client.guilds.cache.get("788421241005408268")?.member(msg.author.id));
 
-    if (this.isGame == 'y' && !getUser(msg.author.id)) {
+    if (this.isGame == "y" && !getUser(msg.author.id)) {
       msg.channel.send({
         embed: {
           color: Colors.PRIMARY,
@@ -45,23 +47,27 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
         }
       });
       setUser(msg.author.id, genSchema(msg.author));
-    } else if (this.isGame == 'p' && !getUser(msg.author.id)) return Bot.errormsg(msg, `You don't have a profile yet!
+    } else if (this.isGame == "p" && !getUser(msg.author.id)) {
+      return Bot.errormsg(msg, `You don't have a profile yet!
     > Do \`&code\` to start playing!`, "Profile not found!");
+    }
 
-    if (this.isGame != 'n' && getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
+    if (this.isGame != "n" && getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
 
-    if (Math.random() * 100 < 3 && !isJoined) msg.channel.send({
-      embed: {
-        color: Colors.PRIMARY,
-        title: "Reminder",
-        description: "Remember to join the [discord server](https://discord.gg/4vTPWdpjFz) for giveaways, perks, and more!"
-      }
-    });
+    if (Math.random() * 100 < 3 && !isJoined) {
+      msg.channel.send({
+        embed: {
+          color: Colors.PRIMARY,
+          title: "Reminder",
+          description: "Remember to join the [discord server](https://discord.gg/4vTPWdpjFz) for giveaways, perks, and more!"
+        }
+      });
+    }
 
     this.exec(msg, args, client);
   }
 
-  exec(_: Discord.Message, _1: string[], _2: Discord.Client) { }
+  exec(_: Discord.Message, _1: string[], _2: Discord.Client): void { }
 
   getCooldown(user: Discord.User) {
     if (!this.cooldownUsers[user.id]) return null;

@@ -1,13 +1,13 @@
-import * as Discord from "discord.js"
+import * as Discord from "discord.js";
 
 const defaultSchema: CycleUser = {
   name: "",
   cycles: "0", text: "0", xp: "0",
   tpc: "1", cpp: "1", tpm: "0",
   langs: null, level: "1", socialMedia: null,
-  
+
   inv: {}, badges: [],
-  
+
   daily: "",
 
   bought: {
@@ -23,9 +23,9 @@ function genSchema(user: Discord.User): CycleUser {
     cycles: "0", text: "0", xp: "0",
     tpc: "1", cpp: "1", tpm: "0",
     langs: null, level: "1", socialMedia: null,
-    
+
     inv: {}, badges: [],
- 
+
     daily: "",
 
     bought: {

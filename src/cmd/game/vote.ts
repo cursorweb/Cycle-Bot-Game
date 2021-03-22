@@ -4,7 +4,7 @@ import { Command, Colors } from "../../global";
 class C extends Command {
   names = ["vote", "v"];
   help = "Vote for the bot <3";
-  isGame = 'p' as 'p';
+  isGame = "p" as const;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({

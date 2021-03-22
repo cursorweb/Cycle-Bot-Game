@@ -1,12 +1,13 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database, Bot, formatDate, msBetween, brackets, commanum, addMs, randomChoice } from "../../global";
+import { ItemEnum } from "../../util/data/item";
 
-let rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
+const rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
   user => {
-    let amt = new Big(user.inv[5] || 0);
+    let amt = new Big(user.inv[ItemEnum.DailyChest] || 0);
     amt = amt.plus(2);
-    user.inv[5] = amt.toString();
+    user.inv[ItemEnum.DailyChest] = amt.toString();
 
     return {
       name: "Daily reward!",
@@ -14,8 +15,8 @@ let rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
     };
   },
   user => {
-    let cycles = new Big(user.cycles);
-    let amt = new Big(user.cpp).times(20);
+    const cycles = new Big(user.cycles);
+    const amt = new Big(user.cpp).times(20);
 
     user.cycles = cycles.plus(amt).toString();
 
@@ -23,11 +24,11 @@ let rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
       name: "Daily post!",
       value: `You got ${brackets(commanum(amt.toString()))} cycles!
 You now have ${brackets(commanum(cycles.toString()))} cycles!`
-    }
+    };
   },
   user => {
-    let text = new Big(user.text);
-    let amt = new Big(user.tpc).times(22);
+    const text = new Big(user.text);
+    const amt = new Big(user.tpc).times(22);
 
     user.text = text.plus(amt).toString();
 
@@ -35,28 +36,28 @@ You now have ${brackets(commanum(cycles.toString()))} cycles!`
       name: "Instant code!",
       value: `You got ${brackets(commanum(amt.toString()))} text!
 You now have ${brackets(commanum(text.toString()))} text!`
-    }
+    };
   }
 ];
 
 class C extends Command {
   names = ["daily", "d"];
   help = "Claim your daily award!";
-  isGame = 'y' as 'y';
+  isGame = "y" as const;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
 
     if (msBetween(new Date(), new Date(user.daily)) > 0) return Bot.errormsg(msg, `You still need to wait ${formatDate(msBetween(new Date(), new Date(user.daily)))}`, "Daily Cooldown!");
-    
-    let func = randomChoice(rewards)[0];
-    let out = func(user);
+
+    const func = randomChoice(rewards)[0];
+    const out = func(user);
 
     msg.channel.send({
       embed: {
         color: Colors.SUCCESS,
         title: "Daily Reward!",
-        description: `You got your daily reward!`,
+        description: "You got your daily reward!",
         fields: [out],
         footer: { text: "Come back tomorrow for a daily reward!" }
       }

@@ -6,15 +6,17 @@ class C extends Command {
   names = ["feedback", "bug-report"];
   help = "Report bugs or feedback on the bot!";
   examples = ["bug-report \"something didn't work\""];
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
-  get cooldown() { return 60e3 * 10; }
+  get cooldown() {
+    return 60e3 * 10;
+  }
 
   async exec(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
-    
+
     for (const id of admin) {
-      let user = client.users.cache.get(id);
+      const user = client.users.cache.get(id);
       user?.send({
         embed: {
           color: Colors.PRIMARY,
@@ -34,7 +36,7 @@ class C extends Command {
         title: "Successfully sent!",
         description: "Your feedback is very important. Thanks for taking the time to write your feedback!"
       }
-    })
+    });
   }
 
   cooldownError(msg: Discord.Message, ms: number) {

@@ -4,9 +4,11 @@ import { Command, Colors } from "../../global";
 class C extends Command {
   names = ["guide", "more-help"];
   help = "View a breakdown of the bot's commands!";
-  isGame = 'n' as 'n';
+  isGame = "n" as const;
 
-  get cooldown() { return 10e3; }
+  get cooldown() {
+    return 10e3;
+  }
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
@@ -36,7 +38,7 @@ Join the [Discord server](https://discord.gg/4vTPWdpjFz) for more perks!
         }],
         footer: { text: "Join the Discord Server! https://discord.gg/4vTPWdpjFz" }
       }
-    })
+    });
   }
 }
 

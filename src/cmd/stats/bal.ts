@@ -1,13 +1,13 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database, Bot, brackets, commanum } from "../../global";
+import { Command, Colors, Database, brackets, commanum } from "../../global";
 
 class C extends Command {
   names = ["balance", "bal"];
   help = "View your balance!\nUse profile to view your text.";
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
-    let user = Database.getUser(msg.author.id);
+    const user = Database.getUser(msg.author.id);
 
     msg.channel.send({
       embed: {
