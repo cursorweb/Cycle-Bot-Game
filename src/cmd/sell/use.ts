@@ -27,7 +27,7 @@ class C extends Command {
     const open = openItem[itmIndex];
 
     if (itmIndex == -1) return Bot.usererr(msg, `Item ${brackets(name)} not found. Check your spelling!`, "Item not found!");
-    if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${commanum(userAmt.negated().plus(amount).toString())}`);
+    if (!user.inv[itmIndex] || userAmt.lt(amount)) return Bot.errormsg(msg, `You don't have enough of this item! You still need ${brackets(commanum(userAmt.negated().plus(amount).toString()))} more!`);
     if (!open) {
       return Bot.errormsg(msg, `This kind of item can't be used!
 It might be used in a shop, however.`, "Item can't be used!");
