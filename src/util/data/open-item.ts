@@ -173,13 +173,15 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
   },
   [ItemEnum.KnowledgeBook]: (user, amt) => {
     let xp = new Big(user.xp);
-    xp = xp.plus(amt * 10);
+    const level = new Big(user.level);
+    const xpAmt = new Big(amt).times(level.plus(10));
+    xp = xp.plus(amt);
     user.xp = xp.toString();
 
     return {
       name: "Book of knowledge!", value: `You read the book...
 You instantly gain SMORT!
-+ ${brackets(commanum((amt * 10).toString()))}
++ ${brackets(commanum(xpAmt.toString()))}
 
 **Note: ** Use \`&c\` to level up!`
     };
