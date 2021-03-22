@@ -3,7 +3,7 @@ import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database, brackets, commanum } from "../../global";
 
 class C extends Command {
-  names = ["balance", "bal"];
+  names = ["balance", "bal", "stats"];
   help = "View your balance!\nUse profile to view your text.";
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
