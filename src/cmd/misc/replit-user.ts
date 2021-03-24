@@ -1,4 +1,4 @@
-import * as fetch from "node-fetch";
+import fetch from "node-fetch";
 import * as Discord from "discord.js";
 import { Command, Colors, Bot, brackets, codestr, commanum } from "../../global";
 
