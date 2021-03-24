@@ -14,7 +14,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
-    const arg0 = parseNumber(args[0]);
+    const arg0 = parseNumber(args[0], true);
     let user = Database.getUser(msg.author.id);
 
     // really stressing our NaN == false here
@@ -39,12 +39,13 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
     // todo: emoji
     const data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)]).gt(0)).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
 
-    Bot.carousel(msg, data, 10, (_, itm) => {
+    Bot.carousel(msg, data, 10, (page, itm) => {
       if (itm.length == 0) {
         return {
           color: Colors.WARNING,
           title: "Empty Page",
-          description: "No items here!"
+          description: "No items here!",
+          footer: { text: `Page: ${page}` }
         };
       }
       return {

@@ -88,9 +88,10 @@ function calcPrice(base: Big, inflation: number, owned: number) {
 /**
  * parses commas as well.
  * @param num the number
+ * @param mention don't ignore <>@!
  */
-function parseNumber(num = "") {
-  const n = num.trim().replace(/[^\d.]/g, "");
+function parseNumber(num = "", mention = false) {
+  const n = num.trim().replace(mention ? /[^\d.<>@!]/g : /[^\d.]/g, "");
   return n == "" ? NaN : Number(n);
 }
 
