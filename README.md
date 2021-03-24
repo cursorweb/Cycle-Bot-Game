@@ -5,7 +5,7 @@ You can invite the bot [here](https://discord.com/api/oauth2/authorize?client_id
 
 
 ## How to play
-The prefix is `&`. Use `&help` to see all commands.
+The prefix is `&`. Use `&help` to see all commands. You can also join the [discord server](https://discord.gg/4vTPWdpjFz)
 
 ## Building
 The program will try to read the `.env` file using `dotenv`. Your `.env` file should look something like:

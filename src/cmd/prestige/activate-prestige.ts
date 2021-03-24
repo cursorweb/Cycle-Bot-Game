@@ -9,6 +9,7 @@ class C extends Command {
   help = "Reset all your data and get a boost!";
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
+
     msg.channel.send("soon");
   }
 }
