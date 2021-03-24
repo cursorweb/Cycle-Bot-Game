@@ -6,7 +6,7 @@ class C extends Command {
   names = [""];
   help = "";
   examples = [""];
-  isGame = '' as '';
+  isGame = "" as "";
 
   isAdmin = true;
 
