@@ -27,10 +27,11 @@ You now have ${brackets(commanum(cycles.toString()))} cycles!`
     };
   },
   user => {
-    const text = new Big(user.text);
+    let text = new Big(user.text);
     const amt = new Big(user.tpc).times(22);
 
-    user.text = text.plus(amt).toString();
+    text = text.plus(amt);
+    user.text = text.toString();
 
     return {
       name: "Instant code!",
