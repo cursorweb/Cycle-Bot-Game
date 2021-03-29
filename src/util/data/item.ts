@@ -23,8 +23,7 @@ export enum ItemEnum {
   SuperGlue,
   CraftingMat,
   CraftingChest,
-  KnowledgeBook,
-  prestigeTokens
+  KnowledgeBook
 }
 
 export const items: BItem[] = [{
@@ -92,10 +91,4 @@ export const items: BItem[] = [{
   emoji: "",
   description: "Instantly gain xp!",
   dropChance: 5
-}, {
-  name: "Pretige Tokens",
-  emoji: "",
-  description: "Tokens you get from prestiging!",
-  dropChance: 0
 }];
-  
