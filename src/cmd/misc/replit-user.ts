@@ -29,7 +29,7 @@ class C extends Command {
             name: args[0]
           }
         })
-      }).then((e: any) => e.json());
+      }).then(e => e.json());
 
       const user: {
         username: string, url: string, id: number,

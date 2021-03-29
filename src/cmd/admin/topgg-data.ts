@@ -22,8 +22,7 @@ class C extends Command {
         // eslint-disable-next-line camelcase
         server_count: guildCount
       })
-    }).then(r => r.text()).then(r => {
-      console.log(r);
+    }).then(() => {
       msg.channel.send({
         embed: {
           color: Colors.SUCCESS,
