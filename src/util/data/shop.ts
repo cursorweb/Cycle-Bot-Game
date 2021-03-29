@@ -237,8 +237,8 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     cost: 141,
     tpm: 35
   }, {
-    name: "Debugger",
-    description: "Now you debug all your code!",
+    name: "VSCode Debugger",
+    description: "Now you debug all your code... Without prints!",
     cost: 161,
     tpm: 40
   }, {
