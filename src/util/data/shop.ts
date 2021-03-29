@@ -144,6 +144,56 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "Uhh... that's too much?!",
     cost: 149,
     cpp: 40
+  }, {
+    name: "Yourself",
+    description: "Nobody loves me like me",
+    cost: 295,
+    cpp: 50
+  }, {
+    name: "Best Friend",
+    description: "When friend just isn't enough",
+    cost: 580,
+    cpp: 60
+  }, {
+    name: "Mailing List",
+    description: "They were probably tricked into it",
+    cost: 1140,
+    cpp: 70
+  }, {
+    name: "Advertisement",
+    description: "Is it really worth it?",
+    cost: 1600,
+    cpp: 75
+  }, {
+    name: "Tracking",
+    description: "Personalized fans!",
+    cost: 2242,
+    cpp: 80
+  }, {
+    name: "Significant Other",
+    description: "<3",
+    cost: 4411,
+    cpp: 90
+  }, {
+    name: "OG Fan",
+    description: "They support you... no matter what!",
+    cost: 8677,
+    cpp: 100
+  }, {
+    name: "Bot",
+    description: "Backup when all else fails",
+    cost: 17069,
+    cpp: 110
+  }, {
+    name: "AI Bot",
+    description: "Acts like a fan, but is it a fan?",
+    cost: 23940,
+    cpp: 120
+  }, {
+    name: "Superiority Complex",
+    description: "I'm the best! Probably! Maybe...",
+    cost: 47094,
+    cpp: 125
   }],
 
   idle: [{
@@ -196,5 +246,50 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "I mean you payed for it...",
     cost: 181,
     tpm: 45
+  }, {
+    name: "Google",
+    description: "Google is your best friend... When it works!",
+    cost: 201,
+    tpm: 50
+  }, {
+    name: "Bing",
+    description: "There's search engines, and then there's bing",
+    cost: 221,
+    tpm: 55
+  }, {
+    name: "Idle Machine II",
+    description: "The OG coder remastered!",
+    cost: 241,
+    tpm: 60
+  }, {
+    name: "Discord Server",
+    description: "Get distracted in #bots with a bot called Cycle!",
+    cost: 261,
+    tpm: 65
+  }, {
+    name: "Slack Server",
+    description: "Slack off",
+    cost: 281,
+    tpm: 70
+  }, {
+    name: "Linter",
+    description: "Your worst enemy! But it helps you?",
+    cost: 301,
+    tpm: 75
+  }, {
+    name: "Eslint",
+    description: "Don't forget to spend time configuring it!",
+    cost: 341,
+    tpm: 85
+  }, {
+    name: "Webpack",
+    description: "Now you can generate small code!",
+    cost: 381,
+    tpm: 95
+  }, {
+    name: "Jest",
+    description: "Test-Driven Development is the best!",
+    cost: 401,
+    tpm: 100
   }]
 };
