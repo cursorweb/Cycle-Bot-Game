@@ -3,6 +3,7 @@
   "game": "This the main commands for gameplay, like **coding** and **posting**",
   "meta": "These are commands about the *bot*, like the current version.",
   "misc": "These are miscellaneous commands not related to the Cycle game.",
+  "prestige": "Commands that reset the user for upgrades.",
   "sell": "These are commands for selling/using items.",
   "shop": "These are \"economy\" commands, like shopping and trading.",
   "stats": "View your statistics, your quests, and the leaderboard."
