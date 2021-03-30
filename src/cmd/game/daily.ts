@@ -15,10 +15,11 @@ const rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
     };
   },
   user => {
-    const cycles = new Big(user.cycles);
+    let cycles = new Big(user.cycles);
     const amt = new Big(user.cpp).times(20);
 
-    user.cycles = cycles.plus(amt).toString();
+    cycles = cycles.plus(amt);
+    user.cycles = cycles.toString();
 
     return {
       name: "Daily post!",
