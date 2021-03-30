@@ -40,6 +40,8 @@ function formatDate(ms: number) {
 }
 
 namespace Bot {
+  export class BotErr extends Error {}
+
   export function argserror(msg: Discord.Message, got: number, expect: number[]) {
     msg.channel.send({
       embed: {
@@ -56,6 +58,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         }]
       }
     });
+    throw new BotErr();
   }
 
   export function errormsg(msg: Discord.Message, error: string, title = "Error!!") {
@@ -66,6 +69,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         description: error
       }
     });
+    throw new BotErr();
   }
 
   export function usererr(msg: Discord.Message, error: string, title = "Error!!") {
@@ -84,6 +88,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         }]
       }
     });
+    throw new BotErr();
   }
 
   /**
