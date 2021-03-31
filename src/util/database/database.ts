@@ -19,3 +19,4 @@ db.settings({ ignoreUndefinedProperties: true });
 
 export * from "./genschema";
 export * from "./pseudo";
+export * from "./boosts";

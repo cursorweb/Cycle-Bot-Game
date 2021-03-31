@@ -71,4 +71,12 @@ interface CycleUser {
   }
 }
 
-export { defaultSchema, genSchema, CycleUser };
+interface BoostItm {
+  name: string;
+
+  tpc: string | number | null;
+  cpp: string | number | null;
+  tpm: string | number | null;
+}
+
+export { defaultSchema, genSchema, CycleUser, BoostItm };

@@ -19,7 +19,7 @@ export function findUser(filter: (u: CycleUser) => boolean): string[] {
   return Object.keys(pdb).filter(k => filter(pdb[k]));
 }
 
-export function getUser(key: string): CycleUser {
+export function getUser(key: string) {
   return pdb[key];
 }
 
