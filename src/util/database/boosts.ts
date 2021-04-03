@@ -1,10 +1,8 @@
-import { BoostItm } from "./genschema";
-
 // 'boost' db
-export const bdb: { [i: string]: BoostItm[] } = {};
+export const bdb: { [i: string]: number[] } = {};
 
 export namespace Boost {
-  export function setUser(key: string, val: BoostItm[]) {
+  export function setUser(key: string, val: number[]) {
     if (!bdb[key]) bdb[key] = val;
     Object.assign(bdb[key], val);
   }
