@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 
-const defaultSchema: CycleUser = {
+export const defaultSchema: CycleUser = {
   name: "",
   cycles: "0", text: "0", xp: "0",
   tpc: "1", cpp: "1", tpm: "0",
@@ -17,7 +17,7 @@ const defaultSchema: CycleUser = {
   }
 };
 
-function genSchema(user: Discord.User): CycleUser {
+export function genSchema(user: Discord.User): CycleUser {
   return {
     name: user.tag,
     cycles: "0", text: "0", xp: "0",
@@ -36,7 +36,7 @@ function genSchema(user: Discord.User): CycleUser {
   };
 }
 
-interface CycleUser {
+export interface CycleUser {
   // meta
   name: string; // tag, used for identification
 
@@ -70,13 +70,3 @@ interface CycleUser {
     cpp: { [i: number]: number };
   }
 }
-
-interface BoostItm {
-  name: string;
-
-  tpc: string | number | null;
-  cpp: string | number | null;
-  tpm: string | number | null;
-}
-
-export { defaultSchema, genSchema, CycleUser, BoostItm };
