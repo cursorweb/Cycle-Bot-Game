@@ -16,7 +16,8 @@ export namespace BoostEnum {
   export enum Spell {
     Coinflip,
     SOQues,
-    FriendDM
+    FriendDM,
+    GambleFever
   }
 }
 
@@ -33,4 +34,8 @@ export const spells: BoostItm[] = [{
   name: "DM to friends",
   description: "You might get ignored...",
   success: 80
+}, {
+  name: "Gombling Fever",
+  description: "It's cheap, and the rewards are high!",
+  success: 10
 }];
