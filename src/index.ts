@@ -71,7 +71,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
 
             if (cmdclss.cooldown && cmdclss.getCooldown(msg.author) != null) {
               if (!cmdclss.sentCooldown(msg.author)) {
-                cmdclss.cooldownError(msg, cmdclss.getCooldown(msg.author) ?? 0);
+                cmdclss.wrapCooldown(msg, cmdclss.getCooldown(msg.author) ?? 0);
                 cmdclss.setSent(msg.author);
               }
             } else

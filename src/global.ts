@@ -98,6 +98,14 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
     if (this.cooldownUsers) this.cooldownUsers[user.id][1] = true;
   }
 
+  wrapCooldown(msg: Discord.Message, ms: number) {
+    try {
+      this.cooldownError(msg, ms);
+    } catch (e) {
+      if (!(e instanceof Bot.BotErr)) throw e;
+    }
+  }
+
   cooldownError(msg: Discord.Message, ms: number) {
     Bot.errormsg(msg, `You still have ${brackets((ms / 1000).toFixed(2))} seconds left!`, "Cooldown!");
   }
