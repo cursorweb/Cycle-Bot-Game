@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.1.9",
-        description: "You can now sell your items for some cycles! So get coding!!",
+        title: "Version 0.1.10",
+        description: "You can now generate ego-coins and golden cycles from cycles! Golden Cycles will have a use soon...",
         fields: [{
           name: "Discord Server",
           value: "Talk to the developers, and get sneak peeks in the official [discord server](https://discord.gg/4vTPWdpjFz)!"
