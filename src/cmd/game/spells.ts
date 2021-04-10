@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Discord from "discord.js";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Command, Colors, Bot, Database, brackets } from "../../global";
+import { spells } from "../../util/data/boosts";
 
 class C extends Command {
   names = ["spells", "use-spell", "spell"];
@@ -11,8 +12,13 @@ class C extends Command {
     return 1000;
   }
 
-  exec(msg: Discord.Message, _: string[]) {
-    msg.channel.send("soon!");
+  exec(msg: Discord.Message, args: string[]) {
+    if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
+    if (args.length == 1) {
+      let name = args[0];
+    } else {
+      // show all avail
+    }
   }
 
   cooldownError(msg: Discord.Message, ms: number) {

@@ -185,5 +185,51 @@ You instantly gain SMORT!
 
 **Note: ** Use \`&c\` to level up!`
     };
+  },
+  [ItemEnum.EgoCoinMaker]: (user, amt) => {
+    let cycles = new Big(user.cycles);
+    const cycleUsed = cycles.times(0.05 * amt).dp(0);
+
+    let egoCoins = new Big(user.inv[ItemEnum.EgoCoin]);
+    const egoCoinAmt = cycleUsed.div(2).dp(0);
+
+    cycles = cycles.minus(cycleUsed);
+    egoCoins = egoCoins.plus(egoCoinAmt);
+
+    user.cycles = cycles.toString();
+    user.inv[ItemEnum.EgoCoin] = egoCoins.toString();
+
+    return {
+      name: "Ego Coin Maker!",
+      value: `You use the machine, and you got...
++${brackets(commanum(egoCoinAmt.toString()))} Ego-Coins!
+-${brackets(commanum(cycleUsed.toString()))} Cycles!
+
+You now have ${brackets(commanum(egoCoins.toString()))} ego-coins!
+You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
+    };
+  },
+  [ItemEnum.GoldenCycleMaker]: (user, amt) => {
+    let cycles = new Big(user.cycles);
+    const cycleUsed = cycles.times(0.05 * amt).dp(0);
+
+    let goldenCycles = new Big(user.inv[ItemEnum.GoldenCycle]);
+    const goldenCycleAmt = cycleUsed.div(2).dp(0);
+
+    cycles = cycles.minus(cycleUsed);
+    goldenCycles = goldenCycles.plus(goldenCycleAmt);
+
+    user.cycles = cycles.toString();
+    user.inv[ItemEnum.GoldenCycle] = goldenCycles.toString();
+
+    return {
+      name: "Golden Cycle Maker!",
+      value: `You use the machine, and you got...
++${brackets(commanum(goldenCycleAmt.toString()))} Golden Cycles!
+-${brackets(commanum(cycleUsed.toString()))} Cycles!
+
+You now have ${brackets(commanum(goldenCycles.toString()))} golden cycles!
+You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
+    };
   }
 };

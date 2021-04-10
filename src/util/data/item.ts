@@ -24,7 +24,9 @@ export enum ItemEnum {
   CraftingMat,
   CraftingChest,
   KnowledgeBook,
-  GoldenCycle
+  GoldenCycle,
+  EgoCoinMaker,
+  GoldenCycleMaker
 }
 
 export const items: BItem[] = [{
@@ -97,4 +99,14 @@ export const items: BItem[] = [{
   emoji: "",
   description: "Use this to buy boosts!",
   dropChance: 24.9 // >:)
+}, {
+  name: "Ego-Coin Maker",
+  emoji: "",
+  description: "Generates 5% of your cycles into ego-coins!",
+  dropChance: 5
+}, {
+  name: "Golden Cycle Maker",
+  emoji: "",
+  description: "Generates 5% of your cycles into golden cycles!",
+  dropChance: 5
 }];
