@@ -15,7 +15,7 @@ class C extends Command {
   exec(msg: Discord.Message, args: string[]) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
     if (args.length == 1) {
-      let name = args[0];
+      const name = args[0];
     } else {
       // show all avail
     }
