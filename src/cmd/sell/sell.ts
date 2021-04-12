@@ -34,8 +34,9 @@ Chock your spelling!`, "Item not found!");
 **You still need** ${brackets(commanum(num.minus(userAmt).toString()))} **more!**`);
     }
 
-    const worth = (1 - item.dropChance / 100) / 2;
-    const cycleAmt = cycles.times(worth).times(amt).dp(0);
+    const worth = new Big((1 - item.dropChance / 100) / 2);
+    // every item is worth at most 100
+    const cycleAmt = worth.times(100).times(amt).dp(0);
     user.inv[itemIndex] = userAmt.minus(num).toString();
     user.cycles = cycles.plus(cycleAmt).toString();
 
