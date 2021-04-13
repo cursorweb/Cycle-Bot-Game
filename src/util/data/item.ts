@@ -6,6 +6,7 @@ export interface BItem {
 
   description: string; // description
   dropChance: number; // out of 100
+  currency?: boolean;
   // non-openable things (like ego-coins) can't be opened, and will lack implementation.
 }
 
@@ -33,7 +34,8 @@ export const items: BItem[] = [{
   name: "Ego-Coin",
   emoji: "", // todo
   description: "Made from only those with the biggest egoes!",
-  dropChance: 25
+  dropChance: 25,
+  currency: true
 }, {
   name: "Cheap iPhone",
   emoji: "",
@@ -98,7 +100,8 @@ export const items: BItem[] = [{
   name: "Golden Cycle",
   emoji: "",
   description: "Use this to buy boosts!",
-  dropChance: 24.9 // >:)
+  dropChance: 24.9, // >:)
+  currency: true
 }, {
   name: "Ego-Coin Maker",
   emoji: "",

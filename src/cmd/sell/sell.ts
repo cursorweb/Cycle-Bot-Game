@@ -34,6 +34,11 @@ Chock your spelling!`, "Item not found!");
 **You still need** ${brackets(commanum(num.minus(userAmt).toString()))} **more!**`);
     }
 
+    if (item.currency) {
+      return Bot.errormsg(msg, `You can't sell currency!
+These currencies cannot be converted into cycles!`);
+    }
+
     const worth = new Big((1 - item.dropChance / 100) / 2);
     // every item is worth at most 100
     const cycleAmt = worth.times(100).times(amt).dp(0);
