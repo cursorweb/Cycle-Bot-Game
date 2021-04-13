@@ -58,7 +58,7 @@ You feel a surge of energy!
   [ItemEnum.ChestChest]: (user, amt) => {
     const itemsGot: { [i: string]: number } = {};
 
-    for (let j = 0; j < 5 * amt; j++) {
+    for (let j = 0; j < 2 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
         if (i == ItemEnum.ChestChest || i == ItemEnum.ChestChestChest) continue;
         const item = items[i];
@@ -129,7 +129,7 @@ It's apple, so it dies quickly!
   [ItemEnum.ChestChestChest]: (user, amt) => {
     const itemsGot: { [i: string]: number } = {};
 
-    for (let j = 0; j < 20 * amt; j++) {
+    for (let j = 0; j < 25 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
         if (i == ItemEnum.ChestChest || i == ItemEnum.ChestChestChest) continue;
         const item = items[i];
