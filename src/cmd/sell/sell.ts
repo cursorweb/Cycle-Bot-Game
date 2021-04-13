@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Command, Colors, Bot, plural, parseNumber, Database, brackets, commanum } from "../../global";
+import { Command, Colors, Bot, plural, parseNumber, Database, brackets, commanum, constrain } from "../../global";
 import { items } from "../../util/data/item";
 
 class C extends Command {
@@ -15,7 +15,7 @@ class C extends Command {
     const name = args[0];
     const amt = parseNumber(args[1] || "1");
     if (args[1] && isNaN(amt)) return Bot.usererr(msg, "The amount must be a number!");
-    const num = new Big(amt);
+    const num = new Big(constrain(amt, 1, 50));
 
     const user = Database.getUser(msg.author.id);
     let itemIndex = items.findIndex(n => n.name.toLowerCase() == name.toLowerCase());
