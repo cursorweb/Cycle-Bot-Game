@@ -60,6 +60,7 @@ You feel a surge of energy!
 
     for (let j = 0; j < 5 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
+        if (i == ItemEnum.ChestChest || i == ItemEnum.ChestChestChest) continue;
         const item = items[i];
         if (Math.random() * 100 < item.dropChance) {
           itemsGot[i] = (itemsGot[i] || 0) + 1;
@@ -130,6 +131,7 @@ It's apple, so it dies quickly!
 
     for (let j = 0; j < 20 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
+        if (i == ItemEnum.ChestChest || i == ItemEnum.ChestChestChest) continue;
         const item = items[i];
         if (Math.random() * 150 < item.dropChance) {
           itemsGot[i] = (itemsGot[i] || 0) + 1;
