@@ -16,7 +16,7 @@ class C extends Command {
     if (args[1] && isNaN(num)) return Bot.usererr(msg, "The amount must be a number!");
 
     const name = args[0];
-    const amount = constrain(num || 1, 1, Infinity);
+    const amount = constrain(num || 1, 1, 50);
     const user = Database.getUser(msg.author.id);
 
     let itmIndex = items.findIndex(o => o.name.toLowerCase() == name.toLowerCase());

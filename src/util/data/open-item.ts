@@ -187,11 +187,19 @@ You instantly gain SMORT!
     };
   },
   [ItemEnum.EgoCoinMaker]: (user, amt) => {
+    // every ego coin is worth 20
     let cycles = new Big(user.cycles);
     const cycleUsed = cycles.times(0.05 * amt).dp(0);
 
     let egoCoins = new Big(user.inv[ItemEnum.EgoCoin]);
     const egoCoinAmt = cycleUsed.div(2).dp(0);
+
+    if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
+      return {
+        name: "Boom!",
+        value: "With a crash, the ego-coin maker breaks.\nSometimes it does this, no machine is perfect!"
+      };
+    }
 
     cycles = cycles.minus(cycleUsed);
     egoCoins = egoCoins.plus(egoCoinAmt);
@@ -215,6 +223,13 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
 
     let goldenCycles = new Big(user.inv[ItemEnum.GoldenCycle]);
     const goldenCycleAmt = cycleUsed.div(2).dp(0);
+
+    if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
+      return {
+        name: "Boom!",
+        value: "With a crash, the golden-cycle maker breaks.\nSometimes it does this, no machine is perfect!"
+      };
+    }
 
     cycles = cycles.minus(cycleUsed);
     goldenCycles = goldenCycles.plus(goldenCycleAmt);
