@@ -4,3 +4,7 @@ export interface BLore {
   lore: string;
 }
 
+export enum LoreEnum {
+  EgoCoins,
+  GoldenCycles
+}
