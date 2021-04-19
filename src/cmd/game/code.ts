@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global";
 import { code as drops } from "../../util/data/drops";
+import { boosts } from "../../util/data/boosts/boosts";
 
 class C extends Command {
   names = ["code", "c"];
@@ -14,6 +15,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
+    const userBoosts = Database.Boost.getUser(msg.author.id);
     let tpc = new Big(user.tpc), text = new Big(user.text), xp = new Big(user.xp);
     const level = new Big(user.level);
 
@@ -27,6 +29,17 @@ class C extends Command {
         fields.push(drop.award(user));
         tpc = new Big(user.tpc), text = new Big(user.text); // have to update it again
       }
+    }
+
+    for (const index in userBoosts) {
+      const amt = userBoosts[index];
+      const itm = boosts[index];
+      fields.push({
+        name: itm.name,
+        value: itm.message || ""
+      });
+
+      tpc = tpc.times(new Big(itm.tpc || 0).plus(100).div(100)).times(amt);
     }
 
     xp = xp.plus(1);

@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Discord from "discord.js";
 import { Command, Colors, Bot, Database, brackets } from "../../global";
-import { spells } from "../../util/data/boosts";
+import { spells } from "../../util/data/boosts/spells";
 
 class C extends Command {
-  names = ["spells", "use-spell", "spell"];
+  names = ["spells", "spell"];
   help = "Look at all the spells or use a spell!";
-  examples = ["spells 3", "use-spell Coinflip"];
-
-  get cooldown() {
-    return 1000;
-  }
+  examples = ["spells 3", "spells"];
 
   exec(msg: Discord.Message, args: string[]) {
     if (args.length > 1) return Bot.argserror(msg, args.length, [0, 1]);
@@ -19,11 +15,6 @@ class C extends Command {
     } else {
       // show all avail
     }
-  }
-
-  cooldownError(msg: Discord.Message, ms: number) {
-    Bot.errormsg(msg, `You are still tired from the last spell you cast!
-Please wait ${brackets((ms / 1000).toFixed(1))} seconds before you can cast again.`, "Too tired!");
   }
 }
 
