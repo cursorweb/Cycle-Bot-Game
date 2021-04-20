@@ -61,6 +61,12 @@ ${codestr("&use 'cheap iphone'", "js")}`
     throw new BotErr();
   }
 
+  /**
+   * Sends *without* problem-solving. Good for internal errors.
+   * @param msg msg
+   * @param error error
+   * @param title title
+   */
   export function errormsg(msg: Discord.Message, error: string, title = "Error!!") {
     msg.channel.send({
       embed: {
@@ -72,6 +78,12 @@ ${codestr("&use 'cheap iphone'", "js")}`
     throw new BotErr();
   }
 
+  /**
+   * Sends *with* problem-solving. Good for argument/user input errors.
+   * @param msg msg
+   * @param error error
+   * @param title title
+   */
   export function usererr(msg: Discord.Message, error: string, title = "Error!!") {
     msg.channel.send({
       embed: {
