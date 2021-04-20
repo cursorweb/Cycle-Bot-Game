@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum, parseNumber } from "../../global";
 import { post as drops } from "../../util/data/drops";
+import { boosts } from "../../util/data/boosts/boosts";
 
 class C extends Command {
   names = ["post", "p"];
@@ -17,8 +18,9 @@ class C extends Command {
     if (args.length > 1) Bot.argserror(msg, args.length, [0, 1]);
     else {
       const user = Database.getUser(msg.author.id);
+      const userBoosts = Database.Boost.getUser(msg.author.id);
       let text = new Big(user.text), cycles = new Big(user.cycles);
-      const cpp = new Big(user.cpp);
+      let cpp = new Big(user.cpp);
       const amt = new Big(parseNumber(args[0]) || user.text);
 
       if (amt.lte(0)) return Bot.usererr(msg, `You cannot post less than ${brackets("0")} lines of code!`);
@@ -39,6 +41,18 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
           fields.push(drop.award(user));
           cycles = new Big(user.cycles), text = new Big(user.text); // have to update it again
         }
+      }
+
+      for (const index in userBoosts) {
+        const itm = boosts[index];
+        if (!itm.cpp) continue;
+        const amt = userBoosts[index].amt;
+        fields.push({
+          name: itm.name,
+          value: itm.message || ""
+        });
+
+        cpp = cpp.times(new Big(itm.cpp).plus(100).div(100)).times(amt);
       }
 
       cycles = cycles.plus(upvotes);

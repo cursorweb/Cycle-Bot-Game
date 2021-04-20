@@ -32,14 +32,15 @@ class C extends Command {
     }
 
     for (const index in userBoosts) {
-      const amt = userBoosts[index];
       const itm = boosts[index];
+      if (!itm.tpc) continue;
+      const amt = userBoosts[index].amt;
       fields.push({
         name: itm.name,
         value: itm.message || ""
       });
 
-      tpc = tpc.times(new Big(itm.tpc || 0).plus(100).div(100)).times(amt);
+      tpc = tpc.times(new Big(itm.tpc).plus(100).div(100)).times(amt);
     }
 
     xp = xp.plus(1);
