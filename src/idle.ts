@@ -12,7 +12,7 @@ setInterval(() => {
     for (const index in userBoosts) {
       const itm = boosts[index];
       if (!itm.tpm) continue;
-      const amt = userBoosts[index].amt;
+      const amt = userBoosts[index].length;
       tpm = tpm.times(new Big(itm.tpm).plus(100).div(100)).times(amt);
     }
 

@@ -46,7 +46,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
       for (const index in userBoosts) {
         const itm = boosts[index];
         if (!itm.cpp) continue;
-        const amt = userBoosts[index].amt;
+        const amt = userBoosts[index].length;
         fields.push({
           name: itm.name,
           value: itm.message || ""

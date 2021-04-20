@@ -2,9 +2,9 @@ export interface BoostItm {
   name: string;
   description: string;
   /**
-   * The message when the user interacts with it (optional for tpm)
+   * The message when the user interacts with it
    */
-  message?: string;
+  message: string;
 
   // 0-100
   tpc?: number;
@@ -16,7 +16,10 @@ export enum BoostEnum {
   Coinflip,
   SOQues,
   FriendDM,
-  GambleFever
+  GambleFever,
+  ClassicSpell,
+  SpellingBee,
+  BackfiringSpell
 }
 
 export const boosts: BoostItm[] = [{
@@ -40,11 +43,35 @@ export const boosts: BoostItm[] = [{
 
   cpp: 25
 }, {
-  name: "Gombling Fever",
+  name: "Gambling Fever",
   description: "It's cheap, and the rewards are high!",
   message: "This isn't helping with your addiction...",
 
   tpc: 25,
   cpp: 25,
   tpm: 25
+}, {
+  name: "Classic Spell",
+  description: "Abracadabra!",
+  message: "Your wizardry improves your life!",
+
+  tpc: 75,
+  cpp: 75,
+  tpm: 75
+}, {
+  name: "Spelling Bee",
+  description: "Spell, 'antidisestablishmentarianism'",
+  message: "You make typos 50% less!",
+
+  tpc: 50,
+  cpp: 25,
+  tpm: 25
+}, {
+  name: "Spell of Backfiring",
+  description: "Your spell backfired!",
+  message: "Bad luck hahaha",
+
+  tpc: -50,
+  cpp: -50,
+  tpm: -50
 }];
