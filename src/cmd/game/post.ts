@@ -52,7 +52,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
           value: itm.message || ""
         });
 
-        cpp = cpp.times(new Big(itm.cpp).plus(100).div(100)).times(amt);
+        cpp = cpp.times(new Big(itm.cpp).plus(100).div(100)).times(amt).dp(0);
       }
 
       cycles = cycles.plus(upvotes);

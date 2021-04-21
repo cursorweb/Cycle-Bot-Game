@@ -19,6 +19,7 @@ export namespace Boost {
   }
 
   export function getUser(key: string) {
+    if (!bdb[key]) bdb[key] = {};
     return bdb[key];
   }
 }

@@ -21,28 +21,7 @@ class C extends Command {
 
     const isServer = msg.guild?.id == "788421241005408268"; // if user is in official server
 
-    if (isServer) tpc = tpc.times(1.1).dp(0);
-
     const fields: Discord.EmbedFieldData[] = [];
-    for (const drop of drops) {
-      if (drop.chance()) {
-        fields.push(drop.award(user));
-        tpc = new Big(user.tpc), text = new Big(user.text); // have to update it again
-      }
-    }
-
-    for (const index in userBoosts) {
-      const itm = boosts[index];
-      if (!itm.tpc) continue;
-      const amt = userBoosts[index].length;
-      fields.push({
-        name: itm.name,
-        value: itm.message || ""
-      });
-
-      tpc = tpc.times(new Big(itm.tpc).plus(100).div(100)).times(amt);
-    }
-
     xp = xp.plus(1);
     if (xp.gte(level.pow(2))) {
       // level up!
@@ -63,6 +42,26 @@ class C extends Command {
         name: "Level up!",
         value: `You are now level ${brackets(commanum(user.level))}!`
       });
+    }
+
+    if (isServer) tpc = tpc.times(1.1).dp(0);
+    for (const drop of drops) {
+      if (drop.chance()) {
+        fields.push(drop.award(user));
+        tpc = new Big(user.tpc), text = new Big(user.text); // have to update it again
+      }
+    }
+
+    for (const index in userBoosts) {
+      const itm = boosts[index];
+      if (!itm.tpc) continue;
+      const amt = userBoosts[index].length;
+      fields.push({
+        name: itm.name,
+        value: itm.message || ""
+      });
+
+      tpc = tpc.times(new Big(itm.tpc).plus(100).div(100)).times(amt).dp(0);
     }
 
     msg.channel.send({

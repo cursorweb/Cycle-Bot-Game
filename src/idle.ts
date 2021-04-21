@@ -13,7 +13,7 @@ setInterval(() => {
       const itm = boosts[index];
       if (!itm.tpm) continue;
       const amt = userBoosts[index].length;
-      tpm = tpm.times(new Big(itm.tpm).plus(100).div(100)).times(amt);
+      tpm = tpm.times(new Big(itm.tpm).plus(100).div(100)).times(amt).dp(0);
     }
 
     let text = new Big(user.text);
