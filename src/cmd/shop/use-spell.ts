@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Command, Colors, Bot, Database } from "../../global";
+import { Command, Colors, Bot, Database, brackets } from "../../global";
 import { boosts, BoostEnum } from "../../util/data/boosts/boosts";
 import { spells } from "../../util/data/boosts/spells";
 
@@ -32,17 +32,29 @@ class C extends Command {
     const item = spells[itmIndex];
     const boost = boosts[item.drops];
 
-    if (Math.random() * 100 < item.success) {
-      msg.channel.send("Huge success!!");
+    if (Math.random() * 100 < item.success) { // success
+      msg.channel.send({
+        embed: {
+          color: Colors.SUCCESS,
+          title: "Success!",
+          description: `You cast the ${brackets(boost.name)}...
+It succeeds!`
+        }
+      });
       if (!user[item.drops]) user[item.drops] = [];
       user[item.drops].push(new Date());
     } else {
-      msg.channel.send("Huge failure!");
+      msg.channel.send({
+        embed: {
+          color: Colors.ERROR,
+          title: "Failure!",
+          description: `You cast the ${brackets(boost.name)}...
+It backfired!`
+        }
+      });
       if (!user[BoostEnum.BackfiringSpell]) user[BoostEnum.BackfiringSpell] = [];
       user[BoostEnum.BackfiringSpell].push(new Date());
     }
-
-    msg.channel.send(`You want to cast ${boost.name} with ${item.success}% success rate`);
   }
 }
 
