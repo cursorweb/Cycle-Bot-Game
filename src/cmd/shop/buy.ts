@@ -11,7 +11,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
     if (cycles.lt(cost)) {
       return [`You don't have enough cycles!
 **You have** ${brackets(commanum(cycles.toString()))}
-**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough cycles!"];
+**You need** ${brackets(commanum(cost.minus(cycles).toString()))} more!`, "Not enough cycles!"];
     }
 
     user.cycles = cycles.minus(cost).toString();
@@ -31,7 +31,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
     if (cycles.lt(cost)) {
       return [`You don't have enough cycles!
 **You have** ${brackets(commanum(cycles.toString()))}
-**You need** ${brackets(commanum(cost.minus(cycles).toString()))}`, "Not enough cycles!"];
+**You need** ${brackets(commanum(cost.minus(cycles).toString()))} more!`, "Not enough cycles!"];
     }
 
     user.cycles = cycles.minus(cost).toString();
@@ -51,7 +51,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
     if (coins.lt(cost)) {
       return [`You don't have enough Ego-Coins!
 **You have** ${brackets(commanum(coins.toString()))}
-**You need** ${brackets(commanum(cost.minus(coins).toString()))}`, "Not enough Ego-Coins!"];
+**You need** ${brackets(commanum(cost.minus(coins).toString()))} more!`, "Not enough Ego-Coins!"];
     }
 
     user.inv[0] = coins.minus(cost).toString();

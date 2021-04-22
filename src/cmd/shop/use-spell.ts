@@ -42,8 +42,6 @@ class C extends Command {
       user[BoostEnum.BackfiringSpell].push(new Date());
     }
 
-    console.log(user);
-
     msg.channel.send(`You want to cast ${boost.name} with ${item.success}% success rate`);
   }
 }
