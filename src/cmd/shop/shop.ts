@@ -28,7 +28,7 @@ class C extends Command {
     }
     if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
     const num = parseNumber(args[1]);
-    if (args[1] && isNaN(num)) return Bot.errormsg(msg, "The page must be a number!");
+    if (args[1] && isNaN(num)) return Bot.usererr(msg, "The page must be a number!");
     if (!Object.keys(handleShop).includes(args[0])) {
       return Bot.errormsg(msg, `The valid shop names are:
 ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
@@ -44,7 +44,8 @@ ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
       title: "Shop!",
       description: `View the shop! Page ${brackets(page.toString())}.
 **Cycles**: ${brackets(commanum(user.cycles))}
-**Text**: ${brackets(commanum(user.text))}\n${i.length > 0 ? codestr(i.join("\n\n"), "md") : codestr(`[ NO ][ MORE ][ ITEMS ]
+**Text**: ${brackets(commanum(user.text))}
+${i.length > 0 ? codestr(i.join("\n\n"), "md") : codestr(`[ NO ][ MORE ][ ITEMS ]
 > You've gone far enough!`, "md")}`,
       footer: { text: `Tip: Use &buy ${args[0]} to buy an item!` }
     }), page);
