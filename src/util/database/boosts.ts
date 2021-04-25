@@ -1,3 +1,5 @@
+import { msBetween } from "../../global";
+
 /**
  * An 'array' containing the boosts data.
  * i: the id of the boost
@@ -20,6 +22,18 @@ export namespace Boost {
 
   export function getUser(key: string) {
     if (!bdb[key]) bdb[key] = {};
+    else checkUser(key);
     return bdb[key];
+  }
+
+  export function checkUser(key: string) {
+    const user = bdb[key];
+    for (const boostKey in user) {
+      const boost = user[boostKey];
+      for (const time of boost) {
+        // 1 minute
+        if (msBetween(time, new Date()) > 6e4) delete user[boostKey];
+      }
+    }
   }
 }
