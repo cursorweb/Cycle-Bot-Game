@@ -17,7 +17,7 @@ class C extends Command {
     const data = spells.map(itm => {
       const boost = boosts[itm.drops];
       return `[ ${boost.name} ][ ${itm.success}% success ]
-<+ ${boost.tpc || 0} TPC> <+ ${boost.cpp || 0} CPP> <+ ${boost.tpm || 0} TPM>
+<+ ${boost.tpc || 0}% TPC> <+ ${boost.cpp || 0}% CPP> <+ ${boost.tpm || 0}% TPM>
 > ${boost.description}`;
     });
 

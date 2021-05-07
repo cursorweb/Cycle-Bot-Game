@@ -19,7 +19,9 @@ export enum BoostEnum {
   GambleFever,
   ClassicSpell,
   SpellingBee,
-  BackfiringSpell
+  BackfiringSpell,
+  SugarHigh,
+  StylishShirts
 }
 
 export const boosts: BoostItm[] = [{
@@ -74,4 +76,16 @@ export const boosts: BoostItm[] = [{
   tpc: -50,
   cpp: -50,
   tpm: -50
+}, {
+  name: "Sugar High",
+  description: "You get a sugar high so you code more!",
+  message: "You type 250 WPM!",
+
+  tpc: 50
+}, {
+  name: "Stylish Shirts",
+  description: "Wear fashion for cycles!",
+  message: "People are attracted by your shirt!",
+
+  cpp: 50
 }];

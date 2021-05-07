@@ -2,6 +2,8 @@ import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../global";
 import { items } from "../../util/data/shop";
+import { boostShop } from "../../util/data/boosts/boosts-shop";
+import { boosts } from "../../util/data/boosts/boosts";
 
 // [topic] [value]
 const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {
@@ -13,7 +15,13 @@ const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {
 > ${n.description}`),
   idle: user => items.idle.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.21, user.bought.idle[i] || 0).toString())} Ego-Coins ]
 <+${n.tpm} TPM> <${commanum((user.bought.idle[i] || 0).toString())} owned>
-> ${n.description}`)
+> ${n.description}`),
+  boosts: _ => boostShop.map(n => {
+    const b = boosts[n.ref];
+    return `[ ${b.name} ][ ${n.cost} Golden Cycles ]
+<+${b.tpc || 0}% TPC> <+ ${b.cpp || 0}% CPP> <+ ${b.tpm || 0}% TPM>
+> ${b.description}`;
+  })
 };
 
 class C extends Command {

@@ -10,7 +10,7 @@ export interface SItem {
   tpm?: number | string;
 }
 
-// upgrades are cpp, idles are tpm
+// upgrades are tpc, idles are tpm
 export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
   upgrades: [{
     name: "Inspiration",
