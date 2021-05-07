@@ -1,3 +1,6 @@
+import { boosts } from "./boosts/boosts";
+import { boostShop } from "./boosts/boosts-shop";
+
 // the S stands for Shop
 export interface SItem {
   name: string;
@@ -8,10 +11,12 @@ export interface SItem {
   tpc?: number | string;
   cpp?: number | string;
   tpm?: number | string;
+
+  ref?: number; // ref for boosts
 }
 
 // upgrades are tpc, idles are tpm
-export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
+export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[], boosts: SItem[] } = {
   upgrades: [{
     name: "Inspiration",
     description: "The idea is the start of everything!",
@@ -291,5 +296,15 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[] } = {
     description: "Test-Driven Development is the best!",
     cost: 401,
     tpm: 100
-  }]
+  }],
+
+  boosts: boostShop.map(n => {
+    const ref = boosts[n.ref];
+    return {
+      name: ref.name,
+      description: ref.description,
+      cost: n.cost,
+      ref: n.ref
+    };
+  })
 };

@@ -14,7 +14,6 @@ class C extends Command {
     return 6e4;
   }
 
-  // for now spells have 100% success rate
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1) Bot.argserror(msg, args.length, [1]);
 

@@ -2,8 +2,9 @@ import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr, parseNumber } from "../../global";
 import { items, SItem } from "../../util/data/shop";
+import { ItemEnum } from "../../util/data/item";
 
-const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex: number, amt: number) => string[] | string } = {
+const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex: number, amt: number, id: string) => string[] | string } = {
   text(user, item, itmIndex, amt) {
     const cost = calcCost(new Big(item.cost), 1.07, amt, user.bought.upgrades[itmIndex] || 0);
     const cycles = new Big(user.cycles), tpc = new Big(user.tpc);
@@ -46,7 +47,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 
   idle(user, item, itmIndex, amt) {
     const cost = calcCost(new Big(item.cost), 1.21, amt, user.bought.idle[itmIndex] || 0);
-    const coins = new Big(user.inv[0]), tpm = new Big(user.tpm);
+    const coins = new Big(user.inv[ItemEnum.EgoCoin]), tpm = new Big(user.tpm);
 
     if (coins.lt(cost)) {
       return [`You don't have enough Ego-Coins!
@@ -54,7 +55,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 **You need** ${brackets(commanum(cost.minus(coins).toString()))} more!`, "Not enough Ego-Coins!"];
     }
 
-    user.inv[0] = coins.minus(cost).toString();
+    user.inv[ItemEnum.EgoCoin] = coins.minus(cost).toString();
     if (!user.bought.idle[itmIndex]) user.bought.idle[itmIndex] = 0;
     user.bought.idle[itmIndex] += amt;
     user.tpm = tpm.plus(new Big(items.idle[itmIndex].tpm ?? 0).times(amt)).toString();
@@ -62,6 +63,26 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
     return `Successfully bought ${brackets(item.name)}
     You Spent: ${brackets(commanum(cost.toString()))}
     Your TPM: ${brackets(commanum(user.tpm))}`;
+  },
+
+  boosts(user, item, _, amt, id) {
+    const cost = new Big(item.cost).times(amt);
+    const coins = new Big(user.inv[ItemEnum.GoldenCycle]);
+    const bUser = Database.Boost.getUser(id);
+    const ref = item.ref || 0;
+
+    if (coins.lt(cost)) {
+      return [`You don't have enough Golden Cycles!
+**You have** ${brackets(commanum(coins.toString()))}
+**You need** ${brackets(commanum(cost.minus(coins).toString()))} more!`, "Not enough Golden Cycles!"];
+    }
+
+    user.inv[ItemEnum.GoldenCycle] = coins.minus(cost).toString();
+    if (!bUser[ref]) bUser[ref] = [];
+    bUser[ref].push(new Date());
+
+    return `Successfully bought ${brackets(item.name)}
+You Spent: ${brackets(commanum(cost.toString()))}`;
   }
 };
 
@@ -69,7 +90,8 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 const map = {
   text: "upgrades",
   post: "cpp",
-  idle: "idle"
+  idle: "idle",
+  boosts: "boosts"
 };
 
 
@@ -112,7 +134,7 @@ class C extends Command {
 Check your spelling!`, "Item not found!");
     }
 
-    const result = handleBuy[args[0]](user, item, itmIndex, amt);
+    const result = handleBuy[args[0]](user, item, itmIndex, amt, msg.author.id);
     if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
     else {
       msg.channel.send({
