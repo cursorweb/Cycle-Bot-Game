@@ -1,4 +1,6 @@
 import { promises as fs } from "fs";
+import { BigNumber as Big } from "bignumber.js";
+import { msBetween } from "../util";
 import * as path from "path";
 
 import { db } from "./database";
@@ -21,6 +23,17 @@ export function findUser(filter: (u: CycleUser) => boolean): string[] {
 
 export function getUser(key: string) {
   return pdb[key];
+}
+
+export function pruneUsers() {
+  for (const key in pdb) {
+    const user = pdb[key];
+
+    // greater than a week
+    if (new Big(user.cycles).lt(50) && (!user.daily || msBetween(new Date(user.daily), new Date()) > 1000 * 60 * 60 * 24 * 7)) {
+      delete pdb[key];
+    }
+  }
 }
 
 export async function save() {
