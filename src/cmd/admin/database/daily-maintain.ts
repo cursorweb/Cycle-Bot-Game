@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database } from "../../../global";
+import fetch from "node-fetch";
+import { Command, Colors, Database, Bot, codestr } from "../../../global";
 
 class C extends Command {
   names = ["admin-all"];
@@ -8,14 +9,34 @@ class C extends Command {
 
   isAdmin = true;
 
-  exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
+  exec(msg: Discord.Message, _: string[], client: Discord.Client) {
     Database.saveBackup();
-    msg.channel.send({
-      embed: {
-        color: Colors.SUCCESS,
-        title: "Successfully backed-up the database! Pruned users, and updated top.gg!",
-        footer: { text: "Note: Use restore to actually restore the database." }
-      }
+    Database.pruneUsers();
+
+    const guildCount = client.guilds.cache.size;
+
+    fetch("https://top.gg/api/bots/781939317450342470/stats", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": process.env.TOPGG || ""
+      },
+      body: JSON.stringify({
+        // eslint-disable-next-line camelcase
+        server_count: guildCount
+      })
+    }).then(() => {
+      msg.channel.send({
+        embed: {
+          color: Colors.SUCCESS,
+          title: "Successfully backed-up the database! Pruned users, and updated top.gg!",
+          footer: { text: "Note: Use restore to actually restore the database." }
+        }
+      });
+    }).catch(e => {
+      Bot.errormsg(msg, `An error occured.
+**ERROR**
+${codestr(e, "js")}`);
     });
   }
 }
