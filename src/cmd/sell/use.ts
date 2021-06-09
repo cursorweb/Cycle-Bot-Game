@@ -6,7 +6,7 @@ import { openItem } from "../../util/data/open-item";
 import { commanum } from "../../util/util";
 
 class C extends Command {
-  names = ["use", "eat", "u"];
+  names = ["use", "eat", "u", "open", "drink"];
   help = "Use an item!";
   examples = ["use coffee"];
 
