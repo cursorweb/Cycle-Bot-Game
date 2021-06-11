@@ -176,7 +176,7 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
   [ItemEnum.KnowledgeBook]: (user, amt) => {
     let xp = new Big(user.xp);
     const level = new Big(user.level);
-    const xpAmt = new Big(amt).times(level.plus(10));
+    const xpAmt = level.plus(12 * amt);
     xp = xp.plus(amt);
     user.xp = xp.toString();
 

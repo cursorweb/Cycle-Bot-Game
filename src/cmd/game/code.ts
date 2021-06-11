@@ -23,7 +23,7 @@ class C extends Command {
 
     const fields: Discord.EmbedFieldData[] = [];
     xp = xp.plus(1);
-    if (xp.gte(level.pow(2))) {
+    if (xp.gte(level.times(5))) {
       // level up!
       xp = new Big(0);
       user.level = level.plus(1).toString();
