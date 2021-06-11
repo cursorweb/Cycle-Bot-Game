@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
-        title: "Version 0.1.14",
-        description: "Added buying boost items! This was technically available in 0.1.13, it was implemented before.",
+        title: "Version 0.1.15",
+        description: "Levels have been nerfed to prepare for newer updates using them in the future!",
         fields: [{
           name: "Discord Server",
           value: "Talk to the developers, and get sneak peeks in the official [discord server](https://discord.gg/4vTPWdpjFz)!"
