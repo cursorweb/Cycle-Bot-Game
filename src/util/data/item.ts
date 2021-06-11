@@ -95,7 +95,7 @@ export const items: BItem[] = [{
   name: "Book of knowledge",
   emoji: "",
   description: "Instantly gain xp!",
-  dropChance: 5
+  dropChance: 10
 }, {
   name: "Golden Cycle",
   emoji: "",

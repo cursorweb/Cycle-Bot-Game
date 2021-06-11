@@ -27,10 +27,14 @@ You earned ${brackets("5")} cycles!` };
 }, {
   chance: () => Math.random() < 0.2,
   award: user => {
+    let itemsFound = 0;
     const itemsGot: { [i: string]: number } = {};
 
     for (let j = 0; j < 5; j++) {
       for (let i = 0; i < items.length; i++) {
+        if (itemsFound > 15) break;
+        if (Math.random() > 0.5) itemsFound++;
+
         const item = items[i];
         if (Math.random() * 100 < item.dropChance) {
           itemsGot[i] = (itemsGot[i] || 0) + 1;

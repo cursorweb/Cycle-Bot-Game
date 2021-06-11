@@ -15,7 +15,7 @@ class C extends Command {
         title: "Personal Balance",
         description: `**Cycles**: ${brackets(commanum(user.cycles))}
 **Text**: ${brackets(commanum(user.text))}
-**Level**: ${brackets(commanum(user.level))} (${commanum(user.xp)} / ${commanum(new Big(user.level).pow(2).toString())} XP)`,
+**Level**: ${brackets(commanum(user.level))} (${commanum(user.xp)} / ${commanum(new Big(user.level).times(5).toString())} XP)`,
         footer: {
           text: "Tip: Use &prof to view other peoples' profiles!"
         }

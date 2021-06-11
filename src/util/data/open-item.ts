@@ -77,6 +77,7 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
     };
   },
   [ItemEnum.DailyChest]: (user, amt) => {
+    let itemsFound = 0;
     const itemsGot: { [i: string]: number } = {};
     let cycles = new Big(user.cycles);
     const cpp = new Big(user.cpp);
@@ -87,6 +88,9 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
 
     for (let j = 0; j < 10 * amt; j++) {
       for (let i = 0; i < items.length; i++) {
+        if (itemsFound > 25) break;
+        if (Math.random() > 0.5) itemsFound++;
+
         const item = items[i];
         if (Math.random() * 100 < item.dropChance) {
           itemsGot[i] = (itemsGot[i] || 0) + 1;
@@ -183,7 +187,7 @@ ${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}`
     return {
       name: "Book of knowledge!", value: `You read the book...
 You instantly gain SMORT!
-+ ${brackets(commanum(xpAmt.toString()))}
++ ${brackets(commanum(xpAmt.toString()))} XP!
 
 **Note: ** Use \`&c\` to level up!`
     };
