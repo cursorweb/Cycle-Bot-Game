@@ -27,16 +27,12 @@ class C extends Command {
         if (col1.length > 0) out.push({ name: `${st}-${st + 4}`, value: col1.join("\n"), inline: true });
         if (col2.length > 0) out.push({ name: `${st + 5}-${st + 9}`, value: col2.join("\n"), inline: true });
 
-        if (page == 1) {
-          const user = Database.getUser(msg.author.id);
-          let index = 0;
+        const user = Database.getUser(msg.author.id);
 
-          if (!itm.findIndex(n => n.name == user.name)) {
-            index = data.findIndex(n => n.name == user.name);
-          }
-
+        if (itm.findIndex(n => n.name == user.name) < 0) {
+          const index = data.findIndex(n => n.name == user.name);
           out.push({
-            name: user.name,
+            name: "You",
             value: `${index + 1}. **${user.name}** ${brackets(commanum(user.cycles))}`
           });
         }
