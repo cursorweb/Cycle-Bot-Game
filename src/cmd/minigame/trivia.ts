@@ -8,9 +8,9 @@ class C extends Command {
   help = "Find the bug and get some cycles!";
   isGame = "y" as const;
 
-  /* get cooldown() {
+  get cooldown() {
     return 6e4;
-  } */
+  }
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
@@ -99,7 +99,6 @@ Use \`&trivia\` to try again!`
           minCycle();
         });
     });
-    // msg.channel.send(`Error: ${question.line}\n${codestr(editorCode, "")}`);
   }
 }
 
