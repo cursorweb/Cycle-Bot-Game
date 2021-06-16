@@ -4,6 +4,8 @@ export interface TriviaItem {
   lang: string;
 }
 
+export const users = ["Mr. Coder", "Bob", "Coder100", "Tom", "Mr. 100", "Six", "Snowy", "Alt", "Hithere", "John"];
+
 export const trivia: TriviaItem[] = [{
   code: `console
   .log(a);
@@ -114,4 +116,31 @@ a.b = 5;
 console.log(a.b);`,
   line: 2,
   lang: "JavaScript"
+}, {
+  code: `class MyClass {
+  constructor(callback) {
+    this .callback = callback;
+  }
+
+  hook(element) {
+    element.addEventListener("click", e => {
+      this.callback(e);
+    });
+  }
+}`,
+  line: 8,
+  lang: "JavaScript"
+}, {
+  code: `export default function element() {
+  return (
+    <>
+      <
+        input
+        placeholder="Enter your text: "
+      >
+    </>
+  );
+}`,
+  line: 7,
+  lang: "React"
 }];
