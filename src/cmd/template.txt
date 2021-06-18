@@ -8,6 +8,7 @@ class C extends Command {
   examples = [""];
   isGame = "" as "";
 
+  // don't forget to change!
   isAdmin = true;
 
   get cooldown() { return ; }
