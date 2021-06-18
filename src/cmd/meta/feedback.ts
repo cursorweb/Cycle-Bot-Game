@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, brackets } from "../../global";
+import { Command, Colors, Bot, brackets, cleanName } from "../../global";
 import admin from "../../util/admin.json";
 
 class C extends Command {
@@ -21,7 +21,7 @@ class C extends Command {
         embed: {
           color: Colors.PRIMARY,
           title: "Incoming Feedback!",
-          description: `${brackets(msg.author.tag)} has sent a message!`,
+          description: `${brackets(cleanName(msg.author.tag))} has sent a message!`,
           fields: [{
             name: "Feedback",
             value: args[0]

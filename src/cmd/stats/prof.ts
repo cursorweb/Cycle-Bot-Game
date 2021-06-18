@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, Database, parseMention, brackets, commanum } from "../../global";
+import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName } from "../../global";
 import { CycleUser } from "../../util/database/database";
 
 class C extends Command {
@@ -35,9 +35,9 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
     msg.channel.send({
       embed: {
         color: Colors.SUCCESS,
-        title: `User ${brackets(user.name)}`,
+        title: `User ${brackets(cleanName(user.name))}`,
 
-        description: `View the profile of ${brackets(user.name)}
+        description: `View the profile of ${brackets(cleanName(user.name))}
 **Cycles**: ${commanum(user.cycles)}
 **Text**: ${commanum(user.text)}
 **Level**: ${commanum(user.level)}`,

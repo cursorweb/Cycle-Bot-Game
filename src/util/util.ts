@@ -99,8 +99,8 @@ function constrain(n: number, min: number, max: number) {
   return n < min ? min : n > max ? max : n;
 }
 
-function serializeUsername(name: string) {
+function cleanName(name: string) {
   return name.replace(/([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+)/g, "\\$1");
 }
 
-export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, parseNumber, constrain, serializeUsername };
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, parseNumber, constrain, cleanName };

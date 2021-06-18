@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database, Bot, brackets, parseMention } from "../../../global";
+import { Command, Colors, Database, Bot, brackets, parseMention, cleanName } from "../../../global";
 
 class C extends Command {
   names = ["admin-user-reset"];
@@ -41,7 +41,7 @@ class C extends Command {
       embed: {
         color: Colors.SUCCESS,
         title: "Success!",
-        description: `Successfully **reset** user ${brackets(user.name)}
+        description: `Successfully **reset** user ${brackets(cleanName(user.name))}
 **Database Saved**
 > View profile to see more!`
       }

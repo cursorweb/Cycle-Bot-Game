@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber } from "../../global";
+import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber, cleanName } from "../../global";
 
 class C extends Command {
   names = ["leaderboard", "scoreboard", "lb", "l"];
@@ -21,8 +21,8 @@ class C extends Command {
       else {
         const st = 10 * (pg - 1) + 1; // start
 
-        const col1 = itm.slice(0, 5).map((n, i) => `${st + i}. ${n.name == msg.author.tag ? "**" : ""}${n.name}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles))}`);
-        const col2 = itm.slice(5).map((n, i) => `${st + i + 5}. ${n.name == msg.author.tag ? "**" : ""}${n.name}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles))}`);
+        const col1 = itm.slice(0, 5).map((n, i) => `${st + i}. ${n.name == msg.author.tag ? "**" : ""}${cleanName(n.name)}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles))}`);
+        const col2 = itm.slice(5).map((n, i) => `${st + i + 5}. ${n.name == msg.author.tag ? "**" : ""}${cleanName(n.name)}${n.name == msg.author.tag ? "**" : ""} ${brackets(commanum(n.cycles))}`);
 
         if (col1.length > 0) out.push({ name: `${st}-${st + 4}`, value: col1.join("\n"), inline: true });
         if (col2.length > 0) out.push({ name: `${st + 5}-${st + 9}`, value: col2.join("\n"), inline: true });
@@ -33,7 +33,7 @@ class C extends Command {
           const index = data.findIndex(n => n.name == user.name);
           out.push({
             name: "You",
-            value: `${index + 1}. **${user.name}** ${brackets(commanum(user.cycles))}`
+            value: `${index + 1}. **${cleanName(user.name)}** ${brackets(commanum(user.cycles))}`
           });
         }
       }

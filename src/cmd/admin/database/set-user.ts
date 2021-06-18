@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database, Bot, brackets, parseMention } from "../../../global";
+import { Command, Colors, Database, Bot, brackets, parseMention, cleanName } from "../../../global";
 
 class C extends Command {
   names = ["admin-user-set"];
@@ -20,7 +20,7 @@ class C extends Command {
       id = parsed.value;
     } else {
       const ids = Database.findUser(u => u.name.toLowerCase().includes(parsed.value.toLowerCase()));
-      if (ids.length == 0) return Bot.usererr(msg, `User ${brackets(parsed.value)} not found! Check your spelling.`, "Not found!!");
+      if (ids.length == 0) return Bot.usererr(msg, `User ${brackets(cleanName(parsed.value))} not found! Check your spelling.`, "Not found!!");
       if (ids.length > 1) {
         msg.channel.send({
           embed: {
@@ -44,7 +44,7 @@ class C extends Command {
       embed: {
         color: Colors.SUCCESS,
         title: "Success!",
-        description: `Successfully **set** user ${brackets(user.name)}
+        description: `Successfully **set** user ${brackets(cleanName(user.name))}
 **Database Saved**
 > View profile to see more!`
       }

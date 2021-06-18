@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum, parseMention, parseNumber } from "../../global";
+import { Command, Colors, Bot, Database, brackets, commanum, parseMention, parseNumber, cleanName } from "../../global";
 import { items } from "../../util/data/item";
 
 class C extends Command {
@@ -29,7 +29,7 @@ class C extends Command {
         if (userArr.length == 0) return Bot.usererr(msg, `User ${brackets(parsedId.value)} not found. Check your spelling!`, "User not found!");
         else if (userArr.length > 1) {
           return Bot.errormsg(msg, `Found ${brackets(userArr.length.toString())} users.
-${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**`).join("\n")}`, "Multiple users found!");
+${userArr.slice(0, 10).map(o => `${brackets(cleanName(Database.getUser(o).name))}: **${o}**`).join("\n")}`, "Multiple users found!");
         }
         user = Database.getUser(userArr[0]);
       }
