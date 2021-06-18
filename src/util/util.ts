@@ -24,7 +24,7 @@ function commanum(inp: string) {
 
   while (/(\d+)(\d{3})/.test(valSplit[0].toString())) valSplit[0] = valSplit[0].toString().replace(/(\d+)(\d{3})/, "$1,$2");
 
-  return valSplit.length == 2 ? `${valSplit[0] }.${ valSplit[1]}` : valSplit[0];
+  return valSplit.length == 2 ? `${valSplit[0]}.${valSplit[1]}` : valSplit[0];
 }
 
 /** Turns 1e+3 to 1000 */
@@ -38,7 +38,7 @@ function expandnum(val: string) {
   let mag = Number(data[1]) + 1;
 
   if (mag < 0) {
-    z = `${sign }0.`;
+    z = `${sign}0.`;
     while (mag++) z += "0";
     return z + str.replace(/^-/, "");
   }
@@ -99,4 +99,8 @@ function constrain(n: number, min: number, max: number) {
   return n < min ? min : n > max ? max : n;
 }
 
-export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, parseNumber, constrain };
+function serializeUsername(name: string) {
+  return name.replace(/([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+)/g, "\\$1");
+}
+
+export { randomChoice, random, randomb, commanum, expandnum, plural, pluralb, parseMention, msBetween, addMs, calcCost, calcPrice, parseNumber, constrain, serializeUsername };
