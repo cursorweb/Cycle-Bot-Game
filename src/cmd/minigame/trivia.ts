@@ -50,8 +50,14 @@ ${codestr(editorCode, "")}`
           const reply = msgs.first();
           const num = parseNumber(reply?.content);
           if (isNaN(num)) {
-            return Bot.errormsg(msg, `You didn't input a number!
-Use \`&trivia\` to try again!`, "Not a number!");
+            // can't use `Bot` here... it throws error!
+            return msg.channel.send({
+              embed: {
+                title: "Not a number!",
+                description: `You didn't input a number!
+Use \`&trivia\` to try again!`
+              }
+            });
           }
 
           const user = randomChoice(users)[0];
@@ -63,7 +69,6 @@ Use \`&trivia\` to try again!`, "Not a number!");
                 description: `You found the bug!
 
 ${user} thanks you!
-${question.line} == ${num}
 + ${brackets("2")} cycles`
               }
             });
