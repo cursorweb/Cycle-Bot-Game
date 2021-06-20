@@ -8,6 +8,8 @@ cmd/
 
 util/
   data/
+    boost/
+      # This contains data for boosts specifically
     # This contains typings for user data like items
 
   database/
@@ -16,6 +18,7 @@ util/
   admin.json # This is all the admin user IDs
   format.ts # These are text formatting utils
   util.ts # These are math/text utils
+  levels.ts # This defines functions to be used for levels
 
 cmd-parser.ts # This parses commands
 global.ts # This exports things from 'util' to be easily importable

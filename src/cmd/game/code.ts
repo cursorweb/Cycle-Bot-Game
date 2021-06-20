@@ -3,6 +3,7 @@ import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global";
 import { code as drops } from "../../util/data/drops";
 import { boosts } from "../../util/data/boosts/boosts";
+import { levelUp } from "../../util/levels";
 
 class C extends Command {
   names = ["code", "c"];
@@ -16,13 +17,19 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
     const userBoosts = Database.Boost.getUser(msg.author.id);
-    let tpc = new Big(user.tpc), text = new Big(user.text), xp = new Big(user.xp);
-    const level = new Big(user.level);
+
+    const fields: Discord.EmbedFieldData[] = [];
+    const levelField = levelUp(user);
+    if (levelField) fields.push(levelField);
+
+    let tpc = new Big(user.tpc);
+    let text = new Big(user.text);
+    /* let xp = new Big(user.xp);
+    const level = new Big(user.level); */
 
     const isServer = msg.guild?.id == "788421241005408268"; // if user is in official server
 
-    const fields: Discord.EmbedFieldData[] = [];
-    xp = xp.plus(1);
+    /* xp = xp.plus(1);
     if (xp.gte(level.times(5))) {
       // level up!
       xp = new Big(0);
@@ -42,7 +49,7 @@ class C extends Command {
         name: "Level up!",
         value: `You are now level ${brackets(commanum(user.level))}!`
       });
-    }
+    } */
 
     if (isServer) tpc = tpc.times(1.1).dp(0);
     for (const drop of drops) {
@@ -77,7 +84,6 @@ You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of 
     });
 
     user.text = text.plus(tpc).toString();
-    user.xp = xp.toString();
   }
 
   cooldownError(msg: Discord.Message, ms: number) {
