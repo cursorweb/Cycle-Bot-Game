@@ -24,32 +24,8 @@ class C extends Command {
 
     let tpc = new Big(user.tpc);
     let text = new Big(user.text);
-    /* let xp = new Big(user.xp);
-    const level = new Big(user.level); */
 
     const isServer = msg.guild?.id == "788421241005408268"; // if user is in official server
-
-    /* xp = xp.plus(1);
-    if (xp.gte(level.times(5))) {
-      // level up!
-      xp = new Big(0);
-      user.level = level.plus(1).toString();
-
-      const newCpp = new Big(user.cpp).times(1.01).dp(0);
-      const newTpc = tpc = tpc.times(1.02).dp(0);
-      const newCycles = new Big(user.cycles).times(1.1).dp(0);
-      const newText = text = new Big(user.text).times(1.15).dp(0);
-
-      user.cpp = newCpp.toString();
-      user.tpc = newTpc.toString();
-      user.cycles = newCycles.toString();
-      user.text = newText.toString();
-
-      fields.push({
-        name: "Level up!",
-        value: `You are now level ${brackets(commanum(user.level))}!`
-      });
-    } */
 
     if (isServer) tpc = tpc.times(1.1).dp(0);
     for (const drop of drops) {
