@@ -54,6 +54,7 @@ ${codestr(editorCode, "")}`
             return msg.channel.send({
               embed: {
                 title: "Not a number!",
+                color: Colors.WARNING,
                 description: `You didn't input a number!
 Use \`&trivia\` to try again!`
               }
