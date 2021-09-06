@@ -252,5 +252,29 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
 You now have ${brackets(commanum(goldenCycles.toString()))} golden cycles!
 You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
     };
+  },
+  [ItemEnum.VoteCrate]: (user, amt) => {
+    const text = new Big(user.text);
+    const cycles = new Big(user.cycles);
+    const tpc = new Big(user.tpc);
+    const cpp = new Big(user.cpp);
+
+    const txt = tpc.times(amt / 1.5).dp(0);
+    const newText = text.plus(txt);
+
+    const cycl = cpp.times(amt / 1.5).dp(0);
+    const newCycles = cycles.plus(cycl);
+
+    user.text = newText.toString();
+    user.cycles = newCycles.toString();
+
+    return {
+      name: "Vote Crate!",
+      value: `You open the vote crate.
++ ${brackets(commanum(txt.toString()))} text!
++ ${brackets(commanum(cycl.toString()))} cycles!
+
+Thanks for voting!`
+    };
   }
 };

@@ -93,7 +93,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
           }
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
       for (const id of admins) {
         const user = client.users.cache.get(id);

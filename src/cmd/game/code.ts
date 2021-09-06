@@ -54,7 +54,7 @@ class C extends Command {
         description: `You code your heart out!
 You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of code!${isServer ? `
 **10% text boost** for coding in the official discord server!` : ""}`,
-        footer: { text: "Use &post to get some cycles!" },
+        footer: { text: "Use &post to get some cycles! Use &open 'chest chest' to use chests!" },
         fields
       }
     });

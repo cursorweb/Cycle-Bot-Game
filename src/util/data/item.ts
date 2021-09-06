@@ -27,7 +27,8 @@ export enum ItemEnum {
   KnowledgeBook,
   GoldenCycle,
   EgoCoinMaker,
-  GoldenCycleMaker
+  GoldenCycleMaker,
+  VoteCrate
 }
 
 export const items: BItem[] = [{
@@ -112,4 +113,9 @@ export const items: BItem[] = [{
   emoji: "",
   description: "Generates 5% of your cycles into golden cycles!",
   dropChance: 5
+}, {
+  name: "Vote Crate",
+  emoji: "",
+  description: "This rare crate (not chest!) gives you all sorts of bonuses!",
+  dropChance: 0
 }];
