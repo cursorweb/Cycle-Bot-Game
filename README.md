@@ -46,3 +46,5 @@ NODE_ENV=1
 Note the value can be whatever you want as we only check for existence.
 
 Also read [CONTRIBUTING.md](CONTRIBUTING.md).
+
+PS: We stopeed working on this project for a while, but it is now being worked on again. 
