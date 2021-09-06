@@ -46,3 +46,7 @@ NODE_ENV=1
 Note the value can be whatever you want as we only check for existence.
 
 Also read [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Balance
+Most math can be found here: https://www.desmos.com/calculator/y0kqpajh2m
+Comments that say `refer to desmos` probably refers to that.

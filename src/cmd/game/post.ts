@@ -36,7 +36,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
     }
 
     // refer to desmos.
-    let upvotes = amt.div(5).times(Math.abs(random(-7, 7)) + 1).abs().plus(cpp).dp(0);
+    let upvotes = amt.plus(cpp).plus(random(-7, 7));
 
     const isServer = msg.guild?.id == "788421241005408268"; // refer to ./code.ts
     if (isServer) upvotes = upvotes.times(1.05).dp(0);
