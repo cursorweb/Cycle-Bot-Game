@@ -50,3 +50,4 @@ Also read [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Balance
 Most math can be found here: https://www.desmos.com/calculator/y0kqpajh2m
 Comments that say `refer to desmos` probably refers to that.
+PS: We stopped working on this project for a while, but it is now being worked on again. 
