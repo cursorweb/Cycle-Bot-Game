@@ -1,0 +1,20 @@
+export const socialMedia = [
+  "Coding Club",
+  "SMS",
+  "Slack",
+  "Discord",
+  "Repl.it",
+  "Glitch.com",
+  "GitHub",
+  "Dev.To",
+  "YouTube",
+  "Twitch",
+  "Instagram",
+  "Twitter",
+  "Facebook",
+  "Reddit",
+  "Vimeo",
+  "Hulu",
+  "Netflix",
+  "TikTok"
+];

@@ -24,7 +24,7 @@ function hidden(input: string) {
 }
 
 function codestr(str: string, lang = "html") {
-  return `\`\`\`${ lang }\n${ str }\`\`\``;
+  return `\`\`\`${lang}\n${str}\`\`\``;
 }
 
 function formatDate(ms: number) {

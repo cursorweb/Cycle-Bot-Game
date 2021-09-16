@@ -13,12 +13,7 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
-        const temp: { [i: number]: string } = {};
-        for (const key in Database.pdb[id].inv) {
-          temp[key] = Database.pdb[id].inv[key];
-        }
-
-        Database.pdb[id].inv = temp;
+        Database.pdb[id].socialMedia = 0;
         // CODE ENTRY POINT
       }
 
