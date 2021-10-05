@@ -1,8 +1,7 @@
 import * as Discord from "discord.js";
 import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database, brackets, codestr } from "../../global";
+import { Command, Colors, Database, brackets, codestr, commanum } from "../../global";
 import { socialMedia } from "../../util/data/social-media";
-import { defaultSchema } from "../../util/database/genschema";
 
 class C extends Command {
   names = ["social-media", "media-shop"];
@@ -18,21 +17,23 @@ class C extends Command {
     }
 
     const idx = user.socialMedia;
-    const prestige = Math.log(idx) + 0.5;
+    const prestige = Math.log(idx + 1) + 0.5;
 
     const curr = socialMedia[idx];
     const next = socialMedia[idx + 1];
 
     // lnx + 0.5
-    const nextTpc = new Big(defaultSchema.tpc).times(prestige);
-    const nextCpp = new Big(defaultSchema.cpp).times(prestige);
-    const nextTpm = new Big(defaultSchema.tpm).times(prestige);
+    const nextTpc = new Big("1").times(prestige).dp(0);
+    const nextCpp = new Big("1").times(prestige).dp(0);
+    const nextTpm = new Big("0").plus(1).times(prestige).div(2).dp(0);
+
+    const cyclesNeeded = new Big(100_000).pow(Math.ceil(Math.log(2 * (idx + 1))));
 
     msg.channel.send({
       embed: {
         color: Colors.PRIMARY,
         title: "Social Media",
-        description: "Social medias will let you get more cycles faster, but all your clout is reset!",
+        description: "Social medias will let you get more cycles faster,\nbut all your clout is reset!",
         fields: [
           {
             name: "Current Social Media",
@@ -42,9 +43,14 @@ class C extends Command {
             value: `Your next social media is ${brackets(next)}.
 ${codestr(`+ ${nextTpc}% base TPC
 + ${nextCpp}% base CPP
-+ ${nextTpm}% base TPM`)}`
++ ${nextTpm}% base TPM`)}
+
+**Requirement: ** ${commanum(cyclesNeeded.toString())} cycles!`
           }
-        ]
+        ],
+        footer: {
+          text: "Use &next-media to go to the next social media!"
+        }
       }
     });
   }

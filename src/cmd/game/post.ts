@@ -4,6 +4,7 @@ import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum, pa
 import { post as drops } from "../../util/data/drops";
 import { boosts } from "../../util/data/boosts/boosts";
 import { levelUp } from "../../util/levels";
+import { socialMedia } from "../../util/data/social-media";
 
 class C extends Command {
   names = ["post", "p"];
@@ -20,6 +21,7 @@ class C extends Command {
 
     const user = Database.getUser(msg.author.id);
     const userBoosts = Database.Boost.getUser(msg.author.id);
+    const idx = user.socialMedia;
 
     const levelField = levelUp(user);
 
@@ -36,7 +38,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
     }
 
     // refer to desmos.
-    let upvotes = amt.plus(cpp).plus(random(-7, 7));
+    let upvotes = amt.plus(cpp).plus(new Big(random(-0.5, 1)).times(cpp)).abs().dp(0);
 
     const isServer = msg.guild?.id == "788421241005408268"; // refer to ./code.ts
     if (isServer) upvotes = upvotes.times(1.05).dp(0);
@@ -62,6 +64,20 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
       cpp = cpp.times(new Big(itm.cpp).plus(100).div(100)).times(amt).dp(0);
     }
 
+    if (idx > 0) {
+      const name = socialMedia[idx];
+      const prestige = Math.log(idx + 1) + 0.5;
+      const cpp = new Big(user.cpp).times(prestige).dp(0);
+      cycles = cycles.plus(cpp);
+
+      fields.push({
+        name: "Social Media Boost!",
+        value: `With a new clout in ${name}, you get +${brackets(commanum(cpp.toString()))} more text!`
+      });
+    }
+
+    if (levelField) fields.push(levelField);
+
     cycles = cycles.plus(upvotes);
 
     msg.channel.send({
@@ -74,7 +90,7 @@ People view your post!
 
 > You now have ${brackets(commanum(cycles.toString()))} cycles!${isServer ? `
 **5% cycle boost** for posting in the official discord server!` : ""}`,
-        fields: levelField ? [levelField] : [],
+        fields,
         footer: {
           text: "Use &bal to view your balance!"
         }

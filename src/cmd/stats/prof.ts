@@ -1,5 +1,7 @@
 import * as Discord from "discord.js";
+import { BigNumber as Big } from "bignumber.js";
 import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName } from "../../global";
+import { socialMedia } from "../../util/data/social-media";
 import { CycleUser } from "../../util/database/database";
 
 class C extends Command {
@@ -32,6 +34,23 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
       }
     }
 
+    const sm = user.socialMedia;
+    const prestige = Math.log(sm) + 0.5;
+
+    const smBoost = [];
+    if (sm > 0) {
+      const nextTpc = new Big("1").times(prestige).dp(0);
+      const nextCpp = new Big("1").times(prestige).dp(0);
+      const nextTpm = new Big("0").plus(1).times(prestige).div(2).dp(0);
+
+      smBoost.push({
+        name: "Social Media Boosts",
+        value: `+ ${nextTpc}% TPC
++ ${nextCpp}% CPP
++ ${nextTpm}% TPM`
+      });
+    }
+
     msg.channel.send({
       embed: {
         color: Colors.SUCCESS,
@@ -40,7 +59,8 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         description: `View the profile of ${brackets(cleanName(user.name))}
 **Cycles**: ${commanum(user.cycles)}
 **Text**: ${commanum(user.text)}
-**Level**: ${commanum(user.level)}`,
+**Level**: ${commanum(user.level)}${sm ? `
+**Social Media**: ${brackets(socialMedia[user.socialMedia])}` : ""}`,
         fields: [{
           name: "TPC (Text Per Code)",
           value: commanum(user.tpc)
@@ -50,7 +70,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         }, {
           name: "TPM (Text Per Minute)",
           value: commanum(user.tpm)
-        }],
+        }].concat(smBoost),
 
         footer: {
           text: "Use &bal to view stats about yourself!"

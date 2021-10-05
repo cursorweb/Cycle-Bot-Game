@@ -35,10 +35,10 @@ class C extends Command {
     }
 
     const user = Database.getUser(id);
-    Database.setUser(id, Object.assign({
+    Database.setUser(id, Object.assign(Database.defaultSchema, {
       cycles: "999999999", text: "999999999",
       tpc: "999999999", cpp: "999999999", tpm: "999999999"
-    }, { name: user.name }, Database.defaultSchema));
+    }, { name: user.name }));
 
     msg.channel.send({
       embed: {
