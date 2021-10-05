@@ -49,7 +49,7 @@ export async function update() {
 }
 
 export async function saveBackup() {
-  await fs.writeFile(path.join(__dirname, "..", "..", "..", "database.json"), JSON.stringify(pdb));
+  await fs.writeFile(path.join(__dirname, "..", "..", "..", "database.json"), JSON.stringify(pdb, null, 2));
 }
 
 export async function updateBackup() {
