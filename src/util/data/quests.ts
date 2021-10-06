@@ -22,10 +22,10 @@ export const quests: CQuest[] = [{
   description: "The first quest there ever was, gives you a low amount of cycles.",
   cycles: 1000,
   start: {
-    tpc:5
+    tpc: 5
   },
   end: {
-    tpc:15
+    tpc: 15
   }
 
 }];
