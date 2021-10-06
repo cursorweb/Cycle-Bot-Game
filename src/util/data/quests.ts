@@ -1,6 +1,6 @@
 // the C stands for challenge
 export interface CQuest {
-  name: string; //the name of the quest
+  name: string; 
   description: string;
   cycles: number;
 
