@@ -5,15 +5,15 @@ export interface CQuest {
   cycles: number;
 
   start?: { // this is the starting number, which will be manually assigned
-    tpc?: number;
-    cpp?: number;
-    tpm?: number;
+    tpc?: string;
+    cpp?: string;
+    tpm?: string;
   }
 
   end?: { // this is how much will be needed, like start + this_number when initiated
-    tpc?: number;
-    cpp?: number;
-    tpm?: number;
+    tpc?: string;
+    cpp?: string;
+    tpm?: string;
   }
 }
 
@@ -22,10 +22,10 @@ export const quests: CQuest[] = [{
   description: "The first quest there ever was, gives you a low amount of cycles.",
   cycles: 1000,
   start: {
-    tpc: 5
+    tpc: "5"
   },
   end: {
-    tpc: 15
+    tpc: "15"
   }
 
 }];
