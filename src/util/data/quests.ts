@@ -28,4 +28,24 @@ export const quests: CQuest[] = [{
     tpc: "15"
   }
 
+}, {
+  name: "Code Quest 1",
+  description: "Example text",
+  cycles: 5000,
+  start: {
+    tpc: "40"
+  },
+  end: {
+    tpc: "75"
+  }
+}, {
+  name: "Code Quest 2",
+  description: "Example text",
+  cycles: 5000,
+  start: {
+    tpc: "100"
+  },
+  end: {
+    tpc: "150"
+  }
 }];
