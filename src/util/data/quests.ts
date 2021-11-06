@@ -17,4 +17,35 @@ export interface CQuest {
   }
 }
 
-export const quests: CQuest[] = [];
+export const quests: CQuest[] = [{
+  name: "Starter Quest",
+  description: "The first quest there ever was, gives you a low amount of cycles.",
+  cycles: 1000,
+  start: {
+    tpc: "5"
+  },
+  end: {
+    tpc: "15"
+  }
+
+}, {
+  name: "Code Quest 1",
+  description: "Example text",
+  cycles: 5000,
+  start: {
+    tpc: "40"
+  },
+  end: {
+    tpc: "75"
+  }
+}, {
+  name: "Code Quest 2",
+  description: "Example text",
+  cycles: 5000,
+  start: {
+    tpc: "100"
+  },
+  end: {
+    tpc: "150"
+  }
+}];
