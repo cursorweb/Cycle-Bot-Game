@@ -113,33 +113,32 @@ ${codestr("&use 'cheap iphone'", "js")}`
    */
   export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.MessageEmbedOptions, curr = 1) {
     let page = curr;
+    const initialMessage = await msg.channel.send({ embed: send(page, data.slice(constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length))) });
+    const react = async() => {
+      if (initialMessage.reactions.cache.has("\u2B05") && initialMessage.reactions.cache.has("\u27A1")) return;
+      if (page > 1) {
+        // left
+        await initialMessage.reactions.removeAll();
+        await initialMessage.react("\u2B05");
+      }
+      await initialMessage.react("\u27A1"); // right
+    };
+    await react();
 
-    function recurse() {
-      msg.channel.send({ embed: send(page, data.slice(constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length))) })
-        .then(async mesg => {
-          if (page > 1) await mesg.react("\u2B05"); // left
-          await mesg.react("\u27A1"); // right
+    const filter = (reaction: Discord.MessageReaction, user: Discord.User) => {
+      return ["\u2B05", "\u27A1"].includes(reaction.emoji.name) && user.id == msg.author.id;
+    };
 
-          function filter(reaction: Discord.MessageReaction, user: Discord.User) {
-            return ["\u2B05", "\u27A1"].includes(reaction.emoji.name) && user.id == msg.author.id;
-          }
-
-          mesg.awaitReactions(filter, { max: 1, time: 60000, errors: ["time"] }).then(col => {
-            const choice = col.first();
-
-            // left
-            if (choice?.emoji.name == "\u2B05") page--;
-            // right
-            else page++;
-
-            mesg.delete();
-
-            recurse();
-          });
-        });
-    }
-
-    recurse();
+    const coll = initialMessage.createReactionCollector(filter, { time: 160000 });
+    coll.on("collect", async(choice) => {
+      choice.users.remove(msg.author);
+      // left
+      if (choice?.emoji.name == "\u2B05") page--;
+      // right
+      else page++;
+      await react();
+      await initialMessage.edit({ embed: send(page, data.slice(constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length))) });
+    });
   }
 }
 
