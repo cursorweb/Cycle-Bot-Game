@@ -95,16 +95,17 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
       }
     } catch (err: any) {
       console.log(err);
-      for (const id of admins) {
-        const user = client.users.cache.get(id);
-        await user?.send({
+      const channel = client.channels.cache.get("899518500576579615") as Discord.TextChannel;
+
+      if (channel) {
+        channel.send({
           embed: {
-            color: g.Colors.PRIMARY,
+            color: g.Colors.ERROR,
             title: "Error!",
             description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
             fields: [{
               name: "Error",
-              value: g.codestr(`${err.message}`, "js")
+              value: g.codestr(err.message, "js")
             }]
           }
         });

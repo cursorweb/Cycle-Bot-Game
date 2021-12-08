@@ -3,7 +3,7 @@ import { UserInput } from "./global";
 function parse(prefix: string, command: string): UserInput | false {
   if (command.slice(0, prefix.length) != prefix) return false;
 
-  const input = command.slice(prefix.length).trim();
+  const input = reformatStr(command.slice(prefix.length));
   if (!/(\s+)|"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([^\s]+)/g.test(input)) return false;
 
   let output: string[] = [];
@@ -17,6 +17,14 @@ function parse(prefix: string, command: string): UserInput | false {
   output = output.filter(o => o != "");
 
   return { command: output[0].toLowerCase(), args: output.slice(1) };
+}
+
+function reformatStr(str: string) {
+  return str
+    .trim()
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, "\"")
+  ;
 }
 
 export { parse };
