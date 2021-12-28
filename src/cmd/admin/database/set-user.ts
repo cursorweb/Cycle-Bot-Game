@@ -23,11 +23,11 @@ class C extends Command {
       if (ids.length == 0) return Bot.usererr(msg, `User ${brackets(cleanName(parsed.value))} not found! Check your spelling.`, "Not found!!");
       if (ids.length > 1) {
         msg.channel.send({
-          embed: {
+          embeds: [{
             color: Colors.WARNING,
             title: "Warning",
             description: `Found ${brackets(ids.length.toString())} users. Using the first one.`
-          }
+          }]
         });
       }
 
@@ -41,13 +41,13 @@ class C extends Command {
     }, { name: user.name }));
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Success!",
         description: `Successfully **set** user ${brackets(cleanName(user.name))}
 **Database Saved**
 > View profile to see more!`
-      }
+      }]
     });
 
     process.env.NODE_ENV ? Database.saveBackup() : Database.save();

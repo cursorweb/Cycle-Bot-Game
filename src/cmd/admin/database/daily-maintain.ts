@@ -27,11 +27,11 @@ class C extends Command {
       })
     }).then(() => {
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: "Successfully backed-up the database! Pruned users, and updated top.gg!",
           footer: { text: "Note: Use restore to actually restore the database." }
-        }
+        }]
       });
     }).catch(e => {
       Bot.errormsg(msg, `An error occured.

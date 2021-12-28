@@ -30,7 +30,7 @@ class C extends Command {
     const cyclesNeeded = new Big(100_000).pow(Math.ceil(Math.log(2 * (idx + 1))));
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Social Media",
         description: "Social medias will let you get more cycles faster,\nbut all your clout is reset!",
@@ -51,7 +51,7 @@ ${codestr(`+ ${nextTpc}% base TPC
         footer: {
           text: "Use &next-media to go to the next social media!"
         }
-      }
+      }]
     });
   }
 }

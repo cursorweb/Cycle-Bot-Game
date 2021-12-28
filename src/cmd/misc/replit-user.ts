@@ -40,7 +40,7 @@ class C extends Command {
     if (user == null) Bot.usererr(msg, `The user ${brackets(args[0])} could not be found.\nCheck your spelling!`, "User not found!");
     else {
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: `User card for ${brackets(user.username)}`,
           author: {
@@ -58,7 +58,7 @@ class C extends Command {
             value: itm.tagline,
             inline: true
           }))
-        }
+        }]
       });
     }
   }

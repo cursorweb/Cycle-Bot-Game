@@ -56,13 +56,13 @@ class C extends Command {
     const out = func(user);
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Daily Reward!",
         description: "You got your daily reward!",
         fields: [out],
         footer: { text: "Come back tomorrow for a daily reward!" }
-      }
+      }]
     });
 
     user.daily = addMs(new Date(), 60e3 * 60 * 10).toString();

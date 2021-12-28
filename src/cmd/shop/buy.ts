@@ -138,11 +138,11 @@ Check your spelling!`, "Item not found!");
     if (Array.isArray(result)) Bot.errormsg(msg, result[0], result[1]);
     else {
       msg.channel.send({
-        embed: {
+        embeds: [{
           title: "Transaction Successful!",
           color: Colors.SUCCESS,
           description: result
-        }
+        }]
       });
     }
   }

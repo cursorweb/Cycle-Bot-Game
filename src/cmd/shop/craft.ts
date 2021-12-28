@@ -73,7 +73,7 @@ class C extends Command {
       user.inv[item.creates] = outAmt.toString();
 
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: "Success!",
           description: item.message,
@@ -81,7 +81,7 @@ class C extends Command {
             name: "Result",
             value: `+ ${brackets(commanum(amt.toString()))} ${itemMeta.name}!`
           }]
-        }
+        }]
       });
     }
   }

@@ -13,19 +13,19 @@ class C extends Command {
     try {
       const output = new Function("client", "process", args.join(" "))(client, process);
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: "Beep Boop Bop Boop!",
           description: `Output was\n${ codestr(output, "yaml")}`
-        }
+        }]
       });
     } catch (e) {
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.ERROR,
           title: "Error!!",
-          description: `Error was\n${ codestr(e, "js")}`
-        }
+          description: `Error was\n${ codestr(String(e), "js")}`
+        }]
       });
     }
   }

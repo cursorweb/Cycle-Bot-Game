@@ -35,48 +35,48 @@ class C extends Command {
     // final output
     const editorCode = code.map((c, i) => `${(i + 1).toString().padEnd(length)}| ${c}`).join("\n");
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: `${brackets(question.lang)} Trivia!`,
         description: `Respond with the line of the bug!
 
 ${codestr(editorCode, "")}`
-      }
+      }]
     }).then(() => {
       const filter = (m: Discord.Message) => msg.author.id == m.author.id;
 
-      msg.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ["time"] })
+      msg.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ["time"] })
         .then(msgs => {
           const reply = msgs.first();
           const num = parseNumber(reply?.content);
           if (isNaN(num)) {
             // can't use `Bot` here... it throws error!
             return msg.channel.send({
-              embed: {
+              embeds: [{
                 title: "Not a number!",
                 color: Colors.WARNING,
                 description: `You didn't input a number!
 Use \`&trivia\` to try again!`
-              }
+              }]
             });
           }
 
           const user = randomChoice(users)[0];
           if (num == question.line) {
             msg.channel.send({
-              embed: {
+              embeds:[ {
                 title: "Correct!",
                 color: Colors.SUCCESS,
                 description: `You found the bug!
 
 ${user} thanks you!
 + ${brackets("2")} cycles`
-              }
+              }]
             });
             addCycle();
           } else {
             msg.channel.send({
-              embed: {
+              embeds: [{
                 title: "Wrong!",
                 color: Colors.ERROR,
                 description: `You made ${user} spend 10 hours debugging...
@@ -84,14 +84,14 @@ ${user} thanks you!
 
 ${question.line} == ${num}
 - ${brackets("2")} cycles`
-              }
+              }]
             });
             minCycle();
           }
         })
         .catch(() => {
           msg.reply({
-            embed: {
+            embeds: [{
               title: "Times up!",
               color: Colors.ERROR,
               description: `You ran out of time!
@@ -99,7 +99,7 @@ ${question.line} == ${num}
 - ${brackets("2")} cycles
 
 Use \`&trivia\` to try again!`
-            }
+            }]
           });
 
           minCycle();

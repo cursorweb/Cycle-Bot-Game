@@ -10,11 +10,11 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.update().then(() => msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Success!",
         description: "Successfully **updated** the database."
-      }
+      }]
     }));
   }
 }

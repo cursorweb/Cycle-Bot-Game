@@ -25,14 +25,14 @@ export function initiate(client: Discord.Client) {
     voteCrate = amt.toString();
 
     client.users.cache.get(id)?.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Thank you for voting!",
         description: `For voting, you get a ${brackets("vote crate")}!`,
         footer: {
           text: "To open a vote crate, use &open 'vote crate'"
         }
-      }
+      }]
     });
 
     res.end();

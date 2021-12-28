@@ -52,7 +52,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
     }
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: `User ${brackets(cleanName(user.name))}`,
 
@@ -75,7 +75,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         footer: {
           text: "Use &bal to view stats about yourself!"
         }
-      }
+      }]
     });
   }
 }

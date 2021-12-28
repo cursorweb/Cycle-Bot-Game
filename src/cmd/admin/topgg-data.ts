@@ -24,11 +24,11 @@ class C extends Command {
       })
     }).then(() => {
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: "Success!",
           description: "Successfully sent data to top.gg."
-        }
+        }]
       });
     }).catch(e => {
       Bot.errormsg(msg, `An error occured.

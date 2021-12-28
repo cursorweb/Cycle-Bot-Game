@@ -22,7 +22,7 @@ Check your spelling!`, "Item not found!");
 
     const item = items[itemIndex];
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Item Info",
         description: `*${item.description}*`,
@@ -31,7 +31,7 @@ Check your spelling!`, "Item not found!");
           value: `**Drop Chance: ** ${item.dropChance}%
 **Openable? ** ${openItem[itemIndex] ? "yes" : "no"}`
         }]
-      }
+      }]
     });
   }
 }

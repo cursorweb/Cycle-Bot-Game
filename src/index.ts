@@ -16,7 +16,9 @@ import { help, load, verifyHuman } from "./loader";
 import "./idle";
 import { initiate } from "./server";
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_MEMBERS]
+});
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
 // the limit is x before we have people confirm they are not self-botting.
@@ -25,7 +27,7 @@ const commandsUsed: { [i: string]: [number, string, number] } = {};
 
 
 client.on("ready", async() => {
-  client.user?.setPresence({ activity: { name: "&help for help!", type: "PLAYING" }, status: "idle" });
+  client.user?.setPresence({ activities: [{ name: "&help for help!", type: "PLAYING" }], status: "idle" });
   console.log(`Logged in as ${client.user?.tag}!`);
 
   await (process.env.NODE_ENV ? g.Database.updateBackup() : g.Database.update());
@@ -56,7 +58,7 @@ client.on("message", async(msg: Discord.Message) => {
           if (cmdclss.names.includes(cmd.command)) {
             if (commandsUsed[msg.author.id] && commandsUsed[msg.author.id][0] >= 100) {
               msg.channel.send({
-                embed: {
+                embeds: [{
                   color: g.Colors.WARNING,
                   title: "Anti-Bot Verification",
                   description: `Type the number for ${g.brackets(commandsUsed[msg.author.id][1])}\n
@@ -64,7 +66,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
                   footer: {
                     text: "You cannot continue until you complete this challenge!"
                   }
-                }
+                }]
               });
               break;
             }
@@ -99,7 +101,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
 
       if (channel) {
         channel.send({
-          embed: {
+          embeds: [{
             color: g.Colors.ERROR,
             title: "Error!",
             description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
@@ -107,7 +109,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
               name: "Error",
               value: g.codestr(err.message, "js")
             }]
-          }
+          }]
         });
       }
     }

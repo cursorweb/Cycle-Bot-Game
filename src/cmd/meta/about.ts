@@ -11,7 +11,7 @@ class C extends Command {
     const userCount = client.guilds.cache.reduce((p, c) => p + c.memberCount, 0);
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Bot Statistics",
         description: "View bot statistics!",
@@ -28,7 +28,7 @@ class C extends Command {
           name: "Creator",
           value: "[Junhao Zhang](https://github.com/cursorweb) ([@Coder100](https://repl.it/@Coder100)) with TypeScript."
         }]
-      }
+      }]
     });
   }
 }

@@ -12,7 +12,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Cycle Guide!",
         description: `Welcome to the Cycle Bot! This guide explains everything you will need to know!
@@ -37,7 +37,7 @@ Join the [Discord server](https://discord.gg/4vTPWdpjFz) for more perks!
           value: "Earn them by coding a lot. You can use this to buy TPM -- Text Per Minute!"
         }],
         footer: { text: "Join the Discord Server! https://discord.gg/4vTPWdpjFz" }
-      }
+      }]
     });
   }
 }

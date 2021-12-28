@@ -34,16 +34,16 @@ export class Command {
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     try {
-      const isJoined = Boolean(client.guilds.cache.get("788421241005408268")?.member(msg.author.id));
+      const isJoined = Boolean(client.guilds.cache.get("788421241005408268")?.members.cache.get(msg.author.id));
 
       if (this.isGame == "y" && !getUser(msg.author.id)) {
         msg.channel.send({
-          embed: {
+          embeds: [{
             color: Colors.PRIMARY,
             title: "Welcome!",
             description: `Welcome to the bot, ${brackets(msg.author.tag)}! Use \`&guide\` to get a simple tutorial!${!isJoined ? `
 Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!` : ""}`
-          }
+          }]
         });
         setUser(msg.author.id, genSchema(msg.author));
       } else if (this.isGame == "p" && !getUser(msg.author.id)) {
@@ -55,11 +55,11 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
 
       if (Math.random() * 100 < 3 && !isJoined) {
         msg.channel.send({
-          embed: {
+          embeds: [{
             color: Colors.PRIMARY,
             title: "Reminder",
             description: "Remember to join the [discord server](https://discord.gg/4vTPWdpjFz) for giveaways, perks, and more!"
-          }
+          }]
         });
       }
 

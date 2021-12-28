@@ -10,7 +10,7 @@ class C extends Command {
     const user = Database.getUser(msg.author.id);
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Personal Balance",
         description: `**Cycles**: ${brackets(commanum(user.cycles))}
@@ -19,7 +19,7 @@ class C extends Command {
         footer: {
           text: "Tip: Use &prof to view other peoples' profiles!"
         }
-      }
+      }]
     });
   }
 }

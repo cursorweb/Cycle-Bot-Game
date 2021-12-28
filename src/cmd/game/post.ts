@@ -81,7 +81,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
     cycles = cycles.plus(upvotes);
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Post your Code!",
         description: `You posted ${brackets(commanum(amt.toString()))} line${pluralb(amt)} of code.
@@ -94,7 +94,7 @@ People view your post!
         footer: {
           text: "Use &bal to view your balance!"
         }
-      }
+      }]
     });
 
     text = text.minus(amt);

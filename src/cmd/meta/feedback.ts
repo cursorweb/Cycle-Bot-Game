@@ -18,7 +18,7 @@ class C extends Command {
     for (const id of admin) {
       const user = client.users.cache.get(id);
       user?.send({
-        embed: {
+        embeds: [{
           color: Colors.PRIMARY,
           title: "Incoming Feedback!",
           description: `${brackets(cleanName(msg.author.tag))} has sent a message!`,
@@ -26,16 +26,16 @@ class C extends Command {
             name: "Feedback",
             value: args[0]
           }]
-        }
+        }]
       });
     }
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Successfully sent!",
         description: "Your feedback is very important. Thanks for taking the time to write your feedback!"
-      }
+      }]
     });
   }
 

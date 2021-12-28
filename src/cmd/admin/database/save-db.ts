@@ -10,11 +10,11 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     (process.env.NODE_ENV ? Database.saveBackup() as Promise<void> : Database.save() as Promise<void>).then(() => Database.update().then(() => msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Success!",
         description: "Successfully **saved** and **updated** the database."
-      }
+      }]
     })));
   }
 }

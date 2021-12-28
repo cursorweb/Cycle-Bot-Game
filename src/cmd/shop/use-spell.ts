@@ -33,23 +33,23 @@ class C extends Command {
 
     if (Math.random() * 100 < item.success) { // success
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.SUCCESS,
           title: "Success!",
           description: `You cast the ${brackets(boost.name)}...
 It succeeds!`
-        }
+        }]
       });
       if (!user[item.drops]) user[item.drops] = [];
       user[item.drops].push(new Date());
     } else {
       msg.channel.send({
-        embed: {
+        embeds: [{
           color: Colors.ERROR,
           title: "Failure!",
           description: `You cast the ${brackets(boost.name)}...
 It backfired!`
-        }
+        }]
       });
       if (!user[BoostEnum.BackfiringSpell]) user[BoostEnum.BackfiringSpell] = [];
       user[BoostEnum.BackfiringSpell].push(new Date());

@@ -36,12 +36,12 @@ It might be used in a shop, however.`, "Item can't be used!");
     user.inv[itmIndex] = userAmt.minus(amount).toString();
     const result = open(user, amount);
     msg.channel.send({
-      embed: {
+      embeds: [{
         title: "Using item!",
         color: Colors.SUCCESS,
         description: `You use **x${commanum(amount.toString())}** ${brackets(item.name)} ...`,
         fields: [result]
-      }
+      }]
     });
   }
 }

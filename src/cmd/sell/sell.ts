@@ -46,13 +46,13 @@ These currencies cannot be converted into cycles!`);
     user.cycles = cycles.plus(cycleAmt).toString();
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Success!",
         description: `You successfully sold ${brackets(item.name)} x**${amt}**!
 It was worth ${brackets(commanum(cycleAmt.toString()))} cycles!
 You now have ${brackets(commanum(user.cycles))} cycles!`
-      }
+      }]
     });
   }
 }

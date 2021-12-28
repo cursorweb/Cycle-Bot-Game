@@ -71,12 +71,12 @@ ${cmd.cooldown ? `**Cooldown**: **${cmd.cooldown}**ms` : ""}`
     };
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: `Help ${brackets(args[0])}`,
         description: `View the help for ${brackets(args[0])}!`,
         fields: [fields]
-      }
+      }]
     });
 
   }
@@ -90,7 +90,7 @@ function verifyHuman(msg: Discord.Message, args: string[], commandsUsed: { [i: s
 
   if (parseNumber(args[0]) != user[2]) {
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.ERROR,
         title: "Error!",
         description: `You gave the wrong answer!
@@ -99,17 +99,17 @@ For example, if you get **1**, type in ${codestr("&verify 1")}`,
         footer: {
           text: "You cannot continue until you complete this challenge!"
         }
-      }
+      }]
     });
 
     return false;
   }
   msg.channel.send({
-    embed: {
+    embeds: [{
       color: Colors.SUCCESS,
       title: "Challenge Complete!",
       description: "You may now continue."
-    }
+    }]
   });
 
   return true;

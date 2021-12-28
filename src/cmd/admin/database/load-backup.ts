@@ -11,11 +11,11 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.updateBackup();
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Successfully loaded the backup the database!",
         footer: { text: "Note: Use push to actually save the backup to main." }
-      }
+      }]
     });
   }
 }

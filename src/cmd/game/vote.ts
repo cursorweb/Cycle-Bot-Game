@@ -8,7 +8,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "Vote Link!",
         description: `**Vote rewards**: Cycles!!
@@ -16,7 +16,7 @@ class C extends Command {
         footer: {
           text: "You will be DMed once your vote is processed!"
         }
-      }
+      }]
     });
   }
 }

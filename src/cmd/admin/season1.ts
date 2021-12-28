@@ -18,11 +18,11 @@ class C extends Command {
     );
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.PRIMARY,
         title: "BOM BOM",
         description: "The new season has begun!"
-      }
+      }]
     });
   }
 }

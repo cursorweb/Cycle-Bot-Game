@@ -62,7 +62,7 @@ class C extends Command {
     }
 
     msg.channel.send({
-      embed: {
+      embeds: [{
         color: Colors.SUCCESS,
         title: "Code Code Code!",
         description: `You code your heart out!
@@ -70,7 +70,7 @@ You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of 
 **10% text boost** for coding in the official discord server!` : ""}`,
         footer: { text: "Use &post to get some cycles!\nUse &open 'chest chest' to open chests!" },
         fields
-      }
+      }]
     });
 
     user.text = text.plus(tpc).toString();
