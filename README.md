@@ -21,7 +21,7 @@ npm run dev
 
 Then do `node .` to run your bot.
 
-If you are hosting this on [`repl.it`](https://repl.it/), a `.replit` file already has been made with everything you need! All you need to add is your `.env` file and make sure to install everything by doing
+If you are hosting this on [`replit`](https://replit.com/), a `.replit` file already has been made with everything you need! All you need to add is your `.env` file and make sure to install everything by doing
 ```
 npm i
 ```
