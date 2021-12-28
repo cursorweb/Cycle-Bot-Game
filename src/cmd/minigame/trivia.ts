@@ -64,7 +64,7 @@ Use \`&trivia\` to try again!`
           const user = randomChoice(users)[0];
           if (num == question.line) {
             msg.channel.send({
-              embeds:[ {
+              embeds: [{
                 title: "Correct!",
                 color: Colors.SUCCESS,
                 description: `You found the bug!

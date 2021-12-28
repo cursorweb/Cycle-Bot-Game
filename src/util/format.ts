@@ -116,15 +116,13 @@ ${codestr("&use 'cheap iphone'", "js")}`
     const initialMessage = await msg.channel.send({
       embeds: [
         send(
-          page,
-          data.slice(
-            constrain(count * (page - 1), 0, data.length),
-            constrain(count * page, 0, data.length)
+          page, data.slice(
+            constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length)
           )
         )
-    ]
+      ]
     });
-    const react = async () => {
+    const react = async() => {
       if (initialMessage.reactions.cache.has("\u2B05") && initialMessage.reactions.cache.has("\u27A1")) return;
       if (page > 1) {
         // left
@@ -140,7 +138,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
     };
 
     const coll = initialMessage.createReactionCollector({ filter, time: 160000 });
-    coll.on("collect", async (choice) => {
+    coll.on("collect", async(choice) => {
       choice.users.remove(msg.author);
       // left
       if (choice?.emoji.name == "\u2B05") page--;
@@ -148,12 +146,10 @@ ${codestr("&use 'cheap iphone'", "js")}`
       else page++;
       await react();
       await initialMessage.edit({
-          embeds: [
+        embeds: [
           send(
-            page,
-            data.slice(
-              constrain(count * (page - 1), 0, data.length),
-              constrain(count * page, 0, data.length)
+            page, data.slice(
+              constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length)
             )
           )
         ]
