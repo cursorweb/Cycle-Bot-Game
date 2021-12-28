@@ -13,9 +13,8 @@ export function initiate(client: Discord.Client) {
 
   app.get("/", (_, res) => res.end("My prefix is '&'!"));
 
-  app.post("/dblwebhook", webhook.middleware(), (req, res) => {
-    if (!req.vote) return res.end();
-    const id = req.vote.user;
+  app.post("/dblwebhook", webhook.listener(vote => {
+    const id = vote.user;
     const user = Database.getUser(id);
     if (!user) return;
 
@@ -34,9 +33,7 @@ export function initiate(client: Discord.Client) {
         }
       }]
     });
-
-    res.end();
-  });
+  }));
 
   app.listen(8080);
 }
