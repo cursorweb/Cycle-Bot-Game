@@ -1,19 +1,21 @@
 module.exports = {
-  env: {
-    es6: true,
-    node: true
+  "env": {
+    "es2021": true,
+    "node": true
   },
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: "module"
-  },
-  extends: [
+  "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  rules: {
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
     "no-unused-vars": 0,
     "indent": ["error", 2],
     "linebreak-style": [2, "unix"],

@@ -9,8 +9,8 @@
     "start": "node .",
     "dev": "tsc -w",
     "prod": "tsc",
-    "eslint": "eslint .",
-    "eslint-fix": "eslint . --fix"
+    "eslint": "eslint . --ext ts",
+    "eslint-fix": "eslint . --ext ts --fix"
   },
   "repository": {
     "type": "git",
