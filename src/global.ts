@@ -1,12 +1,12 @@
 import * as Discord from "discord.js";
-import { Bot, brackets, Colors } from "./util/format";
-import { addMs, msBetween } from "./util/util";
-import { genSchema, setUser, getUser, CycleUser } from "./util/database/database";
+import { Bot, brackets, Colors } from "./util/format.js";
+import { addMs, msBetween } from "./util/util.js";
+import { genSchema, setUser, getUser, CycleUser } from "./util/database/database.js";
 
-export * from "./util/format";
-export * from "./util/util";
+export * from "./util/format.js";
+export * from "./util/util.js";
 
-export * as Database from "./util/database/database";
+export * as Database from "./util/database/database.js";
 
 export interface UserInput {
   command: string;

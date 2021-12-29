@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Discord from "discord.js";
-import { Command, Colors } from "../../global";
+import { Command, Colors } from "../../global.js";
 
 class C extends Command {
   names = ["give", "g"];

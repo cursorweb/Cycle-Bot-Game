@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
+import Big from "bignumber.js";
 import { Command, Colors, Bot, Database, brackets, commanum, parseMention, parseNumber, cleanName } from "../../global";
-import { items } from "../../util/data/item";
+import { items } from "../../util/data/item.js";
 
 class C extends Command {
   names = ["inventory", "inv", "i"];

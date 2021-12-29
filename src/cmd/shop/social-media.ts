@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database, brackets, codestr, commanum } from "../../global";
-import { socialMedia } from "../../util/data/social-media";
+import Big from "bignumber.js";
+import { Command, Colors, Database, brackets, codestr, commanum } from "../../global.js";
+import { socialMedia } from "../../util/data/social-media.js";
 
 class C extends Command {
   names = ["social-media", "media-shop"];

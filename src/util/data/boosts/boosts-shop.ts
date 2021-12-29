@@ -1,4 +1,4 @@
-import { BoostEnum } from "./boosts";
+import { BoostEnum } from "./boosts.js";
 
 // SB = Shop Boost
 export interface SBItem {

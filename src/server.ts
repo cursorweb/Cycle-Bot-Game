@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
+import Big from "bignumber.js";
 import express from "express";
 import { Webhook } from "@top-gg/sdk";
 
-import { Database, Colors, brackets } from "./global";
-import { ItemEnum } from "./util/data/item";
+import { Database, Colors, brackets } from "./global.js";
+import { ItemEnum } from "./util/data/item.js";
 
 
 export function initiate(client: Discord.Client) {

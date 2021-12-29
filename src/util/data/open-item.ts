@@ -1,8 +1,8 @@
 // refer to ./item.ts for metadata.
 import * as Discord from "discord.js";
-import { Database, random, brackets, commanum, hidden, plural } from "../../global";
-import { BigNumber as Big } from "bignumber.js";
-import { items, ItemEnum } from "./item";
+import { Database, random, brackets, commanum, hidden, plural } from "../../global.js";
+import Big from "bignumber.js";
+import { items, ItemEnum } from "./item.js";
 
 // this way, we can utilize the inefficiency of an array search.
 // we will check if this object has an implementation, and if not, there won't be one!

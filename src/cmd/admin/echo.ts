@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command } from "../../global";
+import { Command } from "../../global.js";
 
 class C extends Command {
   names = ["echo", "mimic", "repeat"];

@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr, parseNumber } from "../../global";
-import { items, SItem } from "../../util/data/shop";
-import { ItemEnum } from "../../util/data/item";
+import Big from "bignumber.js";
+import { Command, Colors, constrain, Database, brackets, Bot, calcCost, commanum, codestr, parseNumber } from "../../global.js";
+import { items, SItem } from "../../util/data/shop.js";
+import { ItemEnum } from "../../util/data/item.js";
 
 const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex: number, amt: number, id: string) => string[] | string } = {
   text(user, item, itmIndex, amt) {

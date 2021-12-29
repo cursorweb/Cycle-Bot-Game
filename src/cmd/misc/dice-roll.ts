@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, hidden, parseNumber } from "../../global";
+import { Command, Colors, Bot, hidden, parseNumber } from "../../global.js";
 
 class C extends Command {
   names = ["dice-roll", "roll-dice"];

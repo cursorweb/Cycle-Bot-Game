@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
-// import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database } from "../../../global";
+// import Big from "bignumber.js";
+import { Command, Colors, Database } from "../../../global.js";
 
 class C extends Command {
   names = ["admin-git-prune", "admin-maintain-db"];

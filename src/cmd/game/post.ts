@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum, parseNumber } from "../../global";
-import { post as drops } from "../../util/data/drops";
-import { boosts } from "../../util/data/boosts/boosts";
-import { levelUp } from "../../util/levels";
-import { socialMedia } from "../../util/data/social-media";
+import Big from "bignumber.js";
+import { Command, Colors, Database, Bot, brackets, random, pluralb, commanum, parseNumber } from "../../global.js";
+import { post as drops } from "../../util/data/drops.js";
+import { boosts } from "../../util/data/boosts/boosts.js";
+import { levelUp } from "../../util/levels.js";
+import { socialMedia } from "../../util/data/social-media.js";
 
 class C extends Command {
   names = ["post", "p"];

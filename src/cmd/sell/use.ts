@@ -1,9 +1,9 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, constrain, parseNumber } from "../../global";
-import { items } from "../../util/data/item";
-import { openItem } from "../../util/data/open-item";
-import { commanum } from "../../util/util";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, brackets, constrain, parseNumber } from "../../global.js";
+import { items } from "../../util/data/item.js";
+import { openItem } from "../../util/data/open-item.js";
+import { commanum } from "../../util/util.js";
 
 class C extends Command {
   names = ["use", "eat", "u", "open", "drink", "open-item"];

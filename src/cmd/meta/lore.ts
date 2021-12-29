@@ -1,6 +1,6 @@
 // import * as Discord from "discord.js";
 // import { Command, Colors, brackets, plural, formatDate } from "../../global";
-import { Command } from "../../global";
+import { Command } from "../../global.js";
 
 class C extends Command {
   names = ["lore", "background-info"];

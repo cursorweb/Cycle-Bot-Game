@@ -1,6 +1,6 @@
-import { BigNumber as Big } from "bignumber.js";
-import { Database } from "./global";
-import { boosts } from "./util/data/boosts/boosts";
+import Big from "bignumber.js";
+import { Database } from "./global.js";
+import { boosts } from "./util/data/boosts/boosts.js";
 
 setInterval(() => {
   for (const id in Database.pdb) {

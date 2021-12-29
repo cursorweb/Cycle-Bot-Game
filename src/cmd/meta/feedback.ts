@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, brackets, cleanName } from "../../global";
+import { Command, Colors, Bot, brackets, cleanName } from "../../global.js";
 import admin from "../../util/admin.json";
 
 class C extends Command {

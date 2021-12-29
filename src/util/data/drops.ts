@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { brackets, pluralb, commanum, hidden, Database } from "../../global";
-import { items } from "./item";
+import Big from "bignumber.js";
+import { brackets, pluralb, commanum, hidden, Database } from "../../global.js";
+import { items } from "./item.js";
 
 const code: DropItem[] = [{
   chance: () => Math.random() < 0.1,

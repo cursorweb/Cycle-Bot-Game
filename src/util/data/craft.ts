@@ -1,4 +1,4 @@
-import { ItemEnum } from "./item";
+import { ItemEnum } from "./item.js";
 
 export interface CraftItem {
   /**

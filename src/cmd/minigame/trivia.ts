@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseNumber } from "../../global";
-import { trivia, users } from "../../util/data/trivia";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseNumber } from "../../global.js";
+import { trivia, users } from "../../util/data/trivia.js";
 
 class C extends Command {
   names = ["trivia", "fix-code", "t"];

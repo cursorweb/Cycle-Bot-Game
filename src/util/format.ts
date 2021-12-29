@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { constrain } from "./util";
+import { constrain } from "./util.js";
 
 enum Colors {
   PRIMARY = "#1a8ff0",

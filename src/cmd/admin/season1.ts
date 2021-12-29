@@ -3,7 +3,7 @@ import * as Discord from "discord.js";
 import * as fs from "fs";
 import * as path from "path";
 
-import { Command, Colors, Database } from "../../global";
+import { Command, Colors, Database } from "../../global.js";
 
 class C extends Command {
   names = ["admin-new-season"];
@@ -14,7 +14,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.db.collection("cycle-users").doc("users").set(
-      JSON.parse(fs.readFileSync(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"))
+      JSON.parse(fs.readFileSync(path.join(path.resolve(), "..", "..", "..", "database.json"), "utf-8"))
     );
 
     msg.channel.send({

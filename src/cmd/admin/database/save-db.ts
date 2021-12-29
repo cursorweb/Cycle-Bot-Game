@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database } from "../../../global";
+import { Command, Colors, Database } from "../../../global.js";
 
 class C extends Command {
   names = ["admin-git-push", "admin-save-db"];

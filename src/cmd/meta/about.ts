@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, brackets, plural, formatDate } from "../../global";
+import { Command, Colors, brackets, plural, formatDate } from "../../global.js";
 
 class C extends Command {
   names = ["uptime", "about", "bot-about", "bot-servers", "bot-info"];

@@ -1,9 +1,9 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../global";
-import { items } from "../../util/data/shop";
-import { boostShop } from "../../util/data/boosts/boosts-shop";
-import { boosts } from "../../util/data/boosts/boosts";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../global.js";
+import { items } from "../../util/data/shop.js";
+import { boostShop } from "../../util/data/boosts/boosts-shop.js";
+import { boosts } from "../../util/data/boosts/boosts.js";
 
 // [topic] [value]
 const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {

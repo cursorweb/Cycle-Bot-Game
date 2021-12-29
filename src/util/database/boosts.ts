@@ -1,4 +1,4 @@
-import { msBetween } from "../../global";
+import { msBetween } from "../../global.js";
 
 /**
  * An 'array' containing the boosts data.

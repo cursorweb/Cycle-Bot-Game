@@ -1,5 +1,5 @@
-import { boosts } from "./boosts/boosts";
-import { boostShop } from "./boosts/boosts-shop";
+import { boosts } from "./boosts/boosts.js";
+import { boostShop } from "./boosts/boosts-shop.js";
 
 // the S stands for Shop
 export interface SItem {

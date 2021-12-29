@@ -1,4 +1,4 @@
-import { UserInput } from "./global";
+import { UserInput } from "./global.js";
 
 function parse(prefix: string, command: string): UserInput | false {
   if (command.slice(0, prefix.length) != prefix) return false;

@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, parseNumber, commanum } from "../../global";
-import { items } from "../../util/data/item";
-import { craftItems } from "../../util/data/craft";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, brackets, parseNumber, commanum } from "../../global.js";
+import { items } from "../../util/data/item.js";
+import { craftItems } from "../../util/data/craft.js";
 
 class C extends Command {
   names = ["craft", "create"];

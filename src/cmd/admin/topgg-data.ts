@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, codestr } from "../../global";
+import { Command, Colors, Bot, codestr } from "../../global.js";
 
 class C extends Command {
   names = ["admin-update-topgg"];

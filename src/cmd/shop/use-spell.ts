@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Command, Colors, Bot, Database, brackets } from "../../global";
-import { boosts, BoostEnum } from "../../util/data/boosts/boosts";
-import { spells } from "../../util/data/boosts/spells";
+import { Command, Colors, Bot, Database, brackets } from "../../global.js";
+import { boosts, BoostEnum } from "../../util/data/boosts/boosts.js";
+import { spells } from "../../util/data/boosts/spells.js";
 
 class C extends Command {
   names = ["use-spell", "cast-spell", "cast"];

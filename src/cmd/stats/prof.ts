@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName } from "../../global";
-import { socialMedia } from "../../util/data/social-media";
-import { CycleUser } from "../../util/database/database";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName } from "../../global.js";
+import { socialMedia } from "../../util/data/social-media.js";
+import { CycleUser } from "../../util/database/database.js";
 
 class C extends Command {
   names = ["profile", "prof"];

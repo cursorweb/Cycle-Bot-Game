@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Database, Bot, brackets, parseMention, cleanName } from "../../../global";
+import { Command, Colors, Database, Bot, brackets, parseMention, cleanName } from "../../../global.js";
 
 class C extends Command {
   names = ["admin-user-set"];

@@ -7,14 +7,18 @@ dotenv.config();
 
 import * as Discord from "discord.js";
 
-import * as g from "./global";
-import admins from "./util/admin.json";
+import * as g from "./global.js";
 
-import { parse } from "./cmd-parser";
-import { help, load, verifyHuman } from "./loader";
+// todo: remove
+// import admins from "./util/admin.json";
+import fs from "node:fs";
+const admins = fs.readFileSync("util/admin.json", "utf-8");
 
-import "./idle";
-import { initiate } from "./server";
+import { parse } from "./cmd-parser.js";
+import { help, load, verifyHuman } from "./loader.js";
+
+import "./idle.js";
+import { initiate } from "./server.js";
 
 const client = new Discord.Client({
   intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_MEMBERS]

@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 
 import * as Discord from "discord.js";
-import { Command, brackets, codestr, noun, Colors, Bot, parseNumber } from "./global";
+import { Command, brackets, codestr, noun, Colors, Bot, parseNumber } from "./global.js";
 
 async function load() {
   const output: { [i: string]: { cmds: Command[], desc: string } } = {};
@@ -24,7 +24,7 @@ async function load() {
     }
   }
 
-  await loadDir(path.join(__dirname, "cmd"));
+  await loadDir(path.join(path.resolve(), "cmd"));
 
   const info: { [i: string]: string } = (await import("./cmd/cmd.json")).default;
   Object.keys(info).forEach(key => output[key].desc = info[key]);

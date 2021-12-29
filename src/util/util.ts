@@ -1,4 +1,4 @@
-import { BigNumber as Big } from "bignumber.js";
+import Big from "bignumber.js";
 
 function randomChoice<T>(array: T[], amount = 1): T[] {
   const out = [];

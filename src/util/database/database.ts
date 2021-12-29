@@ -7,7 +7,7 @@ if (process.env.FIREBASE) {
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE))
   });
 } else {
-  const serviceAccount: admin.ServiceAccount = JSON.parse(fs.readFileSync(path.join(__dirname, "../../../sdk-key.json"), "utf8")); // i couldn't think of a better way lol
+  const serviceAccount: admin.ServiceAccount = JSON.parse(fs.readFileSync(path.join(path.resolve(), "../../../sdk-key.json"), "utf8")); // i couldn't think of a better way lol
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
@@ -17,6 +17,6 @@ if (process.env.FIREBASE) {
 export const db = admin.firestore();
 db.settings({ ignoreUndefinedProperties: true });
 
-export * from "./genschema";
-export * from "./pseudo";
-export * from "./boosts";
+export * from "./genschema.js";
+export * from "./pseudo.js";
+export * from "./boosts.js";

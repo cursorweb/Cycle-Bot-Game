@@ -1,11 +1,11 @@
 import { promises as fs } from "fs";
-import { BigNumber as Big } from "bignumber.js";
-import { msBetween } from "../util";
+import Big from "bignumber.js";
+import { msBetween } from "../util.js";
 import * as path from "path";
 
-import { db } from "./database";
+import { db } from "./database.js";
 
-import { CycleUser } from "./genschema";
+import { CycleUser } from "./genschema.js";
 // Try to use `setUser` for everything
 
 // 'pseudo' db

@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { BigNumber as Big } from "bignumber.js";
-import { Command, Colors, Bot, Database, constrain, random, brackets, parseNumber } from "../../global";
-import { commanum } from "../../util/util";
+import Big from "bignumber.js";
+import { Command, Colors, Bot, Database, constrain, random, brackets, parseNumber } from "../../global.js";
+import { commanum } from "../../util/util.js";
 
 class C extends Command {
   names = ["casino", "gamble"];
