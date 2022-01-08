@@ -1,21 +1,21 @@
 module.exports = {
-  "env": {
-    "es2021": true,
-    "node": true
+  env: {
+    es2021: true,
+    node: true
   },
-  "extends": [
+  extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 13,
-    "sourceType": "module"
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 13,
+    sourceType: "module"
   },
-  "plugins": [
+  plugins: [
     "@typescript-eslint"
   ],
-  "rules": {
+  rules: {
     "no-unused-vars": 0,
     "indent": ["error", 2],
     "linebreak-style": [2, "unix"],
