@@ -1,6 +1,11 @@
 import * as Discord from "discord.js";
 import { Command, Colors, Bot, brackets, cleanName } from "../../global.js";
-import admin from "../../util/admin.json";
+
+import fs from "node:fs";
+import { URL } from "node:url";
+
+const admin = JSON.parse(fs.readFileSync(new URL("../../util/admin.json", import.meta.url), "utf-8"));
+// import admin from "../../util/admin.json";
 
 class C extends Command {
   names = ["feedback", "bug-report"];

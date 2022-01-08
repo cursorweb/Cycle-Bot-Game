@@ -2,6 +2,8 @@
 Invite link: https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot
 */
 
+import { URL } from "node:url";
+
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -12,7 +14,7 @@ import * as g from "./global.js";
 // todo: remove
 // import admins from "./util/admin.json";
 import fs from "node:fs";
-const admins = fs.readFileSync("util/admin.json", "utf-8");
+const admins = fs.readFileSync(new URL("util/admin.json", import.meta.url), "utf-8");
 
 import { parse } from "./cmd-parser.js";
 import { help, load, verifyHuman } from "./loader.js";
@@ -21,7 +23,7 @@ import "./idle.js";
 import { initiate } from "./server.js";
 
 const client = new Discord.Client({
-  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_MEMBERS]
+  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_MESSAGES]
 });
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
@@ -47,7 +49,7 @@ client.on("ready", async() => {
   console.log("Initiated server.");
 });
 
-client.on("message", async(msg: Discord.Message) => {
+client.on("messageCreate", async(msg: Discord.Message) => {
   if (ready) {
     try {
       if (msg.author.bot) return;

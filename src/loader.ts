@@ -1,32 +1,38 @@
-import * as path from "path";
-import * as fs from "fs";
+import { URL } from "node:url";
+import * as fs from "node:fs";
 
 import * as Discord from "discord.js";
 import { Command, brackets, codestr, noun, Colors, Bot, parseNumber } from "./global.js";
 
+function getLastItem(path: string) {
+  return path.substring(path.lastIndexOf("/") + 1);
+}
+
 async function load() {
   const output: { [i: string]: { cmds: Command[], desc: string } } = {};
 
-  async function loadDir(dir: string, dirn?: string) {
+  async function loadDir(dir: URL, dirn?: URL) {
+    const dirns = getLastItem(dirn?.toString() ?? ""); // dirnstring
+
     for (const file of fs.readdirSync(dir)) {
-      const stat = fs.lstatSync(`${dir}/${file}`);
+      const stat = fs.lstatSync(new URL(`${dir}/${file}`));
       if (stat.isFile() && /\.js$/.test(file)) {
-        const C: Command = (await import(`${dir}/${file}`)).c;
+        const C: Command = (await import(new URL(`${dir}/${file}`, import.meta.url).toString())).c;
 
-        if (dirn) {
-          if (!output[dirn]) output[dirn] = { cmds: [], desc: "" };
+        if (dirns) {
+          if (!output[dirns]) output[dirns] = { cmds: [], desc: "" };
 
-          output[dirn].cmds.push(C);
+          output[dirns].cmds.push(C);
         }
       } else if (stat.isDirectory()) {
-        await loadDir(`${dir}/${file}`, dirn || file);
+        await loadDir(new URL(`${dir.toString()}/${file}`, import.meta.url), dirn ?? new URL(file, import.meta.url));
       }
     }
   }
 
-  await loadDir(path.join(path.resolve(), "cmd"));
+  await loadDir(new URL("cmd", import.meta.url));
 
-  const info: { [i: string]: string } = (await import("./cmd/cmd.json")).default;
+  const info: { [i: string]: string } = JSON.parse(fs.readFileSync(new URL("./cmd/cmd.json", import.meta.url), "utf-8")); // todo: (await import("./cmd/cmd.json")).default;
   Object.keys(info).forEach(key => output[key].desc = info[key]);
 
   return output;

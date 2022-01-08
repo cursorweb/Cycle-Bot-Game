@@ -1,7 +1,8 @@
-import { promises as fs } from "fs";
+import fs from "node:fs/promises";
+import { URL } from "node:url";
+
 import Big from "bignumber.js";
 import { msBetween } from "../util.js";
-import * as path from "path";
 
 import { db } from "./database.js";
 
@@ -49,9 +50,9 @@ export async function update() {
 }
 
 export async function saveBackup() {
-  await fs.writeFile(path.join(__dirname, "..", "..", "..", "database.json"), JSON.stringify(pdb, null, 2));
+  await fs.writeFile(new URL("../../../database.json", import.meta.url), JSON.stringify(pdb, null, 2));
 }
 
 export async function updateBackup() {
-  pdb = JSON.parse(await fs.readFile(path.join(__dirname, "..", "..", "..", "database.json"), "utf-8"));
+  pdb = JSON.parse(await fs.readFile(new URL("../../../database.json", import.meta.url), "utf-8"));
 }
