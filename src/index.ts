@@ -23,7 +23,7 @@ import "./idle.js";
 import { initiate } from "./server.js";
 
 const client = new Discord.Client({
-  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES, Discord.Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.GUILD_MESSAGES]
+  intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_EMOJIS_AND_STICKERS", "GUILD_MEMBERS", "GUILD_MESSAGES"]
 });
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
