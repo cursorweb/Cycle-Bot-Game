@@ -23,7 +23,7 @@ import "./idle.js";
 import { initiate } from "./server.js";
 
 const client = new Discord.Client({
-  intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_EMOJIS_AND_STICKERS", "GUILD_MEMBERS", "GUILD_MESSAGES"]
+  intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_EMOJIS_AND_STICKERS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"]
 });
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
 
@@ -52,9 +52,10 @@ client.on("ready", async() => {
 client.on("messageCreate", async(msg: Discord.Message) => {
   if (ready) {
     try {
-      if (msg.author.bot) return;
+      if (msg.author.bot || !msg.guild) return;
+
       const cmd = parse("&", msg.content);
-      if (!msg.guild || !cmd) return;
+      if (!cmd) return;
 
       if (cmd.command == "help") help(msg, cmd.args, commands);
       else if (cmd.command == "verify") {

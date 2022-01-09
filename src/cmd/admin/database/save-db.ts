@@ -2,8 +2,8 @@ import * as Discord from "discord.js";
 import { Command, Colors, Database } from "../../../global.js";
 
 class C extends Command {
-  names = ["admin-git-push", "admin-save-db"];
-  help = "'git push' to firebase.";
+  names = ["admin-save", "admin-save-db"];
+  help = "Save current db to firebase.";
   isGame = "n" as const;
 
   isAdmin = true;

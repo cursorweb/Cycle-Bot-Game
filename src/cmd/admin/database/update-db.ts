@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command, Colors, Database } from "../../../global.js";
 
 class C extends Command {
-  names = ["admin-git-fetch", "admin-update-db"];
+  names = ["admin-fetch", "admin-update-db"];
   help = "'git fetch' from firebase.";
   isGame = "n" as const;
 
