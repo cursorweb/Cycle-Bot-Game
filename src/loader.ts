@@ -40,10 +40,16 @@ async function load() {
 
 async function help(msg: Discord.Message, args: string[], output: { [i: string]: { cmds: Command[], desc: string } }) {
   if (args.length != 1) { // &help
-    const fields: Discord.EmbedFieldData[] = Object.keys(output).map((k): Discord.EmbedFieldData => ({
-      name: k,
-      value: `> ${output[k].desc}\n${output[k].cmds.map(n => `&**${n.names[0]}**`).join("\n")}`
-    }));
+    const fields: Discord.EmbedFieldData[] = Object.keys(output).map((k): Discord.EmbedFieldData => {
+      const itm = output[k];
+      const cmds = itm.cmds;
+
+      return {
+        name: k,
+        value: `> ${itm.desc}\n${cmds.map(n => `**&${n.names[0]}**`).join("\n")}`,
+        inline: true
+      };
+    });
 
     Bot.carousel(msg, fields, 2, (page, i) => {
       return {
@@ -84,7 +90,6 @@ ${cmd.cooldown ? `**Cooldown**: **${cmd.cooldown}**ms` : ""}`
         fields: [fields]
       }]
     });
-
   }
 }
 
