@@ -1,9 +1,6 @@
 /*
 Invite link: https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot
 */
-
-import { URL } from "node:url";
-
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -11,10 +8,7 @@ import * as Discord from "discord.js";
 
 import * as g from "./global.js";
 
-// todo: remove
-// import admins from "./util/admin.json";
-import fs from "node:fs";
-const admins = fs.readFileSync(new URL("util/admin.json", import.meta.url), "utf-8");
+import admins from "./util/admin.js";
 
 import { parse } from "./cmd-parser.js";
 import { help, load, verifyHuman } from "./loader.js";

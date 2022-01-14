@@ -1,11 +1,7 @@
 import * as Discord from "discord.js";
 import { Command, Colors, Bot, brackets, cleanName } from "../../global.js";
 
-import fs from "node:fs";
-import { URL } from "node:url";
-
-const admin = JSON.parse(fs.readFileSync(new URL("../../util/admin.json", import.meta.url), "utf-8"));
-// import admin from "../../util/admin.json";
+import admins from "../../util/admin.js";
 
 class C extends Command {
   names = ["feedback", "bug-report"];
@@ -20,7 +16,7 @@ class C extends Command {
   async exec(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
 
-    for (const id of admin) {
+    for (const id of admins) {
       const user = client.users.cache.get(id);
       user?.send({
         embeds: [{
