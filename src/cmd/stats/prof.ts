@@ -4,8 +4,12 @@ import { Command, Colors, Bot, Database, parseMention, brackets, commanum, clean
 import { socialMedia } from "../../util/data/social-media.js";
 import { CycleUser } from "../../util/database/database.js";
 
+const black = "■";
+const white = "□";
+
+
 class C extends Command {
-  names = ["profile", "prof"];
+  names = ["profile", "prof", "bal", "balance", "stats"];
   help = "View yours or someone elses' profile.";
   examples = ["prof", "prof Coder100"];
   isGame = "p" as const;
@@ -22,7 +26,7 @@ class C extends Command {
 
       if (userArg.type == "id") {
         user = Database.getUser(userArg.value);
-        if (!user) return Bot.usererr(msg, `User ${brackets(`<@${ userArg.value }>`)} not found.`, "User not found!");
+        if (!user) return Bot.usererr(msg, `User ${brackets(`<@${userArg.value}>`)} not found.`, "User not found!");
       } else {
         const userArr = Database.findUser(u => u.name.toLowerCase().indexOf(userArg.value.toLowerCase()) > -1);
         if (userArr.length == 0) return Bot.usererr(msg, `User ${brackets(userArg.value)} not found. Check your spelling!`, "User not found!");
@@ -45,22 +49,26 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
 
       smBoost.push({
         name: "Social Media Boosts",
-        value: `+ ${nextTpc}% TPC
-+ ${nextCpp}% CPP
-+ ${nextTpm}% TPM`
+        value: `Social Media: ${brackets(socialMedia[user.socialMedia])}
++ **${nextTpc}**% TPC
++ **${nextCpp}**% CPP
++ **${nextTpm}**% TPM`
       });
     }
 
+    const xp = new Big(user.xp);
+    const total = new Big(user.level).times(5);
+
+    const percent = xp.div(total).times(10).toNumber();
+    const empty = new Big(1).minus(xp.div(total)).times(10).toNumber();
+
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: `User ${brackets(cleanName(user.name))}`,
 
-        description: `View the profile of ${brackets(cleanName(user.name))}
-**Cycles**: ${commanum(user.cycles)}
-**Text**: ${commanum(user.text)}
-**Level**: ${commanum(user.level)}${sm ? `
-**Social Media**: ${brackets(socialMedia[user.socialMedia])}` : ""}`,
+        description: `**Cycles**: ${commanum(user.cycles)}
+**Text**: ${commanum(user.text)}`,
         fields: [{
           name: "TPC (Text Per Code)",
           value: commanum(user.tpc)
@@ -70,11 +78,11 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         }, {
           name: "TPM (Text Per Minute)",
           value: commanum(user.tpm)
-        }].concat(smBoost),
-
-        footer: {
-          text: "Use &bal to view stats about yourself!"
-        }
+        }, {
+          name: "Level",
+          value: `**Level**: ${commanum(user.level)}
+**Progress**: [${black.repeat(percent)}${white.repeat(empty)}]`
+        }].concat(smBoost)
       }]
     });
   }
