@@ -1,6 +1,8 @@
 import { URL } from "node:url";
 import * as fs from "node:fs";
 
+import info from "./cmd/cmd.js";
+
 import * as Discord from "discord.js";
 import { Command, brackets, codestr, noun, Colors, Bot, parseNumber } from "./global.js";
 
@@ -32,8 +34,7 @@ async function load() {
 
   await loadDir(new URL("cmd", import.meta.url));
 
-  const info: { [i: string]: string } = JSON.parse(fs.readFileSync(new URL("./cmd/cmd.json", import.meta.url), "utf-8")); // todo: (await import("./cmd/cmd.json")).default;
-  Object.keys(info).forEach(key => output[key].desc = info[key]);
+  Object.keys(info).forEach(key => output[key].desc = info[key as keyof typeof info]);
 
   return output;
 }
