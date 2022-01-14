@@ -124,7 +124,6 @@ For example, if you get **1**, type in ${codestr("&verify 1")}`,
   });
 
   return true;
-
 }
 
 export { load, help, verifyHuman };

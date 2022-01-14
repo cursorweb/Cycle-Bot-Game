@@ -26,9 +26,9 @@ export const craftItems: CraftItem[] = [{
   creates: ItemEnum.ChestChest,
   requires: [{ amt: 3, type: ItemEnum.CraftingMat }, { amt: 1, type: ItemEnum.SuperGlue }]
 }, {
-  message: "You ruin a chest chest :(",
+  message: "You ruin a phone :(",
   creates: ItemEnum.CraftingMat,
-  requires: [{ amt: 1, type: ItemEnum.Glue }, { amt: 1, type: ItemEnum.ChestChest }]
+  requires: [{ amt: 1, type: ItemEnum.Glue }, { amt: 1, type: ItemEnum.CheapPhone }]
 }, {
   message: "You combine the ego-coins together!",
   creates: ItemEnum.EgoCoinMaker,

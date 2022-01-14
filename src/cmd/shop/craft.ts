@@ -14,7 +14,7 @@ class C extends Command {
     const num = parseNumber(args[0] || "0");
     if (args.length == 0 || num) {
       const fields = craftItems.map(p => {
-        const uses = p.requires.map(n => `${items[n.type].name} x${brackets(n.amt.toString())}`);
+        const uses = p.requires.map(n => `${brackets(items[n.type].name)} x**${n.amt.toString()}**`);
         return {
           make: items[p.creates].name + "\n".repeat(uses.length - 1),
           uses: uses.join("\n")
