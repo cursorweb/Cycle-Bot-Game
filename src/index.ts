@@ -1,5 +1,5 @@
 /*
-Invite link: https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot
+Invite link: https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=272448&scope=bot
 */
 import * as dotenv from "dotenv";
 dotenv.config();

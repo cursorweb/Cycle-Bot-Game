@@ -41,7 +41,8 @@ export class Command {
           embeds: [{
             color: Colors.PRIMARY,
             title: "Welcome!",
-            description: `Welcome to the bot, ${brackets(msg.author.tag)}! Use \`&guide\` to get a simple tutorial!${!isJoined ? `
+            description: `Welcome to the bot, ${brackets(msg.author.tag)}!
+**Use \`&guide\` to get a simple tutorial!**${!isJoined ? `
 Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!` : ""}`
           }]
         });

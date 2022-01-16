@@ -70,6 +70,11 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         description: `**Cycles**: ${commanum(user.cycles)}
 **Text**: ${commanum(user.text)}`,
         fields: [{
+          name: "Stats",
+          value: `**TPC**: ${commanum(user.tpc)}
+**CPP**: ${commanum(user.cpp)}
+**TPM**: ${commanum(user.tpm)}`
+        }/* {
           name: "TPC (Text Per Code)",
           value: commanum(user.tpc)
         }, {
@@ -78,7 +83,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         }, {
           name: "TPM (Text Per Minute)",
           value: commanum(user.tpm)
-        }, {
+        } */, {
           name: "Level",
           value: `**Level**: ${commanum(user.level)}
 **Progress**: [${black.repeat(percent)}${white.repeat(empty)}]`

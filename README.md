@@ -1,7 +1,7 @@
 # Cycle Bot
 This is the code repository for cycle bot! You are playing as a coder who makes programs in order to get cycles. You can extend your reach to youtube, twitch, and dev.to to become the most cycled!
 
-You can invite the bot [here](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=265280&scope=bot). Enjoy!
+You can invite the bot [here](https://discord.com/api/oauth2/authorize?client_id=781939317450342470&permissions=272448&scope=bot). Enjoy!
 
 
 ## How to play
