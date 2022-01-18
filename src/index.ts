@@ -26,21 +26,26 @@ let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.C
 const commandsUsed: { [i: string]: [number, string, number] } = {};
 
 
+if (process.argv?.[2] == "-d") {
+  console.log("[Info] Debugging mode active.");
+  client.on("debug", x => console.log("[Log] ", x));
+}
+
 client.on("ready", async() => {
   client.user?.setPresence({ activities: [{ name: "&help for help!", type: "PLAYING" }], status: "idle" });
-  console.log(`Logged in as ${client.user?.tag}!`);
+  console.log(`[Info] Logged in as ${client.user?.tag}!`);
 
   await (process.env.NODE_ENV ? g.Database.updateBackup() : g.Database.update());
-  console.log("Loaded database.");
+  console.log("[Info] Loaded database.");
 
   commands = await load();
   gcmdarr = Object.keys(commands).reduce((prev: g.Command[], kurr): g.Command[] => prev.concat(commands[kurr].cmds), []);
 
-  console.log(`Loaded ${gcmdarr.length} commands.`);
+  console.log(`[Info] Loaded ${gcmdarr.length} commands.`);
   ready = true;
 
   initiate(client);
-  console.log("Initiated server.");
+  console.log("[Info] Initiated server.");
 });
 
 client.on("messageCreate", async(msg: Discord.Message) => {
@@ -77,9 +82,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
                 cmdclss.wrapCooldown(msg, cmdclss.getCooldown(msg.author) ?? 0);
                 cmdclss.setSent(msg.author);
               }
-            } else
-
-            if (cmdclss.isAdmin) {
+            } else if (cmdclss.isAdmin) {
               if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
               else {
                 g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
@@ -97,7 +100,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
         }
       }
     } catch (err: any) {
-      console.log(err);
+      console.log("[Error]", err);
       const channel = client.channels.cache.get("899518500576579615") as Discord.TextChannel;
 
       if (channel) {

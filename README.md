@@ -20,6 +20,7 @@ npm run dev
 ```
 
 Then do `node .` to run your bot.
+To run with extra logging, use `node . -d`. This includes things spit out by the discord.js library.
 
 If you are hosting this on [`replit`](https://replit.com/), a `.replit` file already has been made with everything you need! All you need to add is your `.env` file and make sure to install everything by doing
 ```
