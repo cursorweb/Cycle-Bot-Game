@@ -7,6 +7,8 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send("Quest goes here");
+    msg.channel.send("Feel free to give ideas for unique quests with &feedback!")
+    msg.channel.send("For now this is just a work in progress!")
   }
 }
 
