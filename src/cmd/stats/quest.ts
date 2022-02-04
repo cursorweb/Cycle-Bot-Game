@@ -1,3 +1,4 @@
+import { quests } from "../../util/data/quests.ts"
 import * as Discord from "discord.js";
 import { Command } from "../../global.js";
 
