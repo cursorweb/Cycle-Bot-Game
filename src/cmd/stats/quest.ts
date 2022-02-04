@@ -1,5 +1,6 @@
-import { quests } from "../../util/data/quests.js"
+import { quests } from "../../util/data/quests.js";
 import * as Discord from "discord.js";
+import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global.js";
 import { Command } from "../../global.js";
 
 class C extends Command {
