@@ -29,7 +29,7 @@ class C extends Command {
     let cycles = new Big(user.cycles);
     let cpp = new Big(user.cpp);
 
-    const amt = new Big(parseNumber(args[0]) || user.text);
+    const amt = new Big(parseNumber(args[0]) || user.text).decimalPlaces(0, Big.ROUND_CEIL);
 
     if (amt.lte(0)) return Bot.usererr(msg, `You cannot post less than ${brackets("0")} lines of code!`);
     if (text.lt(amt)) {
