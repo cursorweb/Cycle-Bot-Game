@@ -14,8 +14,7 @@ class C extends Command {
     /* let user: CycleUser;
     user = Database.getUser(msg.author.id);
     const xp = new Big(user.xp); 
-    const total = new Big(user.level).times(5);
-    */
+    const total = new Big(user.level).times(5);*/
   }
 }
 
