@@ -29,6 +29,7 @@ export function getUser(key: string) {
 export function pruneUsers() {
   for (const key in pdb) {
     const user = pdb[key];
+    if (user.socialMedia > 0) continue;
 
     // greater than a week
     if (new Big(user.cycles).lt(50) && (!user.daily || msBetween(new Date(user.daily), new Date()) > 1000 * 60 * 60 * 24 * 7)) {
