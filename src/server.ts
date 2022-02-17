@@ -9,7 +9,7 @@ import { ItemEnum } from "./util/data/item.js";
 
 export function initiate(client: Discord.Client) {
   const app = express();
-  const webhook = new Webhook(process.env.TOPGG);
+  const webhook = new Webhook(process.env.TOPGG_AUTH);
 
   app.get("/", (_, res) => res.end("My prefix is '&'!"));
 
