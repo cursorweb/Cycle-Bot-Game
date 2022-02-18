@@ -18,10 +18,10 @@ export function initiate(client: Discord.Client) {
     const user = Database.getUser(id);
     if (!user) return;
 
-    let voteCrate = user.inv[ItemEnum.VoteCrate];
+    const voteCrate = user.inv[ItemEnum.VoteCrate];
     let amt = new Big(voteCrate || 0);
     amt = amt.plus(1);
-    voteCrate = amt.toString();
+    user.inv[ItemEnum.VoteCrate] = amt.toString();
 
     client.users.cache.get(id)?.send({
       embeds: [{
