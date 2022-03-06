@@ -126,7 +126,11 @@ ${codestr("&use 'cheap iphone'", "js")}`
       if (initialMessage.reactions.cache.has("\u2B05") && initialMessage.reactions.cache.has("\u27A1")) return;
       if (page > 1) {
         // left
-        await initialMessage.reactions.removeAll().catch();
+        try {
+          await initialMessage.reactions.removeAll();
+        } catch {
+          // nothing
+        }
         await initialMessage.react("\u2B05");
       }
       await initialMessage.react("\u27A1"); // right
@@ -139,7 +143,11 @@ ${codestr("&use 'cheap iphone'", "js")}`
 
     const coll = initialMessage.createReactionCollector({ filter, time: 160000 });
     coll.on("collect", async(choice) => {
-      choice.users.remove(msg.author).catch();
+      try {
+        await choice.users.remove(msg.author);
+      } catch {
+        // ignore
+      }
       // left
       if (choice?.emoji.name == "\u2B05") page--;
       // right
