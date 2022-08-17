@@ -1,3 +1,5 @@
+// you invest an amount into a quest
+// and you have 24 hours to complete the quest!
 // the C stands for challenge
 export interface CQuest {
   name: string;
@@ -20,23 +22,22 @@ export interface CQuest {
 export const quests: CQuest[] = [{
   name: "Starter Quest",
   description: "The first quest there ever was, gives you a low amount of cycles.",
-  cycles: 1000,
+  cycles: 10,
   start: {
     tpc: "5"
   },
   end: {
     tpc: "15"
   }
-
 }, {
-  name: "Code Quest 1",
-  description: "Example text",
+  name: "Proficient Coder",
+  description: "Earn 5 tpm!",
   cycles: 5000,
   start: {
-    tpc: "40"
+    tpc: "0"
   },
   end: {
-    tpc: "75"
+    tpc: "5"
   }
 }, {
   name: "Code Quest 2",

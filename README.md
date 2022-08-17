@@ -36,7 +36,7 @@ Otherwise, it just reads the `sdk-key.json` file in the root directory.
 > Make sure not to commit `sdk-key.json`!
 
 ### Fake-DB
-As this bot is in beta, for now, the files are going to be manually written over. This is in `database.json`
+The bot will periodically stash database info in `database.json`. When developing, make sure `database.json` is created!
 
 ## Contributions
 Suggestions are very much welcome!

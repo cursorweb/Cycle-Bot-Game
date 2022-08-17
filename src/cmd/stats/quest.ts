@@ -1,5 +1,6 @@
 import * as Discord from "discord.js";
 // import Big from "bignumber.js";
+import { quests } from "../../util/data/quests";
 import { Command } from "../../global.js";
 // import { CycleUser } from "../../util/database/database.js";
 
