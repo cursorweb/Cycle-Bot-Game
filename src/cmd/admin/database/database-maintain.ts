@@ -13,7 +13,8 @@ class C extends Command {
     Database.update().then(() => {
       for (const id in Database.pdb) {
         // CODE ENTRY POINT
-        Database.pdb[id].socialMedia = 0;
+        const x = Database.pdb[id] as unknown as any;
+        delete x.langs;
         // CODE ENTRY POINT
       }
 

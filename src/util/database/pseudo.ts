@@ -44,10 +44,12 @@ export async function save() {
 }
 
 export async function update() {
-  const col = db.collection("cycle-users").doc("users");
-  return await col.get().then(doc => {
-    pdb = doc.data() as { [i: string]: CycleUser };
-  });
+  if (!process.env.NODE_ENV) {
+    const col = db.collection("cycle-users").doc("users");
+    return await col.get().then(doc => {
+      pdb = doc.data() as { [i: string]: CycleUser };
+    });
+  }
 }
 
 export async function saveBackup() {

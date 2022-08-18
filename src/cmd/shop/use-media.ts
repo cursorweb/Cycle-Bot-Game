@@ -43,6 +43,11 @@ You need ${cyclesNeeded.minus(userCycles)} more cycles!`);
           tpc: "1",
           cpp: "1",
           tpm: "0",
+          bought: {
+            idle: {},
+            upgrades: {},
+            cpp: {}
+          },
           socialMedia: sm
         });
 
