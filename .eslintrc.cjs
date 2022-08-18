@@ -18,7 +18,7 @@ module.exports = {
   rules: {
     "no-unused-vars": 0,
     "indent": ["error", 2],
-    "linebreak-style": [2, "unix"],
+    "linebreak-style": [2, "windows"],
     "quotes": [2, "double"],
     "semi": [2, "always"],
     "no-extra-parens": [2, "all"],
