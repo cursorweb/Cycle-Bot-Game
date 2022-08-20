@@ -12,9 +12,12 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     Database.update().then(() => {
       for (const id in Database.pdb) {
+        const user = Database.pdb[id];
+
         // CODE ENTRY POINT
-        const x = Database.pdb[id] as unknown as any;
-        delete x.langs;
+        user.quest = [];
+        const x = user as unknown as any;
+        if (x.langs) delete x.langs;
         // CODE ENTRY POINT
       }
 
