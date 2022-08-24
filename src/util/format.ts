@@ -122,7 +122,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         )
       ]
     });
-    const react = async() => {
+    const react = async () => {
       if (initialMessage.reactions.cache.has("\u2B05") && initialMessage.reactions.cache.has("\u27A1")) return;
       if (page > 1) {
         // left
@@ -142,7 +142,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
     };
 
     const coll = initialMessage.createReactionCollector({ filter, time: 160000 });
-    coll.on("collect", async(choice) => {
+    coll.on("collect", async (choice) => {
       try {
         await choice.users.remove(msg.author);
       } catch {
