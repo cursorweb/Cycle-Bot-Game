@@ -8,7 +8,7 @@ import { getUser } from "../../util/database/database.js";
 
 class C extends Command {
   names = ["quests", "q", "quest"];
-  help = "View your daily quest! (A work in progress)";
+  help = "View your daily quest!";
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = getUser(msg.author.id);

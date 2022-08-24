@@ -1,5 +1,5 @@
 // you invest an amount into a quest
-// and you have 24 hours to complete the quest!
+// and you have x hours to complete the quest!
 // the C stands for challenge
 export interface CQuest {
   name: string;

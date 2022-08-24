@@ -31,7 +31,10 @@ if (process.argv?.[2] == "-d") {
   client.on("debug", x => console.log("[Log] ", x));
 }
 
-client.on("ready", async() => {
+// remove start
+import { MessageActionRow, MessageButton } from "discord.js";
+// remove end
+client.on("ready", async () => {
   client.user?.setPresence({ activities: [{ name: "&help for help!", type: "PLAYING" }], status: "idle" });
   console.log(`[Info] Logged in as ${client.user?.tag}!`);
 
@@ -48,10 +51,59 @@ client.on("ready", async() => {
   console.log("[Info] Initiated server.");
 });
 
-client.on("messageCreate", async(msg: Discord.Message) => {
+client.on("messageCreate", async (msg: Discord.Message) => {
   if (ready) {
     try {
       if (msg.author.bot || !msg.guild) return;
+
+      // remove start
+      if (msg.content == "&buttons") {
+        const buttons = new MessageActionRow()
+          .addComponents(
+            new MessageButton()
+              .setCustomId("yes")
+              .setLabel("Yes")
+              .setStyle("SUCCESS"),
+            new MessageButton()
+              .setCustomId("no")
+              .setLabel("No")
+              .setStyle("DANGER")
+          );
+        const mesg = await msg.channel.send({
+          embeds: [{
+            color: g.Colors.PRIMARY,
+            title: "I like buttons",
+            description: "Do you?"
+          }],
+          components: [
+            buttons
+          ]
+        });
+
+        const collector = mesg.createMessageComponentCollector({ filter: u => u.user.id == msg.author.id, time: 15000 });
+        collector.on("collect", i => {
+          const isyes = i.customId == "yes";
+          i.update({
+            embeds: [{
+              color: isyes ? g.Colors.SUCCESS : g.Colors.ERROR,
+              title: isyes ? "Good job!" : "Grrr",
+              description: `You said ${isyes}. ${isyes ? "Good" : "Bad"} choice!`
+            }],
+            components: [buttons]
+          });
+        });
+
+        collector.on("dispose", () => {
+          console.log("dispose!");
+        });
+
+        collector.on("end", () => {
+          mesg.edit({
+            components: []
+          });
+        });
+      }
+      // remove end
 
       const cmd = parse("&", msg.content);
       if (!cmd) return;
@@ -121,7 +173,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
 });
 
 
-setInterval(async() => {
+setInterval(async () => {
   if (process.env.NODE_ENV) {
     await g.Database.saveBackup();
     await g.Database.updateBackup();

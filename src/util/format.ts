@@ -47,7 +47,7 @@ namespace Bot {
       embeds: [{
         color: Colors.ERROR,
         title: "Invalid Arguments!",
-        description: `Invalid arguments!\nExpected \`${expect.join(", ")}\` arguments but got \`${got}\` arguments.`,
+        description: `Invalid arguments!\nExpected \`${expect.join(", ")}\` arguments but got \`${got}\` argument${got == 1 ? "" : "s"}.`,
         fields: [{
           name: "Tip",
           value: `If you have an argument with spaces, use quotes!

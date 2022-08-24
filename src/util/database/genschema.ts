@@ -62,7 +62,7 @@ export interface CycleUser {
   badges: string[]; // badges lol
 
   daily: string;
-  quest: [string, number] | []; // time, quest enum
+  quest: [string, number, number] | []; // time, difficulty (0 = easy 1 = med 2 = hard), quest enum
 
   // what the user has bought
   bought: {

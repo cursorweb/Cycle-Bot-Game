@@ -6,5 +6,6 @@ export default {
   misc: "These are miscellaneous commands not related to the Cycle game.",
   sell: "These are commands for selling/using items.",
   shop: "These are \"economy\" commands, like shopping and trading.",
-  stats: "View your statistics, your quests, and the leaderboard."
+  stats: "View your statistics, your quests, and the leaderboard.",
+  quests: "Quests!"
 };
