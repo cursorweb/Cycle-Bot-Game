@@ -113,54 +113,57 @@ ${codestr("&use 'cheap iphone'", "js")}`
    */
   export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.MessageEmbedOptions, curr = 1) {
     let page = curr;
-    const initialMessage = await msg.channel.send({
+    const getComponents = () => {
+      const components = [];
+      if (page > 1) {
+        components.push(
+          new Discord.MessageButton()
+            .setCustomId("prev")
+            .setEmoji("\u2B05")
+            .setStyle("PRIMARY")
+        );
+      }
+      components.push(
+        new Discord.MessageButton()
+          .setCustomId("next")
+          .setEmoji("\u27A1")
+          .setStyle("PRIMARY")
+      );
+      return new Discord.MessageActionRow().addComponents(...components);
+    };
+    const initialMessage = await msg.reply({
       embeds: [
         send(
           page, data.slice(
             constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length)
           )
         )
+      ],
+      components: [
+        getComponents()
       ]
     });
-    const react = async () => {
-      if (initialMessage.reactions.cache.has("\u2B05") && initialMessage.reactions.cache.has("\u27A1")) return;
-      if (page > 1) {
-        // left
-        try {
-          await initialMessage.reactions.removeAll();
-        } catch {
-          // nothing
-        }
-        await initialMessage.react("\u2B05");
-      }
-      await initialMessage.react("\u27A1"); // right
-    };
-    await react();
 
-    const filter = (reaction: Discord.MessageReaction, user: Discord.User) => {
-      return ["\u2B05", "\u27A1"].includes(reaction.emoji.name ?? "") && user.id == msg.author.id;
-    };
-
-    const coll = initialMessage.createReactionCollector({ filter, time: 160000 });
-    coll.on("collect", async (choice) => {
-      try {
-        await choice.users.remove(msg.author);
-      } catch {
-        // ignore
-      }
-      // left
-      if (choice?.emoji.name == "\u2B05") page--;
-      // right
-      else page++;
-      await react();
-      await initialMessage.edit({
+    const collector = initialMessage.createMessageComponentCollector({ componentType: "BUTTON", time: 160000, filter: (inter) => inter.user.id === msg.author.id });
+    collector.on("collect", async (choice) => {
+      if (choice.customId === "prev") page--;
+      else if (choice.customId === "next") page++;
+      await choice.update({
         embeds: [
           send(
             page, data.slice(
               constrain(count * (page - 1), 0, data.length), constrain(count * page, 0, data.length)
             )
           )
+        ],
+        components: [
+          getComponents()
         ]
+      });
+    });
+    collector.on("end", async () => {
+      await initialMessage.edit({
+        components: []
       });
     });
   }
