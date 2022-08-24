@@ -93,15 +93,13 @@ client.on("messageCreate", async (msg: Discord.Message) => {
           });
         });
 
-        collector.on("dispose", () => {
-          console.log("dispose!");
-        });
-
+        /*
         collector.on("end", () => {
-          mesg.edit({
+          mesg?.edit({
             components: []
           });
         });
+        */
       }
       // remove end
 
