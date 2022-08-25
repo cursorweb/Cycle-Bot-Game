@@ -9,7 +9,7 @@ export const defaultSchema: CycleUser = {
   inv: {}, badges: [],
 
   daily: "",
-  quest: [],
+  quest: null,
 
   bought: {
     idle: {},
@@ -28,7 +28,7 @@ export function genSchema(user: Discord.User): CycleUser {
     inv: {}, badges: [],
 
     daily: "",
-    quest: [],
+    quest: null,
 
     bought: {
       idle: {},
@@ -62,7 +62,13 @@ export interface CycleUser {
   badges: string[]; // badges lol
 
   daily: string;
-  quest: [string, number, number] | []; // time, difficulty (0 = easy 1 = med 2 = hard), quest enum
+
+  quest: {
+    end: string,
+    difficulty: number, // 0 = easy, 1 = med, 2 = hard
+    name: number, // quest enum
+    progress: number
+  } | null;
 
   // what the user has bought
   bought: {

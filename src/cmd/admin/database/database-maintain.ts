@@ -15,9 +15,9 @@ class C extends Command {
         const user = Database.pdb[id];
 
         // CODE ENTRY POINT
-        user.quest = [];
+        user.quest = null;
         const x = user as unknown as any;
-        if (x.langs) delete x.langs;
+        delete x.langs;
         // CODE ENTRY POINT
       }
 

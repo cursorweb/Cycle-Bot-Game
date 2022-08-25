@@ -4,7 +4,9 @@ Invite link: https://discord.com/api/oauth2/authorize?client_id=7819393174503424
 import * as dotenv from "dotenv";
 dotenv.config();
 
+
 import * as Discord from "discord.js";
+
 
 import * as g from "./global.js";
 
@@ -13,13 +15,18 @@ import admins from "./util/admin.js";
 import { parse } from "./cmd-parser.js";
 import { help, load, verifyHuman } from "./loader.js";
 
+
 import "./idle.js";
 import { initiate } from "./server.js";
+
 
 const client = new Discord.Client({
   intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_EMOJIS_AND_STICKERS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"]
 });
+
+
 let commands: { [i: string]: { cmds: g.Command[], desc: string } }, gcmdarr: g.Command[], ready = false;
+
 
 // the limit is x before we have people confirm they are not self-botting.
 // the array is: `commands used,bot input,bot answer`
@@ -31,9 +38,9 @@ if (process.argv?.[2] == "-d") {
   client.on("debug", x => console.log("[Log] ", x));
 }
 
-// remove start
-import { MessageActionRow, MessageButton } from "discord.js";
-// remove end
+console.log("[Info] Loaded index.ts.");
+
+
 client.on("ready", async () => {
   client.user?.setPresence({ activities: [{ name: "&help for help!", type: "PLAYING" }], status: "idle" });
   console.log(`[Info] Logged in as ${client.user?.tag}!`);
@@ -55,53 +62,6 @@ client.on("messageCreate", async (msg: Discord.Message) => {
   if (ready) {
     try {
       if (msg.author.bot || !msg.guild) return;
-
-      // remove start
-      if (msg.content == "&buttons") {
-        const buttons = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId("yes")
-              .setLabel("Yes")
-              .setStyle("SUCCESS"),
-            new MessageButton()
-              .setCustomId("no")
-              .setLabel("No")
-              .setStyle("DANGER")
-          );
-        const mesg = await msg.channel.send({
-          embeds: [{
-            color: g.Colors.PRIMARY,
-            title: "I like buttons",
-            description: "Do you?"
-          }],
-          components: [
-            buttons
-          ]
-        });
-
-        const collector = mesg.createMessageComponentCollector({ filter: u => u.user.id == msg.author.id, time: 15000 });
-        collector.on("collect", i => {
-          const isyes = i.customId == "yes";
-          i.update({
-            embeds: [{
-              color: isyes ? g.Colors.SUCCESS : g.Colors.ERROR,
-              title: isyes ? "Good job!" : "Grrr",
-              description: `You said ${isyes}. ${isyes ? "Good" : "Bad"} choice!`
-            }],
-            components: [buttons]
-          });
-        });
-
-        /*
-        collector.on("end", () => {
-          mesg?.edit({
-            components: []
-          });
-        });
-        */
-      }
-      // remove end
 
       const cmd = parse("&", msg.content);
       if (!cmd) return;
