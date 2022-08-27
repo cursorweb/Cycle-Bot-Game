@@ -276,5 +276,23 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
 
 Thanks for voting!`
     };
+  },
+  [ItemEnum.BronzeQuestChest]: (_user, _amt) => {
+    return {
+      name: "Bronze Quest Chest!",
+      value: "todo"
+    };
+  },
+  [ItemEnum.SilverQuestChest]: (_user, _amt) => {
+    return {
+      name: "Silver Quest Chest!",
+      value: "todo"
+    };
+  },
+  [ItemEnum.GoldQuestChest]: (_user, _amt) => {
+    return {
+      name: "Gold Quest Chest!",
+      value: "todo"
+    };
   }
 };

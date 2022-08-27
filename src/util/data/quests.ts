@@ -4,6 +4,7 @@
 // and you have x hours to complete the quest!
 // you then get a quest chest: bronze, silver, gold
 export enum QuestName {
+  Fail,
   Multiple,
   Cycles,
   Betting,
@@ -21,6 +22,10 @@ export interface CQuest {
 }
 
 export const quests: CQuest[] = [{
+  name: "Failed Quest",
+  description: "You failed a quest lol",
+  max: Infinity
+}, {
   name: "Multitasking",
   description: "Get cycles and text!",
   max: 100

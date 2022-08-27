@@ -64,9 +64,9 @@ export interface CycleUser {
   daily: string;
 
   quest: {
+    name: number, // quest enum
     end: string,
     difficulty: number, // 0 = easy, 1 = med, 2 = hard
-    name: number, // quest enum
     progress: number
   } | null;
 

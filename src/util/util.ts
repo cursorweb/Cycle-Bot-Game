@@ -9,6 +9,12 @@ function randomChoice<T>(array: T[], amount = 1): T[] {
   return out;
 }
 
+/**
+ * Generates a number
+ * @param min Min
+ * @param max Max
+ * @returns Random number between [min, max)
+ */
 function random(min: number, max: number): number {
   return (max - min) * Math.random() + min;
 }
