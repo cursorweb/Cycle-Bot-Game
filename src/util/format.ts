@@ -113,24 +113,25 @@ ${codestr("&use 'cheap iphone'", "js")}`
    */
   export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.MessageEmbedOptions, curr = 1) {
     let page = curr;
-    const getComponents = () => {
+    function getComponents() {
       const components = [];
       if (page > 1) {
         components.push(
           new Discord.MessageButton()
             .setCustomId("prev")
-            .setEmoji("\u2B05")
+            .setEmoji("\u2B05") // <
             .setStyle("PRIMARY")
         );
       }
       components.push(
         new Discord.MessageButton()
           .setCustomId("next")
-          .setEmoji("\u27A1")
+          .setEmoji("\u27A1") // >
           .setStyle("PRIMARY")
       );
       return new Discord.MessageActionRow().addComponents(...components);
-    };
+    }
+
     const initialMessage = await msg.reply({
       embeds: [
         send(
@@ -139,15 +140,19 @@ ${codestr("&use 'cheap iphone'", "js")}`
           )
         )
       ],
+      allowedMentions: {
+        repliedUser: false
+      },
       components: [
         getComponents()
       ]
     });
 
     const collector = initialMessage.createMessageComponentCollector({ componentType: "BUTTON", time: 160000, filter: (inter) => inter.user.id === msg.author.id });
+
     collector.on("collect", async (choice) => {
-      if (choice.customId === "prev") page--;
-      else if (choice.customId === "next") page++;
+      if (choice.customId == "prev") page--;
+      else if (choice.customId == "next") page++;
       await choice.update({
         embeds: [
           send(
@@ -161,6 +166,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         ]
       });
     });
+
     collector.on("end", async () => {
       await initialMessage.edit({
         components: []
