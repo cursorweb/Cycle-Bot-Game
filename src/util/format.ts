@@ -27,6 +27,19 @@ function codestr(str: string, lang = "html") {
   return `\`\`\`${lang}\n${str}\`\`\``;
 }
 
+// [...ooo]
+const black = "■";
+const white = "□";
+
+/**
+ * Progress, assumes width > percent
+ * @param percent 0-width
+ * @param width max
+ */
+function progress(percent: number, width: number) {
+  return `[${black.repeat(percent)}${white.repeat(width - percent)}]`;
+}
+
 function formatDate(ms: number) {
   const days = Math.floor(ms / (24 * 60 * 60 * 1000));
   const hours = Math.floor(ms % (24 * 60 * 60 * 1000) / (60 * 60 * 1000));
@@ -120,14 +133,14 @@ ${codestr("&use 'cheap iphone'", "js")}`
           new Discord.MessageButton()
             .setCustomId("prev")
             .setEmoji("\u2B05") // <
-            .setStyle("PRIMARY")
+            .setStyle("SECONDARY")
         );
       }
       components.push(
         new Discord.MessageButton()
           .setCustomId("next")
           .setEmoji("\u27A1") // >
-          .setStyle("PRIMARY")
+          .setStyle("SECONDARY")
       );
       return new Discord.MessageActionRow().addComponents(...components);
     }
@@ -175,4 +188,4 @@ ${codestr("&use 'cheap iphone'", "js")}`
   }
 }
 
-export { Colors, brackets, noun, hidden, codestr, formatDate, Bot };
+export { Colors, brackets, noun, hidden, codestr, progress, formatDate, Bot };

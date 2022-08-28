@@ -1,11 +1,10 @@
 import * as Discord from "discord.js";
 
-import { Command, Bot, Database, Colors, random, brackets } from "../../global.js";
-import { quests } from "../../util/data/quests.js";
+import { Command, Bot, Database, Colors, random, brackets, formatDate } from "../../global.js";
+import { quests, qDiff } from "../../util/data/quests.js";
 
 
 const hours = 1000 * 60 * 60;
-const names = ["easy", "medium", "hard"];
 
 class C extends Command {
   names = ["new-quest", "newquest"];
@@ -55,14 +54,14 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     msg.channel.send({
       embeds: [{
         color: Colors.PRIMARY,
-        title: `New ${names[difficulty]} quest!`,
+        title: `New ${qDiff[difficulty]} quest!`,
         description: `You got ${brackets(quest.name)}!`,
         fields: [{
           name: "Description",
           value: quest.description
         }, {
           name: "Deadline",
-          value: new Date(deadline).toLocaleString(),
+          value: formatDate(new Date(deadline).getTime() - new Date().getTime()),
         }]
       }]
     });

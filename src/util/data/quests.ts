@@ -1,4 +1,5 @@
 // import { Database } from "../../global";
+export const qDiff = ["easy", "medium", "hard"];
 
 // you invest an amount into a quest
 // and you have x hours to complete the quest!

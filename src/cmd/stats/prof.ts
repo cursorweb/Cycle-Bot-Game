@@ -1,11 +1,8 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName } from "../../global.js";
+import { Command, Colors, Bot, Database, parseMention, brackets, commanum, cleanName, progress } from "../../global.js";
 import { socialMedia } from "../../util/data/social-media.js";
 import { CycleUser } from "../../util/database/database.js";
-
-const black = "■";
-const white = "□";
 
 
 class C extends Command {
@@ -60,7 +57,6 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
     const total = new Big(user.level).times(5);
 
     const percent = xp.div(total).times(10).toNumber();
-    const empty = new Big(1).minus(xp.div(total)).times(10).toNumber();
 
     msg.channel.send({
       embeds: [{
@@ -77,7 +73,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(Database.getUser(o).name)}: **${o}**
         }, {
           name: "Level",
           value: `**Level**: ${commanum(user.level)}
-**Progress**: [${black.repeat(percent)}${white.repeat(empty)}]`
+**Progress**: ${progress(percent, 10)}`
         }].concat(smBoost)
       }]
     });
