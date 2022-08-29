@@ -143,4 +143,14 @@ console.log(a.b);`,
 }`,
   line: 7,
   lang: "React"
+}, {
+  code: `print("hello" " world!")
+a = 5
+def my_func():
+  a = a + 5
+  print(a)
+
+my_func()`,
+  line: 4,
+  lang: "Python"
 }];

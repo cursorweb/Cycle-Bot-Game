@@ -1,3 +1,6 @@
+import { EmbedFieldData } from "discord.js";
+import { Database, brackets, addMs, random, progress } from "../../global";
+
 // import { Database } from "../../global";
 export const qDiff = ["easy", "medium", "hard"];
 
@@ -12,7 +15,7 @@ export enum QuestName {
   Coding,
   Answerer,
   ChestOpener,
-  Poster,
+  Trivia,
 }
 
 // the C stands for challenge
@@ -25,33 +28,117 @@ export interface CQuest {
 export const quests: CQuest[] = [{
   name: "Failed Quest",
   description: "You failed a quest lol",
-  max: Infinity
+  max: 1
 }, {
   name: "Multitasking",
   description: "Get cycles and text!",
-  max: 100
+  max: 256
 }, {
   name: "Cycle Farming",
   description: "Get cycles!",
-  max: 200
+  max: 128
 }, {
   name: "Betting",
   description: "Win in Casinos!",
-  max: 10
+  max: 43 // 128 / 3
 }, {
   name: "Coding",
   description: "Write some code!",
-  max: 250
+  max: 128
 }, {
   name: "Helpful",
   description: "Answer some questions while coding!",
-  max: 10
+  max: 5 // 128 * 0.05
 }, {
   name: "Lucky",
   description: "Get some chests while coding!",
-  max: 5
+  max: 7 // 128 * 0.1
+}, {
+  name: "Smart",
+  description: "Participate in some trivia!",
+  max: 10
 }];
 
-export function increase(_id: string) {
+export enum ActionType {
+  Code,
+  Post,
+  Answer,
+  Bet,
+  Chest,
+  Trivia
+}
 
+export function checkQuest(id: string, action: ActionType): EmbedFieldData | undefined {
+  const user = Database.getUser(id);
+  const quest = user.quest;
+
+  if (!quest) {
+    return;
+  }
+
+  if (new Date().getTime() > new Date(quest.end).getTime()) {
+    const deadline = addMs(new Date(), 1000 * 60 * 60 * 24);
+
+    user.quest = {
+      name: QuestName.Fail,
+      end: deadline.toString(),
+      difficulty: 0,
+      progress: 0
+    };
+
+    return {
+      name: "Quest Failed!",
+      value: `You failed your quest ${brackets(quests[quest.name].name)}!
+You can't get another quest for 24 hours!`
+    };
+  }
+
+  switch (quest.name) {
+  case QuestName.Fail:
+    return;
+  case QuestName.Multiple:
+    if (action == ActionType.Code || action == ActionType.Post) {
+      quest.progress += 1;
+    }
+    break;
+  case QuestName.Cycles:
+    if (action == ActionType.Post) {
+      quest.progress += Math.round(random(1, 3));
+    }
+    break;
+  case QuestName.Betting:
+    if (action == ActionType.Bet) {
+      quest.progress++;
+    }
+    break;
+  case QuestName.Coding:
+    if (action == ActionType.Code) {
+      quest.progress++;
+    }
+    break;
+  case QuestName.Answerer:
+    if (action == ActionType.Answer) {
+      quest.progress++;
+    }
+    break;
+  case QuestName.ChestOpener:
+    if (action == ActionType.Chest) {
+      quest.progress++;
+    }
+    break;
+  case QuestName.Trivia:
+    if (action == ActionType.Trivia) {
+      quest.progress++;
+    }
+    break;
+  }
+
+  const amt = quest.progress;
+  const max = quests[quest.name].max;
+
+  return {
+    name: "Quest Progress!",
+    value: `Your progress has increased!
+${progress(amt / max * 10, 10)} (${amt.toLocaleString()} / ${max.toLocaleString()})`
+  };
 }

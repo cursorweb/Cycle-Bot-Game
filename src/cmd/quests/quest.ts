@@ -27,7 +27,7 @@ ${brackets(quest.name)}!`,
             value: formatDate(new Date(end).getTime() - new Date().getTime())
           }, {
             name: "Progress",
-            value: progress(prog / quest.max * 10, 10)
+            value: `${progress(prog / quest.max * 10, 10)} (${prog.toLocaleString()} / ${quest.max.toLocaleString()})`
           }]
         }]
       });

@@ -15,17 +15,17 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
     let cycles = new Big(user.cycles);
-    if (cycles.lt(2)) return Bot.errormsg(msg, `You need at least ${brackets("2")} cycles to play!`, "Not enough cycles!");
+    if (cycles.lt(10)) return Bot.errormsg(msg, `You need at least ${brackets("10")} cycles to play!`, "Not enough cycles!");
 
-    const addCycle = () => {
-      cycles = cycles.plus(2);
+    function addCycle() {
+      cycles = cycles.plus(10);
       user.cycles = cycles.toString();
-    };
+    }
 
-    const minCycle = () => {
-      cycles = cycles.minus(2);
+    function minCycle() {
+      cycles = cycles.minus(10);
       user.cycles = cycles.toString();
-    };
+    }
 
     const question = randomChoice(trivia)[0];
 
@@ -70,7 +70,7 @@ Use \`&trivia\` to try again!`
                 description: `You found the bug!
 
 ${user} thanks you!
-+ ${brackets("2")} cycles`
++ ${brackets("10")} cycles`
               }]
             });
             addCycle();
@@ -83,7 +83,7 @@ ${user} thanks you!
 **IN THE WRONG SPOT**
 
 ${question.line} == ${num}
-- ${brackets("2")} cycles`
+- ${brackets("10")} cycles`
               }]
             });
             minCycle();
@@ -96,7 +96,7 @@ ${question.line} == ${num}
               color: Colors.ERROR,
               description: `You ran out of time!
 
-- ${brackets("2")} cycles
+- ${brackets("10")} cycles
 
 Use \`&trivia\` to try again!`
             }]
