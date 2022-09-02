@@ -1,5 +1,5 @@
 import { EmbedFieldData } from "discord.js";
-import { Database, brackets, addMs, random, progress } from "../../global";
+import { Database, brackets, addMs, random, progress } from "../../global.js";
 
 // import { Database } from "../../global";
 export const qDiff = ["easy", "medium", "hard"];

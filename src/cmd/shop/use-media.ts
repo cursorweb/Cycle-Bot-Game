@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets } from "../../global.js";
+import { Command, Colors, Bot, Database, brackets, commanum } from "../../global.js";
 import { socialMedia } from "../../util/data/social-media.js";
 
 class C extends Command {
-  names = ["advance-media", "use-media", "prestige", "next-media"];
+  names = ["advance-media", "use-media", "prestige", "next-media", "nm"];
   help = "Go to the next social media!";
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
@@ -24,12 +24,12 @@ class C extends Command {
       mesg.awaitReactions({ filter, max: 1, time: 60000, errors: ["time"] }).then(_ => {
         const user = Database.getUser(msg.author.id);
         const idx = user.socialMedia;
-        const cyclesNeeded = new Big(100_000).pow(Math.log(2 * idx));
+        const cyclesNeeded = new Big(100_000).pow(Math.ceil(Math.log(2 * (idx + 1))));
         const userCycles = new Big(user.cycles);
 
         if (userCycles.lt(cyclesNeeded)) {
           return Bot.errormsg(msg, `Not enough cycles!!
-You need ${cyclesNeeded.minus(userCycles)} more cycles!`);
+You need ${brackets(commanum(cyclesNeeded.minus(userCycles).toString()))} more cycles!`);
         }
 
         let sm = user.socialMedia + 1;

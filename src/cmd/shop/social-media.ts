@@ -4,7 +4,7 @@ import { Command, Colors, Database, brackets, codestr, commanum } from "../../gl
 import { socialMedia } from "../../util/data/social-media.js";
 
 class C extends Command {
-  names = ["social-media", "media-shop"];
+  names = ["social-media", "media-shop", "sm"];
   help = "View the next social media planned!";
   examples = ["social-media"];
 

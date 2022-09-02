@@ -1,6 +1,8 @@
 import * as Discord from "discord.js";
+import Big from "bignumber.js";
 
-import { Command, Bot, Database, Colors, random, brackets, formatDate } from "../../global.js";
+import { CycleUser } from "../../util/database/genschema.js";
+import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum } from "../../global.js";
 import { quests, qDiff } from "../../util/data/quests.js";
 
 
@@ -21,7 +23,7 @@ class C extends Command {
 Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     }
 
-    let difficulty;
+    let difficulty: 0 | 1 | 2;
     let deadline = new Date().getTime();
 
     switch (args[0]) {
@@ -39,6 +41,10 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
       break;
     default:
       return Bot.usererr(msg, "Valid difficulties: `hard`, `medium`, `easy`", "Invalid difficulty!");
+    }
+
+    if (!this.checkCycles(msg, user, difficulty)) {
+      return;
     }
 
     const questi = Math.floor(random(0, quests.length));
@@ -65,6 +71,24 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
         }]
       }]
     });
+  }
+
+  private checkCycles(msg: Discord.Message, user: CycleUser, diff: 0 | 1 | 2) {
+    const userCycles = new Big(user.cycles);
+    const handle = (amt: number) => {
+      if (userCycles.lt(new Big(amt))) {
+        Bot.errormsg(msg, `Not enough cycles!!
+    You need ${brackets(commanum(userCycles.minus(new Big(amt)).toString()))} more cycles.`);
+        return false;
+      }
+      return true;
+    };
+
+    switch (diff) {
+    case 0: return handle(1_000);
+    case 1: return handle(100_000);
+    case 2: return handle(1_000_000);
+    }
   }
 }
 
