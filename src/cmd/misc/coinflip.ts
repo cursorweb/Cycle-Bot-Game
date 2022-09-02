@@ -7,9 +7,6 @@ class C extends Command {
   examples = ["coinflip", "coin-flip"];
   isGame = "n" as const;
 
-  // don't forget to change!
-  isAdmin = true;
-
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
       embeds: [{
