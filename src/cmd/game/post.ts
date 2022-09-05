@@ -5,6 +5,7 @@ import { post as drops } from "../../util/data/drops.js";
 import { boosts } from "../../util/data/boosts/boosts.js";
 import { levelUp } from "../../util/levels.js";
 import { socialMedia } from "../../util/data/social-media.js";
+import { ActionType, checkQuest } from "../../util/data/quests.js";
 
 class C extends Command {
   names = ["post", "p"];
@@ -77,6 +78,9 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
     }
 
     if (levelField) fields.push(levelField);
+
+    const quest = checkQuest(user, ActionType.Post);
+    if (quest) fields.push(quest);
 
     cycles = cycles.plus(upvotes);
 

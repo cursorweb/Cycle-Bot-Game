@@ -5,6 +5,7 @@ import { code as drops } from "../../util/data/drops.js";
 import { boosts } from "../../util/data/boosts/boosts.js";
 import { levelUp } from "../../util/levels.js";
 import { socialMedia } from "../../util/data/social-media.js";
+import { ActionType, checkQuest } from "../../util/data/quests.js";
 
 class C extends Command {
   names = ["code", "c"];
@@ -60,6 +61,9 @@ class C extends Command {
         value: `With a better code editor in ${name},\nyou get +${brackets(commanum(tpc.toString()))} more text!`
       });
     }
+
+    const quest = checkQuest(user, ActionType.Code);
+    if (quest) fields.push(quest);
 
     msg.channel.send({
       embeds: [{

@@ -68,8 +68,7 @@ export enum ActionType {
   Trivia
 }
 
-export function checkQuest(id: string, action: ActionType): EmbedFieldData | undefined {
-  const user = Database.getUser(id);
+export function checkQuest(user: Database.CycleUser, action: ActionType): EmbedFieldData | undefined {
   const quest = user.quest;
 
   if (!quest) {
@@ -77,6 +76,16 @@ export function checkQuest(id: string, action: ActionType): EmbedFieldData | und
   }
 
   if (new Date().getTime() > new Date(quest.end).getTime()) {
+    if (user.quest?.name == QuestName.Fail) {
+      user.quest = null;
+
+      return {
+        name: "Quest update!",
+        value: `Your cooldown has ended.
+You can start quests again!`
+      };
+    }
+
     const deadline = addMs(new Date(), 1000 * 60 * 60 * 24);
 
     user.quest = {
@@ -94,43 +103,43 @@ You can't get another quest for 24 hours!`
   }
 
   switch (quest.name) {
-  case QuestName.Fail:
-    return;
-  case QuestName.Multiple:
-    if (action == ActionType.Code || action == ActionType.Post) {
-      quest.progress += 1;
-    }
-    break;
-  case QuestName.Cycles:
-    if (action == ActionType.Post) {
-      quest.progress += Math.round(random(1, 3));
-    }
-    break;
-  case QuestName.Betting:
-    if (action == ActionType.Bet) {
-      quest.progress++;
-    }
-    break;
-  case QuestName.Coding:
-    if (action == ActionType.Code) {
-      quest.progress++;
-    }
-    break;
-  case QuestName.Answerer:
-    if (action == ActionType.Answer) {
-      quest.progress++;
-    }
-    break;
-  case QuestName.ChestOpener:
-    if (action == ActionType.Chest) {
-      quest.progress++;
-    }
-    break;
-  case QuestName.Trivia:
-    if (action == ActionType.Trivia) {
-      quest.progress++;
-    }
-    break;
+    case QuestName.Fail:
+      return;
+    case QuestName.Multiple:
+      if (action == ActionType.Code || action == ActionType.Post) {
+        quest.progress += 1;
+      }
+      break;
+    case QuestName.Cycles:
+      if (action == ActionType.Post) {
+        quest.progress += Math.round(random(1, 3));
+      }
+      break;
+    case QuestName.Betting:
+      if (action == ActionType.Bet) {
+        quest.progress++;
+      }
+      break;
+    case QuestName.Coding:
+      if (action == ActionType.Code) {
+        quest.progress++;
+      }
+      break;
+    case QuestName.Answerer:
+      if (action == ActionType.Answer) {
+        quest.progress++;
+      }
+      break;
+    case QuestName.ChestOpener:
+      if (action == ActionType.Chest) {
+        quest.progress++;
+      }
+      break;
+    case QuestName.Trivia:
+      if (action == ActionType.Trivia) {
+        quest.progress++;
+      }
+      break;
   }
 
   const amt = quest.progress;

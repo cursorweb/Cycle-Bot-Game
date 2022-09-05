@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { Command, Colors, Bot, Database, constrain, random, brackets, parseNumber } from "../../global.js";
 import { commanum } from "../../util/util.js";
+import { ActionType, checkQuest } from "../../util/data/quests.js";
 
 class C extends Command {
   names = ["casino", "gamble"];
@@ -40,11 +41,14 @@ class C extends Command {
 
       mesg.awaitReactions({ filter, max: 1, time: 60000, errors: ["time"] }).then(() => {
         if (random(0, 3) < 1) {
+          const field = checkQuest(user, ActionType.Bet);
+
           mesg.edit({
             embeds: [{
               color: Colors.SUCCESS,
               title: "You win!",
-              description: `You chose the right color! You earned ${brackets(commanum(amt.toString()))} cycles!`
+              description: `You chose the right color! You earned ${brackets(commanum(amt.toString()))} cycles!`,
+              fields: field ? [field] : []
             }]
           });
 

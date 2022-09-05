@@ -27,27 +27,27 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     let deadline = new Date().getTime();
 
     switch (args[0]) {
-    case "easy":
-      difficulty = 0;
-      deadline += hours * 24;
-      break;
-    case "medium":
-      difficulty = 1;
-      deadline += hours * 12;
-      break;
-    case "hard":
-      difficulty = 2;
-      deadline += hours * 6;
-      break;
-    default:
-      return Bot.usererr(msg, "Valid difficulties: `hard`, `medium`, `easy`", "Invalid difficulty!");
+      case "easy":
+        difficulty = 0;
+        deadline += hours * 24;
+        break;
+      case "medium":
+        difficulty = 1;
+        deadline += hours * 12;
+        break;
+      case "hard":
+        difficulty = 2;
+        deadline += hours * 6;
+        break;
+      default:
+        return Bot.usererr(msg, "Valid difficulties: `hard`, `medium`, `easy`", "Invalid difficulty!");
     }
 
     if (!this.checkCycles(msg, user, difficulty)) {
       return;
     }
 
-    const questi = Math.floor(random(0, quests.length));
+    const questi = Math.floor(random(1, quests.length));
     const quest = quests[questi];
 
     user.quest = {
@@ -78,16 +78,16 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     const handle = (amt: number) => {
       if (userCycles.lt(new Big(amt))) {
         Bot.errormsg(msg, `Not enough cycles!!
-    You need ${brackets(commanum(userCycles.minus(new Big(amt)).toString()))} more cycles.`);
+    You need ${brackets(commanum(new Big(amt).minus(userCycles).toString()))} more cycles.`);
         return false;
       }
       return true;
     };
 
     switch (diff) {
-    case 0: return handle(1_000);
-    case 1: return handle(100_000);
-    case 2: return handle(1_000_000);
+      case 0: return handle(1_000);
+      case 1: return handle(100_000);
+      case 2: return handle(1_000_000);
     }
   }
 }

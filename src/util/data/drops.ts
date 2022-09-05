@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { brackets, pluralb, commanum, hidden, Database } from "../../global.js";
 import { items } from "./item.js";
+import { ActionType, checkQuest } from "./quests.js";
 
 const code: DropItem[] = [{
   chance: () => Math.random() < 0.1,
@@ -12,8 +13,10 @@ const code: DropItem[] = [{
     const amount = tpc.times(boost).dp(0);
     text = text.plus(amount);
     user.text = text.toString();
-    return { name: "Code Burst!", value: `You get an extra burst of energy!
-+${brackets(commanum(amount.toString()))} line${pluralb(amount)} of code! (+${Math.floor(boost * 100)}%)` };
+    return {
+      name: "Code Burst!", value: `You get an extra burst of energy!
++${brackets(commanum(amount.toString()))} line${pluralb(amount)} of code! (+${Math.floor(boost * 100)}%)`
+    };
   }
 }, {
   chance: () => Math.random() < 0.05,
@@ -21,8 +24,19 @@ const code: DropItem[] = [{
     let cycles = new Big(user.cycles);
     cycles = cycles.plus(5);
     user.cycles = cycles.toString();
-    return { name: "Question Answerer!", value: `You answered somebody's question!
-You earned ${brackets("5")} cycles!` };
+
+    const field = checkQuest(user, ActionType.Answer);
+    let value = "";
+    if (field) {
+      value = `
+**${field.name}**
+${field.value}`;
+    }
+
+    return {
+      name: "Question Answerer!", value: `You answered somebody's question!
+You earned ${brackets("5")} cycles!${value}`
+    };
   }
 }, {
   chance: () => Math.random() < 0.2,
@@ -45,9 +59,19 @@ You earned ${brackets("5")} cycles!` };
 
     const itemText = Object.keys(itemsGot).map(i => `${hidden(`${items[Number(i)].name}`)}${itemsGot[i] > 1 ? ` x**${commanum(itemsGot[i].toString())}**` : ""}`);
 
-    return { name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
+    const field = checkQuest(user, ActionType.Chest);
+    let value = "";
+    if (field) {
+      value = `
+**${field.name}**
+${field.value}`;
+    }
+
+    return {
+      name: "Mystery Chest!", value: `You accidentally make a ${brackets("chest")}!
 You open it up and find...
-${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}` };
+${itemText.length == 0 ? hidden("nothing :(") : itemText.join("\n")}${value}`
+    };
   }
 }];
 

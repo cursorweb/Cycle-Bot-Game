@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseNumber } from "../../global.js";
 import { trivia, users } from "../../util/data/trivia.js";
+import { ActionType, checkQuest } from "../../util/data/quests.js";
 
 class C extends Command {
   names = ["trivia", "fix-code", "t"];
@@ -61,16 +62,19 @@ Use \`&trivia\` to try again!`
             });
           }
 
-          const user = randomChoice(users)[0];
+          const username = randomChoice(users)[0];
           if (num == question.line) {
+            const field = checkQuest(user, ActionType.Trivia);
+
             msg.channel.send({
               embeds: [{
                 title: "Correct!",
                 color: Colors.SUCCESS,
                 description: `You found the bug!
 
-${user} thanks you!
-+ ${brackets("10")} cycles`
+${username} thanks you!
++ ${brackets("10")} cycles`,
+                fields: field ? [field] : []
               }]
             });
             addCycle();
@@ -79,7 +83,7 @@ ${user} thanks you!
               embeds: [{
                 title: "Wrong!",
                 color: Colors.ERROR,
-                description: `You made ${user} spend 10 hours debugging...
+                description: `You made ${username} spend 10 hours debugging...
 **IN THE WRONG SPOT**
 
 ${question.line} == ${num}
