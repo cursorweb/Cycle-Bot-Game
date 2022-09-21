@@ -4,6 +4,8 @@ Invite link: https://discord.com/api/oauth2/authorize?client_id=7819393174503424
 import * as dotenv from "dotenv";
 dotenv.config();
 
+import { execSync } from "node:child_process";
+
 
 import * as Discord from "discord.js";
 
@@ -111,24 +113,38 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
       }
     } catch (err: any) {
       console.log("[Error]", err);
-      const channel = client.channels.cache.get("899518500576579615") as Discord.TextChannel;
-
-      if (channel) {
-        channel.send({
-          embeds: [{
-            color: g.Colors.ERROR,
-            title: "Error!",
-            description: `Error is type ${g.brackets("UNHANDLED EXCEPTION")}`,
-            fields: [{
-              name: "Error",
-              value: g.codestr(err.message, "js")
-            }]
-          }]
-        });
-      }
+      showError("UNHANDLED EXCEPTION", err.message);
     }
   }
 });
+
+client.on("rateLimit", e => {
+  if (e.timeout > 10_000) {
+    console.log("[Bot Ratelimit], timeout:", e.timeout);
+    showError("BOT RATELIMIT", "The bot got ratelimited, so we killed it.\nCheck the repl for more!");
+
+    // restart the shell
+    execSync("kill 1");
+  }
+});
+
+function showError(title: string, text: string) {
+  const channel = client.channels.cache.get("899518500576579615") as Discord.TextChannel;
+
+  if (channel) {
+    channel.send({
+      embeds: [{
+        color: g.Colors.ERROR,
+        title: "Error!",
+        description: `Error is type ${g.brackets(title)}`,
+        fields: [{
+          name: "Error",
+          value: g.codestr(text, "js")
+        }]
+      }]
+    });
+  }
+}
 
 
 setInterval(async () => {
