@@ -1,5 +1,7 @@
+import Big from "bignumber.js";
 import { EmbedFieldData } from "discord.js";
 import { Database, brackets, addMs, random, progress } from "../../global.js";
+import { ItemEnum } from "./item.js";
 
 // import { Database } from "../../global";
 export const qDiff = ["easy", "medium", "hard"];
@@ -144,6 +146,23 @@ You can't get another quest for 24 hours!`
 
   const amt = quest.progress;
   const max = quests[quest.name].max;
+
+  if (quest.progress >= max) {
+    const diffs = ["Easy", "Medium", "Hard"];
+    const chests = ["Bronze", "Silver", "Gold"];
+    const enums = [ItemEnum.BronzeQuestChest, ItemEnum.SilverQuestChest, ItemEnum.GoldQuestChest];
+    const diff = quest.difficulty;
+
+    const name = enums[diff];
+    const items = new Big(user.inv[name] || "0");
+    user.inv[name] = items.plus(1).toString();
+
+    return {
+      name: "Quest Complete!",
+      value: `Because you chose a ${diffs[diff]} quest,
+you get a ${brackets(`${chests[diff]} Quest Chest`)}!`
+    };
+  }
 
   return {
     name: "Quest Progress!",
