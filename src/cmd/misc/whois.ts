@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Bot, parseMention } from "../../global.js";
+import { Command, Bot, brackets, Colors, parseMention } from "../../global.js";
 
 class C extends Command {
   names = ["whois", "who-is"];
@@ -13,11 +13,15 @@ class C extends Command {
     }
 
     let user: Discord.User | undefined;
+    let member: Discord.GuildMember | null | undefined;
+
     if (args.length == 0) {
       user = msg.author;
+      member = msg.member;
     } else if (args.length == 1) {
       const search = args[0];
-      user = client.users.cache.find(user => {
+
+      const filter = (user: Discord.User | Discord.GuildMember) => {
         if (user.id == search) return true;
         const mention = parseMention(search);
 
@@ -25,14 +29,38 @@ class C extends Command {
           return user.id == mention.value;
         }
 
-        return user.username.toLowerCase() == mention.value;
-      });
+        return (user instanceof Discord.User ? user.username : user.user.username).toLowerCase() == mention.value;
+      };
+
+      user = client.users.cache.find(filter);
+      member = msg.guild?.members.cache.find(filter);
     }
 
     if (user) {
-      msg.channel.send("todo");
+      msg.channel.send({
+        embeds: [{
+          color: Colors.PRIMARY,
+          title: user.tag,
+          description: `**Account Creation**: ${user.createdAt.toDateString()}
+**Joined At**: ${member?.joinedAt?.toDateString() || "*User not in server*"}`,
+          fields: member ? [{
+            name: "Roles",
+            value: member.roles.cache.map(r => `<@&${r.id}>`).join(" ")
+          }] : []
+        }]
+      });
     } else {
-      msg.channel.send("User not found1");
+      msg.channel.send({
+        embeds: [{
+          title: "User not found!",
+          color: Colors.ERROR,
+          description: `Your search, ${brackets(args[0])}
+did not turn up any results!`,
+          footer: {
+            text: "Make sure the user is in a server that cycle is in as well!"
+          }
+        }]
+      });
     }
   }
 }
