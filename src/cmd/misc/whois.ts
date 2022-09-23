@@ -29,7 +29,8 @@ class C extends Command {
           return user.id == mention.value;
         }
 
-        return (user instanceof Discord.User ? user.username : user.user.username).toLowerCase() == mention.value;
+        const duser = user instanceof Discord.User ? user : user.user;
+        return duser.username.toLowerCase() == mention.value.toLowerCase() || duser.tag.toLowerCase() == mention.value.toLowerCase();
       };
 
       user = client.users.cache.find(filter);
