@@ -7,7 +7,7 @@ class C extends Command {
   examples = ["whois Hithere#6537", "whois"];
   isGame = "n" as const;
 
-  exec(msg: Discord.Message, args: string[], client: Discord.Client) {
+  async exec(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (args.length > 2) {
       return Bot.argserror(msg, args.length, [0, 1]);
     }
@@ -30,11 +30,18 @@ class C extends Command {
         }
 
         const duser = user instanceof Discord.User ? user : user.user;
-        return duser.username.toLowerCase() == mention.value.toLowerCase() || duser.tag.toLowerCase() == mention.value.toLowerCase();
+        const val = mention.value.toLowerCase();
+        return duser.username.toLowerCase() == val || duser.tag.toLowerCase() == val;
       };
 
       user = client.users.cache.find(filter);
       member = msg.guild?.members.cache.find(filter);
+      try {
+        if (!user) user = await client.users.fetch(search);
+        if (!member) member = await msg.guild?.members.fetch(search);
+      } catch {
+        // don't care
+      }
     }
 
     if (user) {
@@ -43,7 +50,12 @@ class C extends Command {
           color: Colors.PRIMARY,
           title: user.tag,
           description: `**Account Creation**: ${user.createdAt.toDateString()}
-**Joined At**: ${member?.joinedAt?.toDateString() || "*User not in server*"}`,
+**Joined At**: ${member?.joinedAt?.toDateString() || "*User not in server*"}
+**Id**: \`${user.id}\`
+**View more**: ${user}`,
+          thumbnail: {
+            url: user.displayAvatarURL(),
+          },
           fields: member ? [{
             name: "Roles",
             value: member.roles.cache.map(r => `<@&${r.id}>`).join(" ")
