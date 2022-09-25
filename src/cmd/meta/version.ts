@@ -10,8 +10,8 @@ class C extends Command {
     msg.channel.send({
       embeds: [{
         color: Colors.PRIMARY,
-        title: "Version 0.1.18",
-        description: "Quality of life update! We are now using discord.js v13, and many commands have been revamped!",
+        title: "Version 0.1.19",
+        description: "Quests update! Invest a certain amount of cycles and get a big payback! Get one now -> `&new-quest`",
         fields: [{
           name: "Discord Server",
           value: "Talk to the developers, and get sneak peeks in the official [discord server](https://discord.gg/4vTPWdpjFz)!"
