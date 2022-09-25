@@ -277,22 +277,87 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
 Thanks for voting!`
     };
   },
-  [ItemEnum.BronzeQuestChest]: (_user, _amt) => {
+  [ItemEnum.BronzeQuestChest]: (user, amt) => {
+    // 1% tpm * cpp -> cycle
+    // 10 ego coins
+    // 1 chest chest
+
+    const cyclesEarned = new Big(user.tpm).times(0.01 * amt).times(new Big(user.cpp)).plus(500 * amt).dp(0, Big.ROUND_FLOOR);
+    const ecsEarned = 10 * amt;
+    const cchestsEarned = amt;
+
+    const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
+    const ecs = new Big(user.inv[ItemEnum.EgoCoin]).plus(ecsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
+
+    user.cycles = nCycles;
+    user.inv[ItemEnum.EgoCoin] = ecs;
+    user.inv[ItemEnum.ChestChest] = cchests;
+
     return {
       name: "Bronze Quest Chest!",
-      value: "todo"
+      value: `You open up a ${brackets("Bronze quest chest")}!
+You got:
++ ${brackets(cyclesEarned.toString())} Cycles!
++ ${brackets(ecsEarned.toString())} Ego-Coins!
++ ${brackets(cchestsEarned.toString())} Chest Chests!`
     };
   },
-  [ItemEnum.SilverQuestChest]: (_user, _amt) => {
+  [ItemEnum.SilverQuestChest]: (user, amt) => {
+    // 5% tpm * cpp -> cycle
+    // 20 ego coins
+    // 10 chest chest
+
+    const cyclesEarned = new Big(user.tpm).times(0.05 * amt).times(new Big(user.cpp)).plus(5e4 * amt).dp(0, Big.ROUND_FLOOR);
+    const ecsEarned = 20 * amt;
+    const cchestsEarned = 10 * amt;
+
+    const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
+    const ecs = new Big(user.inv[ItemEnum.EgoCoin]).plus(ecsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
+
+    user.cycles = nCycles;
+    user.inv[ItemEnum.EgoCoin] = ecs;
+    user.inv[ItemEnum.ChestChest] = cchests;
+
     return {
       name: "Silver Quest Chest!",
-      value: "todo"
+      value: `You open up a ${brackets("Silver quest chest")}!
+You got:
++ ${brackets(cyclesEarned.toString())} Cycles!
++ ${brackets(ecsEarned.toString())} Ego-Coins!
++ ${brackets(cchestsEarned.toString())} Chest Chests!`
     };
   },
-  [ItemEnum.GoldQuestChest]: (_user, _amt) => {
+  [ItemEnum.GoldQuestChest]: (user, amt) => {
+    // 10% tpm * cpp -> cycle
+    // 30 ego coins
+    // 15 chest chest
+    // 1 chest chest chest
+
+    const cyclesEarned = new Big(user.tpm).times(0.1 * amt).times(new Big(user.cpp)).plus(5e5 * amt).dp(0, Big.ROUND_FLOOR);
+    const ecsEarned = 30 * amt;
+    const cchestsEarned = 15 * amt;
+    const ccchestsEarned = amt;
+
+    const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
+    const ecs = new Big(user.inv[ItemEnum.EgoCoin]).plus(ecsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
+    const ccchests = new Big(user.inv[ItemEnum.ChestChestChest]).plus(ccchestsEarned).toString();
+
+    user.cycles = nCycles;
+    user.inv[ItemEnum.EgoCoin] = ecs;
+    user.inv[ItemEnum.ChestChest] = cchests;
+    user.inv[ItemEnum.ChestChestChest] = ccchests;
+
     return {
       name: "Gold Quest Chest!",
-      value: "todo"
+      value: `You open up a ${brackets("Gold quest chest")}!
+You got:
++ ${brackets(cyclesEarned.toString())} Cycles!
++ ${brackets(ecsEarned.toString())} Ego-Coins!
++ ${brackets(cchestsEarned.toString())} Chest Chests!
++ ${brackets(ccchestsEarned.toString())} Chest Chest Chests!`
     };
   }
 };

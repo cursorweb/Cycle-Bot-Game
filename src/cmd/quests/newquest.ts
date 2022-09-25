@@ -3,7 +3,7 @@ import Big from "bignumber.js";
 
 import { CycleUser } from "../../util/database/genschema.js";
 import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum } from "../../global.js";
-import { quests, qDiff } from "../../util/data/quests.js";
+import { quests, qDiff, checkQuest } from "../../util/data/quests.js";
 
 
 const hours = 1000 * 60 * 60;
@@ -17,6 +17,8 @@ class C extends Command {
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
 
     const user = Database.getUser(msg.author.id);
+
+    checkQuest(user);
 
     if (user.quest) {
       return Bot.errormsg(msg, `You already have a quest!
@@ -43,7 +45,8 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
         return Bot.usererr(msg, "Valid difficulties: `hard`, `medium`, `easy`", "Invalid difficulty!");
     }
 
-    if (!this.checkCycles(msg, user, difficulty)) {
+    const cost = this.checkCycles(msg, user, difficulty);
+    if (cost == 0) {
       return;
     }
 
@@ -61,7 +64,8 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
       embeds: [{
         color: Colors.PRIMARY,
         title: `New ${qDiff[difficulty]} quest!`,
-        description: `You got ${brackets(quest.name)}!`,
+        description: `You got ${brackets(quest.name)}!
+- ${brackets(cost.toString())} cycles`,
         fields: [{
           name: "Description",
           value: quest.description
@@ -81,7 +85,9 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     You need ${brackets(commanum(new Big(amt).minus(userCycles).toString()))} more cycles.`);
         return false;
       }
-      return true;
+
+      user.cycles = userCycles.minus(amt).toString();
+      return amt;
     };
 
     switch (diff) {

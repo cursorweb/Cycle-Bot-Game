@@ -3,7 +3,6 @@ import { EmbedFieldData } from "discord.js";
 import { Database, brackets, addMs, random, progress } from "../../global.js";
 import { ItemEnum } from "./item.js";
 
-// import { Database } from "../../global";
 export const qDiff = ["easy", "medium", "hard"];
 
 // you invest an amount into a quest
@@ -70,7 +69,7 @@ export enum ActionType {
   Trivia
 }
 
-export function checkQuest(user: Database.CycleUser, action: ActionType): EmbedFieldData | undefined {
+export function checkQuest(user: Database.CycleUser, action?: ActionType): EmbedFieldData | undefined {
   const quest = user.quest;
 
   if (!quest) {
@@ -104,6 +103,7 @@ You can't get another quest for 24 hours!`
     };
   }
 
+  const start = quest.progress;
   switch (quest.name) {
     case QuestName.Fail:
       return;
@@ -164,9 +164,11 @@ you get a ${brackets(`${chests[diff]} Quest Chest`)}!`
     };
   }
 
-  return {
-    name: "Quest Progress!",
-    value: `Your progress has increased!
+  if (amt != start) {
+    return {
+      name: "Quest Progress!",
+      value: `Your progress has increased!
 ${progress(amt / max * 10, 10)} (${amt.toLocaleString()} / ${max.toLocaleString()})`
-  };
+    };
+  }
 }
