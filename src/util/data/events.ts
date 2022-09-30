@@ -4,3 +4,5 @@ export interface EventItm {
   boost?: number; // the boost (defaults to 10)
   category: "tpc" | "tpm" | "cpp"; // the category
 }
+
+// Probably should be the list of different type of events
