@@ -1,7 +1,6 @@
 import * as Discord from "discord.js";
 import { Command, Colors} from "../../global.js";
 
-import { EventItm } from "../../util/data/boosts/events.js";
 
 
 class C extends Command {
