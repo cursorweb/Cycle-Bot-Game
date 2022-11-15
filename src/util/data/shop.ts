@@ -112,6 +112,16 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[], boosts: SI
     description: "Now you can share even more code!",
     cost: "3.9323e11",
     tpc: 500
+  }, {
+    name: "Replit Ghostwriter",
+    description: "Writes code... for you!",
+    cost: "5.171e13",
+    tpc: 600
+  }, {
+    name: "Github Copilot",
+    description: "Ghostwriter but more expensive!",
+    cost: "6.8e15",
+    tpc: 700
   }],
 
   cpp: [{
@@ -296,6 +306,11 @@ export const items: { upgrades: SItem[], cpp: SItem[], idle: SItem[], boosts: SI
     description: "Test-Driven Development is the best!",
     cost: 401,
     tpm: 100
+  }, {
+    name: "Replit Bounties",
+    description: "What's better than coding? Having people code for you!",
+    cost: 461,
+    tpm: 115
   }],
 
   boosts: boostShop.map(n => {

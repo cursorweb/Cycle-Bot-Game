@@ -123,7 +123,7 @@ console.log(a.b);`,
   }
 
   hook(element) {
-    element.addEventListener("click", e => {
+    element.addEventListener("click", function(e) {
       this.callback(e);
     });
   }
@@ -152,5 +152,11 @@ def my_func():
 
 my_func()`,
   line: 4,
+  lang: "Python"
+}, {
+  code: `a = 1
+b =+ 1
+print(a + " + " + b + " = " + (a + b))`,
+  line: 3,
   lang: "Python"
 }];

@@ -86,7 +86,6 @@ ${username} thanks you!
                 description: `You made ${username} spend 10 hours debugging...
 **IN THE WRONG SPOT**
 
-${question.line} == ${num}
 - ${brackets("10")} cycles`
               }]
             });
