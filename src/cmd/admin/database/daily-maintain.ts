@@ -11,7 +11,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], client: Discord.Client) {
     Database.saveBackup();
-    Database.pruneUsers();
+    const deleted = Database.pruneUsers().map(x => codestr(x)).toString();
 
     const guildCount = client.guilds.cache.size;
 
@@ -29,7 +29,8 @@ class C extends Command {
       msg.channel.send({
         embeds: [{
           color: Colors.SUCCESS,
-          title: "Successfully backed-up the database! Pruned users, and updated top.gg!",
+          title: `Successfully backed-up the database! Pruned users, and updated top.gg!
+Deleted: ${deleted == "" ? "**no one**" : deleted}`,
           footer: { text: "Note: Use restore to actually restore the database." }
         }]
       });
