@@ -41,7 +41,7 @@ async function load() {
 
 async function help(msg: Discord.Message, args: string[], output: { [i: string]: { cmds: Command[], desc: string } }) {
   if (args.length != 1) { // &help
-    const fields: Discord.EmbedFieldData[] = Object.keys(output).map((k): Discord.EmbedFieldData => {
+    const fields: Discord.EmbedField[] = Object.keys(output).map((k) => {
       const itm = output[k];
       const cmds = itm.cmds;
 
@@ -52,7 +52,7 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
       };
     });
 
-    Bot.carousel(msg, fields, 2, (page, i) => {
+    Bot.carousel(msg, fields, 2, (page, i): Discord.EmbedData => {
       return {
         color: Colors.PRIMARY,
         title: "Help Categories",
@@ -71,7 +71,7 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
 
     if (!cmd) return Bot.usererr(msg, `Help for ${brackets(args[0])} was not found!`, "Command not found!");
     // &help meta
-    const fields: Discord.EmbedFieldData = {
+    const fields: Discord.EmbedField = {
       name: noun(cmd.names[0]),
       value: `${cmd.help}\
 ${cmd.examples.length == 0
@@ -80,7 +80,8 @@ ${cmd.examples.length == 0
 ${cmd.names.length > 1
     ? `**Aliases**: ${cmd.names.slice(1).join(",")}\n` : ""}\
 ${cmd.isAdmin ? `${brackets("ADMIN-ONLY")}\n` : ""}\
-${cmd.cooldown ? `**Cooldown**: **${cmd.cooldown}**ms` : ""}`
+${cmd.cooldown ? `**Cooldown**: **${cmd.cooldown}**ms` : ""}`,
+      inline: false
     };
 
     msg.channel.send({

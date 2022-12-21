@@ -1,11 +1,12 @@
 import * as Discord from "discord.js";
+import { ButtonBuilder, ButtonStyle, ComponentType } from "discord.js";
 import { constrain } from "./util.js";
 
 enum Colors {
-  PRIMARY = "#1a8ff0",
-  ERROR = "#f0351a",
-  SUCCESS = "#06c012",
-  WARNING = "#faa12f"
+  PRIMARY = 0x1a8ff0,
+  ERROR = 0xf0351a,
+  SUCCESS = 0x06c012,
+  WARNING = 0xfaa12f
 }
 
 // [ **smth** ]
@@ -124,25 +125,25 @@ ${codestr("&use 'cheap iphone'", "js")}`
    * @param send the embed to be sent
    * @param curr curr page (1)
    */
-  export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.MessageEmbedOptions, curr = 1) {
+  export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.EmbedData, curr = 1) {
     let page = curr;
     function getComponents() {
       const components = [];
       if (page > 1) {
         components.push(
-          new Discord.MessageButton()
+          new ButtonBuilder()
             .setCustomId("prev")
             .setEmoji("\u2B05") // <
-            .setStyle("SECONDARY")
+            .setStyle(ButtonStyle.Secondary)
         );
       }
       components.push(
-        new Discord.MessageButton()
+        new ButtonBuilder()
           .setCustomId("next")
           .setEmoji("\u27A1") // >
-          .setStyle("SECONDARY")
+          .setStyle(ButtonStyle.Secondary)
       );
-      return new Discord.MessageActionRow().addComponents(...components);
+      return new Discord.ActionRowBuilder().addComponents(...components);
     }
 
     const initialMessage = await msg.reply({
@@ -157,11 +158,11 @@ ${codestr("&use 'cheap iphone'", "js")}`
         repliedUser: false
       },
       components: [
-        getComponents()
+        getComponents() as any
       ]
     });
 
-    const collector = initialMessage.createMessageComponentCollector({ componentType: "BUTTON", time: 160000, filter: (inter) => inter.user.id === msg.author.id });
+    const collector = initialMessage.createMessageComponentCollector({ componentType: ComponentType.Button, time: 160000, filter: (inter) => inter.user.id === msg.author.id });
 
     collector.on("collect", async (choice) => {
       if (choice.customId == "prev") page--;
@@ -175,7 +176,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
           )
         ],
         components: [
-          getComponents()
+          getComponents() as any
         ]
       });
     });
