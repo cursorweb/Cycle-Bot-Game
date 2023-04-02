@@ -21,7 +21,7 @@ class C extends Command {
     const userBoosts = Database.Boost.getUser(msg.author.id);
     const idx = user.socialMedia;
 
-    const fields: Discord.EmbedFieldData[] = [];
+    const fields: Discord.APIEmbedField[] = [];
     const levelField = levelUp(user);
     if (levelField) fields.push(levelField);
 

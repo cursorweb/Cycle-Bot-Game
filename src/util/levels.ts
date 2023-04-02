@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { Database, brackets, commanum } from "../global.js";
 
-export function levelUp(user: Database.CycleUser): Discord.EmbedFieldData | undefined {
+export function levelUp(user: Database.CycleUser): Discord.APIEmbedField | undefined {
   const level = new Big(user.level);
   let xp = new Big(user.xp);
 

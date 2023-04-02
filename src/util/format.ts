@@ -125,7 +125,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
    * @param send the embed to be sent
    * @param curr curr page (1)
    */
-  export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.EmbedData, curr = 1) {
+  export async function carousel<T>(msg: Discord.Message, data: T[], count: number, send: (_: number, _1: T[]) => Discord.APIEmbed, curr = 1) {
     let page = curr;
     function getComponents() {
       const components = [];

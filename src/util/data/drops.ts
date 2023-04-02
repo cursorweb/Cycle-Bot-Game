@@ -92,7 +92,7 @@ const post: DropItem[] = [{
 
 export interface DropItem {
   chance: () => boolean;
-  award: (_: Database.CycleUser) => Discord.EmbedFieldData
+  award: (_: Database.CycleUser) => Discord.APIEmbedField
 }
 
 export { code, post };

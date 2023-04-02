@@ -16,7 +16,7 @@ class C extends Command {
     const data = Object.keys(Database.pdb).map(n => ({ name: Database.pdb[n].name, cycles: Database.pdb[n].cycles })).sort((a, b) => new Big(b.cycles).minus(new Big(a.cycles)).toNumber());
 
     Bot.carousel(msg, data, 10, (pg, itm) => {
-      let out: Discord.EmbedFieldData[] = [];
+      let out: Discord.APIEmbedField[] = [];
       if (itm.length == 0) out = [{ name: "Empty Page", value: "No users here!" }];
       else {
         const st = 10 * (pg - 1) + 1; // start

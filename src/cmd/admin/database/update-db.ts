@@ -9,13 +9,15 @@ class C extends Command {
   isAdmin = true;
 
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
-    Database.update().then(() => msg.channel.send({
-      embeds: [{
-        color: Colors.SUCCESS,
-        title: "Success!",
-        description: "Successfully **updated** the database."
-      }]
-    }));
+    Database.update().then(() => {
+      msg.channel.send({
+        embeds: [{
+          color: Colors.SUCCESS,
+          title: "Success!",
+          description: "Successfully **updated** the database."
+        }]
+      });
+    });
   }
 }
 

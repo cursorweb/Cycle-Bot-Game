@@ -19,10 +19,11 @@ import { help, load, verifyHuman } from "./loader.js";
 
 import "./idle.js";
 import { initiate } from "./server.js";
+import { ActivityType } from "discord.js";
 
 
 const client = new Discord.Client({
-  intents: ["GUILDS", "DIRECT_MESSAGES", "GUILD_EMOJIS_AND_STICKERS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"]
+  intents: ["Guilds", "DirectMessages", "GuildEmojisAndStickers", "GuildMembers", "GuildMessages", "GuildMessageReactions"]
 });
 
 
@@ -43,7 +44,7 @@ console.log("[Info] Loaded index.ts.");
 
 
 client.on("ready", async () => {
-  client.user?.setPresence({ activities: [{ name: "&help for help!", type: "PLAYING" }], status: "idle" });
+  client.user?.setPresence({ activities: [{ name: "&help for help!", type: ActivityType.Playing }], status: "idle" });
   console.log(`[Info] Logged in as ${client.user?.tag}!`);
 
   await (process.env.NODE_ENV ? g.Database.updateBackup() : g.Database.update());

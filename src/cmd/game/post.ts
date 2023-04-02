@@ -44,7 +44,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
     const isServer = msg.guild?.id == "788421241005408268"; // refer to ./code.ts
     if (isServer) upvotes = upvotes.times(1.05).dp(0);
 
-    const fields: Discord.EmbedFieldData[] = [];
+    const fields: Discord.APIEmbedField[] = [];
     for (const drop of drops) {
       if (drop.chance()) {
         fields.push(drop.award(user));

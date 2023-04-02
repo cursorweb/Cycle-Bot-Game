@@ -6,7 +6,7 @@ import { items, ItemEnum } from "./item.js";
 
 // this way, we can utilize the inefficiency of an array search.
 // we will check if this object has an implementation, and if not, there won't be one!
-export const openItem: { [i: number]: (user: Database.CycleUser, amt: number) => Discord.EmbedFieldData } = {
+export const openItem: { [i: number]: (user: Database.CycleUser, amt: number) => Discord.APIEmbedField } = {
   [ItemEnum.CheapPhone]: (user, amt) => {
     const cycles = new Big(user.cycles);
     const cpp = new Big(user.cpp);

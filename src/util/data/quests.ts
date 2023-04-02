@@ -1,5 +1,5 @@
 import Big from "bignumber.js";
-import { EmbedFieldData } from "discord.js";
+import { APIEmbedField } from "discord.js";
 import { Database, brackets, addMs, random, progress } from "../../global.js";
 import { ItemEnum } from "./item.js";
 
@@ -69,7 +69,7 @@ export enum ActionType {
   Trivia
 }
 
-export function checkQuest(user: Database.CycleUser, action?: ActionType): EmbedFieldData | undefined {
+export function checkQuest(user: Database.CycleUser, action?: ActionType): APIEmbedField | undefined {
   const quest = user.quest;
 
   if (!quest) {

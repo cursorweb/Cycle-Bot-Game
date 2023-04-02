@@ -47,19 +47,21 @@ ${codestr(editorCode, "")}`
       const filter = (m: Discord.Message) => msg.author.id == m.author.id;
 
       msg.channel.awaitMessages({ filter, time: 60000, max: 1, errors: ["time"] })
-        .then(msgs => {
-          const reply = msgs.first();
+        .then(collected => {
+          const reply = collected.first();
           const num = parseNumber(reply?.content);
           if (isNaN(num)) {
             // can't use `Bot` here... it throws error!
-            return msg.channel.send({
+            msg.channel.send({
               embeds: [{
                 title: "Not a number!",
                 color: Colors.WARNING,
                 description: `You didn't input a number!
-Use \`&trivia\` to try again!`
+                Use \`&trivia\` to try again!`
               }]
             });
+
+            return;
           }
 
           const username = randomChoice(users)[0];

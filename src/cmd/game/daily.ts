@@ -3,7 +3,7 @@ import Big from "bignumber.js";
 import { Command, Colors, Database, Bot, formatDate, msBetween, brackets, commanum, addMs, randomChoice } from "../../global.js";
 import { ItemEnum } from "../../util/data/item.js";
 
-const rewards: ((user: Database.CycleUser) => Discord.EmbedFieldData)[] = [
+const rewards: ((user: Database.CycleUser) => Discord.APIEmbedField)[] = [
   user => {
     let amt = new Big(user.inv[ItemEnum.DailyChest] || 0);
     amt = amt.plus(2);

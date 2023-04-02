@@ -47,7 +47,7 @@ ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
     const page = constrain(num || 1, 1, Infinity);
     const data = handleShop[args[0]](user);
 
-    Bot.carousel(msg, data, 5, (page, i): Discord.MessageEmbedOptions => ({
+    Bot.carousel(msg, data, 5, (page, i): Discord.APIEmbed => ({
       color: Colors.PRIMARY,
       title: "Shop!",
       description: `View the shop! Page ${brackets(page.toString())}.

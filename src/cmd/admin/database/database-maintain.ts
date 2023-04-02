@@ -23,14 +23,16 @@ class C extends Command {
 
       if (process.env.NODE_ENV) Database.updateBackup();
 
-      Database.save().then(() => msg.channel.send({
-        embeds: [{
-          color: Colors.SUCCESS,
-          title: "Successfully updated!",
-          description: "The schema has successfully been updated!\nMake sure `genschema.ts` is up to date.",
-          footer: { text: "Use &lb to find most information!" }
-        }]
-      }));
+      Database.save().then(() => {
+        msg.channel.send({
+          embeds: [{
+            color: Colors.SUCCESS,
+            title: "Successfully updated!",
+            description: "The schema has successfully been updated!\nMake sure `genschema.ts` is up to date.",
+            footer: { text: "Use &lb to find most information!" }
+          }]
+        });
+      });
     });
   }
 }
