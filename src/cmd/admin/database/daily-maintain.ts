@@ -11,7 +11,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, _: string[], client: Discord.Client) {
     Database.saveBackup();
-    const deleted = Database.pruneUsers().map(x => `\`${x}\``).toString();
+    const deleted = Database.pruneUsers().map(x => `\`${x.name}\`: ${x.reason}`).join("\n").toString();
 
     const guildCount = client.guilds.cache.size;
 

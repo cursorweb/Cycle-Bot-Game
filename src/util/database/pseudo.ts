@@ -27,15 +27,27 @@ export function getUser(key: string) {
 }
 
 export function pruneUsers() {
-  const deleted = [];
+  const deleted: { name: string, reason: string }[] = [];
   for (const key in pdb) {
     const user = pdb[key];
     if (user.socialMedia > 0) continue;
 
     // greater than a week
-    if (new Big(user.cycles).lt(50) && (!user.daily || msBetween(new Date(user.daily), new Date()) > 1000 * 60 * 60 * 24 * 7)) {
+    if (new Big(user.cycles).lt(50) && (user.daily && msBetween(new Date(user.daily), new Date()) > 1000 * 60 * 60 * 24 * 7)) {
       delete pdb[key];
-      deleted.push(user.name);
+
+      let reason = "";
+
+      if (new Big(user.cycles).lt(50)) {
+        reason = `Cycles: ${user.cycles}`;
+      } else {
+        reason = `Date: ${(msBetween(new Date(user.daily), new Date()) / 1000 * 60 * 60 * 24).toFixed(1)} days`;
+      }
+
+      deleted.push({
+        name: user.name,
+        reason
+      });
     }
   }
 

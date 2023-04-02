@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as Discord from "discord.js";
 import { Command, Colors, Bot, Database } from "../../global.js";
 
