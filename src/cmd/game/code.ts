@@ -67,7 +67,7 @@ class C extends Command {
 
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Code Code Code!",
         description: `You code your heart out!
 You make ${brackets(commanum(tpc.toString()))} line${plural(tpc.toNumber())} of code!${isServer ? `

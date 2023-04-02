@@ -23,7 +23,15 @@ import { ActivityType } from "discord.js";
 
 
 const client = new Discord.Client({
-  intents: ["Guilds", "DirectMessages", "GuildEmojisAndStickers", "GuildMembers", "GuildMessages", "GuildMessageReactions"]
+  intents: [
+    "Guilds",
+    "DirectMessages",
+    "GuildEmojisAndStickers",
+    "GuildMembers",
+    "GuildMessages",
+    "GuildMessageReactions",
+    "MessageContent"
+  ]
 });
 
 
@@ -67,6 +75,7 @@ client.on("messageCreate", async (msg: Discord.Message) => {
 
       const cmd = parse("&", msg.content);
       if (!cmd) return;
+
 
       if (cmd.command == "help") help(msg, cmd.args, commands);
       else if (cmd.command == "verify") {
