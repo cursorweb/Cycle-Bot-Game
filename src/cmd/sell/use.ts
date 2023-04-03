@@ -38,7 +38,7 @@ It might be used in a shop, however.`, "Item can't be used!");
     msg.channel.send({
       embeds: [{
         title: "Using item!",
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         description: `You use **x${commanum(amount.toString())}** ${brackets(item.name)} ...`,
         fields: [result]
       }]

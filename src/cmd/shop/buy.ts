@@ -48,7 +48,11 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
   idle(user, item, itmIndex, amt) {
     const cost = calcCost(new Big(item.cost), 1.21, amt, user.bought.idle[itmIndex] || 0);
     if (cost.isNaN()) {
-      throw new Error("COST IS NAN!!!");
+      throw new Error(`COST IS NAN!!!
+User: ${user}
+Item: ${item}
+Item Index: ${itmIndex}
+Amount: ${amt}`);
     }
 
     const coins = new Big(user.inv[ItemEnum.IdleCoin]), tpm = new Big(user.tpm);
@@ -144,7 +148,7 @@ Check your spelling!`, "Item not found!");
       msg.channel.send({
         embeds: [{
           title: "Transaction Successful!",
-          color: Colors.SUCCESS,
+          color: Colors.PRIMARY,
           description: result
         }]
       });

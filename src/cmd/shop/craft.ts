@@ -74,7 +74,7 @@ class C extends Command {
 
       msg.channel.send({
         embeds: [{
-          color: Colors.SUCCESS,
+          color: Colors.PRIMARY,
           title: "Success!",
           description: item.message,
           fields: [{

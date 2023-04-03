@@ -57,7 +57,7 @@ class C extends Command {
 
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Daily Reward!",
         description: "You got your daily reward!",
         fields: [out],

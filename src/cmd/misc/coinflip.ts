@@ -10,7 +10,7 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Coin flip!",
         description: `You flipped a coin, and got ${hidden(randomChoice(["heads", "tails"])[0])}!`
       }]

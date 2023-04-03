@@ -11,7 +11,7 @@ class C extends Command {
     if (args.length == 0) {
       msg.channel.send({
         embeds: [{
-          color: Colors.SUCCESS,
+          color: Colors.PRIMARY,
           title: "Roll a dice!",
           description: `You rolled the dice, and you got...
 ${hidden(Math.floor(Math.random() * 6 + 1).toString())}`
@@ -25,7 +25,7 @@ ${hidden(Math.floor(Math.random() * 6 + 1).toString())}`
       else {
         msg.channel.send({
           embeds: [{
-            color: Colors.SUCCESS,
+            color: Colors.PRIMARY,
             title: "Roll a dice!",
             description: `You rolled the dice, and you got...
 ${hidden(Math.floor(Math.random() * (max - min + 1) + min).toString())}`

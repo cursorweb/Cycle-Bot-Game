@@ -71,7 +71,7 @@ ${codestr(editorCode, "")}`
             msg.channel.send({
               embeds: [{
                 title: "Correct!",
-                color: Colors.SUCCESS,
+                color: Colors.PRIMARY,
                 description: `You found the bug!
 
 ${username} thanks you!

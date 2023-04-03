@@ -14,7 +14,7 @@ class C extends Command {
       const output = new Function("client", "process", args.join(" "))(client, process);
       msg.channel.send({
         embeds: [{
-          color: Colors.SUCCESS,
+          color: Colors.PRIMARY,
           title: "Beep Boop Bop Boop!",
           description: `Output was\n${ codestr(output, "yaml")}`
         }]

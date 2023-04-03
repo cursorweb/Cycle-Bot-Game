@@ -86,7 +86,7 @@ You need ${brackets(amt.minus(text).toString())} more code.`);
 
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Post your Code!",
         description: `You posted ${brackets(commanum(amt.toString()))} line${pluralb(amt)} of code.
 People view your post!

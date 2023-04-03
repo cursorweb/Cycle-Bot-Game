@@ -53,7 +53,7 @@ You need ${brackets(commanum(cyclesNeeded.minus(userCycles).toString()))} more c
 
         msg.channel.send({
           embeds: [{
-            color: Colors.SUCCESS,
+            color: Colors.PRIMARY,
             title: `You moved to ${brackets(name)}!`,
             description: `Your cycles, tpc, cpp, and tpm have been reset,
 but now you get a base boost!`,

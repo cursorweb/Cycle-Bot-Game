@@ -47,7 +47,7 @@ These currencies cannot be converted into cycles!`);
 
     msg.channel.send({
       embeds: [{
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Success!",
         description: `You successfully sold ${brackets(item.name)} x**${amt}**!
 It was worth ${brackets(commanum(cycleAmt.toString()))} cycles!

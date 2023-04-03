@@ -45,7 +45,7 @@ class C extends Command {
 
           mesg.edit({
             embeds: [{
-              color: Colors.SUCCESS,
+              color: Colors.PRIMARY,
               title: "You win!",
               description: `You chose the right color! You earned ${brackets(commanum(amt.toString()))} cycles!`,
               fields: field ? [field] : []

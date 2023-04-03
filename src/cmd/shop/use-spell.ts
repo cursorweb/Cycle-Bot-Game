@@ -34,7 +34,7 @@ class C extends Command {
     if (Math.random() * 100 < item.success) { // success
       msg.channel.send({
         embeds: [{
-          color: Colors.SUCCESS,
+          color: Colors.PRIMARY,
           title: "Success!",
           description: `You cast the ${brackets(boost.name)}...
 It succeeds!`

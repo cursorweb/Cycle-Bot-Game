@@ -49,7 +49,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(cleanName(Database.getUser(o).name))
         };
       }
       return {
-        color: Colors.SUCCESS,
+        color: Colors.PRIMARY,
         title: "Inventory",
         description: itm.join("\n"),
         footer: { text: `Page ${page}` }
