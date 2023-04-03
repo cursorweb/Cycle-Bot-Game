@@ -17,7 +17,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 
     user.cycles = cycles.minus(cost).toString();
     if (!user.bought.upgrades[itmIndex]) user.bought.upgrades[itmIndex] = 0;
-    user.bought.upgrades[itmIndex] += amt;
+    user.bought.upgrades[itmIndex]! += amt;
     user.tpc = tpc.plus(new Big(items.upgrades[itmIndex].tpc ?? 0).times(amt)).toString();
 
     return `Successfully bought ${brackets(item.name)}
@@ -37,7 +37,7 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 
     user.cycles = cycles.minus(cost).toString();
     if (!user.bought.cpp[itmIndex]) user.bought.cpp[itmIndex] = 0;
-    user.bought.cpp[itmIndex] += amt;
+    user.bought.cpp[itmIndex]! += amt;
     user.cpp = cpp.plus(new Big(items.cpp[itmIndex].cpp ?? 0).times(amt)).toString();
 
     return `Successfully bought ${brackets(item.name)}
@@ -55,7 +55,7 @@ Item Index: ${itmIndex}
 Amount: ${amt}`);
     }
 
-    const coins = new Big(user.inv[ItemEnum.IdleCoin]), tpm = new Big(user.tpm);
+    const coins = new Big(user.inv[ItemEnum.IdleCoin] || 0), tpm = new Big(user.tpm);
 
     if (coins.lt(cost)) {
       return [`You don't have enough Idle-Coins!
@@ -65,7 +65,7 @@ Amount: ${amt}`);
 
     user.inv[ItemEnum.IdleCoin] = coins.minus(cost).toString();
     if (!user.bought.idle[itmIndex]) user.bought.idle[itmIndex] = 0;
-    user.bought.idle[itmIndex] += amt;
+    user.bought.idle[itmIndex]! += amt;
     user.tpm = tpm.plus(new Big(items.idle[itmIndex].tpm ?? 0).times(amt)).toString();
 
     return `Successfully bought ${brackets(item.name)}
@@ -75,7 +75,7 @@ Amount: ${amt}`);
 
   boosts(user, item, _, amt, id) {
     const cost = new Big(item.cost).times(amt);
-    const coins = new Big(user.inv[ItemEnum.GoldenCycle]);
+    const coins = new Big(user.inv[ItemEnum.GoldenCycle] || 0);
     const bUser = Database.Boost.getUser(id);
     const ref = item.ref || 0;
 

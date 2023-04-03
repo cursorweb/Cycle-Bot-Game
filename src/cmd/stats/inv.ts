@@ -37,7 +37,7 @@ ${userArr.slice(0, 10).map(o => `${brackets(cleanName(Database.getUser(o).name))
 
     const page = arg0 || 1;
     // todo: emoji
-    const data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)]).gt(0)).map(i => `x**${commanum(user.inv[Number(i)].toString())}** ${brackets(items[Number(i)].name)}`);
+    const data = Object.keys(user.inv).filter(i => new Big(user.inv[Number(i)] || 0).gt(0)).map(i => `x**${commanum(user.inv[Number(i)]!.toString())}** ${brackets(items[Number(i)].name)}`);
 
     Bot.carousel(msg, data, 10, (page, itm) => {
       if (itm.length == 0) {

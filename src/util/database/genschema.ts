@@ -57,7 +57,7 @@ export interface CycleUser {
   // extra boosts
   level: string; // the level
   socialMedia: number; // social media platform (number)
-  inv: { [i: number]: string }; // [item-index]: amount
+  inv: { [i: number]: string | undefined }; // [item-index]: amount
 
   badges: string[]; // badges lol
 
@@ -72,9 +72,9 @@ export interface CycleUser {
 
   // what the user has bought
   bought: {
-    idle: { [i: number]: number }; // [item-index]: amount
+    idle: { [i: number]: number | undefined }; // [item-index]: amount
     // this means we can only expand forwards
-    upgrades: { [i: number]: number };
-    cpp: { [i: number]: number };
+    upgrades: { [i: number]: number | undefined };
+    cpp: { [i: number]: number | undefined };
   }
 }

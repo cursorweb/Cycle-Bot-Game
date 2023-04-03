@@ -68,7 +68,7 @@ module.exports = {
     "no-shadow": 0,
     "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-non-null-assertion": 2,
+    "@typescript-eslint/no-non-null-assertion": 1,
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-namespace": 0

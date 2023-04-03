@@ -197,7 +197,7 @@ You instantly gain SMORT!
     let cycles = new Big(user.cycles);
     const cycleUsed = cycles.times(0.05 * amt).dp(0);
 
-    let idleCoins = new Big(user.inv[ItemEnum.IdleCoin]);
+    let idleCoins = new Big(user.inv[ItemEnum.IdleCoin] || 0);
     const idleCoinAmt = cycleUsed.div(2).dp(0);
 
     if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
@@ -227,7 +227,7 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
     let cycles = new Big(user.cycles);
     const cycleUsed = cycles.times(0.05 * amt).dp(0);
 
-    let goldenCycles = new Big(user.inv[ItemEnum.GoldenCycle]);
+    let goldenCycles = new Big(user.inv[ItemEnum.GoldenCycle] || 0);
     const goldenCycleAmt = cycleUsed.div(2).dp(0);
 
     if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
@@ -259,10 +259,18 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
     const tpc = new Big(user.tpc);
     const cpp = new Big(user.cpp);
 
-    const txt = tpc.times(amt / 1.5).dp(0);
-    const newText = text.plus(txt);
+    let txt = tpc.times(amt).dp(0);
+    let cycl = cpp.times(amt).dp(0);
 
-    const cycl = cpp.times(amt / 1.5).dp(0);
+    if (txt.gt(50)) {
+      txt = txt.div(2).dp(0);
+    }
+
+    if (cycl.gt(50)) {
+      cycl = cycl.div(2).dp(0);
+    }
+
+    const newText = text.plus(txt);
     const newCycles = cycles.plus(cycl);
 
     user.text = newText.toString();
@@ -287,8 +295,8 @@ Thanks for voting!`
     const cchestsEarned = amt;
 
     const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
-    const ics = new Big(user.inv[ItemEnum.IdleCoin]).plus(icsEarned).toString();
-    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
+    const ics = new Big(user.inv[ItemEnum.IdleCoin] || 0).plus(icsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest] || 0).plus(cchestsEarned).toString();
 
     user.cycles = nCycles;
     user.inv[ItemEnum.IdleCoin] = ics;
@@ -313,8 +321,8 @@ You got:
     const cchestsEarned = 10 * amt;
 
     const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
-    const ics = new Big(user.inv[ItemEnum.IdleCoin]).plus(icsEarned).toString();
-    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
+    const ics = new Big(user.inv[ItemEnum.IdleCoin] || 0).plus(icsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest] || 0).plus(cchestsEarned).toString();
 
     user.cycles = nCycles;
     user.inv[ItemEnum.IdleCoin] = ics;
@@ -341,9 +349,9 @@ You got:
     const ccchestsEarned = amt;
 
     const nCycles = new Big(user.cycles).plus(cyclesEarned).toString();
-    const ics = new Big(user.inv[ItemEnum.IdleCoin]).plus(icsEarned).toString();
-    const cchests = new Big(user.inv[ItemEnum.ChestChest]).plus(cchestsEarned).toString();
-    const ccchests = new Big(user.inv[ItemEnum.ChestChestChest]).plus(ccchestsEarned).toString();
+    const ics = new Big(user.inv[ItemEnum.IdleCoin] || 0).plus(icsEarned).toString();
+    const cchests = new Big(user.inv[ItemEnum.ChestChest] || 0).plus(cchestsEarned).toString();
+    const ccchests = new Big(user.inv[ItemEnum.ChestChestChest] || 0).plus(ccchestsEarned).toString();
 
     user.cycles = nCycles;
     user.inv[ItemEnum.IdleCoin] = ics;
