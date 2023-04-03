@@ -7,7 +7,7 @@ import { items } from "../../util/data/item.js";
 class C extends Command {
   names = ["sell", "s"];
   help = "Sell your items for cycles!";
-  examples = ["sell ego-coin", "sell 'chest chest' 2"];
+  examples = ["sell coffee", "sell 'chest chest' 2"];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length < 1 || args.length > 2) return Bot.argserror(msg, args.length, [1, 2]);

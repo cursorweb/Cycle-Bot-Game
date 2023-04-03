@@ -13,7 +13,7 @@ const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {
   post: user => items.cpp.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.14, user.bought.cpp[i] || 0).toString())} Cycles ]
 <+${n.cpp} CPP> <${commanum((user.bought.cpp[i] || 0).toString())} owned>
 > ${n.description}`),
-  idle: user => items.idle.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.21, user.bought.idle[i] || 0).toString())} Ego-Coins ]
+  idle: user => items.idle.map((n, i) => `[ ${n.name} ][ ${commanum(calcPrice(new Big(n.cost), 1.21, user.bought.idle[i] || 0).toString())} Idle-Coins ]
 <+${n.tpm} TPM> <${commanum((user.bought.idle[i] || 0).toString())} owned>
 > ${n.description}`),
   boosts: _ => boostShop.map(n => {

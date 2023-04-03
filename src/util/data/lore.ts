@@ -5,6 +5,6 @@ export interface BLore {
 }
 
 export enum LoreEnum {
-  EgoCoins,
+  IdleCoins,
   GoldenCycles
 }

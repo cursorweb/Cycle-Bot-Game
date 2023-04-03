@@ -10,9 +10,9 @@ export interface CraftItem {
 }
 
 export const craftItems: CraftItem[] = [{
-  message: "You smash all the ego-coins together with the cheap iPhone!",
+  message: "You smash all the idle-coins together with the cheap iPhone!",
   creates: ItemEnum.ApplePhone,
-  requires: [{ amt: 1, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.EgoCoin }]
+  requires: [{ amt: 1, type: ItemEnum.CheapPhone }, { amt: 5, type: ItemEnum.IdleCoin }]
 }, {
   message: "You glue the chest chests together...",
   creates: ItemEnum.ChestChestChest,
@@ -30,9 +30,9 @@ export const craftItems: CraftItem[] = [{
   creates: ItemEnum.CraftingMat,
   requires: [{ amt: 1, type: ItemEnum.Glue }, { amt: 1, type: ItemEnum.CheapPhone }]
 }, {
-  message: "You combine the ego-coins together!",
-  creates: ItemEnum.EgoCoinMaker,
-  requires: [{ amt: 5, type: ItemEnum.EgoCoin }, { amt: 5, type: ItemEnum.CraftingMat }]
+  message: "You combine the idle-coins together!",
+  creates: ItemEnum.IdleCoinMaker,
+  requires: [{ amt: 5, type: ItemEnum.IdleCoin }, { amt: 5, type: ItemEnum.CraftingMat }]
 }, {
   message: "You combine the golden cycles together!",
   creates: ItemEnum.GoldenCycleMaker,

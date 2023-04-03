@@ -47,15 +47,19 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 
   idle(user, item, itmIndex, amt) {
     const cost = calcCost(new Big(item.cost), 1.21, amt, user.bought.idle[itmIndex] || 0);
-    const coins = new Big(user.inv[ItemEnum.EgoCoin]), tpm = new Big(user.tpm);
-
-    if (coins.lt(cost)) {
-      return [`You don't have enough Ego-Coins!
-**You have** ${brackets(commanum(coins.toString()))}
-**You need** ${brackets(commanum(cost.minus(coins).toString()))} more!`, "Not enough Ego-Coins!"];
+    if (cost.isNaN()) {
+      throw new Error("COST IS NAN!!!");
     }
 
-    user.inv[ItemEnum.EgoCoin] = coins.minus(cost).toString();
+    const coins = new Big(user.inv[ItemEnum.IdleCoin]), tpm = new Big(user.tpm);
+
+    if (coins.lt(cost)) {
+      return [`You don't have enough Idle-Coins!
+**You have** ${brackets(commanum(coins.toString()))}
+**You need** ${brackets(commanum(cost.minus(coins).toString()))} more!`, "Not enough Idle-Coins!"];
+    }
+
+    user.inv[ItemEnum.IdleCoin] = coins.minus(cost).toString();
     if (!user.bought.idle[itmIndex]) user.bought.idle[itmIndex] = 0;
     user.bought.idle[itmIndex] += amt;
     user.tpm = tpm.plus(new Big(items.idle[itmIndex].tpm ?? 0).times(amt)).toString();

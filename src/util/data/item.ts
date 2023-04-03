@@ -7,12 +7,12 @@ export interface BItem {
   description: string; // description
   dropChance: number; // out of 100
   currency?: boolean;
-  // non-openable things (like ego-coins) can't be opened, and will lack implementation.
+  // non-openable things (like idle-coins) can't be opened, and will lack implementation.
 }
 
 // Name the items!
 export enum ItemEnum {
-  EgoCoin,
+  IdleCoin,
   CheapPhone,
   ExtraFinger,
   Coffee,
@@ -26,7 +26,7 @@ export enum ItemEnum {
   CraftingChest,
   KnowledgeBook,
   GoldenCycle,
-  EgoCoinMaker,
+  IdleCoinMaker,
   GoldenCycleMaker,
   VoteCrate,
   BronzeQuestChest,
@@ -35,9 +35,9 @@ export enum ItemEnum {
 }
 
 export const items: BItem[] = [{
-  name: "Ego-Coin",
+  name: "Idle-Coin",
   emoji: "", // todo
-  description: "Made from only those with the biggest egoes!",
+  description: "A mysterious form of currency. Use these to buy idle machines!",
   dropChance: 25,
   currency: true
 }, {
@@ -68,7 +68,7 @@ export const items: BItem[] = [{
 }, {
   name: "Apple iPhone",
   emoji: "",
-  description: "An iPhone... with an ego!",
+  description: "An iPhone... for idlers!",
   dropChance: 5
 }, {
   name: "Chest Chest Chest",
@@ -103,13 +103,13 @@ export const items: BItem[] = [{
 }, {
   name: "Golden Cycle",
   emoji: "",
-  description: "Use this to buy boosts!",
+  description: "The purest form of cycles. Use this to buy boosts!",
   dropChance: 24.9, // >:)
   currency: true
 }, {
-  name: "Ego-Coin Maker",
+  name: "Idle-Coin Maker",
   emoji: "",
-  description: "Generates 5% of your cycles into ego-coins!",
+  description: "Generates 5% of your cycles into idle-coins!",
   dropChance: 5
 }, {
   name: "Golden Cycle Maker",
