@@ -159,4 +159,80 @@ b =+ 1
 print(a + " + " + b + " = " + (a + b))`,
   line: 3,
   lang: "Python"
+}, {
+  code: `fn main() {
+  let a = 5;
+  let a = String::from("Hello, ");
+
+  a += "World!";
+
+  println!("{a}");
+}`,
+  line: 5,
+  lang: "Rust"
+}, {
+  code: `let a = 5
+[1, 2, 3]
+  .forEach(
+    k => {
+    console.log(k + a)
+  }
+)`,
+  line: 4,
+  lang: "JavaScript"
+}, {
+  code: `/*
+  /*
+    /* Comments? */
+  */
+*/
+
+fn main() {
+  let a = 5..;
+
+  for k in a {
+    println!(k);
+  }
+}`,
+  line: 11,
+  lang: "Rust"
+}, {
+  code: `let: for(let i = 0; i< 5; i++) {
+  for(let j = -2;;) {
+    console.log(
+      i
+      +
+      +
+      j
+      +
+      5.toString()
+    );
+
+    if (i == j) {
+      break let;
+    }
+  }
+}`,
+  line: 9,
+  lang: "JavaScript"
+}, {
+  code: `var let = 5.;
+console.log(let);
+let var = 5;
+console.log(var);`,
+  line: 3,
+  lang: "JavaScript"
+}, {
+  code: `console.log(5.toString());
+console.log(5 . toString());
+console.log(5+[]);`,
+  line: 1,
+  lang: "JavaScript"
+}, {
+  code: `let (a) = 5;
+(a) += 3;
+((a) + 3) += 3;
+console.log((a));`,
+  line: 3,
+  lang: "JavaScript"
 }];
