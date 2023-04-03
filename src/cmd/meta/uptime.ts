@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
-import { Command, Colors, brackets, plural, formatDate } from "../../global.js";
+import { Command, Colors, brackets, plural, formatDate, commanum } from "../../global.js";
 
 class C extends Command {
-  names = ["uptime", "about", "bot-about", "bot-servers", "bot-info"];
+  names = ["uptime", "bot-about", "bot-servers", "bot-info"];
   help = "View some general statistics about the bot.";
   isGame = "n" as const;
 
@@ -23,7 +23,7 @@ class C extends Command {
           value: `In ${brackets(guildCount.toString())} server${plural(guildCount)}!`
         }, {
           name: "Users",
-          value: `The bot is overseeing ${brackets(userCount.toString())} user${plural(userCount)}.`
+          value: `The bot is overseeing ${brackets(commanum(userCount.toString()))} user${plural(userCount)}.`
         }, {
           name: "Creator",
           value: "[Junhao Zhang](https://github.com/cursorweb) ([@Coder100](https://repl.it/@Coder100)) with TypeScript."

@@ -32,6 +32,12 @@ export function pruneUsers() {
     const user = pdb[key];
     if (user.socialMedia > 0) continue;
 
+    const tpc = new Big(user.tpc);
+    const cpp = new Big(user.cpp);
+    const tpm = new Big(user.tpm);
+
+    if (tpc.plus(cpp).plus(tpm).gt(100)) continue;
+
     // greater than a week
     if (new Big(user.cycles).lt(50) && (user.daily && msBetween(new Date(user.daily), new Date()) > 1000 * 60 * 60 * 24 * 7)) {
       delete pdb[key];

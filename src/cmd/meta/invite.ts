@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command, Colors } from "../../global.js";
 
 class C extends Command {
-  names = ["invite", "github"];
+  names = ["invite", "about", "github"];
   help = "Invite the bot to your server!";
   isGame = "n" as const;
 

@@ -47,13 +47,6 @@ const handleBuy: { [i: string]: (user: Database.CycleUser, item: SItem, itmIndex
 
   idle(user, item, itmIndex, amt) {
     const cost = calcCost(new Big(item.cost), 1.21, amt, user.bought.idle[itmIndex] || 0);
-    if (cost.isNaN()) {
-      throw new Error(`COST IS NAN!!!
-User: ${user}
-Item: ${item}
-Item Index: ${itmIndex}
-Amount: ${amt}`);
-    }
 
     const coins = new Big(user.inv[ItemEnum.IdleCoin] || 0), tpm = new Big(user.tpm);
 
