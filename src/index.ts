@@ -127,6 +127,16 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
   }
 });
 
+client.on("interactionCreate", async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+
+  const { commandName } = interaction;
+
+  if (commandName == "ping") {
+    await interaction.reply("Pong!");
+  }
+});
+
 client.on("rateLimit", e => {
   if (e.timeout > 10_000) {
     console.log("[Bot Ratelimit], timeout:", e.timeout);

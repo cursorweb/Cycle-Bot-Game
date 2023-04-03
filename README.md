@@ -27,6 +27,9 @@ If you are hosting this on [`replit`](https://replit.com/), a `.replit` file alr
 npm i
 ```
 
+### Slash Commands
+Use `node ./dist/slashutil/deploy-commands.js` to deploy slash commands!
+
 ### Firebase
 This project *does* require firebase, so make sure you hvae the admin SDK ready. First, it will check if the `.env` file contains the `FIREBASE` key, which is just the JSON file on one line.
 ```
@@ -51,5 +54,3 @@ Also read [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Balance
 Most math can be found here: https://www.desmos.com/calculator/y0kqpajh2m
 Comments that say `refer to desmos` probably refers to that.
-
-PS: We stopped working on this project for a while, but it is now being worked on again. 

@@ -6,6 +6,9 @@ cmd/
   template.txt # A template file
   cmd.json # Info on all the files
 
+slashutil/
+  deploy-commands.ts # Run this to deploy commands
+
 util/
   data/
     boost/

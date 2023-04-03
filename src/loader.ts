@@ -56,7 +56,8 @@ async function help(msg: Discord.Message, args: string[], output: { [i: string]:
       return {
         color: Colors.PRIMARY,
         title: "Help Categories",
-        description: `View the help categories! Page: ${brackets(page.toString())}${codestr("&help <command>")}`,
+        description: `View the help categories! Page: ${brackets(page.toString())}${codestr("&help <command>")}
+**PRO TIP**: Use \`&guide\` for a guide!`,
         fields: i.length == 0 ? [{ name: "End of Help!", value: "No more commands!" }] : i
       };
     });
