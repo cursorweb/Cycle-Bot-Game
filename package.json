@@ -9,6 +9,7 @@
     "start": "node .",
     "dev": "tsc -w",
     "prod": "tsc",
+    "deploy": "node ./dist/slashutil/deploy-commands.js",
     "eslint": "eslint . --ext ts",
     "eslint-fix": "eslint . --ext ts --fix"
   },
