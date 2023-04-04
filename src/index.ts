@@ -132,9 +132,13 @@ client.on("interactionCreate", async interaction => {
 
   const { commandName } = interaction;
 
-  if (commandName == "ping") {
-    await interaction.reply("Pong!");
-  }
+  await interaction.reply({
+    embeds: [{
+      title: commandName,
+      color: g.Colors.PRIMARY,
+      description: "Coming soon..."
+    }]
+  });
 });
 
 client.on("rateLimit", e => {

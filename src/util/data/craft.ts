@@ -30,11 +30,11 @@ export const craftItems: CraftItem[] = [{
   creates: ItemEnum.CraftingMat,
   requires: [{ amt: 1, type: ItemEnum.Glue }, { amt: 1, type: ItemEnum.CheapPhone }]
 }, {
-  message: "You combine the idle-coins together!",
+  message: "You combine the golden cycles together! Somehow this makes idle-coins?",
   creates: ItemEnum.IdleCoinMaker,
-  requires: [{ amt: 5, type: ItemEnum.IdleCoin }, { amt: 5, type: ItemEnum.CraftingMat }]
-}, {
-  message: "You combine the golden cycles together!",
-  creates: ItemEnum.GoldenCycleMaker,
   requires: [{ amt: 5, type: ItemEnum.GoldenCycle }, { amt: 5, type: ItemEnum.CraftingMat }]
+}, {
+  message: "You combine the idle-coins together! Somehow this makes golden cycles?",
+  creates: ItemEnum.GoldenCycleMaker,
+  requires: [{ amt: 5, type: ItemEnum.IdleCoin }, { amt: 5, type: ItemEnum.CraftingMat }]
 }];

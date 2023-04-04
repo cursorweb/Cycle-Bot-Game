@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, parseNumber, commanum } from "../../global.js";
+import { Command, Colors, Bot, Database, brackets, parseNumber, commanum, codestr, noun } from "../../global.js";
 import { items } from "../../util/data/item.js";
 import { craftItems } from "../../util/data/craft.js";
 
@@ -14,12 +14,12 @@ class C extends Command {
     const num = parseNumber(args[0] || "0");
     if (args.length == 0 || num) {
       const fields = craftItems.map(p => {
-        const uses = p.requires.map(n => `${brackets(items[n.type].name)} x**${n.amt.toString()}**`);
-        return {
-          make: items[p.creates].name + "\n".repeat(uses.length - 1),
-          uses: uses.join("\n")
-        };
+        const uses = p.requires.map(n => `[ ${items[n.type].name} ][ x${n.amt} ]`);
+        return `${noun(items[p.creates].name)}
+${codestr(uses.join("\n"), "md")}`;
       });
+
+
       Bot.carousel(msg, fields, 3, (page, i) => {
         return {
           color: Colors.PRIMARY,
@@ -30,11 +30,7 @@ class C extends Command {
             value: "No items here!"
           }] : [{
             name: "Item",
-            value: i.map(n => n.make).join("\n\n"),
-            inline: true
-          }, {
-            name: "Ingredients",
-            value: i.map(n => n.uses).join("\n\n"),
+            value: i.join("\n\n"),
             inline: true
           }],
           footer: { text: "Tip: Use &craft <item> to craft <item>!" }
