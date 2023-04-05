@@ -143,7 +143,8 @@ ${codestr("&use 'cheap iphone'", "js")}`
           .setEmoji("\u27A1") // >
           .setStyle(ButtonStyle.Secondary)
       );
-      return new Discord.ActionRowBuilder().addComponents(...components);
+      return new Discord.ActionRowBuilder<Discord.ButtonBuilder>()
+        .addComponents(...components);
     }
 
     const initialMessage = await msg.reply({
@@ -158,7 +159,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
         repliedUser: false
       },
       components: [
-        getComponents() as any
+        getComponents()
       ]
     });
 
@@ -176,7 +177,7 @@ ${codestr("&use 'cheap iphone'", "js")}`
           )
         ],
         components: [
-          getComponents() as any
+          getComponents()
         ]
       });
     });

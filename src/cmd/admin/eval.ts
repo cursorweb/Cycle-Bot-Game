@@ -10,13 +10,14 @@ class C extends Command {
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], client: Discord.Client) {
+
     try {
       const output = new Function("client", "process", args.join(" "))(client, process);
       msg.channel.send({
         embeds: [{
           color: Colors.PRIMARY,
           title: "Beep Boop Bop Boop!",
-          description: `Output was\n${ codestr(output, "yaml")}`
+          description: `Output was\n${codestr(output, "yaml")}`
         }]
       });
     } catch (e) {
@@ -24,7 +25,7 @@ class C extends Command {
         embeds: [{
           color: Colors.ERROR,
           title: "Error!!",
-          description: `Error was\n${ codestr(String(e), "js")}`
+          description: `Error was\n${codestr(String(e), "js")}`
         }]
       });
     }

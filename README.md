@@ -29,7 +29,7 @@ npm i
 
 ### Slash Commands
 Use `npm run deploy` to deploy slash commands!
-**Tip**: Use `npm run deploy -- -d` to delete all slash commands!
+> **Tip**: Use `npm run deploy -- -d` to delete all slash commands!
 
 ### Firebase
 This project *does* require firebase, so make sure you hvae the admin SDK ready. First, it will check if the `.env` file contains the `FIREBASE` key, which is just the JSON file on one line.

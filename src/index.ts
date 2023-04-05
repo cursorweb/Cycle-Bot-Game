@@ -106,7 +106,11 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
             } else if (cmdclss.isAdmin) {
               if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
               else {
-                g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
+                try {
+                  g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
+                } catch {
+                  // ignore BotErr
+                }
               }
             } else cmdclss.wrap(msg, cmd.args, client);
 
