@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import { ButtonBuilder, ActionRowBuilder, ButtonStyle } from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, codestr, Database } from "../../../global.js";
+import { Command, Colors, codestr, Database, commanum } from "../../../global.js";
 import { ItemEnum } from "../../../util/data/item.js";
 
 const vars = [
@@ -82,7 +82,7 @@ Vars: ${vars}`,
             ItemEnum);
 
           if (output instanceof Big) {
-            output = `new Big(${output.toString()})`;
+            output = `new Big(${commanum(output.toString())})`;
           } else if (typeof output == "object") {
             output = JSON.stringify(output, null, 2);
           }
