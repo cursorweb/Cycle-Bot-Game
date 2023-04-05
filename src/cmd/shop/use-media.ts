@@ -38,7 +38,7 @@ class C extends Command {
       collector.on("collect", async choice => {
         if (choice.customId == "cancel") {
           collector.stop();
-          mesg.edit({
+          await mesg.edit({
             embeds: [{
               color: Colors.PRIMARY,
               title: "Cancelled",
