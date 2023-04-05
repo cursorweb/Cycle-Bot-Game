@@ -1,4 +1,5 @@
 import * as Discord from "discord.js";
+import { ButtonBuilder, ActionRowBuilder, ButtonStyle } from "discord.js";
 import Big from "bignumber.js";
 import { Command, Colors, Bot, Database, brackets, commanum } from "../../global.js";
 import { socialMedia } from "../../util/data/social-media.js";
@@ -12,16 +13,41 @@ class C extends Command {
       embeds: [{
         color: Colors.WARNING,
         title: "Confirm Reset",
-        description: "Are you sure you want to reset all your progress and go to the next social media?\nReact with ✅!"
-      }]
+        description: "Are you sure you want to reset all your progress and go to the next social media?\nClick the ✅!"
+      }],
+      components: [
+        new ActionRowBuilder<ButtonBuilder>()
+          .addComponents([
+            new ButtonBuilder()
+              .setCustomId("next")
+              .setEmoji("✔️")
+              .setStyle(ButtonStyle.Success),
+            new ButtonBuilder()
+              .setCustomId("cancel")
+              .setEmoji("✖️")
+              .setStyle(ButtonStyle.Danger)
+          ])
+      ]
     }).then(async mesg => {
-      await mesg.react("✅");
+      const collector = mesg.createMessageComponentCollector({
+        filter: (inter) => inter.user.id == msg.author.id,
+        max: 1,
+        time: 60000
+      });
 
-      function filter(reaction: Discord.MessageReaction, user: Discord.User) {
-        return reaction.emoji.name == "✅" && user.id == msg.author.id;
-      }
+      collector.on("collect", async choice => {
+        if (choice.customId == "cancel") {
+          collector.stop();
+          mesg.edit({
+            embeds: [{
+              color: Colors.PRIMARY,
+              title: "Cancelled",
+              description: "You decided not to make a new account.\nMaybe next time!"
+            }]
+          });
+          return;
+        }
 
-      mesg.awaitReactions({ filter, max: 1, time: 60000, errors: ["time"] }).then(_ => {
         const user = Database.getUser(msg.author.id);
         const idx = user.socialMedia;
         const cyclesNeeded = new Big(100_000).pow(Math.ceil(Math.log(2 * (idx + 1))));
@@ -61,6 +87,22 @@ but now you get a base boost!`,
               text: "Use &prof to see more!"
             }
           }]
+        });
+      });
+
+      collector.on("end", collected => {
+        if (collected.size == 0) {
+          mesg.edit({
+            embeds: [{
+              color: Colors.PRIMARY,
+              title: "Cancelled",
+              description: "You didn't make a response!"
+            }]
+          });
+        }
+
+        mesg.edit({
+          components: []
         });
       });
     });
