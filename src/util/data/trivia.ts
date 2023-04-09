@@ -235,4 +235,12 @@ console.log(5+[]);`,
 console.log((a));`,
   line: 3,
   lang: "JavaScript"
+}, {
+  code: `let a = 10, b = null;
+console.log(a.toString());
+console.log(5..toString());
+console.log(b.toString());
+console.log(5.toString());`,
+  line: 5,
+  lang: "JavaScript"
 }];
