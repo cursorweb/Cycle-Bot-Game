@@ -85,6 +85,8 @@ Vars: ${vars}`,
             output = `new Big(${commanum(output.toString())})`;
           } else if (typeof output == "object") {
             output = JSON.stringify(output, null, 2);
+          } else {
+            output = JSON.stringify(output);
           }
 
           mesg.edit({

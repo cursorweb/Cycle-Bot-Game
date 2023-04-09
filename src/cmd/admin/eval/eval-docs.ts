@@ -41,7 +41,7 @@ return ___;`
       code: `const user = Database.pdb["${id}"];
 let ___ = new Big(user.cycles/text/tpc/cpp/tpm);
 __INSERT_CODE__
-user.___ = ___;
+user.___ = ___.toString();
 return ___;`
     }, {
       desc: "ItemEnum Lookup Table",
