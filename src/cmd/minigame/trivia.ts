@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseNumber } from "../../global.js";
+import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseNumber, commanum } from "../../global.js";
 import { trivia, users } from "../../util/data/trivia.js";
 import { ActionType, checkQuest } from "../../util/data/quests.js";
 
@@ -16,15 +16,16 @@ class C extends Command {
   exec(msg: Discord.Message, _: string[], _1: Discord.Client) {
     const user = Database.getUser(msg.author.id);
     let cycles = new Big(user.cycles);
-    if (cycles.lt(10)) return Bot.errormsg(msg, `You need at least ${brackets("10")} cycles to play!`, "Not enough cycles!");
+    const cycleEarn = Big.max(new Big(user.cpp).div(50).dp(0), 10);
+    if (cycles.lt(cycleEarn)) return Bot.errormsg(msg, `You need at least ${brackets(commanum(cycleEarn.toString()))} cycles to play!`, "Not enough cycles!");
 
     function addCycle() {
-      cycles = cycles.plus(10);
+      cycles = cycles.plus(cycleEarn);
       user.cycles = cycles.toString();
     }
 
     function minCycle() {
-      cycles = cycles.minus(10);
+      cycles = cycles.minus(cycleEarn);
       user.cycles = cycles.toString();
     }
 
@@ -75,7 +76,7 @@ ${codestr(editorCode, "")}`
                 description: `You found the bug!
 
 ${username} thanks you!
-+ ${brackets("10")} cycles`,
++ ${brackets(commanum(cycleEarn.toString()))} cycles`,
                 fields: field ? [field] : []
               }]
             });
@@ -88,7 +89,7 @@ ${username} thanks you!
                 description: `You made ${username} spend 10 hours debugging...
 **IN THE WRONG SPOT**
 
-- ${brackets("10")} cycles`
+\\- ${brackets(commanum(cycleEarn.toString()))} cycles`
               }]
             });
             minCycle();
@@ -101,7 +102,7 @@ ${username} thanks you!
               color: Colors.ERROR,
               description: `You ran out of time!
 
-- ${brackets("10")} cycles
+- ${brackets(commanum(cycleEarn.toString()))} cycles
 
 Use \`&trivia\` to try again!`
             }]
