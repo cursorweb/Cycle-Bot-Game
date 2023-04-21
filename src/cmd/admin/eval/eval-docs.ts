@@ -8,7 +8,6 @@ class C extends Command {
   examples = ["eval-docs", "eval-docs __INSERT_ID__ 1"];
   isGame = "n" as const;
 
-  // don't forget to change!
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], _1: Discord.Client) {

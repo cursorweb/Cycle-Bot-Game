@@ -2,11 +2,17 @@ import * as Discord from "discord.js";
 import { Bot, brackets, Colors } from "./util/format.js";
 import { addMs, msBetween } from "./util/util.js";
 import { genSchema, setUser, getUser, CycleUser } from "./util/database/database.js";
+import admin from "./util/admin.js";
 
 export * from "./util/format.js";
 export * from "./util/util.js";
 
 export * as Database from "./util/database/database.js";
+
+let lockedDown = false;
+export function toggleLockDown() {
+  return lockedDown = !lockedDown;
+}
 
 export interface UserInput {
   command: string;
@@ -33,6 +39,22 @@ export class Command {
   } // ms
 
   wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
+    if (lockedDown) {
+      if (admin.includes(msg.author.id)) {
+        if (!this.isAdmin) {
+          msg.channel.send({
+            embeds: [{
+              color: Colors.WARNING,
+              title: "Warning!",
+              description: "Bot is in **LOCKDOWN MODE**.\nUse `&admin-lock-down` to unlock!"
+            }]
+          });
+        }
+      } else {
+        return;
+      }
+    }
+
     try {
       const isJoined = Boolean(client.guilds.cache.get("788421241005408268")?.members.cache.get(msg.author.id));
 

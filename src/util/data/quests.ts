@@ -109,7 +109,7 @@ You can't get another quest for 24 hours!`
       return;
     case QuestName.Multiple:
       if (action == ActionType.Code || action == ActionType.Post) {
-        quest.progress += 1;
+        quest.progress++;
       }
       break;
     case QuestName.Cycles:

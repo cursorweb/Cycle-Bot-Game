@@ -8,7 +8,6 @@ class C extends Command {
   examples = ["admin-deploy-commands"];
   isGame = "n" as const;
 
-  // don't forget to change!
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
