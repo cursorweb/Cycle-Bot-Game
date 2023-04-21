@@ -157,6 +157,8 @@ You can't get another quest for 24 hours!`
     const items = new Big(user.inv[name] || "0");
     user.inv[name] = items.plus(1).toString();
 
+    user.quest = null;
+
     return {
       name: "Quest Complete!",
       value: `Because you chose a ${diffs[diff]} quest,

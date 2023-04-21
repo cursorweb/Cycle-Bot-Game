@@ -42,7 +42,7 @@ class C extends Command {
         title: `${brackets(question.lang)} Trivia!`,
         description: `Respond with the line of the bug!
 
-${codestr(editorCode, "")}`
+${codestr(editorCode, question.lang)}`
       }]
     }).then(() => {
       const filter = (m: Discord.Message) => msg.author.id == m.author.id;
