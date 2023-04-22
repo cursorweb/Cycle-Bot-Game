@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 
 import { CycleUser } from "../../util/database/genschema.js";
-import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum } from "../../global.js";
+import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum, codestr } from "../../global.js";
 import { quests, qDiff, checkQuest } from "../../util/data/quests.js";
 
 
@@ -14,6 +14,19 @@ class C extends Command {
   examples = ["new-quest easy"];
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
+    if (args.length == 0) {
+      msg.channel.send({
+        embeds: [{
+          color: Colors.PRIMARY,
+          title: "Quests!",
+          description: `Use \`&new-quest <difficulty>\` to make a new quest!\nThe difficulties are:\n${codestr(`
+&new-quest Easy
+&new-quest Medium
+&new-quest Hard`, "yaml")}`
+        }]
+      });
+      return;
+    }
     if (args.length != 1) return Bot.argserror(msg, args.length, [1]);
 
     const user = Database.getUser(msg.author.id);

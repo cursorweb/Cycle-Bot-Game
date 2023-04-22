@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import { Command, Colors } from "../../global.js";
 
 class C extends Command {
-  names = ["guide", "more-help"];
+  names = ["guide"];
   help = "View a breakdown of the bot's commands!";
   isGame = "n" as const;
 
@@ -36,6 +36,10 @@ You can also do daily tasks for cycles:
 **&vote** Vote for the bot on top.gg :)
 **&daily** Get your daily reward!
 
+You can also do other tasks with \`quests\`!
+**&quest** View your current quest
+**&new-quest** Get a new quest!
+
 There's a lot more commands:
 **&help** View more help commands!
 
@@ -50,6 +54,14 @@ There's a lot more commands:
           name: "Chests",
           value: `Sometimes you get chests from coding. They give you **items**!
 Use \`&info\` to see all items!`
+        }, {
+          name: "Golden Cycles",
+          value: `Use these to buy boosts, which give you an advantage for a certain about of time!
+Buy boosts at \`&shop boosts\``
+        }, {
+          name: "Idle-Coins",
+          value: `Use these to buy idle machines, getting you passive **text**!
+Buy idle machines at \`&shop idle\``
         }],
         footer: { text: "Join the Discord Server! https://discord.gg/4vTPWdpjFz" }
       }]
