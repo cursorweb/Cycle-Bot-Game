@@ -78,7 +78,7 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
         color: Colors.PRIMARY,
         title: `New ${qDiff[difficulty]} quest!`,
         description: `You got ${brackets(quest.name)}!
-- ${brackets(cost.toString())} cycles`,
+\\- ${brackets(cost.toString())} cycles`,
         fields: [{
           name: "Description",
           value: quest.description

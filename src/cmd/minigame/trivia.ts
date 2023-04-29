@@ -4,6 +4,12 @@ import { Command, Colors, Bot, Database, randomChoice, codestr, brackets, parseN
 import { trivia, users } from "../../util/data/trivia.js";
 import { ActionType, checkQuest } from "../../util/data/quests.js";
 
+const replaces = {
+  "C++": "cpp",
+  "C#": "csharp",
+  "React": "js"
+};
+
 class C extends Command {
   names = ["trivia", "fix-code", "t"];
   help = "Find the bug and get some cycles!";
@@ -42,7 +48,7 @@ class C extends Command {
         title: `${brackets(question.lang)} Trivia!`,
         description: `Respond with the line of the bug!
 
-${codestr(editorCode, question.lang)}`
+${codestr(editorCode, replaces[question.lang as keyof typeof replaces] || question.lang)}`
       }]
     }).then(() => {
       const filter = (m: Discord.Message) => msg.author.id == m.author.id;
