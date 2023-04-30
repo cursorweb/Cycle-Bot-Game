@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, constrain, parseNumber } from "../../global.js";
+import { Command, Colors, Bot, Database, brackets, parseNumber } from "../../global.js";
 import { items } from "../../util/data/item.js";
 import { openItem } from "../../util/data/open-item.js";
 import { commanum } from "../../util/util.js";
@@ -12,11 +12,10 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
-    const num = parseNumber(args[1]);
+    const num = args[1] == "all" ? Infinity : parseNumber(args[1]);
     if (args[1] && isNaN(num)) return Bot.usererr(msg, "The amount must be a number!");
 
     const name = args[0];
-    const amount = constrain(num || 1, 1, 50);
     const user = Database.getUser(msg.author.id);
 
     let itmIndex = items.findIndex(o => o.name.toLowerCase() == name.toLowerCase());
@@ -24,6 +23,7 @@ class C extends Command {
 
     const item = items[itmIndex];
     const userAmt = new Big(user.inv[itmIndex] || 0);
+    const amount = num == Infinity ? userAmt.toNumber() : num;
     const open = openItem[itmIndex];
 
     if (itmIndex == -1) return Bot.usererr(msg, `Item ${brackets(name)} not found. Check your spelling!`, "Item not found!");
