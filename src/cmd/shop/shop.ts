@@ -4,6 +4,7 @@ import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, bracket
 import { items } from "../../util/data/shop.js";
 import { boostShop } from "../../util/data/boosts/boosts-shop.js";
 import { boosts } from "../../util/data/boosts/boosts.js";
+import { ItemEnum } from "../../util/data/item.js";
 
 // [topic] [value]
 const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {
@@ -53,6 +54,8 @@ ${codestr(Object.keys(handleShop).join(", "), "yaml")}`, "Invalid Shop Name!!");
       description: `View the shop! Page ${brackets(page.toString())}.
 **Cycles**: ${brackets(commanum(user.cycles))}
 **Text**: ${brackets(commanum(user.text))}
+**Idle-Coins**: ${brackets(commanum(user.inv[ItemEnum.IdleCoin] || "0"))}
+**Golden Cycles**: ${brackets(commanum(user.inv[ItemEnum.GoldenCycle] || "0"))}
 ${i.length > 0 ? codestr(i.join("\n\n"), "md") : codestr(`[ NO ][ MORE ][ ITEMS ]
 > You've gone far enough!`, "md")}`,
       footer: { text: `Tip: Use &buy ${args[0]} to buy an item!` }
