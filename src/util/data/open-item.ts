@@ -198,12 +198,14 @@ You instantly gain SMORT!
     const cycleUsed = cycles.times(0.05 * amt).dp(0);
 
     let idleCoins = new Big(user.inv[ItemEnum.IdleCoin] || 0);
-    const idleCoinAmt = cycleUsed.div(2).dp(0);
+    const idleCoinAmt = cycleUsed.div(2).times(Math.random() * 0.9 + 0.1).plus(1).dp(0);
 
-    if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
+    if (cycles.lt(cycleUsed)) {
       return {
         name: "Boom!",
-        value: "With a crash, the idle-coin maker breaks.\nSometimes it does this, no machine is perfect!"
+        value: `With a crash, the idle-coin maker breaks.
+You didn't have enough cycles!
+You needed ${brackets(commanum(cycleUsed.toString()))} cycles!`
       };
     }
 
@@ -228,12 +230,14 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
     const cycleUsed = cycles.times(0.05 * amt).dp(0);
 
     let goldenCycles = new Big(user.inv[ItemEnum.GoldenCycle] || 0);
-    const goldenCycleAmt = cycleUsed.div(2).dp(0);
+    const goldenCycleAmt = cycleUsed.div(2).times(Math.random() * 0.9 + 0.1).plus(1).dp(0);
 
-    if (cycles.lt(cycleUsed) || Math.random() * 50 < amt) {
+    if (cycles.lt(cycleUsed)) {
       return {
         name: "Boom!",
-        value: "With a crash, the golden-cycle maker breaks.\nSometimes it does this, no machine is perfect!"
+        value: `With a crash, the golden cycle maker breaks.
+You didn't have enough cycles!
+You needed ${brackets(commanum(cycleUsed.toString()))} cycles!`
       };
     }
 

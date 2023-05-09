@@ -7,6 +7,7 @@ import { msBetween } from "../util.js";
 import { db } from "./database.js";
 
 import { CycleUser } from "./genschema.js";
+import { bannedUsers } from "./banned-user.js";
 // Try to use `setUser` for everything
 
 // 'pseudo' db
@@ -62,6 +63,10 @@ export function pruneUsers() {
 
 export async function save() {
   if (Object.keys(pdb).length == 0) return; // prevent corruption
+  for (const id in pdb) {
+    if (bannedUsers.includes(id)) delete pdb[id];
+  }
+
   return await db.collection("cycle-users").doc("users").set(pdb);
 }
 
@@ -75,6 +80,9 @@ export async function update() {
 }
 
 export async function saveBackup() {
+  for (const id in pdb) {
+    if (bannedUsers.includes(id)) delete pdb[id];
+  }
   await fs.writeFile(new URL("../../../database.json", import.meta.url), JSON.stringify(pdb, null, 2));
 }
 

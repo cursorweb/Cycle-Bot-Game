@@ -1,6 +1,7 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber, cleanName } from "../../global.js";
+import { bannedUsers } from "../../util/database/banned-user.js";
 
 class C extends Command {
   names = ["leaderboard", "scoreboard", "lb", "l"];
@@ -13,7 +14,10 @@ class C extends Command {
     if (args[0] && isNaN(num)) return Bot.usererr(msg, "The page must be a number!");
 
     const page = constrain(num || 1, 1, Infinity);
-    const data = Object.keys(Database.pdb).map(n => ({ name: Database.pdb[n].name, cycles: Database.pdb[n].cycles })).sort((a, b) => new Big(b.cycles).minus(new Big(a.cycles)).toNumber());
+    const data = Object.keys(Database.pdb)
+      .filter(n => !bannedUsers.includes(n))
+      .map(n => ({ name: Database.pdb[n].name, cycles: Database.pdb[n].cycles }))
+      .sort((a, b) => new Big(b.cycles).minus(new Big(a.cycles)).toNumber());
 
     Bot.carousel(msg, data, 10, (pg, itm) => {
       let out: Discord.APIEmbedField[] = [];
