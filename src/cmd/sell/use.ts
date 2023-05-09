@@ -12,7 +12,7 @@ class C extends Command {
 
   exec(msg: Discord.Message, args: string[], _: Discord.Client) {
     if (args.length != 1 && args.length != 2) return Bot.argserror(msg, args.length, [1, 2]);
-    const num = args[1] == "all" ? Infinity : parseNumber(args[1]);
+    const num = args[1] == "all" ? Infinity : parseNumber(args[1] || "1");
     if (args[1] && isNaN(num)) return Bot.usererr(msg, "The amount must be a number!");
 
     const name = args[0];
