@@ -15,13 +15,13 @@ const vars = [
 class C extends Command {
   names = ["eval"];
   help = "Evaluates code.";
-  examples = ["eval 'return 1+1'"];
+  examples = ["eval ```return 1+1```"];
   isGame = "n" as const;
 
   isAdmin = true;
 
   exec(msg: Discord.Message, args: string[], client: Discord.Client) {
-    const code = args.join(" ");
+    const code = msg.content.replace(/&.+? (```([\s\S]*?)```|([^`]+))/g, "$2$3");
 
     msg.channel.send({
       embeds: [{
