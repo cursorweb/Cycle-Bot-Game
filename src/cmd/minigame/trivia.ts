@@ -104,7 +104,7 @@ ${username} thanks you!
         .catch(() => {
           msg.reply({
             embeds: [{
-              title: "Times up!",
+              title: "Time's up!",
               color: Colors.ERROR,
               description: `You ran out of time!
 

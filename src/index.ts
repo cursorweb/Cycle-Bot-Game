@@ -104,15 +104,18 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
                 cmdclss.setSent(msg.author);
               }
             } else if (cmdclss.isAdmin) {
-              if (admins.includes(msg.author.id)) cmdclss.wrap(msg, cmd.args, client);
-              else {
+              if (admins.includes(msg.author.id)) {
+                await cmdclss.wrap(msg, cmd.args, client);
+              } else {
                 try {
                   g.Bot.errormsg(msg, "haha you don't have the perms!", "Permissions needed!");
                 } catch {
                   // ignore BotErr
                 }
               }
-            } else cmdclss.wrap(msg, cmd.args, client);
+            } else {
+              await cmdclss.wrap(msg, cmd.args, client);
+            }
 
             if (!commandsUsed[msg.author.id]) {
               const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
@@ -155,8 +158,8 @@ client.on("rateLimit", e => {
   }
 });
 
-function showError(title: string, text: string) {
-  const channel = client.channels.cache.get("899518500576579615") as Discord.TextChannel;
+async function showError(title: string, text: string) {
+  const channel = await client.channels.fetch("899518500576579615") as Discord.TextChannel;
 
   if (channel) {
     channel.send({

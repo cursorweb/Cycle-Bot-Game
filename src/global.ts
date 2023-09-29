@@ -23,12 +23,13 @@ export class Command {
   names: string[] = [];
   help = "*no help provided*";
   examples: string[] = [];
+  /**
+   * its either:
+   * 'y' (yes, auto-initiate)
+   * 'n' (don't initiate)
+   * 'p' (don't initiate, and error if player does not have profile)
+   */
   isGame: "y" | "n" | "p" = "p"; // if we should initiate player or not
-  /* its either:
-    'y' (yes, auto-initiate)
-    'n' (don't initiate)
-    'p' (don't initiate, and error if player does not have profile)
-  */
 
   isAdmin = false;
 
@@ -38,7 +39,7 @@ export class Command {
     return 0;
   } // ms
 
-  wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
+  async wrap(msg: Discord.Message, args: string[], client: Discord.Client) {
     if (lockedDown) {
       if (admin.includes(msg.author.id)) {
         if (!this.isAdmin) {
@@ -56,14 +57,14 @@ export class Command {
     }
 
     try {
-      const isJoined = Boolean(client.guilds.cache.get("788421241005408268")?.members.cache.get(msg.author.id));
+      const isJoined = await (await client.guilds.fetch("788421241005408268"))?.members.fetch(msg.author.id);
 
       if (this.isGame == "y" && !getUser(msg.author.id)) {
         msg.channel.send({
           embeds: [{
             color: Colors.PRIMARY,
             title: "Welcome!",
-            description: `Welcome to the bot, ${brackets(msg.author.tag)}!
+            description: `Welcome to the bot, ${brackets(msg.author.username)}!
 **Use \`&guide\` to get a simple tutorial!**${!isJoined ? `
 Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!` : ""}`
           }]
@@ -74,7 +75,9 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
     > Do \`&code\` to start playing!`, "Profile not found!");
       }
 
-      if (this.isGame != "n" && getUser(msg.author.id).name != msg.author.tag) setUser(msg.author.id, { name: msg.author.tag } as CycleUser);
+      if (this.isGame != "n" && getUser(msg.author.id).name != msg.author.username) {
+        setUser(msg.author.id, { name: msg.author.username } as CycleUser);
+      }
 
       if (Math.random() * 100 < 3 && !isJoined) {
         msg.channel.send({
@@ -121,6 +124,11 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
     if (this.cooldownUsers) this.cooldownUsers[user.id][1] = true;
   }
 
+  /**
+   * Send a cooldown error, and propagate errors.
+   * @param msg Discord Message
+   * @param ms Time left (if cool-downed)
+   */
   wrapCooldown(msg: Discord.Message, ms: number) {
     try {
       this.cooldownError(msg, ms);
@@ -129,6 +137,7 @@ Join the [discord server](https://discord.gg/4vTPWdpjFz) for support and perks!`
     }
   }
 
+  // to be overriden
   cooldownError(msg: Discord.Message, ms: number) {
     Bot.errormsg(msg, `You still have ${brackets((ms / 1000).toFixed(2))} seconds left!`, "Cooldown!");
   }
