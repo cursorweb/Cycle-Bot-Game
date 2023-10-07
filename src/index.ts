@@ -129,7 +129,7 @@ For example, if you get **one**, type in ${g.codestr("&verify 1")}`,
       }
     } catch (err: any) {
       console.log("[Error]", err);
-      showError("UNHANDLED EXCEPTION", err.message);
+      showError("UNHANDLED EXCEPTION", err.message, err);
     }
   }
 });
@@ -158,7 +158,7 @@ client.on("rateLimit", e => {
   }
 });
 
-async function showError(title: string, text: string) {
+async function showError(title: string, text: string, obj?: any) {
   const channel = await client.channels.fetch("899518500576579615") as Discord.TextChannel;
 
   if (channel) {
@@ -169,7 +169,7 @@ async function showError(title: string, text: string) {
         description: `Error is type ${g.brackets(title)}`,
         fields: [{
           name: "Error",
-          value: g.codestr(text, "js")
+          value: `${g.codestr(text, "js")}\n${g.codestr(JSON.stringify(obj, null, 2), "js")}`
         }]
       }]
     });

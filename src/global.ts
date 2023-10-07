@@ -57,7 +57,9 @@ export class Command {
     }
 
     try {
-      const isJoined = await (await client.guilds.fetch("788421241005408268"))?.members.fetch(msg.author.id);
+      const guild = await client.guilds.fetch("788421241005408268");
+      // throws error if user is not found
+      const isJoined = await guild.members.fetch(msg.author.id).catch(() => null);
 
       if (this.isGame == "y" && !getUser(msg.author.id)) {
         msg.channel.send({

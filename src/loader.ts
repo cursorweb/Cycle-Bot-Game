@@ -118,6 +118,7 @@ For example, if you get **1**, type in ${codestr("&verify 1")}`,
 
     return false;
   }
+
   msg.channel.send({
     embeds: [{
       color: Colors.SUCCESS,
