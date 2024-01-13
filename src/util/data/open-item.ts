@@ -263,16 +263,8 @@ You now have ${brackets(commanum(user.cycles.toString()))} cycles!`
     const tpc = new Big(user.tpc);
     const cpp = new Big(user.cpp);
 
-    let txt = tpc.times(amt).dp(0);
-    let cycl = cpp.times(amt).dp(0);
-
-    if (txt.gt(50)) {
-      txt = txt.div(2).dp(0);
-    }
-
-    if (cycl.gt(50)) {
-      cycl = cycl.div(2).dp(0);
-    }
+    const txt = tpc.plus(20).times(amt).dp(0);
+    const cycl = cpp.plus(20).times(amt).dp(0);
 
     const newText = text.plus(txt);
     const newCycles = cycles.plus(cycl);

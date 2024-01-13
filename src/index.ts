@@ -77,7 +77,7 @@ client.on("messageCreate", async (msg: Discord.Message) => {
       if (!cmd) return;
 
 
-      if (cmd.command == "help") help(msg, cmd.args, commands);
+      if (cmd.command == "help" || cmd.command == "h") help(msg, cmd.args, commands);
       else if (cmd.command == "verify") {
         if (commandsUsed[msg.author.id] && verifyHuman(msg, cmd.args, commandsUsed)) delete commandsUsed[msg.author.id];
       } else {
