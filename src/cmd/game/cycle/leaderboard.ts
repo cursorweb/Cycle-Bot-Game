@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber, cleanName } from "../../global.js";
-import { bannedUsers } from "../../util/database/banned-user.js";
+import { Command, Colors, Bot, Database, brackets, commanum, constrain, parseNumber, cleanName } from "../../../global.js";
+import { bannedUsers } from "../../../util/database/banned-user.js";
 
 class C extends Command {
   names = ["leaderboard", "scoreboard", "lb", "l"];

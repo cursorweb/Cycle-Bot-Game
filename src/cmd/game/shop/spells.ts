@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, brackets, constrain, parseNumber, codestr } from "../../global.js";
-import { boosts } from "../../util/data/boosts/boosts.js";
-import { spells } from "../../util/data/boosts/spells.js";
+import { Command, Colors, Bot, brackets, constrain, parseNumber, codestr } from "../../../global.js";
+import { boosts } from "../../../util/data/boosts/boosts.js";
+import { spells } from "../../../util/data/boosts/spells.js";
 
 class C extends Command {
   names = ["spells", "spell", "spell-book", "spellbook"];

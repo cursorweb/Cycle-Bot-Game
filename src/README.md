@@ -1,31 +1,23 @@
 # About
-The source code is divided into many sections. Hopefully this will help you (and me!) understand where everything is.
+The source code is divided into many sections.
+This is a brief overview of them.
 ```
-cmd/
-  # All the bot commands (each folder is a category)
-  template.txt # A template file
-  cmd.json # Info on all the files
-
-slashutil/
-  deploy-commands.ts # Run this to deploy commands
+index.ts # entrypoint
+commands.ts # loads commands, and generates in-depth help command
+server.ts # hosts webserver
 
 util/
-  data/
-    boost/
-      # This contains data for boosts specifically
-    # This contains typings for user data like items
+  admin/ # admin commands
+  game/ # anything part of the cycle game
+    shop/ # anything part of the shop
+    item/ # anything to do with items
+    cycle/ # coding, posting, etc
+  minigame/ # minigames
+  meta/ # things to do with accounts and the bot itself
+  misc/ # random
 
-  database/
-    # This is the wrapper for firebase
+slashutil/
+  deploy-commands.ts # deploys commands (standalone 'bin' executable)
 
-  admin.json # This is all the admin user IDs
-  format.ts # These are text formatting utils
-  util.ts # These are math/text utils
-  levels.ts # This defines functions to be used for levels
 
-cmd-parser.ts # This parses commands
-global.ts # This exports things from 'util' to be easily importable
-loader.ts # This loads commands from 'cmd'
-server.ts # This creates a server for top.gg
-index.ts # Entry point
 ```

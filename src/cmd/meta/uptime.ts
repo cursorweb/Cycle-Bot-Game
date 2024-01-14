@@ -26,7 +26,7 @@ class C extends Command {
           value: `The bot is overseeing ${brackets(commanum(userCount.toString()))} user${plural(userCount)}.`
         }, {
           name: "Creator",
-          value: "[Junhao Zhang](https://github.com/cursorweb) ([@Coder100](https://repl.it/@Coder100)) with TypeScript."
+          value: "[Junhao Zhang](https://github.com/cursorweb) ([@Coder100](https://replit.com/@Coder100)) with TypeScript."
         }]
       }]
     });

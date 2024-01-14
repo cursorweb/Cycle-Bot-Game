@@ -1,10 +1,10 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../global.js";
-import { items } from "../../util/data/shop.js";
-import { boostShop } from "../../util/data/boosts/boosts-shop.js";
-import { boosts } from "../../util/data/boosts/boosts.js";
-import { ItemEnum } from "../../util/data/item.js";
+import { Command, Colors, Bot, Database, commanum, constrain, calcPrice, brackets, codestr, parseNumber } from "../../../global.js";
+import { items } from "../../../util/data/shop.js";
+import { boostShop } from "../../../util/data/boosts/boosts-shop.js";
+import { boosts } from "../../../util/data/boosts/boosts.js";
+import { ItemEnum } from "../../../util/data/item.js";
 
 // [topic] [value]
 const handleShop: { [i: string]: (user: Database.CycleUser) => string[] } = {

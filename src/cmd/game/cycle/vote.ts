@@ -1,5 +1,5 @@
 import * as Discord from "discord.js";
-import { Command, Colors } from "../../global.js";
+import { Command, Colors } from "../../../global.js";
 
 class C extends Command {
   names = ["vote", "v"];

@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Database, Bot, formatDate, msBetween, brackets, commanum, addMs, randomChoice } from "../../global.js";
-import { ItemEnum } from "../../util/data/item.js";
+import { Command, Colors, Database, Bot, formatDate, msBetween, brackets, commanum, addMs, randomChoice } from "../../../global.js";
+import { ItemEnum } from "../../../util/data/item.js";
 
 const rewards: ((user: Database.CycleUser) => Discord.APIEmbedField)[] = [
   user => {

@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { quests, qDiff } from "../../util/data/quests.js";
-import { Command, Colors, brackets, progress, formatDate } from "../../global.js";
-import { getUser } from "../../util/database/database.js";
+import { quests, qDiff } from "../../../util/data/quests.js";
+import { Command, Colors, brackets, progress, formatDate } from "../../../global.js";
+import { getUser } from "../../../util/database/database.js";
 
 
 class C extends Command {

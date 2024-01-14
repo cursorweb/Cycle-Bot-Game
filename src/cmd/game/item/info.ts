@@ -1,7 +1,7 @@
 import * as Discord from "discord.js";
-import { Command, Colors, Bot, brackets } from "../../global.js";
-import { items } from "../../util/data/item.js";
-import { openItem } from "../../util/data/open-item.js";
+import { Command, Colors, Bot, brackets } from "../../../global.js";
+import { items } from "../../../util/data/item.js";
+import { openItem } from "../../../util/data/open-item.js";
 
 class C extends Command {
   names = ["info", "item"];

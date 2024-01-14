@@ -1,8 +1,8 @@
 import * as Discord from "discord.js";
 import { ButtonBuilder, ActionRowBuilder, ButtonStyle } from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, Database, brackets, commanum } from "../../global.js";
-import { socialMedia } from "../../util/data/social-media.js";
+import { Command, Colors, Bot, Database, brackets, commanum } from "../../../global.js";
+import { socialMedia } from "../../../util/data/social-media.js";
 
 class C extends Command {
   names = ["advance-media", "use-media", "prestige", "next-media", "nm"];

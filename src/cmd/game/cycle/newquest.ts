@@ -1,9 +1,9 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
 
-import { CycleUser } from "../../util/database/genschema.js";
-import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum, codestr } from "../../global.js";
-import { quests, qDiff, checkQuest } from "../../util/data/quests.js";
+import { CycleUser } from "../../../util/database/genschema.js";
+import { Command, Bot, Database, Colors, random, brackets, formatDate, commanum, codestr } from "../../../global.js";
+import { quests, qDiff, checkQuest } from "../../../util/data/quests.js";
 
 
 const hours = 1000 * 60 * 60;

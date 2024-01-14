@@ -1,11 +1,11 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../global.js";
-import { code as drops } from "../../util/data/drops.js";
-import { boosts } from "../../util/data/boosts/boosts.js";
-import { levelUp } from "../../util/levels.js";
-import { socialMedia } from "../../util/data/social-media.js";
-import { ActionType, checkQuest } from "../../util/data/quests.js";
+import { Command, Colors, Bot, brackets, plural, commanum, Database } from "../../../global.js";
+import { code as drops } from "../../../util/data/drops.js";
+import { boosts } from "../../../util/data/boosts/boosts.js";
+import { levelUp } from "../../../util/levels.js";
+import { socialMedia } from "../../../util/data/social-media.js";
+import { ActionType, checkQuest } from "../../../util/data/quests.js";
 
 class C extends Command {
   names = ["code", "c"];
