@@ -1,7 +1,7 @@
 import Big from "bignumber.js";
 import { APIEmbedField } from "discord.js";
 import { Database, brackets, addMs, random, progress } from "../../global.js";
-import { ItemEnum } from "./item.js";
+import { ItemEnum } from "./items/item.js";
 
 export const qDiff = ["easy", "medium", "hard"];
 

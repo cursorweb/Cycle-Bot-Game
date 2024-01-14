@@ -2,7 +2,7 @@ import * as Discord from "discord.js";
 import Big from "bignumber.js";
 import { brackets, pluralb, commanum, hidden, Database } from "../../global.js";
 import { items } from "./item.js";
-import { ActionType, checkQuest } from "./quests.js";
+import { ActionType, checkQuest } from "../quests.js";
 
 const code: DropItem[] = [{
   chance: () => Math.random() < 0.1,
