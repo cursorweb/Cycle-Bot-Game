@@ -61,6 +61,11 @@ ${codestr(uses.join("\n"), "md")}`;
           return Bot.errormsg(msg, `You don't have enough of ${brackets(items[itm.type].name)}!
 **You still need** ${brackets(commanum(num.minus(userAmt).toString()))} **more!**`);
         }
+      }
+
+      for (const itm of item.requires) {
+        const num = new Big(itm.amt).times(amt);
+        const userAmt = new Big(user.inv[itm.type] || 0);
         user.inv[itm.type] = userAmt.minus(num).toString();
       }
 
