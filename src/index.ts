@@ -27,7 +27,6 @@ const client = new Discord.Client({
     "Guilds",
     "DirectMessages",
     "GuildEmojisAndStickers",
-    "GuildMembers",
     "GuildMessages",
     "GuildMessageReactions",
     "MessageContent"
