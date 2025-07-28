@@ -1,7 +1,6 @@
 import * as Discord from "discord.js";
 import Big from "bignumber.js";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Command, Colors, Bot, plural, parseNumber, Database, brackets, commanum, constrain } from "../../global.js";
+import { Command, Colors, Bot, parseNumber, Database, brackets, commanum, constrain } from "../../global.js";
 import { items } from "../../util/data/item.js";
 
 class C extends Command {
