@@ -41,7 +41,7 @@ Quest is: ${brackets(quests[user.quest.name].name)}`, "Quest in progress!");
     let difficulty: 0 | 1 | 2;
     let deadline = new Date().getTime();
 
-    switch (args[0]) {
+    switch (args[0].toLowerCase()) {
       case "easy":
         difficulty = 0;
         deadline += hours * 24;
